@@ -1,0 +1,12 @@
+{
+	"name":	"漆嘉伟",
+	"age":	22,
+	"weight":	65.3,
+	"address":	{
+		"country":	"China",
+		"home":	"武汉",
+		"zip-code":	11111
+	},
+	"skill":	["C", "Java", "Python", 8086],
+	"student":	true
+}
