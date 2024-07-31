@@ -136,7 +136,7 @@ int main(void)
     cJSON_AddItemToArray(cjson_education, education_1);
     cJSON_AddItemToArray(cjson_education, education_2);
 
-    cJSON_AddItemToObject(cjson_example, "eduaction", cjson_education);
+    cJSON_AddItemToObject(cjson_example, "education", cjson_education);
 
     //创建languages
     cJSON* cjson_languages = NULL;
