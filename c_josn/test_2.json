@@ -1,17 +1,17 @@
 {
-	"name":	"漆嘉伟",
-	"age":	22,
+	"name":	"漆嘉伟_update",
+	"age":	33,
 	"interest":	{
-		"sport":	["篮球", "足球"],
-		"book":	["unix高级环境编程", "c prime plus"]
+		"sport":	["乒乓球", "足球"],
+		"book":	["unix高级环境编程", "嵌入式c语言自我修养"]
 	},
 	"color":	["black", "white"],
 	"like":	[{
 			"game":	"塞尔达旷野之息",
 			"price":	256.8
 		}, {
-			"game":	"Eding Ring",
-			"price":	299
+			"game":	"艾尔登法环：黄金树之影",
+			"price":	499
 		}],
 	"education":	[["小学", "初中"], ["高中", "大学"]],
 	"lagngues":	{
@@ -20,10 +20,10 @@
 			"grade":	10
 		},
 		"serialTwo":	{
-			"language":	"英语",
-			"grade":	6
+			"language":	"日语",
+			"grade":	8
 		}
 	},
-	"vip":	true,
+	"vip":	false,
 	"address":	null
 }
