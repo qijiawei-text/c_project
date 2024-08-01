@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这是一个注释 -->
+<message>
+    <to>qijiawei</to>
+    <from>qijiawei</from>
+    <headig>http</headig>
+    <obj>grt</obj>
+    <body>学习xml和json</body>
+    <!-- 属性与元素的使用 -->
+    <note id="501">
+        <to>Tove</to>
+        <from>Jani</from>
+        <heading>Reminder</heading>
+        <body>Don't forget me this weekend!</body>
+    </note>
+    <note id="502">
+        <to>Jani</to>
+        <from>Tove</from>
+        <heading>Re: Reminder</heading>
+        <body>I will not</body>
+    </note>
+    <!-- CDATA部分由 <!CDATA[ 开始 ，由 ]]> 结束-->
+    <note id="503">
+        <![CDATA[ 
+        function matchwo(a,b){
+        if (a < b && a < 0)  then
+        {
+        return 1;
+        }
+        else 
+        {
+        return 0;
+        }
+        }
+        ]]>
+    </note>
+</message>

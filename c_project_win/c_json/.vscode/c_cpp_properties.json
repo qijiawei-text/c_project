@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Users/jiaweq1/OneDrive - kochind.com/Desktop/my_code_git/c_project_win/c_json/include/"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\Users\\jiaweq1\\Downloads\\mingw64\\bin\\gcc.exe"
+        }
+    ],
+    "version": 4
+}
