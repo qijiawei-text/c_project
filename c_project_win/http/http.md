@@ -221,11 +221,60 @@
 - 3xx：需要后续操作才能完成这一请求。
 - 4xx：表示请求包含语法错误或无法完成.
 - 5xx：服务器在处理请求的过程中发生了错误。　 
-　
-<p align="center">
-  <img src="image-3.png" />
-</p> 
 
-**HTTTPS**  
+### 4.3 常用状态码
+#### 200 OK
+&emsp;&emsp;HTTP状态码`200 OK`表明请求已经成功。默认情况下状态码为 200 的响应可以被缓存。
+&emsp;&emsp;不同的请求方式对于请求成功的意义如下：
+- *GET*: 已经取得资源，并将资源添加到响应的消息体中。
+- *HEAD*: 响应的消息体为头部信息。
+- *POST*: 响应的消息体中包含此次请求的结果。
+- *TRACE*: 响应的消息体中包含服务器接收到的请求信息。
+#### 201 Created
+&emsp;&emsp;HTTP响应状态码 `201 Created` 是一个代表成功的应答状态码，表示请求已经被成功处理，并且创建了新的资源。新的资源在应答返回之前已经被创建。
+&emsp;&emsp;这个状态码的常规使用的场景是作为 *post* 请求的返回值。
+#### 202 Accepted
+&emsp;&emsp;HTTP响应状态码 `202 Accepted` 表示服务器端已经收到请求消息，但是尚未进行处理。但是对于请求的处理却是无保证的，即稍后无法通过 HTTP 协议给客户端发送一个异步请求来告知其请求的处理结果。这个状态码被设计用来将请求交由另外一个进程或者服务器来进行处理，或者是对请求进行批处理的情形。
+&emsp;&emsp;通常表示请求已在后台排队(异步请求)。
+#### 204 No Content
+&emsp;&emsp;HTTP响应状态码 `204 No Content` 成功状态响应码，表示该请求已经成功了，但是客户端客户不需要离开当前页面。默认情况下 204 响应是可缓存的。
+&emsp;&emsp;在 *PUT* 请求中进行资源更新，但是不需要改变当前展示给用户的页面，那么返回 `204 No Content`。如果创建了资源，则返回 `201 Created` 。如果应将页面更改为新更新的页面，则应改用 `200 OK` 。  
+&emsp;&emsp;在 *DELETE* 请求中成功通常是 `204 No Content`表示删除成功。
+#### 400 Bad Raquest
+&emsp;&emsp;HTTP响应状态码 `400 Bad Request` 响应状态码表示服务器因某些被认为是客户端错误的原因（例如，请求语法错误、无效请求消息格式或者欺骗性请求路由），而无法或不会处理该请求。
+#### 401 Unauthorized
+&emsp;&emsp;HTTP响应状态码 `401 Unauthorized `代表客户端错误，指的是由于缺乏目标资源要求的身份验证凭证，发送的请求未得到满足。这个状态码会与 WWW-Authenticate 首部一起发送，其中包含有如何进行验证的信息。
+
+      E.g: HTTP/1.1 401 Unauthorized
+      Date: Wed, 21 Oct 2015 07:28:00 GMT
+      WWW-Authenticate: Basic realm="Access to staging site"
+
+#### 403 Forbidden
+&emsp;&emsp;HTTP响应状态码 `403 Forbidden` 代表客户端错误，指的是服务器端有能力处理该请求，但是拒绝授权访问。
+
+      401 Unauthorized 与 403 Forbidden 的区别：  
+       - 401 Unauthorized 用户身份验证错误，验证成功之后，可改变状态（例如用户的账户密码错误）。
+       - 403 Forbidden 即使重新验证也不会改变该状态。该访问是长期禁止的，并且与应用逻辑密切相关（例如没有足够的权限访问该资源）。
+
+#### 404 Not Found
+&emsp;&emsp;HTTP 响应状态码 `404 Not Found` 指的是服务器无法找到所请求的资源。*404* 状态码并不能说明请求的资源是临时还是永久丢失。如果服务器知道该资源是永久丢失，那么应该返回 `410（Gone）` 而不是 *404*。
+
+#### 405 Method Not Allowed
+&emsp;&emsp;HTTP响应状态码 `405 Method Not Allowed` 表明服务器禁止了使用当前 HTTP 方法的请求（例如服务器没有该方法）。
+
+#### 406 Not Acceptable
+&emsp;&emsp;HTTP响应状态码 `406 Not Acceptable` 表示客户端错误，指代服务器端无法提供与 *Accept* 和 *Accept-Language*、 消息头指定的值相匹配的响应。
+
+#### 410 Gone
+&emsp;&emsp;HTTP响应状态码 `410 Gone` 说明请求的目标资源在原服务器上不存在了，并且是永久性的丢失。如果不清楚是否为永久或临时的丢失，应该使用 *404*。
+
+#### 422 Unprocessable Entity
+&emsp;&emsp;HTTP响应状态码 `422 Unprocessable Entity` 表示服务器理解请求实体的内容类型，并且请求实体的语法是正确的，但是服务器无法处理所包含的指令。
+
+#### 500 Internal Server Error
+&emsp;&emsp;HTTP响应状态码 `500 Internal Server Error` 是表示服务器端错误的响应状态码，意味着所请求的服务器遇到意外的情况并阻止其执行请求。  
+&emsp;&emsp;这个错误代码是一个通用的“万能”响应代码。有时候，对于类似于 *500* 这样的错误，服务器管理员会更加详细地记录相关的请求信息来防止以后同样错误的出现。
+
+## **HTTTPS**  
 
 &emsp;&emsp;HTTPS(端口 **443**) = HTTP(端口 **80**) + SSL/TLS  

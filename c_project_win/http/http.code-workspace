@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../.vscode"
+		},
+		{
+			"path": "../apue.3e"
+		},
+		{
+			"path": "../c_json"
+		}
+	]
+}
