@@ -1,0 +1,16 @@
+{
+  "config": {
+    "name": "PA",
+    "type": "openconfig-optical-amplifier:EDFA",
+    "target-gain": "11.1",
+    "target-gain-tilt": "-1.9",
+    "gain-range": "openconfig-optical-amplifier:LOW_GAIN_RANGE",
+    "amp-mode": "openconfig-optical-amplifier:CONSTANT_GAIN",
+    "enabled": true,
+    "com-oplink-amplifier-ext:autolos": true,
+    "com-oplink-amplifier-ext:apr-enabled": true,
+    "com-oplink-amplifier-ext:fsm-mode": "auto",
+    "com-oplink-amplifier-ext:ready-power": "11.1"
+  }
+}
+

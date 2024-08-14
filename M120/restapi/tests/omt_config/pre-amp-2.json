@@ -1,0 +1,7 @@
+{
+	"target-gain":  15.2,
+	"target-gain-tilt":     -0.2,
+	"voa":  0.2,
+	"apr-enable":   "enable",
+	"state":        "up"
+}

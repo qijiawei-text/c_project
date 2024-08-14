@@ -1,0 +1,404 @@
+---
+swagger: "2.0"
+info:
+  description: "YANG definitions for connection validation Module"
+  version: "1.0"
+  title: "com-oplink-connectivity-validation API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/optical-cv:
+    get:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "returns com.oplink.connectivity.validation.cvtop.OpticalCv"
+      description: "returns com.oplink.connectivity.validation.cvtop.OpticalCv"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.connectivity.validation.cvtop.OpticalCv"
+          schema:
+            $ref: "#/definitions/com.oplink.connectivity.validation.cvtop.OpticalCvWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "creates com.oplink.connectivity.validation.cvtop.OpticalCv"
+      description: "creates com.oplink.connectivity.validation.cvtop.OpticalCv"
+      parameters:
+      - in: "body"
+        name: "com.oplink.connectivity.validation.cvtop.OpticalCv.body-param"
+        description: "com.oplink.connectivity.validation.cvtop.OpticalCv to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.connectivity.validation.cvtop.OpticalCvWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "creates or updates com.oplink.connectivity.validation.cvtop.OpticalCv"
+      description: "creates or updates com.oplink.connectivity.validation.cvtop.OpticalCv"
+      parameters:
+      - in: "body"
+        name: "com.oplink.connectivity.validation.cvtop.OpticalCv.body-param"
+        description: "com.oplink.connectivity.validation.cvtop.OpticalCv to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.connectivity.validation.cvtop.OpticalCvWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "removes com.oplink.connectivity.validation.cvtop.OpticalCv"
+      description: "removes com.oplink.connectivity.validation.cvtop.OpticalCv"
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/optical-cv/config:
+    get:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "returns com.oplink.connectivity.validation.CvConfig"
+      description: "returns com.oplink.connectivity.validation.CvConfig"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.connectivity.validation.CvConfig"
+          schema:
+            $ref: "#/definitions/com.oplink.connectivity.validation.CvConfigWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "creates com.oplink.connectivity.validation.CvConfig"
+      description: "creates com.oplink.connectivity.validation.CvConfig"
+      parameters:
+      - in: "body"
+        name: "com.oplink.connectivity.validation.CvConfig.body-param"
+        description: "com.oplink.connectivity.validation.CvConfig to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.connectivity.validation.CvConfigWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "creates or updates com.oplink.connectivity.validation.CvConfig"
+      description: "creates or updates com.oplink.connectivity.validation.CvConfig"
+      parameters:
+      - in: "body"
+        name: "com.oplink.connectivity.validation.CvConfig.body-param"
+        description: "com.oplink.connectivity.validation.CvConfig to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.connectivity.validation.CvConfigWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "removes com.oplink.connectivity.validation.CvConfig"
+      description: "removes com.oplink.connectivity.validation.CvConfig"
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/optical-cv/state:
+    get:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "returns com.oplink.connectivity.validation.CvState"
+      description: "returns com.oplink.connectivity.validation.CvState"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.connectivity.validation.CvState"
+          schema:
+            $ref: "#/definitions/com.oplink.connectivity.validation.CvStateWrapper"
+        400:
+          description: "Internal error"
+  /data/optical-cv/state/client-connectivity={name}:
+    get:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "returns com.oplink.connectivity.validation.ClientState"
+      description: "returns com.oplink.connectivity.validation.ClientState"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of client-connectivity"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "com.oplink.connectivity.validation.ClientState"
+          schema:
+            $ref: "#/definitions/com.oplink.connectivity.validation.ClientStateWrapper"
+        400:
+          description: "Internal error"
+  /data/optical-cv/state/mux-connectivity:
+    get:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "returns com.oplink.connectivity.validation.MuxConnecvityState"
+      description: "returns com.oplink.connectivity.validation.MuxConnecvityState"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.connectivity.validation.MuxConnecvityState"
+          schema:
+            $ref: "#/definitions/com.oplink.connectivity.validation.MuxConnecvityStateWrapper"
+        400:
+          description: "Internal error"
+  /data/optical-cv/state/reflection={name}:
+    get:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "returns com.oplink.connectivity.validation.ReflectionState"
+      description: "returns com.oplink.connectivity.validation.ReflectionState"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of reflection"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "com.oplink.connectivity.validation.ReflectionState"
+          schema:
+            $ref: "#/definitions/com.oplink.connectivity.validation.ReflectionStateWrapper"
+        400:
+          description: "Internal error"
+  /operations/set-cv-enable:
+    post:
+      tags:
+      - "com-oplink-connectivity-validation"
+      summary: "operates on com.oplink.connectivity.validation.SetCvEnable"
+      description: "operates on com.oplink.connectivity.validation.SetCvEnable"
+      parameters:
+      - in: "body"
+        name: "com.oplink.connectivity.validation.setcvenable.Input.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/com.oplink.connectivity.validation.setcvenable.Input"
+      responses:
+        200:
+          description: "Correct response"
+          schema:
+            $ref: "#/definitions/com.oplink.connectivity.validation.SetCvEnable"
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+definitions:
+  com.oplink.connectivity.validation.ClientState:
+    type: "object"
+    properties:
+      client-t-in-power:
+        type: "string"
+        description: "CLIENT[-W/-P] R CV IN, pd3/pd4, calibrated to port Client[-W/-P]R"
+      client-t-out-power:
+        type: "string"
+        description: "AMP card CLIENT T CV OUT, pd12, calibrated to port ClientT"
+      client-r-differ-power:
+        type: "string"
+        description: "ClientR differ power, 'client-r-out-power' - 'client-r-in-power'"
+      name:
+        $ref: "#/definitions/com.oplink.connectivity.validation.NameEnumeration"
+      client-r-out-power:
+        type: "string"
+        description: "AMP card CLIENT R CV OUT, pd10, calibrated to port ClientR"
+      dfb-output-power:
+        type: "string"
+        description: "AMP card DFB output power. This value is caculated by PD10 or\
+          \ PD12"
+      client-r-in-power:
+        type: "string"
+        description: "CLIENT[-W/-P] T CV IN, pd6, calibrated to port Client[-W/-P]T"
+      client-t-differ-power:
+        type: "string"
+        description: "ClientT differ power, 'client-t-out-power' - 'client-t-in-power'"
+  com.oplink.connectivity.validation.ClientStateWrapper:
+    properties:
+      client-connectivity:
+        $ref: "#/definitions/com.oplink.connectivity.validation.ClientState"
+  com.oplink.connectivity.validation.CvConfig:
+    type: "object"
+    properties:
+      enable-cv-protection:
+        type: "boolean"
+        description: "enable/disable connectivity validation protection."
+        default: false
+  com.oplink.connectivity.validation.CvConfigWrapper:
+    properties:
+      config:
+        $ref: "#/definitions/com.oplink.connectivity.validation.CvConfig"
+  com.oplink.connectivity.validation.CvState:
+    type: "object"
+    properties:
+      mux-connectivity:
+        $ref: "#/definitions/com.oplink.connectivity.validation.MuxConnecvityState"
+      client-connectivity:
+        type: "array"
+        items:
+          $ref: "#/definitions/com.oplink.connectivity.validation.ClientState"
+      reflection:
+        type: "array"
+        items:
+          $ref: "#/definitions/com.oplink.connectivity.validation.ReflectionState"
+  com.oplink.connectivity.validation.CvStateWrapper:
+    properties:
+      state:
+        $ref: "#/definitions/com.oplink.connectivity.validation.CvState"
+  com.oplink.connectivity.validation.MuxConnecvityState:
+    type: "object"
+    properties:
+      mux-r-in-power:
+        type: "string"
+        description: "MUX R CV in, pd7, calibrated to port MuxR"
+      mux-t-differ-power:
+        type: "string"
+        description: "MUX R differ power, 'mux-t-out-power' - 'mux-t-in-power'"
+      mux-t-in-power:
+        type: "string"
+        description: "MUX T CV in, pd5, calibrated to port MuxT"
+      mux-t-out-power:
+        type: "string"
+        description: "MUX T CV OUT, pd3/pd4, calibrated to port MuxT"
+      mux-r-differ-power:
+        type: "string"
+        description: "MUX R differ power, 'mux-r-out-power' - 'mux-r-in-power'"
+      mux-r-out-power:
+        type: "string"
+        description: "MUX R CV OUT, pd6, calibrated to port MuxR"
+  com.oplink.connectivity.validation.MuxConnecvityStateWrapper:
+    properties:
+      mux-connectivity:
+        $ref: "#/definitions/com.oplink.connectivity.validation.MuxConnecvityState"
+  com.oplink.connectivity.validation.Name:
+    type: "string"
+    enum:
+    - "all"
+    - "reflection"
+    - "mux"
+    - "client-w"
+    - "client-p"
+  com.oplink.connectivity.validation.NameEnumeration:
+    type: "string"
+    enum:
+    - "mux-t"
+    - "client-w-line-t"
+    - "client-w-t"
+    - "client-p-line-t"
+    - "client-p-t"
+  com.oplink.connectivity.validation.ReflectionState:
+    type: "object"
+    properties:
+      output-power:
+        type: "string"
+        description: "PDb power."
+      name:
+        $ref: "#/definitions/com.oplink.connectivity.validation.NameEnumeration"
+      differ-power:
+        type: "string"
+        description: "Reflect power."
+      reflect-power:
+        type: "string"
+        description: "PDa power."
+  com.oplink.connectivity.validation.ReflectionStateWrapper:
+    properties:
+      reflection:
+        $ref: "#/definitions/com.oplink.connectivity.validation.ReflectionState"
+  com.oplink.connectivity.validation.SetCvEnable:
+    type: "object"
+    properties:
+      output:
+        $ref: "#/definitions/org.openroadm.common.types.RpcResponseStatus"
+  com.oplink.connectivity.validation.cvtop.OpticalCv:
+    allOf:
+    - $ref: "#/definitions/com.oplink.optical.ParentCircuitPack"
+    - type: "object"
+      properties:
+        config:
+          $ref: "#/definitions/com.oplink.connectivity.validation.CvConfig"
+        state:
+          $ref: "#/definitions/com.oplink.connectivity.validation.CvState"
+  com.oplink.connectivity.validation.cvtop.OpticalCvWrapper:
+    properties:
+      optical-cv:
+        $ref: "#/definitions/com.oplink.connectivity.validation.cvtop.OpticalCv"
+  com.oplink.connectivity.validation.setcvenable.Input:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/com.oplink.connectivity.validation.Name"
+      enable:
+        type: "boolean"
+        default: false
+  com.oplink.optical.ParentCircuitPack:
+    type: "object"
+    properties:
+      component-name:
+        type: "string"
+        description: "component identifier. Unique within the context of a circuit-pack."
+      circuit-pack-name:
+        type: "string"
+        description: "The circuit-pack that contains this optical module/component."
+      component-index:
+        type: "integer"
+        format: "int64"
+        description: "The HAL device index"
+      component-type:
+        type: "string"
+        description: "The HAL device type."
+  org.openroadm.common.types.RpcResponseStatus:
+    type: "object"
+    properties:
+      status-message:
+        type: "string"
+        description: "Gives a more detailed status"
+      status:
+        description: "Successful or Failed"
+        $ref: "#/definitions/org.openroadm.common.types.RpcStatus"
+  org.openroadm.common.types.RpcStatus:
+    type: "string"
+    enum:
+    - "Successful"
+    - "Failed"

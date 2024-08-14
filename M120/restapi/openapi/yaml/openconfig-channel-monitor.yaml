@@ -1,0 +1,578 @@
+---
+swagger: "2.0"
+info:
+  description: "This model describes operational state data for an optical\n    channel\
+    \ monitor (OCM) for optical transport line system\n    elements such as wavelength\
+    \ routers (ROADMs) and amplifiers."
+  version: "1.0"
+  title: "openconfig-channel-monitor API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/channel-monitors:
+    get:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "returns openconfig.channel.monitor.ChannelMonitors"
+      description: "Top-level container for optical channel monitors"
+      parameters: []
+      responses:
+        200:
+          description: "openconfig.channel.monitor.ChannelMonitors"
+          schema:
+            $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorsWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates openconfig.channel.monitor.ChannelMonitors"
+      description: "Top-level container for optical channel monitors"
+      parameters:
+      - in: "body"
+        name: "openconfig.channel.monitor.ChannelMonitors.body-param"
+        description: "openconfig.channel.monitor.ChannelMonitors to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates or updates openconfig.channel.monitor.ChannelMonitors"
+      description: "Top-level container for optical channel monitors"
+      parameters:
+      - in: "body"
+        name: "openconfig.channel.monitor.ChannelMonitors.body-param"
+        description: "openconfig.channel.monitor.ChannelMonitors to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "removes openconfig.channel.monitor.ChannelMonitors"
+      description: "Top-level container for optical channel monitors"
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/channel-monitors/channel-monitor/:
+    post:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor"
+      description: "List of channel monitors, keyed by channel monitor name."
+      parameters:
+      - in: "body"
+        name: "openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor.body-param"
+        description: "openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitorWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/channel-monitors/channel-monitor={name}:
+    get:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "returns openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor"
+      description: "List of channel monitors, keyed by channel monitor name."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor"
+          schema:
+            $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitorWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates or updates openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor"
+      description: "List of channel monitors, keyed by channel monitor name."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor.body-param"
+        description: "openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitorWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "removes openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor"
+      description: "List of channel monitors, keyed by channel monitor name."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/channel-monitors/channel-monitor={name}/channels:
+    get:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "returns openconfig.channel.monitor.mediachannelspectrumpowertop.Channels"
+      description: "Enclosing container for the list of values describing\n      \
+        \  the spectrum power distribution"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "openconfig.channel.monitor.mediachannelspectrumpowertop.Channels"
+          schema:
+            $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.ChannelsWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates openconfig.channel.monitor.mediachannelspectrumpowertop.Channels"
+      description: "Enclosing container for the list of values describing\n      \
+        \  the spectrum power distribution"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "openconfig.channel.monitor.mediachannelspectrumpowertop.Channels.body-param"
+        description: "openconfig.channel.monitor.mediachannelspectrumpowertop.Channels\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.ChannelsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates or updates openconfig.channel.monitor.mediachannelspectrumpowertop.Channels"
+      description: "Enclosing container for the list of values describing\n      \
+        \  the spectrum power distribution"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "openconfig.channel.monitor.mediachannelspectrumpowertop.Channels.body-param"
+        description: "openconfig.channel.monitor.mediachannelspectrumpowertop.Channels\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.ChannelsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "removes openconfig.channel.monitor.mediachannelspectrumpowertop.Channels"
+      description: "Enclosing container for the list of values describing\n      \
+        \  the spectrum power distribution"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/channel-monitors/channel-monitor={name}/channels/channel={lower-frequency},{upper-frequency}:
+    get:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "returns openconfig.channel.monitor.mediachannelspectrumpowertop.channels.Channel"
+      description: "List of tuples describing the spectrum power distribution"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      - name: "lower-frequency"
+        in: "path"
+        description: "Id of channel"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "upper-frequency"
+        in: "path"
+        description: "Id of channel"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "openconfig.channel.monitor.mediachannelspectrumpowertop.channels.Channel"
+          schema:
+            $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.channels.ChannelWrapper"
+        400:
+          description: "Internal error"
+  /data/channel-monitors/channel-monitor={name}/channels/channel={lower-frequency},{upper-frequency}/state:
+    get:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "returns openconfig.channel.monitor.MediaChannelSpectrumPowerState"
+      description: "Operational state data for spectrum power"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      - name: "lower-frequency"
+        in: "path"
+        description: "Id of channel"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "upper-frequency"
+        in: "path"
+        description: "Id of channel"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "openconfig.channel.monitor.MediaChannelSpectrumPowerState"
+          schema:
+            $ref: "#/definitions/openconfig.channel.monitor.MediaChannelSpectrumPowerStateWrapper"
+        400:
+          description: "Internal error"
+  /data/channel-monitors/channel-monitor={name}/config:
+    get:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "returns openconfig.channel.monitor.ChannelMonitorConfig"
+      description: "Configuration data "
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "openconfig.channel.monitor.ChannelMonitorConfig"
+          schema:
+            $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorConfigWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates openconfig.channel.monitor.ChannelMonitorConfig"
+      description: "Configuration data "
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "openconfig.channel.monitor.ChannelMonitorConfig.body-param"
+        description: "openconfig.channel.monitor.ChannelMonitorConfig to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorConfigWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "creates or updates openconfig.channel.monitor.ChannelMonitorConfig"
+      description: "Configuration data "
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "openconfig.channel.monitor.ChannelMonitorConfig.body-param"
+        description: "openconfig.channel.monitor.ChannelMonitorConfig to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorConfigWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "removes openconfig.channel.monitor.ChannelMonitorConfig"
+      description: "Configuration data "
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/channel-monitors/channel-monitor={name}/state:
+    get:
+      tags:
+      - "openconfig-channel-monitor"
+      summary: "returns openconfig.channel.monitor.channelmonitortop.channelmonitors.channelmonitor.State"
+      description: "Operational state data "
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of channel-monitor"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "openconfig.channel.monitor.channelmonitortop.channelmonitors.channelmonitor.State"
+          schema:
+            $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.channelmonitor.StateWrapper"
+        400:
+          description: "Internal error"
+definitions:
+  com.oplink.ocm.ext.ChannelMonitorsAugmentation1:
+    type: "object"
+    properties:
+      config:
+        $ref: "#/definitions/com.oplink.ocm.ext.OcmConfig"
+      state:
+        $ref: "#/definitions/com.oplink.ocm.ext.ocmmoduletop.State"
+    x-augmentation:
+      prefix: "com-oplink-ocm-ext"
+      namespace: "http://com/oplink/ocm/ext"
+  com.oplink.ocm.ext.OcmConfig:
+    type: "object"
+    properties:
+      waveplan-mode:
+        description: "User configurable AWG waveplan."
+        $ref: "#/definitions/com.oplink.ocm.ext.WaveplanMode"
+  com.oplink.ocm.ext.OcmState:
+    type: "object"
+    properties:
+      current-waveplan:
+        description: "Current waveplan used."
+        $ref: "#/definitions/com.oplink.ocm.ext.WaveplanMode"
+  com.oplink.ocm.ext.WaveplanMode:
+    type: "string"
+    enum:
+    - "auto"
+    - "75G"
+    - "150G"
+    - "175G"
+    - "300G"
+    - "50G"
+    - "100G"
+  com.oplink.ocm.ext.ocmmoduletop.State:
+    allOf:
+    - $ref: "#/definitions/com.oplink.ocm.ext.OcmConfig"
+    - $ref: "#/definitions/com.oplink.ocm.ext.OcmState"
+  openconfig.channel.monitor.ChannelMonitorConfig:
+    type: "object"
+    properties:
+      monitor-port:
+        type: "string"
+        description: "Reference to system-supplied name of the port that the\n   \
+          \     channel monitor is physically connected to. This port\n        will\
+          \ be of type MONITOR. This port is a tap off of the\n        monitored-port\
+          \ and would be in the same card as the\n        monitored port. If this\
+          \ port is embedded in another card\n        (i.e. an amplifier card) the\
+          \ device should still define\n        a port representing the monitor port\
+          \ if it is internal\n        and not physically present on the faceplate\
+          \ of the card"
+        x-path: "/oc-platform:components/oc-platform:component/oc-platform:name"
+      name:
+        type: "string"
+        description: "Reference to system-supplied name of the port on the\n     \
+          \   optical channel monitor (OCM). If this port is embedded\n        in\
+          \ another card (i.e. an amplifier card) the device\n        should still\
+          \ define a port representing the OCM even if\n        it is internal and\
+          \ not physically present on the\n        faceplate of the card"
+        x-path: "/oc-platform:components/oc-platform:component/oc-platform:name"
+  openconfig.channel.monitor.ChannelMonitorConfigWrapper:
+    properties:
+      config:
+        $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorConfig"
+  openconfig.channel.monitor.ChannelMonitorState:
+    type: "object"
+  openconfig.channel.monitor.ChannelMonitors:
+    allOf:
+    - $ref: "#/definitions/com.oplink.ocm.ext.ChannelMonitorsAugmentation1"
+    - type: "object"
+      properties:
+        channel-monitor:
+          type: "array"
+          description: "List of channel monitors, keyed by channel monitor name."
+          items:
+            $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor"
+      description: ""
+  openconfig.channel.monitor.ChannelMonitorsWrapper:
+    properties:
+      channel-monitors:
+        $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitors"
+  openconfig.channel.monitor.MediaChannelSpectrumPowerState:
+    type: "object"
+    properties:
+      power:
+        type: "string"
+        description: "Average measured optical power over the specified spectrum"
+      upper-frequency:
+        type: "integer"
+        format: "int32"
+        description: "Upper frequency of the specified spectrum power"
+      lower-frequency:
+        type: "integer"
+        format: "int32"
+        description: "Lower frequency of the specified spectrum power"
+  openconfig.channel.monitor.MediaChannelSpectrumPowerStateWrapper:
+    properties:
+      state:
+        $ref: "#/definitions/openconfig.channel.monitor.MediaChannelSpectrumPowerState"
+  openconfig.channel.monitor.MediaChannelSpectrumPowerTop:
+    type: "object"
+    properties:
+      channels:
+        description: "Enclosing container for the list of values describing\n    \
+          \    the spectrum power distribution"
+        $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.Channels"
+  openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor:
+    allOf:
+    - $ref: "#/definitions/openconfig.channel.monitor.MediaChannelSpectrumPowerTop"
+    - type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "References the optical channel monitor name"
+          x-path: "../config/name"
+        state:
+          description: "Operational state data "
+          $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.channelmonitor.State"
+        config:
+          description: "Configuration data "
+          $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorConfig"
+      description: "List of channel monitors, keyed by channel monitor name."
+  openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitorWrapper:
+    properties:
+      channel-monitor:
+        $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.ChannelMonitor"
+  openconfig.channel.monitor.channelmonitortop.channelmonitors.channelmonitor.State:
+    allOf:
+    - $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorConfig"
+    - $ref: "#/definitions/openconfig.channel.monitor.ChannelMonitorState"
+  openconfig.channel.monitor.channelmonitortop.channelmonitors.channelmonitor.StateWrapper:
+    properties:
+      state:
+        $ref: "#/definitions/openconfig.channel.monitor.channelmonitortop.channelmonitors.channelmonitor.State"
+  openconfig.channel.monitor.mediachannelspectrumpowertop.Channels:
+    type: "object"
+    properties:
+      channel:
+        type: "array"
+        description: "List of tuples describing the spectrum power distribution"
+        items:
+          $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.channels.Channel"
+  openconfig.channel.monitor.mediachannelspectrumpowertop.ChannelsWrapper:
+    properties:
+      channels:
+        $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.Channels"
+  openconfig.channel.monitor.mediachannelspectrumpowertop.channels.Channel:
+    type: "object"
+    properties:
+      state:
+        description: "Operational state data for spectrum power"
+        $ref: "#/definitions/openconfig.channel.monitor.MediaChannelSpectrumPowerState"
+      upper-frequency:
+        type: "integer"
+        format: "int32"
+        description: "Reference to the list key"
+        x-path: "../state/upper-frequency"
+      lower-frequency:
+        type: "integer"
+        format: "int32"
+        description: "Reference to the list key"
+        x-path: "../state/lower-frequency"
+  openconfig.channel.monitor.mediachannelspectrumpowertop.channels.ChannelWrapper:
+    properties:
+      channel:
+        $ref: "#/definitions/openconfig.channel.monitor.mediachannelspectrumpowertop.channels.Channel"

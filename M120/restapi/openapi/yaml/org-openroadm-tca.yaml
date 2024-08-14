@@ -1,0 +1,1175 @@
+---
+swagger: "2.0"
+info:
+  description: "YANG definitions of Threshold Crossing Alert types.\n       \n   \
+    \   Copyright of the Members of the Open ROADM MSA Agreement dated (c) 2016, \n\
+    \      AT&T Intellectual Property.  All other rights reserved.\n      \n     \
+    \ Redistribution and use in source and binary forms, with or without modification,\
+    \ \n      are permitted provided that the following conditions are met:\n    \
+    \  \n      * Redistributions of source code must retain the above copyright notice,\
+    \ this \n        list of conditions and the following disclaimer.\n      * Redistributions\
+    \ in binary form must reproduce the above copyright notice, \n        this list\
+    \ of conditions and the following disclaimer in the documentation and/or \n  \
+    \      other materials provided with the distribution.\n      * Neither the Members\
+    \ of the Open ROADM MSA Agreement nor the names of its \n        contributors\
+    \ may be used to endorse or promote products derived from this software \n   \
+    \     without specific prior written permission.\n      \n      THIS SOFTWARE\
+    \ IS PROVIDED BY THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT ''AS IS'' \n   \
+    \   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\
+    \ IMPLIED \n      WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\
+    \ ARE DISCLAIMED. \n      IN NO EVENT THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT\
+    \ BE LIABLE FOR ANY DIRECT, \n      INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,\
+    \ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT \n      NOT LIMITED TO, PROCUREMENT\
+    \ OF SUBSTITUTE GOODS OR SERVICES;  LOSS OF USE, DATA, \n      OR PROFITS; OR\
+    \ BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, \n   \
+    \   WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\
+    \ \n      ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED\
+    \ OF THE \n      POSSIBILITY OF SUCH DAMAGE"
+  version: "1.0"
+  title: "org-openroadm-tca API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/potential-tca-list:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.tca.PotentialTcaList"
+      description: "returns org.openroadm.tca.PotentialTcaList"
+      parameters: []
+      responses:
+        200:
+          description: "org.openroadm.tca.PotentialTcaList"
+          schema:
+            $ref: "#/definitions/org.openroadm.tca.PotentialTcaListWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.tca.PotentialTcaList"
+      description: "creates org.openroadm.tca.PotentialTcaList"
+      parameters:
+      - in: "body"
+        name: "org.openroadm.tca.PotentialTcaList.body-param"
+        description: "org.openroadm.tca.PotentialTcaList to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.tca.PotentialTcaListWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.tca.PotentialTcaList"
+      description: "creates or updates org.openroadm.tca.PotentialTcaList"
+      parameters:
+      - in: "body"
+        name: "org.openroadm.tca.PotentialTcaList.body-param"
+        description: "org.openroadm.tca.PotentialTcaList to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.tca.PotentialTcaListWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.tca.PotentialTcaList"
+      description: "removes org.openroadm.tca.PotentialTcaList"
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca/:
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.tca.PotentialTca"
+      description: "creates org.openroadm.tca.PotentialTca"
+      parameters:
+      - in: "body"
+        name: "org.openroadm.tca.PotentialTca.body-param"
+        description: "org.openroadm.tca.PotentialTca to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.tca.PotentialTcaWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/potential-tca-list/tca={id}:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.tca.PotentialTca"
+      description: "returns org.openroadm.tca.PotentialTca"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.tca.PotentialTca"
+          schema:
+            $ref: "#/definitions/org.openroadm.tca.PotentialTcaWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.tca.PotentialTca"
+      description: "creates or updates org.openroadm.tca.PotentialTca"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.tca.PotentialTca.body-param"
+        description: "org.openroadm.tca.PotentialTca to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.tca.PotentialTcaWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.tca.PotentialTca"
+      description: "removes org.openroadm.tca.PotentialTca"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/layerRate:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.layerrate.LayerRate"
+      description: "returns org.openroadm.layerrate.LayerRate"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.layerrate.LayerRate"
+          schema:
+            $ref: "#/definitions/org.openroadm.layerrate.LayerRateWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.layerrate.LayerRate"
+      description: "creates org.openroadm.layerrate.LayerRate"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.layerrate.LayerRate.body-param"
+        description: "org.openroadm.layerrate.LayerRate to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.layerrate.LayerRateWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.layerrate.LayerRate"
+      description: "creates or updates org.openroadm.layerrate.LayerRate"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.layerrate.LayerRate.body-param"
+        description: "org.openroadm.layerrate.LayerRate to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.layerrate.LayerRateWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.layerrate.LayerRate"
+      description: "removes org.openroadm.layerrate.LayerRate"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/resource:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.resource.Resource"
+      description: "returns org.openroadm.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.Resource"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.ResourceWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.resource.Resource"
+      description: "creates org.openroadm.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.Resource.body-param"
+        description: "org.openroadm.resource.Resource to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.ResourceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.resource.Resource"
+      description: "creates or updates org.openroadm.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.Resource.body-param"
+        description: "org.openroadm.resource.Resource to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.ResourceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.resource.Resource"
+      description: "removes org.openroadm.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/resource/device:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.resource.types.DeviceId"
+      description: "Device of the resource, used only when the system using this\n\
+        \         model report on more than one device. "
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.DeviceId"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.DeviceIdWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.resource.types.DeviceId"
+      description: "Device of the resource, used only when the system using this\n\
+        \         model report on more than one device. "
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.types.DeviceId.body-param"
+        description: "org.openroadm.resource.types.DeviceId to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.types.DeviceIdWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.resource.types.DeviceId"
+      description: "Device of the resource, used only when the system using this\n\
+        \         model report on more than one device. "
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.types.DeviceId.body-param"
+        description: "org.openroadm.resource.types.DeviceId to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.types.DeviceIdWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.resource.types.DeviceId"
+      description: "Device of the resource, used only when the system using this\n\
+        \         model report on more than one device. "
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/resource/resource:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.resource.resource.Resource"
+      description: "returns org.openroadm.resource.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.resource.Resource"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.resource.ResourceWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.resource.resource.Resource"
+      description: "creates org.openroadm.resource.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.resource.Resource.body-param"
+        description: "org.openroadm.resource.resource.Resource to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.resource.ResourceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.resource.resource.Resource"
+      description: "creates or updates org.openroadm.resource.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.resource.Resource.body-param"
+        description: "org.openroadm.resource.resource.Resource to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.resource.ResourceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.resource.resource.Resource"
+      description: "removes org.openroadm.resource.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/resource/resource/port:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.resource.types.PortName"
+      description: "returns org.openroadm.resource.types.PortName"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.PortName"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.PortNameWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.resource.types.PortName"
+      description: "creates org.openroadm.resource.types.PortName"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.types.PortName.body-param"
+        description: "org.openroadm.resource.types.PortName to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.types.PortNameWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.resource.types.PortName"
+      description: "creates or updates org.openroadm.resource.types.PortName"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.types.PortName.body-param"
+        description: "org.openroadm.resource.types.PortName to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.types.PortNameWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.resource.types.PortName"
+      description: "removes org.openroadm.resource.types.PortName"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/resource/resourceType:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.resource.types.ResourceType"
+      description: "returns org.openroadm.resource.types.ResourceType"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.ResourceType"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.ResourceTypeWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.resource.types.ResourceType"
+      description: "creates org.openroadm.resource.types.ResourceType"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.types.ResourceType.body-param"
+        description: "org.openroadm.resource.types.ResourceType to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.types.ResourceTypeWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.resource.types.ResourceType"
+      description: "creates or updates org.openroadm.resource.types.ResourceType"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.resource.types.ResourceType.body-param"
+        description: "org.openroadm.resource.types.ResourceType to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.resource.types.ResourceTypeWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.resource.types.ResourceType"
+      description: "removes org.openroadm.resource.types.ResourceType"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/thresholdMeasurement:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.pm.types.PmMeasurement"
+      description: "returns org.openroadm.pm.types.PmMeasurement"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.types.PmMeasurement"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.types.PmMeasurementWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.pm.types.PmMeasurement"
+      description: "creates org.openroadm.pm.types.PmMeasurement"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.pm.types.PmMeasurement.body-param"
+        description: "org.openroadm.pm.types.PmMeasurement to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.pm.types.PmMeasurementWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.pm.types.PmMeasurement"
+      description: "creates or updates org.openroadm.pm.types.PmMeasurement"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.pm.types.PmMeasurement.body-param"
+        description: "org.openroadm.pm.types.PmMeasurement to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.pm.types.PmMeasurementWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.pm.types.PmMeasurement"
+      description: "removes org.openroadm.pm.types.PmMeasurement"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/potential-tca-list/tca={id}/thresholdMeasurement/pmParameterValue/:
+    post:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      description: "creates org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.pm.types.pmmeasurement.PmParameterValue.body-param"
+        description: "org.openroadm.pm.types.pmmeasurement.PmParameterValue to be\
+          \ added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.pm.types.pmmeasurement.PmParameterValueWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/potential-tca-list/tca={id}/thresholdMeasurement/pmParameterValue={type}:
+    get:
+      tags:
+      - "org-openroadm-tca"
+      summary: "returns org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      description: "returns org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "Id of pmParameterValue"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.types.pmmeasurement.PmParameterValueWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "org-openroadm-tca"
+      summary: "creates or updates org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      description: "creates or updates org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "Id of pmParameterValue"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.pm.types.pmmeasurement.PmParameterValue.body-param"
+        description: "org.openroadm.pm.types.pmmeasurement.PmParameterValue to be\
+          \ added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.pm.types.pmmeasurement.PmParameterValueWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-tca"
+      summary: "removes org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      description: "removes org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of tca"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "Id of pmParameterValue"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+definitions:
+  org.openroadm.alarm.Severity:
+    type: "string"
+    enum:
+    - "critical"
+    - "major"
+    - "minor"
+    - "warning"
+    - "clear"
+    - "indeterminate"
+  org.openroadm.common.alarm.pm.types.Direction:
+    type: "string"
+    enum:
+    - "tx"
+    - "rx"
+    - "bidirectional"
+    - "notApplicable"
+  org.openroadm.layerrate.LayerRate:
+    type: "object"
+    properties:
+      type:
+        $ref: "#/definitions/org.openroadm.layerrate.LayerRateEnum"
+      extension:
+        type: "string"
+  org.openroadm.layerrate.LayerRateEnum:
+    type: "string"
+    enum:
+    - "vendorExtension"
+    - "layer2"
+    - "layer3"
+    - "layer4"
+    - "layer5"
+    - "layer6"
+  org.openroadm.layerrate.LayerRateWrapper:
+    properties:
+      layerRate:
+        $ref: "#/definitions/org.openroadm.layerrate.LayerRate"
+  org.openroadm.pm.types.LocationEnumeration:
+    type: "string"
+    enum:
+    - "notApplicable"
+    - "nearEnd"
+    - "farEnd"
+  org.openroadm.pm.types.PmGranularity:
+    type: "string"
+    enum:
+    - "notApplicable"
+    - "1min"
+    - "15min"
+    - "24Hour"
+  org.openroadm.pm.types.PmMeasurement:
+    type: "object"
+    properties:
+      location:
+        description: "Location PM parameter measurement"
+        $ref: "#/definitions/org.openroadm.pm.types.LocationEnumeration"
+      validity:
+        description: "Validity of data"
+        $ref: "#/definitions/org.openroadm.pm.types.ValidityEnumeration"
+      pmParameterValue:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      direction:
+        description: "Direction PM parameter measurement"
+        $ref: "#/definitions/org.openroadm.common.alarm.pm.types.Direction"
+      pmParameterUnit:
+        type: "string"
+        description: "Unit PM parameter has been measured - frames, packets, u, etc"
+  org.openroadm.pm.types.PmMeasurementWrapper:
+    properties:
+      thresholdMeasurement:
+        $ref: "#/definitions/org.openroadm.pm.types.PmMeasurement"
+  org.openroadm.pm.types.ValidityEnumeration:
+    type: "string"
+    enum:
+    - "complete"
+    - "partial"
+    - "suspect"
+  org.openroadm.pm.types.pmmeasurement.PmParameterValue:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      value:
+        type: "string"
+  org.openroadm.pm.types.pmmeasurement.PmParameterValueWrapper:
+    properties:
+      pmParameterValue:
+        $ref: "#/definitions/org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+  org.openroadm.resource.Resource:
+    type: "object"
+    properties:
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.resource.Resource"
+      device:
+        description: "Device of the resource, used only when the system using this\n\
+          \         model report on more than one device. "
+        $ref: "#/definitions/org.openroadm.resource.types.DeviceId"
+      resourceType:
+        $ref: "#/definitions/org.openroadm.resource.types.ResourceType"
+  org.openroadm.resource.ResourceWrapper:
+    properties:
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.Resource"
+  org.openroadm.resource.resource.Resource:
+    type: "object"
+    properties:
+      node-id:
+        type: "string"
+        description: "Node Id is a globally unique identifier for a device.\n    \
+          \     Same as leafref value in model, if applicable."
+        x-choice: "resource:device"
+      connection-name:
+        type: "string"
+        description: "Connection name. Unique within the context of a device.\n  \
+          \       Same as leafref value in model, if applicable."
+        x-choice: "resource:connection"
+      internal-link-name:
+        type: "string"
+        description: "Internal Link identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:internal-link"
+      interface-name:
+        type: "string"
+        description: "Interface identifier."
+        x-choice: "resource:interface"
+      versioned-service-name:
+        type: "string"
+        description: "Service identifier. Unique within the context of a network.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:versioned-service"
+      odu-sncp-pg-name:
+        type: "string"
+        description: "name of the odu-snc-pg"
+        x-choice: "resource:odu-sncp-pg"
+      circuit-pack-name:
+        type: "string"
+        description: "Circuit-Pack identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:circuit-pack"
+      degree-number:
+        type: "integer"
+        format: "int32"
+        description: "Degree identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:degree"
+      srg-number:
+        type: "integer"
+        format: "int32"
+        description: "Shared Risk Group identifier. Unique within the context of a\
+          \ device.\n         Same as leafref value in model, if applicable."
+        x-choice: "resource:srg"
+      shelf-name:
+        type: "string"
+        description: "Shelf-id identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:shelf"
+      service-name:
+        type: "string"
+        description: "Service identifier. Unique within the context of a network.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:service"
+      common-id:
+        type: "string"
+        description: "Service identifier. Unique within the context of a network.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:temp-service"
+      physical-link-name:
+        type: "string"
+        description: "Physical Link identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:physical-link"
+      port:
+        $ref: "#/definitions/org.openroadm.resource.types.PortName"
+        x-choice: "resource:port"
+      other-resource-id:
+        type: "string"
+        description: "resource-id for other."
+        x-choice: "resource:other"
+      xpdr-number:
+        type: "integer"
+        format: "int32"
+        description: "number of the xponder"
+        x-choice: "resource:xponder"
+      version-number:
+        type: "integer"
+        format: "int32"
+        description: "version-number of the service"
+        x-choice: "resource:versioned-service"
+      amp-number:
+        type: "integer"
+        format: "int32"
+        description: "number of the line-amplifier"
+        x-choice: "resource:line-amplifier"
+  org.openroadm.resource.resource.ResourceWrapper:
+    properties:
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.resource.Resource"
+  org.openroadm.resource.types.CircuitPackName:
+    type: "object"
+    properties:
+      circuit-pack-name:
+        type: "string"
+        description: "Circuit-Pack identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+  org.openroadm.resource.types.DeviceId:
+    type: "object"
+    properties:
+      node-id:
+        type: "string"
+        description: "Node Id is a globally unique identifier for a device.\n    \
+          \     Same as leafref value in model, if applicable."
+  org.openroadm.resource.types.DeviceIdWrapper:
+    properties:
+      device:
+        $ref: "#/definitions/org.openroadm.resource.types.DeviceId"
+  org.openroadm.resource.types.PortName:
+    allOf:
+    - $ref: "#/definitions/org.openroadm.resource.types.CircuitPackName"
+    - type: "object"
+      properties:
+        port-name:
+          type: "string"
+          description: "Port identifier. Unique within the context of a circuit-pack.\n\
+            \         Same as leafref value in model, if applicable."
+  org.openroadm.resource.types.PortNameWrapper:
+    properties:
+      port:
+        $ref: "#/definitions/org.openroadm.resource.types.PortName"
+  org.openroadm.resource.types.ResourceType:
+    type: "object"
+    properties:
+      type:
+        $ref: "#/definitions/org.openroadm.resource.types.ResourceTypeEnum"
+      extension:
+        type: "string"
+  org.openroadm.resource.types.ResourceTypeEnum:
+    type: "string"
+    enum:
+    - "other"
+    - "device"
+    - "degree"
+    - "shared-risk-group"
+    - "connection"
+    - "connection-map"
+    - "port"
+    - "circuit-pack"
+    - "internal-link"
+    - "physical-link"
+    - "interface"
+    - "shelf"
+    - "service"
+    - "odu-sncp-pg"
+    - "line-amplifier"
+    - "xponder"
+    - "versioned-service"
+    - "temp-service"
+  org.openroadm.resource.types.ResourceTypeWrapper:
+    properties:
+      resourceType:
+        $ref: "#/definitions/org.openroadm.resource.types.ResourceType"
+  org.openroadm.tca.PotentialTca:
+    allOf:
+    - $ref: "#/definitions/org.openroadm.tca.Tca"
+    - type: "object"
+      properties:
+        lowThresholdValue:
+          type: "string"
+        highThresholdValue:
+          type: "string"
+  org.openroadm.tca.PotentialTcaList:
+    type: "object"
+    properties:
+      tca:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.tca.PotentialTca"
+  org.openroadm.tca.PotentialTcaListWrapper:
+    properties:
+      potential-tca-list:
+        $ref: "#/definitions/org.openroadm.tca.PotentialTcaList"
+  org.openroadm.tca.PotentialTcaWrapper:
+    properties:
+      tca:
+        $ref: "#/definitions/org.openroadm.tca.PotentialTca"
+  org.openroadm.tca.Tca:
+    type: "object"
+    properties:
+      severity:
+        description: "Severity of alarm. Based on X.733 perceived severity."
+        $ref: "#/definitions/org.openroadm.alarm.Severity"
+      thresholdMeasurement:
+        $ref: "#/definitions/org.openroadm.pm.types.PmMeasurement"
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.Resource"
+      granularity:
+        $ref: "#/definitions/org.openroadm.pm.types.PmGranularity"
+      raiseTime:
+        type: "string"
+      layerRate:
+        $ref: "#/definitions/org.openroadm.layerrate.LayerRate"
+      id:
+        type: "string"
+      thresholdType:
+        description: "Threshold Crossed"
+        $ref: "#/definitions/org.openroadm.tca.ThresholdTypeEnumeration"
+  org.openroadm.tca.ThresholdTypeEnumeration:
+    type: "string"
+    enum:
+    - "high"
+    - "low"

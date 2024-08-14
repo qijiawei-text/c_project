@@ -1,0 +1,8 @@
+{
+    "config": {
+        "name": "PADDING-VOA",
+        "attenuation-mode": "openconfig-optical-attenuator:CONSTANT_ATTENUATION",
+        "attenuation": "10.6",
+        "enabled": true
+    }
+}

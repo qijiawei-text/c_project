@@ -1,0 +1,37 @@
+{
+	"system":       {
+			"nodename":     "Rainier400",
+			"ip-address":   "172.16.166.236",
+			"netmask":      "255.255.0.0",
+			"gateway":      "172.16.166.8",
+			"ntp-ip-1":     "127.0.0.1",
+			"ntp-ip-2":     "",
+			"syslog-ip-1":  "127.0.0.1",
+			"syslog-ip-2":  "",
+			"tacacs-ip-1":  "",
+			"tacacs-server-secret-1":       "",
+			"tacacs-ip-2":  "",
+			"tacacs-server-secret-2":       "",
+			"fiber-type":   "ssmf",
+			"launching-power-per-channel":  5,
+			"drop-power-per-channel":       0,
+			"number-of-carriers":   40,
+			"ocm-based-carriers":   "disable",
+			"timezone":     8,
+			"long-span":    "disable"
+	},
+	"booster-amp":  {
+			"target-gain":  15,
+			"target-gain-tilt":     0,
+			"voa":  5,
+			"apr-enable":   "enable",
+			"state":        "up"
+	},
+	"pre-amp":      {
+			"target-gain":  15,
+			"target-gain-tilt":     -1,
+			"voa":  0,
+			"apr-enable":   "enable",
+			"state":        "up"
+	}
+}

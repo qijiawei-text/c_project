@@ -1,0 +1,10 @@
+{
+  "config": {
+    "name": "OSC",
+    "type": "openconfig-optical-amplifier:EDFA",
+    "amp-mode": "openconfig-optical-amplifier:CONSTANT_POWER",
+    "target-output-power": "7.6",
+    "enabled": true
+  }
+}
+

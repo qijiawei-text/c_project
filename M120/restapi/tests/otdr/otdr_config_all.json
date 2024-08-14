@@ -1,0 +1,33 @@
+{
+    "otdrs":        {
+        "otdr": [{
+                "name": "OTDR",
+                "config":       {
+                        "name": "OTDR",
+                        "scan-type":    "medium",
+                        "distance-range":       60,
+                        "pulse-width":  3000,
+                        "sample-resolution":    "10.0",
+                        "measuring-time":       60,
+                        "user-ior":     "1.4679",
+                        "reflectance-thr":      "-41.3",
+                        "splice-loss-thr":      "0.5",
+                        "fiber-end-thr":        "3.1"
+                }
+            }, {
+                "name": "OTDR-P",
+                "config":       {
+                        "name": "OTDR-P",
+                        "scan-type":    "medium",
+                        "distance-range":       60,
+                        "pulse-width":  3000,
+                        "sample-resolution":    "10.0",
+                        "measuring-time":       60,
+                        "user-ior":     "1.4679",
+                        "reflectance-thr":      "-42.3",
+                        "splice-loss-thr":      "0.7",
+                        "fiber-end-thr":        "3.2"
+                }
+            }]
+    }
+}

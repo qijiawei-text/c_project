@@ -1,0 +1,6 @@
+{	
+    "name": "OTDR",
+    "scan-type": "medium",
+    "operation": "start",
+    "port-name": "external"
+}

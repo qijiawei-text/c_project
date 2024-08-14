@@ -1,0 +1,7 @@
+{
+    "config":       {
+            "index":        1,
+            "source":       "port-in1",
+            "dest":         "port-out3"
+    }
+}

@@ -1,0 +1,471 @@
+---
+swagger: "2.0"
+info:
+  description: "YANG definitions of auth managements, including authentication, user\
+    \ management, session management."
+  version: "1.0"
+  title: "com-oplink-auth API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/auth-mgnt:
+    get:
+      tags:
+      - "com-oplink-auth"
+      summary: "returns com.oplink.auth.AuthMgnt"
+      description: "returns com.oplink.auth.AuthMgnt"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.auth.AuthMgnt"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.AuthMgntWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "com-oplink-auth"
+      summary: "creates com.oplink.auth.AuthMgnt"
+      description: "creates com.oplink.auth.AuthMgnt"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.AuthMgnt.body-param"
+        description: "com.oplink.auth.AuthMgnt to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.auth.AuthMgntWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "com-oplink-auth"
+      summary: "creates or updates com.oplink.auth.AuthMgnt"
+      description: "creates or updates com.oplink.auth.AuthMgnt"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.AuthMgnt.body-param"
+        description: "com.oplink.auth.AuthMgnt to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.auth.AuthMgntWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "com-oplink-auth"
+      summary: "removes com.oplink.auth.AuthMgnt"
+      description: "removes com.oplink.auth.AuthMgnt"
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/auth-mgnt/config:
+    get:
+      tags:
+      - "com-oplink-auth"
+      summary: "returns com.oplink.auth.authmgnt.Config"
+      description: "returns com.oplink.auth.authmgnt.Config"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.auth.authmgnt.Config"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.authmgnt.ConfigWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "com-oplink-auth"
+      summary: "creates com.oplink.auth.authmgnt.Config"
+      description: "creates com.oplink.auth.authmgnt.Config"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.authmgnt.Config.body-param"
+        description: "com.oplink.auth.authmgnt.Config to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.auth.authmgnt.ConfigWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "com-oplink-auth"
+      summary: "creates or updates com.oplink.auth.authmgnt.Config"
+      description: "creates or updates com.oplink.auth.authmgnt.Config"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.authmgnt.Config.body-param"
+        description: "com.oplink.auth.authmgnt.Config to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.auth.authmgnt.ConfigWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "com-oplink-auth"
+      summary: "removes com.oplink.auth.authmgnt.Config"
+      description: "removes com.oplink.auth.authmgnt.Config"
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/auth-mgnt/state:
+    get:
+      tags:
+      - "com-oplink-auth"
+      summary: "returns com.oplink.auth.authmgnt.State"
+      description: "returns com.oplink.auth.authmgnt.State"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.auth.authmgnt.State"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.authmgnt.StateWrapper"
+        400:
+          description: "Internal error"
+  /data/auth-mgnt/state/tokens={token}:
+    get:
+      tags:
+      - "com-oplink-auth"
+      summary: "returns com.oplink.auth.TokenInfo"
+      description: "returns com.oplink.auth.TokenInfo"
+      parameters:
+      - name: "token"
+        in: "path"
+        description: "Id of tokens"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "com.oplink.auth.TokenInfo"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.TokenInfoWrapper"
+        400:
+          description: "Internal error"
+  /operations/auth:
+    post:
+      tags:
+      - "com-oplink-auth"
+      summary: "operates on com.oplink.auth.Auth"
+      description: "operates on com.oplink.auth.Auth"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.auth.Input.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/com.oplink.auth.auth.Input"
+      responses:
+        200:
+          description: "Correct response"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.Auth"
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+  /operations/delete-tokens-by-username:
+    post:
+      tags:
+      - "com-oplink-auth"
+      summary: "operates on com.oplink.auth.DeleteTokensByUsername"
+      description: "operates on com.oplink.auth.DeleteTokensByUsername"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.UserName.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/com.oplink.auth.UserName"
+      responses:
+        200:
+          description: "Correct response"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.DeleteTokensByUsername"
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+  /operations/login:
+    post:
+      tags:
+      - "com-oplink-auth"
+      summary: "operates on com.oplink.auth.Login"
+      description: "operates on com.oplink.auth.Login"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.login.Input.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/com.oplink.auth.login.Input"
+      responses:
+        200:
+          description: "Correct response"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.Login"
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+  /operations/logout:
+    post:
+      tags:
+      - "com-oplink-auth"
+      summary: "operates on com.oplink.auth.Logout"
+      description: "operates on com.oplink.auth.Logout"
+      parameters:
+      - in: "body"
+        name: "com.oplink.auth.logout.Input.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/com.oplink.auth.logout.Input"
+      responses:
+        200:
+          description: "Correct response"
+          schema:
+            $ref: "#/definitions/com.oplink.auth.Logout"
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+definitions:
+  com.oplink.auth.AppMode:
+    type: "object"
+    properties:
+      application:
+        type: "integer"
+        format: "int64"
+        description: "Applications that accesses to the device. \n               \
+          \ 1 : WEB, \n                2 : COMAND,\n                4 : tl1,\n   \
+          \             8 : snmp,\n                16: shell,\n                32:\
+          \ rest,\n                64: netconf,\n                0xFFFFFFFF: all"
+  com.oplink.auth.Auth:
+    type: "object"
+    properties:
+      output:
+        $ref: "#/definitions/com.oplink.auth.RpcResponseStatus"
+  com.oplink.auth.AuthChannel:
+    type: "object"
+    properties:
+      auth-channel:
+        type: "integer"
+        format: "int64"
+        description: "The auth channel which is used to check username and password.\
+          \ \n                0 : radius, \n                1 : tacacs,\n        \
+          \        2 : local"
+  com.oplink.auth.AuthMgnt:
+    type: "object"
+    properties:
+      config:
+        $ref: "#/definitions/com.oplink.auth.authmgnt.Config"
+      state:
+        $ref: "#/definitions/com.oplink.auth.authmgnt.State"
+  com.oplink.auth.AuthMgntWrapper:
+    properties:
+      auth-mgnt:
+        $ref: "#/definitions/com.oplink.auth.AuthMgnt"
+  com.oplink.auth.DeleteTokensByUsername:
+    type: "object"
+    properties:
+      output:
+        $ref: "#/definitions/com.oplink.auth.RpcResponseStatus"
+  com.oplink.auth.ExpireTime:
+    type: "object"
+    properties:
+      expire-time:
+        type: "integer"
+        format: "int64"
+  com.oplink.auth.LastLoginTime:
+    type: "object"
+    properties:
+      last-login-time:
+        type: "integer"
+        format: "int64"
+  com.oplink.auth.LastOperationTime:
+    type: "object"
+    properties:
+      last-operation-time:
+        type: "integer"
+        format: "int64"
+  com.oplink.auth.Login:
+    type: "object"
+    properties:
+      output:
+        $ref: "#/definitions/com.oplink.auth.login.Output"
+  com.oplink.auth.LoginType:
+    type: "object"
+    properties:
+      login-type:
+        type: "integer"
+        format: "int64"
+        description: "login type that is used for checking accouts. \n           \
+          \     0 : Normal Authentication, \n                1 : HTTP Basic Authentication,\n\
+          \                2 : Token Authentication,\n                3 : Token Authentication\
+          \ without password"
+  com.oplink.auth.Logout:
+    type: "object"
+    properties:
+      output:
+        $ref: "#/definitions/com.oplink.auth.RpcResponseStatus"
+  com.oplink.auth.OperCmd:
+    type: "object"
+    properties:
+      oper-cmd:
+        type: "string"
+        description: "The operating command from client"
+  com.oplink.auth.PrivLv:
+    type: "object"
+    properties:
+      priv-lv:
+        type: "integer"
+        format: "int64"
+        description: "Remote return user priv level."
+  com.oplink.auth.RemoteAddress:
+    type: "object"
+    properties:
+      remote-address:
+        type: "string"
+  com.oplink.auth.RpcResponseStatus:
+    type: "object"
+    properties:
+      status-message:
+        type: "string"
+        description: "Gives a more detailed reason for failure"
+      status:
+        type: "integer"
+        format: "int32"
+        description: "Successful or Failed"
+  com.oplink.auth.Token:
+    type: "object"
+    properties:
+      token:
+        type: "string"
+        description: "The token for authentication."
+  com.oplink.auth.TokenInfo:
+    allOf:
+    - $ref: "#/definitions/com.oplink.auth.AppMode"
+    - $ref: "#/definitions/com.oplink.auth.AuthChannel"
+    - $ref: "#/definitions/com.oplink.auth.ExpireTime"
+    - $ref: "#/definitions/com.oplink.auth.LastLoginTime"
+    - $ref: "#/definitions/com.oplink.auth.LastOperationTime"
+    - $ref: "#/definitions/com.oplink.auth.LoginType"
+    - $ref: "#/definitions/com.oplink.auth.PrivLv"
+    - $ref: "#/definitions/com.oplink.auth.RemoteAddress"
+    - $ref: "#/definitions/com.oplink.auth.Token"
+    - $ref: "#/definitions/com.oplink.auth.UserName"
+    - $ref: "#/definitions/com.oplink.auth.UserRole"
+  com.oplink.auth.TokenInfoWrapper:
+    properties:
+      tokens:
+        $ref: "#/definitions/com.oplink.auth.TokenInfo"
+  com.oplink.auth.UserName:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "The user name string identifying this entry."
+  com.oplink.auth.UserPasword:
+    type: "object"
+    properties:
+      password:
+        type: "string"
+        description: "The password for this entry. This shouldn't be in clear text\
+          \ when output operaton."
+  com.oplink.auth.UserRole:
+    type: "object"
+    properties:
+      user-role:
+        type: "integer"
+        format: "int64"
+        description: "Applications that accesses to the device. \n               \
+          \ 1 : query, \n                2 : opeartion,\n                4 : admin"
+  com.oplink.auth.auth.Input:
+    allOf:
+    - $ref: "#/definitions/com.oplink.auth.AppMode"
+    - $ref: "#/definitions/com.oplink.auth.OperCmd"
+    - $ref: "#/definitions/com.oplink.auth.Token"
+  com.oplink.auth.authmgnt.Config:
+    type: "object"
+    properties:
+      session-maxcount:
+        type: "integer"
+        format: "int64"
+        description: "The maximum number of sessions"
+      session-timeout:
+        type: "integer"
+        format: "int64"
+        description: "Session timeout. 0 means never timeout until logout"
+      per-command-authorizaiton:
+        type: "boolean"
+        description: "Turns per-command-authorizaiton on / off to aaa server(tacacs+\
+          \ or radius)."
+        default: false
+  com.oplink.auth.authmgnt.ConfigWrapper:
+    properties:
+      config:
+        $ref: "#/definitions/com.oplink.auth.authmgnt.Config"
+  com.oplink.auth.authmgnt.State:
+    type: "object"
+    properties:
+      tokens:
+        type: "array"
+        items:
+          $ref: "#/definitions/com.oplink.auth.TokenInfo"
+  com.oplink.auth.authmgnt.StateWrapper:
+    properties:
+      state:
+        $ref: "#/definitions/com.oplink.auth.authmgnt.State"
+  com.oplink.auth.login.Input:
+    allOf:
+    - $ref: "#/definitions/com.oplink.auth.AppMode"
+    - $ref: "#/definitions/com.oplink.auth.LoginType"
+    - $ref: "#/definitions/com.oplink.auth.RemoteAddress"
+    - $ref: "#/definitions/com.oplink.auth.Token"
+    - $ref: "#/definitions/com.oplink.auth.UserName"
+    - $ref: "#/definitions/com.oplink.auth.UserPasword"
+  com.oplink.auth.login.Output:
+    allOf:
+    - $ref: "#/definitions/com.oplink.auth.AuthChannel"
+    - $ref: "#/definitions/com.oplink.auth.RpcResponseStatus"
+    - $ref: "#/definitions/com.oplink.auth.Token"
+    - $ref: "#/definitions/com.oplink.auth.UserRole"
+  com.oplink.auth.logout.Input:
+    allOf:
+    - $ref: "#/definitions/com.oplink.auth.AppMode"
+    - $ref: "#/definitions/com.oplink.auth.LoginType"
+    - $ref: "#/definitions/com.oplink.auth.Token"
+    - $ref: "#/definitions/com.oplink.auth.UserName"

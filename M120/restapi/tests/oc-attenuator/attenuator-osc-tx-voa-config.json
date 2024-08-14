@@ -1,0 +1,8 @@
+{
+    "config": {
+        "name": "OSC-TX-VOA",
+        "attenuation-mode": "openconfig-optical-attenuator:CONSTANT_POWER",
+        "target-output-power": "16.6",
+        "enabled": true
+    }
+}

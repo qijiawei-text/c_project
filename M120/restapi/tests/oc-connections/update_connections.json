@@ -1,0 +1,22 @@
+{
+    "connections": {
+      "connection": [
+        {
+          "index": 15,
+          "config": {
+            "index": 15,
+            "source": "port-in15",
+            "dest": "port-out16"
+          }
+        },
+        {
+          "index": 16,
+          "config": {
+            "index": 16,
+            "source": "port-in16",
+            "dest": "port-out15"
+          }
+        }
+      ]
+    }
+  }

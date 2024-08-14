@@ -1,0 +1,13 @@
+{
+  "supervisory-channels": {
+    "supervisory-channel": [
+      {
+        "interface": "OSC",
+        "config": {
+          "interface": "OSC",
+          "com-oplink-amplifier-ext:osc-sfp-enable": false
+        }
+      }
+    ]
+  }
+}

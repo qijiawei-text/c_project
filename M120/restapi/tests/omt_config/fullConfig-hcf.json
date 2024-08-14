@@ -1,0 +1,39 @@
+{
+        "system":       {
+                "nodename":     "DCI-OLSP-ggj0123",
+                "ip-address":   "172.16.163.217",
+                "netmask":      "255.255.255.0",
+                "gateway":      "172.16.163.8",
+                "ntp-ip-1":     "172.16.166.20",
+                "ntp-ip-2":     "172.16.166.88",
+                "syslog-ip-1":  "172.16.166.82",
+                "syslog-ip-2":  "172.16.166.83",
+                "tacacs-ip-1":  "172.16.166.20",
+                "tacacs-server-secret-1":       "wuhan_key-001",
+                "tacacs-ip-2":  "172.16.161.103",
+                "tacacs-server-secret-2":       "wuhan_key-002",
+                "fiber-type":   "ssmf",
+                "launching-power-per-channel":  5,
+                "drop-power-per-channel":       0,
+                "number-of-carriers":   30,
+                "long-span":    "enable",
+                "timezone":     6,
+                "ipv6-mode":    "link-layer",
+                "ipv6-address": "fe80::fcfe:feff:fe00:100/64",
+                "ipv6-gateway": ""
+        },
+        "booster-amp":  {
+                "target-gain":  15.4,
+                "target-gain-tilt":     -0.2,
+                "voa":  0.2,
+                "apr-enable":   "disable",
+                "state":        "down"
+        },
+        "pre-amp":      {
+                "target-gain":  15.5,
+                "target-gain-tilt":     -0.1,
+                "voa":  0.1,
+                "apr-enable":   "disable",
+                "state":        "down"
+        }
+}

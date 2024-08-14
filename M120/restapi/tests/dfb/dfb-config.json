@@ -1,0 +1,7 @@
+{
+    "config": {
+        "name": "dfb-hp",
+        "target-output-power": "8.4",
+        "enabled": false
+      }
+}
