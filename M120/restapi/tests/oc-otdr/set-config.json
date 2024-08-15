@@ -1,8 +1,0 @@
-{
-    "acquisition-time-s": 60,
-    "range-m": 5000,
-    "pulse-width-ns": 3000,
-    "refractive-index": 1.4679,
-    "reflectance-threshold": -40,
-    "splice-loss-threshold": 2.16
-}

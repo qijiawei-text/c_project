@@ -1,9 +1,0 @@
-{
-        "laser-safty": {
-          "config": {
-            "remote-interlock-enable": false,
-            "dummy-admin-key-enable": true,
-            "panel-safe-cmpt-enable": false
-          }
-        }
-}

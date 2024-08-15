@@ -1,2 +1,0 @@
-# configd
-configd

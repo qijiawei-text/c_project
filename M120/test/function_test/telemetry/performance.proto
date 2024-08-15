@@ -1,5 +1,0 @@
-syntax = "proto2";
-
-message Performance { 
-	repeated int32 data = 1;
-}

@@ -1,8 +1,0 @@
-{
-    "config": {
-        "name": "PA-VOA",
-        "attenuation-mode": "openconfig-optical-attenuator:CONSTANT_ATTENUATION",
-        "attenuation": "13.6",
-        "enabled": true
-    }
-}

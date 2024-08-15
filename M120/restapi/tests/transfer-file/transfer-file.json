@@ -1,6 +1,0 @@
-{
-    "user-id":  "guangjung",
-    "password": "welcome",
-    "source-file-name": "/log/saved/internal-log.tar.gz",
-    "destination-file-name": "172.16.161.117:/home/guangjung/internal-log.tar.gz"
-}

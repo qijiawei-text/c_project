@@ -1,2 +1,0 @@
-# dsc-lib
-Datastore libary

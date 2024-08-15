@@ -1,7 +1,0 @@
-{
-        "config":       {
-                "remote-interlock-enable":      false,
-                "dummy-admin-key-enable":       false,
-                "panel-safe-cmpt-enable":       true
-        }
-}

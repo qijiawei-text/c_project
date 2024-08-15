@@ -1,7 +1,0 @@
-{
-    "config":       {
-            "index":        15,
-            "source":       "port-in15",
-            "dest":         "port-out6"
-    }
-}
