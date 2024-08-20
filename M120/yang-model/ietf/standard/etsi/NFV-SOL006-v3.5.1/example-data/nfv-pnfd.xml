@@ -1,0 +1,8 @@
+<pnfd xmlns="urn:etsi:nfv:yang:etsi-nfv-pnfd">
+  <id>physical-dpi</id>
+  <version>1.0</version>
+  <ext-cpd>
+    <id>outside</id>
+      <layer-protocol xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:ethernet</layer-protocol>
+  </ext-cpd>
+</pnfd>

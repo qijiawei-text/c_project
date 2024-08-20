@@ -1,0 +1,941 @@
+module: etsi-nfv-descriptors
+  +--rw nfv
+     +--rw vnfd* [id]
+     |  +--rw id                               string
+     |  +--rw provider                         string
+     |  +--rw product-name                     string
+     |  +--rw software-version                 string
+     |  +--rw version                          string
+     |  +--rw product-info-name?               string
+     |  +--rw product-info-description?        string
+     |  +--rw vnfm-info*                       string
+     |  +--rw localization-language?           string
+     |  +--rw default-localization-language?   string
+     |  +--rw vdu* [id]
+     |  |  +--rw id                               string
+     |  |  +--rw name                             string
+     |  |  +--rw description?                     string
+     |  |  +--rw int-cpd* [id]
+     |  |  |  +--rw int-virtual-link-desc?                   -> /nfv/vnfd/int-virtual-link-desc/id
+     |  |  |  +--rw bitrate-requirement?                     uint64
+     |  |  |  +--rw virtual-network-interface-requirement* [name]
+     |  |  |  |  +--rw name                                           string
+     |  |  |  |  +--rw description?                                   string
+     |  |  |  |  +--rw standardized-network-interface-requirements* [key]
+     |  |  |  |  |  +--rw key      string
+     |  |  |  |  |  +--rw value?   string
+     |  |  |  |  +--rw network-interface-requirements* [key]
+     |  |  |  |  |  +--rw key      string
+     |  |  |  |  |  +--rw value?   string
+     |  |  |  |  +--rw nic-io-requirements?                           -> /nfv/vnfd/virtual-compute-desc/logical-node/id
+     |  |  |  +--rw nicio-requirements?                      -> /nfv/vnfd/virtual-compute-desc/id
+     |  |  |  +--rw order?                                   uint32
+     |  |  |  +--rw vnic-type?                               identityref
+     |  |  |  +--rw id                                       string
+     |  |  |  +--rw layer-protocol*                          identityref
+     |  |  |  +--rw role?                                    identityref
+     |  |  |  +--rw description?                             string
+     |  |  |  +--rw protocol* [associated-layer-protocol]
+     |  |  |  |  +--rw associated-layer-protocol    identityref
+     |  |  |  |  +--rw address-data* [type]
+     |  |  |  |     +--rw type               identityref
+     |  |  |  |     +--rw l2-address-data
+     |  |  |  |     |  +--rw mac-address-assignment    boolean
+     |  |  |  |     +--rw l3-address-data
+     |  |  |  |        +--rw ip-address-assignment?           boolean
+     |  |  |  |        +--rw ip-address-assignment-subtype?   enumeration
+     |  |  |  |        +--rw floating-ip-activated            boolean
+     |  |  |  |        +--rw ip-address-type?                 enumeration
+     |  |  |  |        +--rw number-of-ip-addresses?          uint32
+     |  |  |  |        +--rw fixed-ip-address?                string
+     |  |  |  +--rw trunk-mode?                              boolean
+     |  |  |  +--rw security-group-rule-id?                  -> ../../../security-group-rule/id
+     |  |  +--rw virtual-compute-desc?            -> ../../virtual-compute-desc/id
+     |  |  +--rw os-container-desc*               -> ../../os-container-desc/id
+     |  |  +--rw virtual-storage-desc*            -> ../../virtual-storage-desc/id
+     |  |  +--rw boot-order* [key]
+     |  |  |  +--rw key      uint32
+     |  |  |  +--rw value?   -> ../../virtual-storage-desc
+     |  |  +--rw sw-image-desc?                   -> ../../sw-image-desc/id
+     |  |  +--rw nfvi-constraint*                 string
+     |  |  +--rw monitoring-parameter* [id]
+     |  |  |  +--rw id                    string
+     |  |  |  +--rw name?                 string
+     |  |  |  +--rw performance-metric?   string
+     |  |  |  +--rw collection-period?    uint64
+     |  |  +--rw configurable-properties* [key]
+     |  |  |  +--rw key      string
+     |  |  |  +--rw value?   string
+     |  |  +--rw boot-data?                       string
+     |  |  +--rw trunk-port* [parent-port-cpd]
+     |  |  |  +--rw parent-port-cpd    -> ../../int-cpd/id
+     |  |  |  +--rw sub-port-list* [sub-port-cpd]
+     |  |  |     +--rw sub-port-cpd         -> ../../../int-cpd/id
+     |  |  |     +--rw segmentation-type?   enumeration
+     |  |  |     +--rw segmentation-id?     uint32
+     |  |  +--rw logical-node* [id]
+     |  |  |  +--rw id                    string
+     |  |  |  +--rw requirement-detail* [key]
+     |  |  |     +--rw key      string
+     |  |  |     +--rw value?   string
+     |  |  +--rw request-additional-capability* [name]
+     |  |  |  +--rw name                             string
+     |  |  |  +--rw support-mandatory?               boolean
+     |  |  |  +--rw min-version?                     string
+     |  |  |  +--rw preferred-version?               string
+     |  |  |  +--rw target-performance-parameters* [key]
+     |  |  |     +--rw key      string
+     |  |  |     +--rw value?   string
+     |  |  +--rw mcio-constraint-params*          enumeration
+     |  |  +--rw mcio-identification-data
+     |  |     +--rw name    string
+     |  |     +--rw type    enumeration
+     |  +--rw virtual-compute-desc* [id]
+     |  |  +--rw id                               string
+     |  |  +--rw logical-node* [id]
+     |  |  |  +--rw id                    string
+     |  |  |  +--rw requirement-detail* [key]
+     |  |  |     +--rw key      string
+     |  |  |     +--rw value?   string
+     |  |  +--rw request-additional-capability* [name]
+     |  |  |  +--rw name                             string
+     |  |  |  +--rw support-mandatory?               boolean
+     |  |  |  +--rw min-version?                     string
+     |  |  |  +--rw preferred-version?               string
+     |  |  |  +--rw target-performance-parameters* [key]
+     |  |  |     +--rw key      string
+     |  |  |     +--rw value?   string
+     |  |  +--rw compute-requirements?            string
+     |  |  +--rw virtual-memory
+     |  |  |  +--rw size?                       decimal64
+     |  |  |  +--rw over-subscription-policy?   string
+     |  |  |  +--rw vdu-mem-requirements* [key]
+     |  |  |  |  +--rw key      string
+     |  |  |  |  +--rw value?   string
+     |  |  |  +--rw numa-enabled?               boolean
+     |  |  +--rw virtual-cpu
+     |  |  |  +--rw cpu-architecture?          string
+     |  |  |  +--rw num-virtual-cpu?           uint16
+     |  |  |  +--rw clock?                     uint32
+     |  |  |  +--rw oversubscription-policy?   string
+     |  |  |  +--rw vdu-cpu-requirements* [key]
+     |  |  |  |  +--rw key      string
+     |  |  |  |  +--rw value?   string
+     |  |  |  +--rw pinning!
+     |  |  |     +--rw policy?   enumeration
+     |  |  |     +--rw rule* [key]
+     |  |  |        +--rw key      string
+     |  |  |        +--rw value?   string
+     |  |  +--rw virtual-disk* [id]
+     |  |     +--rw id                          string
+     |  |     +--rw size-of-storage?            uint64
+     |  |     +--rw vdu-storage-requirements* [key]
+     |  |     |  +--rw key      string
+     |  |     |  +--rw value?   string
+     |  |     +--rw rdma-enabled?               boolean
+     |  |     +--rw sw-image-desc?              -> ../../../sw-image-desc/id
+     |  +--rw virtual-storage-desc* [id]
+     |  |  +--rw id                           string
+     |  |  +--rw type-of-storage?             identityref
+     |  |  +--rw (storage)?
+     |  |  |  +--:(block-storage-data)
+     |  |  |  |  +--rw block-storage-data
+     |  |  |  |     +--rw size-of-storage?            uint64
+     |  |  |  |     +--rw vdu-storage-requirements* [key]
+     |  |  |  |     |  +--rw key      string
+     |  |  |  |     |  +--rw value?   string
+     |  |  |  |     +--rw rdma-enabled?               boolean
+     |  |  |  |     +--rw sw-image-desc?              -> ../../../sw-image-desc/id
+     |  |  |  +--:(object-storage-data)
+     |  |  |  |  +--rw object-storage-data
+     |  |  |  |     +--rw max-size-of-storage?   uint64
+     |  |  |  +--:(file-storage-data)
+     |  |  |     +--rw file-storage-data
+     |  |  |        +--rw size-of-storage?         uint64
+     |  |  |        +--rw file-system-protocol?    string
+     |  |  |        +--rw int-virtual-link-desc    -> ../../../sw-image-desc/id
+     |  |  +--rw nfvi-maintenance-info
+     |  |  |  +--rw impact-notification-lead-time         yang:timeticks
+     |  |  |  +--rw is-impact-mitigation-requested?       boolean
+     |  |  |  +--rw supported-migration-type*             enumeration
+     |  |  |  +--rw max-undetectable-interruption-time?   yang:timeticks
+     |  |  |  +--rw min-recovery-time-between-impacts?    yang:timeticks
+     |  |  |  +--rw max-number-of-impacted-instances* [group-size]
+     |  |  |  |  +--rw group-size                          uint32
+     |  |  |  |  +--rw max-number-of-impacted-instances?   uint32
+     |  |  |  +--rw min-number-of-preserved-instances* [group-size]
+     |  |  |     +--rw group-size                           uint32
+     |  |  |     +--rw min-number-of-preserved-instances?   uint32
+     |  |  +--rw per-vnfc-instance?           boolean
+     |  +--rw os-container-desc* [id]
+     |  |  +--rw id                                       string
+     |  |  +--rw name?                                    string
+     |  |  +--rw description?                             string
+     |  |  +--rw requested-cpu-resources?                 uint32
+     |  |  +--rw requested-memory-resources?              uint64
+     |  |  +--rw requested-ephemeral-storage-resources?   uint64
+     |  |  +--rw extended-resource-requests* [extended-resource amount]
+     |  |  |  +--rw extended-resource    string
+     |  |  |  +--rw amount               uint32
+     |  |  +--rw cpu-resource-limit?                      uint32
+     |  |  +--rw memory-resource-limit?                   uint64
+     |  |  +--rw ephemeral-storage-resource-limit?        uint64
+     |  |  +--rw huge-page-resources* [hugepage-size]
+     |  |  |  +--rw hugepage-size     uint32
+     |  |  |  +--rw requested-size?   uint32
+     |  |  |  +--rw size-unit?        scaler-units-size
+     |  |  +--rw sw-image-desc?                           -> ../../sw-image-desc/id
+     |  |  +--rw boot-data?                               string
+     |  |  +--rw monitoring-parameter* [id]
+     |  |     +--rw id                    string
+     |  |     +--rw name?                 string
+     |  |     +--rw performance-metric?   string
+     |  |     +--rw collection-period?    uint64
+     |  +--rw sw-image-desc* [id]
+     |  |  +--rw id                                      string
+     |  |  +--rw name                                    string
+     |  |  +--rw version                                 string
+     |  |  +--rw provider?                               string
+     |  |  +--rw checksum
+     |  |  |  +--rw algorithm    identityref
+     |  |  |  +--rw hash         string
+     |  |  +--rw container-format?                       enumeration
+     |  |  +--rw disk-format?                            enumeration
+     |  |  +--rw min-disk?                               uint64
+     |  |  +--rw min-ram?                                decimal64
+     |  |  +--rw size?                                   uint64
+     |  |  +--rw image?                                  inet:uri
+     |  |  +--rw operating-system?                       string
+     |  |  +--rw supported-virtualization-environment*   string
+     |  +--rw int-virtual-link-desc* [id]
+     |  |  +--rw id                       string
+     |  |  +--rw flavour* [id]
+     |  |  |  +--rw id     string
+     |  |  |  +--rw qos!
+     |  |  |     +--rw latency                   uint32
+     |  |  |     +--rw packet-delay-variation    uint32
+     |  |  |     +--rw packet-loss-ratio?        decimal64
+     |  |  +--rw connectivity-type
+     |  |  |  +--rw layer-protocol*   identityref
+     |  |  |  +--rw flow-pattern?     flow-pattern
+     |  |  +--rw test-access*             string
+     |  |  +--rw description?             string
+     |  |  +--rw monitoring-parameters* [id]
+     |  |  |  +--rw id                    string
+     |  |  |  +--rw name?                 string
+     |  |  |  +--rw performance-metric?   string
+     |  |  |  +--rw collection-period?    uint64
+     |  |  +--rw nfvi-maintenance-info
+     |  |  |  +--rw impact-notification-lead-time         yang:timeticks
+     |  |  |  +--rw is-impact-mitigation-requested?       boolean
+     |  |  |  +--rw supported-migration-type*             enumeration
+     |  |  |  +--rw max-undetectable-interruption-time?   yang:timeticks
+     |  |  |  +--rw min-recovery-time-between-impacts?    yang:timeticks
+     |  |  |  +--rw max-number-of-impacted-instances* [group-size]
+     |  |  |  |  +--rw group-size                          uint32
+     |  |  |  |  +--rw max-number-of-impacted-instances?   uint32
+     |  |  |  +--rw min-number-of-preserved-instances* [group-size]
+     |  |  |     +--rw group-size                           uint32
+     |  |  |     +--rw min-number-of-preserved-instances?   uint32
+     |  |  +--rw externally-managed?      enumeration
+     |  +--rw security-group-rule* [id]
+     |  |  +--rw id                string
+     |  |  +--rw description?      string
+     |  |  +--rw direction?        enumeration
+     |  |  +--rw ether-type?       enumeration
+     |  |  +--rw protocol?         enumeration
+     |  |  +--rw port-range-min?   uint16
+     |  |  +--rw port-range-max?   uint16
+     |  +--rw ext-cpd* [id]
+     |  |  +--rw (cp-connection)?
+     |  |  |  +--:(int-virtual-link-desc)
+     |  |  |  |  +--rw int-virtual-link-desc?             -> /nfv/vnfd/int-virtual-link-desc/id
+     |  |  |  +--:(int-cpd)
+     |  |  |  |  +--rw int-cpd
+     |  |  |  |     +--rw vdu-id?   -> ../../../vdu/id
+     |  |  |  |     +--rw cpd?      -> deref(../vdu-id)/../int-cpd/id
+     |  |  |  +--:(vip-cpd)
+     |  |  |  |  +--rw vip-cpd?                           -> ../../vip-cpd/id
+     |  |  |  +--:(virtual-cpd)
+     |  |  |     +--rw virtual-cpd?                       -> ../../virtual-cpd/id
+     |  |  +--rw virtual-network-interface-requirement* [name]
+     |  |  |  +--rw name                                           string
+     |  |  |  +--rw description?                                   string
+     |  |  |  +--rw standardized-network-interface-requirements* [key]
+     |  |  |  |  +--rw key      string
+     |  |  |  |  +--rw value?   string
+     |  |  |  +--rw network-interface-requirements* [key]
+     |  |  |  |  +--rw key      string
+     |  |  |  |  +--rw value?   string
+     |  |  |  +--rw nic-io-requirements?                           -> /nfv/vnfd/virtual-compute-desc/logical-node/id
+     |  |  +--rw nicio-requirements?                      -> /nfv/vnfd/virtual-compute-desc/id
+     |  |  +--rw id                                       string
+     |  |  +--rw layer-protocol*                          identityref
+     |  |  +--rw role?                                    identityref
+     |  |  +--rw description?                             string
+     |  |  +--rw protocol* [associated-layer-protocol]
+     |  |  |  +--rw associated-layer-protocol    identityref
+     |  |  |  +--rw address-data* [type]
+     |  |  |     +--rw type               identityref
+     |  |  |     +--rw l2-address-data
+     |  |  |     |  +--rw mac-address-assignment    boolean
+     |  |  |     +--rw l3-address-data
+     |  |  |        +--rw ip-address-assignment?           boolean
+     |  |  |        +--rw ip-address-assignment-subtype?   enumeration
+     |  |  |        +--rw floating-ip-activated            boolean
+     |  |  |        +--rw ip-address-type?                 enumeration
+     |  |  |        +--rw number-of-ip-addresses?          uint32
+     |  |  |        +--rw fixed-ip-address?                string
+     |  |  +--rw trunk-mode?                              boolean
+     |  |  +--rw security-group-rule-id?                  -> ../../security-group-rule/id
+     |  +--rw vip-cpd* [id]
+     |  |  +--rw int-cpd*                 -> ../../vdu/int-cpd/id
+     |  |  +--rw int-virtual-link-desc?   -> ../../int-virtual-link-desc/id
+     |  |  +--rw dedicated-ip-address?    boolean
+     |  |  +--rw vip-function?            identityref
+     |  |  +--rw id                       string
+     |  |  +--rw layer-protocol*          identityref
+     |  |  +--rw role?                    identityref
+     |  |  +--rw description?             string
+     |  |  +--rw protocol* [associated-layer-protocol]
+     |  |  |  +--rw associated-layer-protocol    identityref
+     |  |  |  +--rw address-data* [type]
+     |  |  |     +--rw type               identityref
+     |  |  |     +--rw l2-address-data
+     |  |  |     |  +--rw mac-address-assignment    boolean
+     |  |  |     +--rw l3-address-data
+     |  |  |        +--rw ip-address-assignment?           boolean
+     |  |  |        +--rw ip-address-assignment-subtype?   enumeration
+     |  |  |        +--rw floating-ip-activated            boolean
+     |  |  |        +--rw ip-address-type?                 enumeration
+     |  |  |        +--rw number-of-ip-addresses?          uint32
+     |  |  |        +--rw fixed-ip-address?                string
+     |  |  +--rw trunk-mode?              boolean
+     |  +--rw virtual-cpd* [id]
+     |  |  +--rw vdu*                       -> ../../vdu/id
+     |  |  +--rw additional-service-data
+     |  |  |  +--rw port-data* [name]
+     |  |  |  |  +--rw name                 string
+     |  |  |  |  +--rw protocol?            enumeration
+     |  |  |  |  +--rw port?                uint64
+     |  |  |  |  +--rw port-configurable?   boolean
+     |  |  |  +--rw service-data?   string
+     |  |  +--rw id                         string
+     |  |  +--rw layer-protocol*            identityref
+     |  |  +--rw role?                      identityref
+     |  |  +--rw description?               string
+     |  |  +--rw protocol* [associated-layer-protocol]
+     |  |  |  +--rw associated-layer-protocol    identityref
+     |  |  |  +--rw address-data* [type]
+     |  |  |     +--rw type               identityref
+     |  |  |     +--rw l2-address-data
+     |  |  |     |  +--rw mac-address-assignment    boolean
+     |  |  |     +--rw l3-address-data
+     |  |  |        +--rw ip-address-assignment?           boolean
+     |  |  |        +--rw ip-address-assignment-subtype?   enumeration
+     |  |  |        +--rw floating-ip-activated            boolean
+     |  |  |        +--rw ip-address-type?                 enumeration
+     |  |  |        +--rw number-of-ip-addresses?          uint32
+     |  |  |        +--rw fixed-ip-address?                string
+     |  |  +--rw trunk-mode?                boolean
+     |  +--rw df* [id]
+     |  |  +--rw id                                 string
+     |  |  +--rw description?                       string
+     |  |  +--rw vdu-profile* [id]
+     |  |  |  +--rw id                                      -> ../../../vdu/id
+     |  |  |  +--rw min-number-of-instances?                uint16
+     |  |  |  +--rw max-number-of-instances?                uint16
+     |  |  |  +--rw local-affinity-or-anti-affinity-rule* [type scope]
+     |  |  |  |  +--rw type                     affinity-type
+     |  |  |  |  +--rw scope                    affinity-scope
+     |  |  |  |  +--rw nfvi-maintenance-info
+     |  |  |  |     +--rw impact-notification-lead-time         yang:timeticks
+     |  |  |  |     +--rw is-impact-mitigation-requested?       boolean
+     |  |  |  |     +--rw supported-migration-type*             enumeration
+     |  |  |  |     +--rw max-undetectable-interruption-time?   yang:timeticks
+     |  |  |  |     +--rw min-recovery-time-between-impacts?    yang:timeticks
+     |  |  |  |     +--rw max-number-of-impacted-instances* [group-size]
+     |  |  |  |     |  +--rw group-size                          uint32
+     |  |  |  |     |  +--rw max-number-of-impacted-instances?   uint32
+     |  |  |  |     +--rw min-number-of-preserved-instances* [group-size]
+     |  |  |  |        +--rw group-size                           uint32
+     |  |  |  |        +--rw min-number-of-preserved-instances?   uint32
+     |  |  |  +--rw affinity-or-anti-affinity-group-id*     -> ../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw nfvi-maintenance-info
+     |  |  |     +--rw impact-notification-lead-time         yang:timeticks
+     |  |  |     +--rw is-impact-mitigation-requested?       boolean
+     |  |  |     +--rw supported-migration-type*             enumeration
+     |  |  |     +--rw max-undetectable-interruption-time?   yang:timeticks
+     |  |  |     +--rw min-recovery-time-between-impacts?    yang:timeticks
+     |  |  |     +--rw max-number-of-impacted-instances* [group-size]
+     |  |  |     |  +--rw group-size                          uint32
+     |  |  |     |  +--rw max-number-of-impacted-instances?   uint32
+     |  |  |     +--rw min-number-of-preserved-instances* [group-size]
+     |  |  |        +--rw group-size                           uint32
+     |  |  |        +--rw min-number-of-preserved-instances?   uint32
+     |  |  +--rw virtual-link-profile* [id flavour]
+     |  |  |  +--rw id                                      -> /nfv/vnfd/int-virtual-link-desc/id
+     |  |  |  +--rw flavour                                 -> deref(../../../ext-cpd/int-virtual-link-desc)/../flavour/id
+     |  |  |  +--rw local-affinity-or-anti-affinity-rule* [type scope]
+     |  |  |  |  +--rw type                     affinity-type
+     |  |  |  |  +--rw scope                    affinity-scope
+     |  |  |  |  +--rw nfvi-maintenance-info
+     |  |  |  |     +--rw impact-notification-lead-time         yang:timeticks
+     |  |  |  |     +--rw is-impact-mitigation-requested?       boolean
+     |  |  |  |     +--rw supported-migration-type*             enumeration
+     |  |  |  |     +--rw max-undetectable-interruption-time?   yang:timeticks
+     |  |  |  |     +--rw min-recovery-time-between-impacts?    yang:timeticks
+     |  |  |  |     +--rw max-number-of-impacted-instances* [group-size]
+     |  |  |  |     |  +--rw group-size                          uint32
+     |  |  |  |     |  +--rw max-number-of-impacted-instances?   uint32
+     |  |  |  |     +--rw min-number-of-preserved-instances* [group-size]
+     |  |  |  |        +--rw group-size                           uint32
+     |  |  |  |        +--rw min-number-of-preserved-instances?   uint32
+     |  |  |  +--rw affinity-or-anti-affinity-group-id*     -> ../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw max-bit-rate-requirements
+     |  |  |  |  +--rw root    uint32
+     |  |  |  |  +--rw leaf?   uint32
+     |  |  |  +--rw min-bit-rate-requirements
+     |  |  |  |  +--rw root    uint32
+     |  |  |  |  +--rw leaf?   uint32
+     |  |  |  +--rw virtual-link-protocol-data
+     |  |  |     +--rw associated-layer-protocol?   identityref
+     |  |  |     +--rw l2-protocol-data
+     |  |  |     |  +--rw name?               string
+     |  |  |     |  +--rw network-type?       enumeration
+     |  |  |     |  +--rw vlan-transparent?   boolean
+     |  |  |     |  +--rw mtu?                uint16
+     |  |  |     |  +--rw segmentation-id?    string
+     |  |  |     +--rw l3-protocol-data
+     |  |  |        +--rw name?                  string
+     |  |  |        +--rw ip-version?            enumeration
+     |  |  |        +--rw cidr?                  string
+     |  |  |        +--rw ip-allocation-pools*   string
+     |  |  |        +--rw gateway-ip?            inet:ip-address
+     |  |  |        +--rw dhcp-enabled?          boolean
+     |  |  |        +--rw ipv6-address-mode?     enumeration
+     |  |  +--rw vip-cp-profile* [id]
+     |  |  |  +--rw id                         -> ../../../vip-cpd/id
+     |  |  |  +--rw min-number-of-instances?   uint16
+     |  |  |  +--rw max-number-of-instances?   uint16
+     |  |  +--rw mciop-profile* [id]
+     |  |  |  +--rw id                                    string
+     |  |  |  +--rw deployment-order?                     uint32
+     |  |  |  +--rw affinity-or-anti-affinity-group-id*   -> ../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw associated-vdu*                       -> ../../../vdu/id
+     |  |  +--rw instantiation-level* [id]
+     |  |  |  +--rw id              string
+     |  |  |  +--rw description?    string
+     |  |  |  +--rw vdu-level* [vdu-id]
+     |  |  |  |  +--rw vdu-id                 -> ../../../../vdu/id
+     |  |  |  |  +--rw number-of-instances?   uint16
+     |  |  |  +--rw vip-cp-level* [id]
+     |  |  |  |  +--rw id                     -> ../../../../vip-cpd/id
+     |  |  |  |  +--rw number-of-instances?   uint16
+     |  |  |  +--rw scaling-info* [scaling-aspect-id]
+     |  |  |     +--rw scaling-aspect-id    -> ../../../scaling-aspect/id
+     |  |  |     +--rw scale-level?         uint32
+     |  |  +--rw default-instantiation-level?       -> ../instantiation-level/id
+     |  |  +--rw supported-operation*               identityref
+     |  |  +--rw lcm-operations-configuration
+     |  |  |  +--rw instantiate-vnf-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |  |  +--rw key      string
+     |  |  |  |  |  +--rw value?   string
+     |  |  |  |  +--rw target-scale-levels-supported?   boolean
+     |  |  |  +--rw scale-vnf-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |  |  +--rw key      string
+     |  |  |  |  |  +--rw value?   string
+     |  |  |  |  +--rw scaling-by-more-than-one-step-supported?   boolean
+     |  |  |  +--rw scale-vnf-to-level-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |  |  +--rw key      string
+     |  |  |  |  |  +--rw value?   string
+     |  |  |  |  +--rw arbitrary-target-levels-supported?   boolean
+     |  |  |  +--rw heal-vnf-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |  |  +--rw key      string
+     |  |  |  |  |  +--rw value?   string
+     |  |  |  |  +--rw cause*       string
+     |  |  |  +--rw terminate-vnf-op-config
+     |  |  |  |  +--rw min-graceful-termination?               yang:timeticks
+     |  |  |  |  +--rw max-recommended-graceful-termination?   yang:timeticks
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw operate-vnf-op-config
+     |  |  |  |  +--rw min-graceful-stop-timeout?               yang:timeticks
+     |  |  |  |  +--rw max-recommended-graceful-stop-timeout?   yang:timeticks
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw change-vnf-flavour-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw change-ext-vnf-connectivity-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw create-snapshot-vnf-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw revert-to-snapshot-vnf-op-config
+     |  |  |  |  +--rw parameter* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw change-current-vnf-package-op-config* [id]
+     |  |  |     +--rw id           string
+     |  |  |     +--rw parameter* [key]
+     |  |  |        +--rw key      string
+     |  |  |        +--rw value?   string
+     |  |  +--rw affinity-or-anti-affinity-group* [id]
+     |  |  |  +--rw id                        string
+     |  |  |  +--rw affinityorAntiaffinity    affinity-type
+     |  |  |  +--rw scope                     affinity-scope
+     |  |  +--rw indicator* [id]
+     |  |  |  +--rw id                 string
+     |  |  |  +--rw name?              string
+     |  |  |  +--rw indicator-value?   string
+     |  |  |  +--rw source?            enumeration
+     |  |  +--rw supported-vnf-interfaces* [name]
+     |  |  |  +--rw name                 enumeration
+     |  |  |  +--rw cpd-id*              -> ../../../ext-cpd/id
+     |  |  |  +--rw interface-details* [key]
+     |  |  |     +--rw key      string
+     |  |  |     +--rw value?   string
+     |  |  +--rw supported-coordination-actions* [vnf-lcm-operation]
+     |  |  |  +--rw vnf-lcm-operation           enumeration
+     |  |  |  +--rw coordination-action-name?   -> ../../../lcm-operations-coordination/coordination-action-name
+     |  |  +--rw monitoring-parameter* [id]
+     |  |  |  +--rw id                    string
+     |  |  |  +--rw name?                 string
+     |  |  |  +--rw performance-metric?   string
+     |  |  |  +--rw collection-period?    uint64
+     |  |  +--rw scaling-aspect* [id]
+     |  |  |  +--rw id                      string
+     |  |  |  +--rw name?                   string
+     |  |  |  +--rw description?            string
+     |  |  |  +--rw max-scale-level?        uint32
+     |  |  |  +--rw aspect-delta-details
+     |  |  |     +--rw deltas* [id]
+     |  |  |     |  +--rw id                             string
+     |  |  |     |  +--rw vdu-delta* [id]
+     |  |  |     |  |  +--rw id                     -> ../../../../../../vdu/id
+     |  |  |     |  |  +--rw number-of-instances?   uint32
+     |  |  |     |  +--rw virtual-link-bit-rate-delta* [id]
+     |  |  |     |  |  +--rw id                       string
+     |  |  |     |  |  +--rw bit-rate-requirements
+     |  |  |     |  |     +--rw root    uint32
+     |  |  |     |  |     +--rw leaf?   uint32
+     |  |  |     |  +--rw vip-cp-delta* [id]
+     |  |  |     |     +--rw id                     -> ../../../../../../vip-cpd/id
+     |  |  |     |     +--rw number-of-instances?   uint16
+     |  |  |     +--rw step-deltas?   -> ../deltas/id
+     |  |  +--rw dependencies* [id]
+     |  |     +--rw id              string
+     |  |     +--rw primary-id?     -> ../../vdu-profile/id
+     |  |     +--rw secondary-id?   -> ../../vdu-profile/id
+     |  +--rw configurable-properties
+     |  |  +--rw is-auto-scalable-enabled?           boolean
+     |  |  +--rw is-auto-heal-enabled?               boolean
+     |  |  +--rw vnfm-interface-info
+     |  |  |  +--rw interface-name?   string
+     |  |  |  +--rw details
+     |  |  |  |  +--rw uri-components
+     |  |  |  |  |  +--rw scheme?      inet:uri
+     |  |  |  |  |  +--rw authority
+     |  |  |  |  |  |  +--rw userinfo?   string
+     |  |  |  |  |  |  +--rw host?       inet:host
+     |  |  |  |  |  |  +--rw port?       inet:port-number
+     |  |  |  |  |  +--rw path?        string
+     |  |  |  |  |  +--rw query?       string
+     |  |  |  |  |  +--rw fragment?    string
+     |  |  |  |  +--rw interface-specific-data*   string
+     |  |  |  +--rw credentials?      string
+     |  |  +--rw vnfm-oauth-server-info
+     |  |  +--rw vnf-oauth-server-info
+     |  |  +--rw additional-configurable-property* [key]
+     |  |     +--rw key      string
+     |  |     +--rw value?   string
+     |  +--rw modifiable-attributes
+     |  |  +--rw extension*   string
+     |  |  +--rw metadata*    string
+     |  +--rw lifecycle-management-script* [id]
+     |  |  +--rw id                      string
+     |  |  +--rw event*                  union
+     |  |  +--rw lcm-transition-event*   string
+     |  |  +--rw script?                 string
+     |  |  +--rw script-dsl?             string
+     |  |  +--rw script-input* [key]
+     |  |     +--rw key      string
+     |  |     +--rw value?   string
+     |  x--rw element-group* [id]
+     |  |  +--rw id                   string
+     |  |  +--rw description?         string
+     |  |  +--rw vdu*                 -> ../../vdu/id
+     |  |  +--rw virtual-link-desc*   -> /nfv/vnfd/int-virtual-link-desc/id
+     |  +--rw indicator* [id]
+     |  |  +--rw id                 string
+     |  |  +--rw name?              string
+     |  |  +--rw indicator-value*   string
+     |  |  +--rw source?            enumeration
+     |  +--rw auto-scale*                      string
+     |  +--rw vnf-package-change-info* [src-vnfd-id dst-vnfd-id src-flavour-id]
+     |  |  +--rw src-vnfd-id                            string
+     |  |  +--rw dst-vnfd-id                            string
+     |  |  +--rw src-flavour-id                         string
+     |  |  +--rw additional-params-id?                  -> ../../df/lcm-operations-configuration/change-current-vnf-package-op-config/id
+     |  |  +--rw modification-qualifier*                enumeration
+     |  |  +--rw additional-modification-description*   string
+     |  |  +--rw component-mapping* [type]
+     |  |  |  +--rw type              string
+     |  |  |  +--rw source-desc-id?   string
+     |  |  |  +--rw dst-desc-id?      string
+     |  |  |  +--rw description?      string
+     |  |  +--rw lcm-script-id?                         -> ../../lifecycle-management-script/id
+     |  |  +--rw coordination-action-name?              -> ../../lcm-operations-coordination/coordination-action-name
+     |  |  +--rw dst-flavour-id?                        -> ../../df/id
+     |  +--rw lcm-operations-coordination* [coordination-action-name]
+     |  |  +--rw coordination-action-name    string
+     |  |  +--rw description?                string
+     |  |  +--rw endpoint-type?              enumeration
+     |  |  +--rw coordination-stage?         enumeration
+     |  |  +--rw input-parameter* [key]
+     |  |  |  +--rw key      string
+     |  |  |  +--rw value?   string
+     |  |  +--rw output-parameter* [key]
+     |  |     +--rw key      string
+     |  |     +--rw value?   string
+     |  +--rw mciop-id*                        string
+     +--rw nsd* [id]
+     |  +--rw id                                   string
+     |  +--rw designer?                            string
+     |  +--rw version?                             string
+     |  +--rw name?                                string
+     |  +--rw invariant-id?                        string
+     |  +--rw ext-invariant-id?                    string
+     |  +--rw nested-nsd-id*                       -> ../../nsd/id
+     |  +--rw vnfd-id*                             -> /nfv/vnfd/id
+     |  +--rw pnfd-id*                             -> /nfv/pnfd/id
+     |  +--rw sapd* [id]
+     |  |  +--rw (cpd-or-virtual-link)?
+     |  |  |  +--:(virtual-link-desc)
+     |  |  |  |  +--rw virtual-link-desc?   -> ../../virtual-link-desc/id
+     |  |  |  +--:(associated-cpd)
+     |  |  |     +--rw associated-cpd
+     |  |  |        +--rw (constituent-base-element-id)?
+     |  |  |        |  +--:(vnfd-id)
+     |  |  |        |  |  +--rw vnfd-id        -> /nfv/vnfd/id
+     |  |  |        |  +--:(pnfd-id)
+     |  |  |        |  |  +--rw pnfd-id        -> /nfv/pnfd/id
+     |  |  |        |  +--:(nsd-id)
+     |  |  |        |     +--rw nsd-id         -> ../../../../nsd/id
+     |  |  |        +--rw (constituent-cpd-id)?
+     |  |  |           +--:(vnf-ext-cpd)
+     |  |  |           |  +--rw vnf-ext-cpd    -> deref(../vnfd-id)/../ext-cpd/id
+     |  |  |           +--:(pnf-ext-cpd)
+     |  |  |           |  +--rw pnf-ext-cpd    -> deref(../pnfd-id)/../ext-cpd/id
+     |  |  |           +--:(sapd)
+     |  |  |              +--rw sapd           -> deref(../nsd-id)/../sapd/id
+     |  |  +--rw id                         string
+     |  |  +--rw layer-protocol*            identityref
+     |  |  +--rw role?                      identityref
+     |  |  +--rw description?               string
+     |  |  +--rw protocol* [associated-layer-protocol]
+     |  |  |  +--rw associated-layer-protocol    identityref
+     |  |  |  +--rw address-data* [type]
+     |  |  |     +--rw type               identityref
+     |  |  |     +--rw l2-address-data
+     |  |  |     |  +--rw mac-address-assignment    boolean
+     |  |  |     +--rw l3-address-data
+     |  |  |        +--rw ip-address-assignment?           boolean
+     |  |  |        +--rw ip-address-assignment-subtype?   enumeration
+     |  |  |        +--rw floating-ip-activated            boolean
+     |  |  |        +--rw ip-address-type?                 enumeration
+     |  |  |        +--rw number-of-ip-addresses?          uint32
+     |  |  |        +--rw fixed-ip-address?                string
+     |  |  +--rw trunk-mode?                boolean
+     |  |  +--rw security-group-rule-id?    -> ../../security-group-rule/id
+     |  +--rw security-group-rule* [id]
+     |  |  +--rw id                string
+     |  |  +--rw description?      string
+     |  |  +--rw direction?        enumeration
+     |  |  +--rw ether-type?       enumeration
+     |  |  +--rw protocol?         enumeration
+     |  |  +--rw port-range-min?   uint16
+     |  |  +--rw port-range-max?   uint16
+     |  +--rw virtual-link-desc* [id]
+     |  |  +--rw id                   string
+     |  |  +--rw connectivity-type
+     |  |  |  +--rw layer-protocol*   identityref
+     |  |  |  +--rw flow-pattern?     flow-pattern
+     |  |  +--rw df* [id]
+     |  |  |  +--rw id                            string
+     |  |  |  +--rw qos!
+     |  |  |  |  +--rw latency                   uint32
+     |  |  |  |  +--rw packet-delay-variation    uint32
+     |  |  |  |  +--rw packet-loss-ratio?        decimal64
+     |  |  |  |  +--rw priority?                 uint32
+     |  |  |  +--rw service-availability-level?   uint32
+     |  |  +--rw test-access?         enumeration
+     |  |  +--rw description?         string
+     |  +--rw vnffgd* [id]
+     |  |  +--rw id                         string
+     |  |  +--rw vnf-profile-id*            -> ../../df/vnf-profile/id
+     |  |  +--rw pnf-profile-id*            -> ../../df/pnf-profile/id
+     |  |  +--rw nested-ns-profile-id*      -> ../../df/ns-profile/id
+     |  |  +--rw virtual-link-profile-id?   -> ../../df/virtual-link-profile/id
+     |  |  +--rw nfp-position-element* [id]
+     |  |  |  +--rw id      string
+     |  |  |  +--rw desc
+     |  |  |     +--rw (constituent-base-element-id)
+     |  |  |     |  +--:(vnf-profile)
+     |  |  |     |  |  +--rw vnf-profile
+     |  |  |     |  |     +--rw vnf-profile-id?   -> ../../../../../../nsd/df/vnf-profile/id
+     |  |  |     |  +--:(pnf-profile)
+     |  |  |     |  |  +--rw pnf-profile
+     |  |  |     |  |     +--rw pnf-profile-id?   -> ../../../../../../nsd/df/pnf-profile/id
+     |  |  |     |  +--:(ns-profile)
+     |  |  |     |     +--rw ns-profile
+     |  |  |     |        +--rw ns-profile-id?   -> ../../../../../../nsd/df/ns-profile/id
+     |  |  |     +--rw (constituent-cpd-id)?
+     |  |  |        +--:(vnf)
+     |  |  |        |  +--rw vnf
+     |  |  |        |     +--rw vnfd-id?   -> /nfv/vnfd/id
+     |  |  |        |     +--rw cpd-id?    -> deref(../vnfd-id)/../ext-cpd/id
+     |  |  |        +--:(pnf)
+     |  |  |        |  +--rw pnf
+     |  |  |        |     +--rw pnfd-id?      -> /nfv/pnfd/id
+     |  |  |        |     +--rw pnf-cpd-id?   -> deref(../pnfd-id)/../ext-cpd/id
+     |  |  |        +--:(ns)
+     |  |  |           +--rw ns
+     |  |  |              +--rw nsd-id?       -> ../../../../../../nsd/id
+     |  |  |              +--rw sap-cpd-id?   -> deref(../nsd-id)/../sapd/id
+     |  |  +--rw nfpd* [id]
+     |  |     +--rw id               string
+     |  |     +--rw rule?            string
+     |  |     +--rw position-desc* [id]
+     |  |        +--rw id                                      string
+     |  |        +--rw nfp-position-element-id*                -> ../../../nfp-position-element/id
+     |  |        +--rw forwarding-behaviour?                   identityref
+     |  |        +--rw forwarding-behavior-input-parameters?   string
+     |  +--rw autoscale-rule*                      string
+     |  +--rw lifecycle-management-script* [event]
+     |  |  +--rw event     string
+     |  |  +--rw script?   string
+     |  +--rw df* [id]
+     |  |  +--rw id                                 string
+     |  |  +--rw flavour-key?                       -> ../monitored-info/id
+     |  |  +--rw vnf-profile* [id]
+     |  |  |  +--rw id                                      string
+     |  |  |  +--rw vnfd-id                                 -> /nfv/vnfd/id
+     |  |  |  +--rw vnfd-ext-invariant-id?                  string
+     |  |  |  +--rw flavour-id                              -> deref(../vnfd-id)/../df/id
+     |  |  |  +--rw instantiation-level                     -> deref(../flavour-id)/../instantiation-level/id
+     |  |  |  +--rw target-vnf-scale-level-info* [aspect-id]
+     |  |  |  |  +--rw aspect-id      -> deref(../../flavour-id)/../scaling-aspect/id
+     |  |  |  |  +--rw scale-level    uint16
+     |  |  |  +--rw min-number-of-instances?                uint16
+     |  |  |  +--rw max-number-of-instances?                uint16
+     |  |  |  +--rw local-affinity-or-anti-affinity-rule* [type scope]
+     |  |  |  |  +--rw type     affinity-type
+     |  |  |  |  +--rw scope    affinity-scope
+     |  |  |  +--rw affinity-or-anti-affinity-group-id*     -> ../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw virtual-link-connectivity* [virtual-link-profile-id]
+     |  |  |  |  +--rw virtual-link-profile-id               -> ../../../virtual-link-profile/id
+     |  |  |  |  +--rw constituent-cpd-id* [constituent-base-element-id]
+     |  |  |  |  |  +--rw constituent-base-element-id    -> ../../../id
+     |  |  |  |  |  +--rw constituent-cpd-id?            -> deref(../../../vnfd-id)/../ext-cpd/id
+     |  |  |  |  +--rw affinity-or-anti-affinity-group-id*   -> ../../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw service-availability-level?             uint32
+     |  |  |  +--rw version-dependency* [dependent-constituent-id]
+     |  |  |     +--rw dependent-constituent-id        string
+     |  |  |     +--rw version-dependency-statement
+     |  |  |        +--rw descriptor-id*   string
+     |  |  +--rw pnf-profile* [id]
+     |  |  |  +--rw id                           string
+     |  |  |  +--rw pnfd-id?                     -> /nfv/pnfd/id
+     |  |  |  +--rw pnfd-ext-invariant-id?       string
+     |  |  |  +--rw virtual-link-connectivity* [virtual-link-profile-id]
+     |  |  |  |  +--rw virtual-link-profile-id               -> ../../../virtual-link-profile/id
+     |  |  |  |  +--rw constituent-cpd-id* [constituent-base-element-id]
+     |  |  |  |  |  +--rw constituent-base-element-id    -> ../../../id
+     |  |  |  |  |  +--rw constituent-cpd-id?            -> deref(../../../pnfd-id)/../ext-cpd/id
+     |  |  |  |  +--rw affinity-or-anti-affinity-group-id*   -> ../../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw version-dependency* [dependent-constituent-id]
+     |  |  |     +--rw dependent-constituent-id        string
+     |  |  |     +--rw version-dependency-statement
+     |  |  |        +--rw descriptor-id*   string
+     |  |  +--rw virtual-link-profile* [id]
+     |  |  |  +--rw id                                      string
+     |  |  |  +--rw virtual-link-desc-id                    -> ../../../virtual-link-desc/id
+     |  |  |  +--rw flavour-id                              -> deref(../virtual-link-desc-id)/../df/id
+     |  |  |  +--rw local-affinity-or-anti-affinity-rule* [type scope]
+     |  |  |  |  +--rw type     affinity-type
+     |  |  |  |  +--rw scope    affinity-scope
+     |  |  |  +--rw affinity-or-anti-affinity-group-id*     -> ../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw max-bitrate-requirements
+     |  |  |  |  +--rw root    uint64
+     |  |  |  |  +--rw leaf?   uint64
+     |  |  |  +--rw min-bitrate-requirements
+     |  |  |  |  +--rw root    uint64
+     |  |  |  |  +--rw leaf?   uint64
+     |  |  |  +--rw virtual-link-protocol-data
+     |  |  |  |  +--rw associated-layer-protocol?   identityref
+     |  |  |  |  +--rw l2-protocol-data
+     |  |  |  |  |  +--rw name?               string
+     |  |  |  |  |  +--rw network-type?       enumeration
+     |  |  |  |  |  +--rw vlan-transparent?   boolean
+     |  |  |  |  |  +--rw mtu?                uint16
+     |  |  |  |  |  +--rw segmentation-id?    string
+     |  |  |  |  +--rw l3-protocol-data
+     |  |  |  |     +--rw name?                  string
+     |  |  |  |     +--rw ip-version?            enumeration
+     |  |  |  |     +--rw cidr?                  string
+     |  |  |  |     +--rw ip-allocation-pools*   string
+     |  |  |  +--rw data-flow-mirroring
+     |  |  |     +--rw mirroring-job-name?   string
+     |  |  |     +--rw description?          string
+     |  |  |     +--rw data-flow-info* [id]
+     |  |  |        +--rw id                         string
+     |  |  |        +--rw direction?                 enumeration
+     |  |  |        +--rw flow-constituent-cpd-id
+     |  |  |           +--rw (constituent-base-element-id)?
+     |  |  |           |  +--:(vnfd-id)
+     |  |  |           |  |  +--rw vnfd-id        -> /nfv/vnfd/id
+     |  |  |           |  +--:(pnfd-id)
+     |  |  |           |  |  +--rw pnfd-id        -> /nfv/pnfd/id
+     |  |  |           |  +--:(nsd-id)
+     |  |  |           |     +--rw nsd-id         -> ../../../../../../../nsd/id
+     |  |  |           +--rw (constituent-cpd-id)?
+     |  |  |              +--:(vnf-ext-cpd)
+     |  |  |              |  +--rw vnf-ext-cpd    -> deref(../vnfd-id)/../ext-cpd/id
+     |  |  |              +--:(pnf-ext-cpd)
+     |  |  |              |  +--rw pnf-ext-cpd    -> deref(../pnfd-id)/../ext-cpd/id
+     |  |  |              +--:(sapd)
+     |  |  |                 +--rw sapd           -> deref(../nsd-id)/../sapd/id
+     |  |  +--rw scaling-aspect* [id]
+     |  |  |  +--rw id               string
+     |  |  |  +--rw name?            string
+     |  |  |  +--rw description?     string
+     |  |  |  +--rw scaling-level?   -> ../../ns-instantiation-level/id
+     |  |  +--rw affinity-or-anti-affinity-group* [id]
+     |  |  |  +--rw id                        string
+     |  |  |  +--rw affinityorAntiaffinity    affinity-type
+     |  |  |  +--rw scope                     affinity-scope
+     |  |  +--rw ns-instantiation-level* [id]
+     |  |  |  +--rw id                               string
+     |  |  |  +--rw description?                     string
+     |  |  |  +--rw vnf-to-level-mapping* [vnf-profile-id]
+     |  |  |  |  +--rw vnf-profile-id         -> ../../../vnf-profile/id
+     |  |  |  |  +--rw number-of-instances?   uint32
+     |  |  |  +--rw virtual-link-to-level-mapping* [virtual-link-profile-id]
+     |  |  |  |  +--rw virtual-link-profile-id    -> ../../../virtual-link-profile/id
+     |  |  |  |  +--rw root                       uint64
+     |  |  |  |  +--rw leaf?                      uint64
+     |  |  |  +--rw ns-to-level-mapping* [ns-profile-id]
+     |  |  |     +--rw ns-profile-id          -> ../../../ns-profile/id
+     |  |  |     +--rw number-of-instances?   uint32
+     |  |  +--rw default-instantiation-level?       -> ../ns-instantiation-level/id
+     |  |  +--rw ns-lcm-additional-params
+     |  |  |  +--rw instantiate
+     |  |  |  |  +--rw params* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw scale
+     |  |  |  |  +--rw params* [key]
+     |  |  |  |     +--rw key      string
+     |  |  |  |     +--rw value?   string
+     |  |  |  +--rw heal
+     |  |  |     +--rw params* [key]
+     |  |  |        +--rw key      string
+     |  |  |        +--rw value?   string
+     |  |  +--rw ns-profile* [id]
+     |  |  |  +--rw id                                      string
+     |  |  |  +--rw nsd-id                                  -> ../../../../nsd/id
+     |  |  |  +--rw nsd-ext-invariant-id?                   string
+     |  |  |  +--rw ns-df-id                                -> deref(../nsd-id)/../df/id
+     |  |  |  +--rw instantiation-level-id                  -> deref(../ns-df-id)/../ns-instantiation-level/id
+     |  |  |  +--rw min-number-of-instances?                uint16
+     |  |  |  +--rw max-number-of-instances?                uint16
+     |  |  |  +--rw local-affinity-or-anti-affinity-rule* [type scope]
+     |  |  |  |  +--rw type     affinity-type
+     |  |  |  |  +--rw scope    affinity-scope
+     |  |  |  +--rw affinity-or-anti-affinity-group-id*     -> ../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw virtual-link-connectivity* [virtual-link-profile-id]
+     |  |  |  |  +--rw virtual-link-profile-id               -> ../../../virtual-link-profile/id
+     |  |  |  |  +--rw constituent-cpd-id* [constituent-base-element-id]
+     |  |  |  |  |  +--rw constituent-base-element-id    -> ../../../id
+     |  |  |  |  |  +--rw constituent-cpd-id?            -> deref(../../../nsd-id)/../sapd/id
+     |  |  |  |  +--rw affinity-or-anti-affinity-group-id*   -> ../../../affinity-or-anti-affinity-group/id
+     |  |  |  +--rw version-dependency* [dependent-constituent-id]
+     |  |  |     +--rw dependent-constituent-id        string
+     |  |  |     +--rw version-dependency-statement
+     |  |  |        +--rw descriptor-id*   string
+     |  |  +--rw dependencies* [id]
+     |  |  |  +--rw id                             string
+     |  |  |  +--rw (primary-id)?
+     |  |  |  |  +--:(primary-vnf-profile)
+     |  |  |  |  |  +--rw primary-vnf-profile?     -> ../../vnf-profile/vnfd-id
+     |  |  |  |  +--:(primary-ns-profile)
+     |  |  |  |     +--rw primary-ns-profile?      -> ../../ns-profile/nsd-id
+     |  |  |  +--rw (secondary-id)?
+     |  |  |     +--:(secondary-vnf-profile)
+     |  |  |     |  +--rw secondary-vnf-profile?   -> ../../vnf-profile/vnfd-id
+     |  |  |     +--:(secondary-ns-profile)
+     |  |  |        +--rw secondary-ns-profile?    -> ../../ns-profile/nsd-id
+     |  |  +--rw monitored-info* [id]
+     |  |  |  +--rw id                      string
+     |  |  |  +--rw vnf-indicator-info
+     |  |  |  |  +--rw vnfd-id?         -> /nfv/vnfd/id
+     |  |  |  |  +--rw vnf-indicator    -> deref(../vnfd-id)/../indicator/id
+     |  |  |  +--rw monitoring-parameter
+     |  |  |     +--rw id?                   string
+     |  |  |     +--rw name?                 string
+     |  |  |     +--rw performance-metric    string
+     |  |  |     +--rw collection-period?    string
+     |  |  +--rw priority?                          uint32
+     |  |  +--rw service-availability-level?        uint32
+     |  +--rw signature?                           string
+     |  +--rw algorithm?                           string
+     |  +--rw certificate?                         string
+     |  +--rw strict-nsd-constituent-onboarding?   boolean
+     +--rw pnfd* [id]
+        +--rw id                            string
+        +--rw function-description?         string
+        +--rw provider?                     string
+        +--rw version                       string
+        +--rw invariant-id?                 string
+        +--rw ext-invariant-id?             string
+        +--rw name?                         string
+        +--rw ext-cpd* [id]
+        |  +--rw id                string
+        |  +--rw layer-protocol*   identityref
+        |  +--rw role?             identityref
+        |  +--rw description?      string
+        |  +--rw protocol* [associated-layer-protocol]
+        |  |  +--rw associated-layer-protocol    identityref
+        |  |  +--rw address-data* [type]
+        |  |     +--rw type               identityref
+        |  |     +--rw l2-address-data
+        |  |     |  +--rw mac-address-assignment    boolean
+        |  |     +--rw l3-address-data
+        |  |        +--rw ip-address-assignment?           boolean
+        |  |        +--rw ip-address-assignment-subtype?   enumeration
+        |  |        +--rw floating-ip-activated            boolean
+        |  |        +--rw ip-address-type?                 enumeration
+        |  |        +--rw number-of-ip-addresses?          uint32
+        |  |        +--rw fixed-ip-address?                string
+        |  +--rw trunk-mode?       boolean
+        +--rw geographical-location-info?   string
+        +--rw security-group-rule* [id]
+           +--rw id                string
+           +--rw description?      string
+           +--rw direction?        enumeration
+           +--rw ether-type?       enumeration
+           +--rw protocol?         enumeration
+           +--rw port-range-min?   uint16
+           +--rw port-range-max?   uint16

@@ -1,0 +1,33 @@
+{
+  "attenuators": {
+    "attenuator": [
+      {
+        "name": "PADDING-VOA",
+        "config": {
+          "name": "PADDING-VOA",
+          "attenuation-mode": "openconfig-optical-attenuator:CONSTANT_ATTENUATION",
+          "attenuation": "10.2",
+          "enabled": true
+        }
+      },
+      {
+        "name": "PA-VOA",
+        "config": {
+          "name": "PA-VOA",
+          "attenuation-mode": "openconfig-optical-attenuator:CONSTANT_ATTENUATION",
+          "attenuation": "11.6",
+          "enabled": true
+        }
+      },
+      {
+        "name": "OSC-TX-VOA",
+        "config": {
+          "name": "OSC-TX-VOA",
+          "attenuation-mode": "openconfig-optical-attenuator:CONSTANT_POWER",
+          "target-output-power": "9.7",
+          "enabled": true
+        }
+      }
+    ]
+  }
+}

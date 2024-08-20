@@ -1,0 +1,2008 @@
+module org-openroadm-pm-types {
+  namespace "http://org/openroadm/pm-types";
+  prefix org-openroadm-pm-types;
+
+  organization
+    "Open ROADM MSA";
+  contact
+    "OpenROADM.org";
+  description
+    "YANG definitions of performance management types.
+
+      Copyright of the Members of the Open ROADM MSA Agreement dated (c) 2016,
+      All other rights reserved.
+
+      Redistribution and use in source and binary forms, with or without modification,
+      are permitted provided that the following conditions are met:
+
+      * Redistributions of source code must retain the above copyright notice, this
+        list of conditions and the following disclaimer.
+      * Redistributions in binary form must reproduce the above copyright notice,
+        this list of conditions and the following disclaimer in the documentation and/or
+        other materials provided with the distribution.
+      * Neither the Members of the Open ROADM MSA Agreement nor the names of its
+        contributors may be used to endorse or promote products derived from this software
+        without specific prior written permission.
+
+      THIS SOFTWARE IS PROVIDED BY THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT ''AS IS''
+      AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+      WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+      IN NO EVENT THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT BE LIABLE FOR ANY DIRECT,
+      INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+      NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;  LOSS OF USE, DATA,
+      OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+      WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+      ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+      POSSIBILITY OF SUCH DAMAGE";
+
+  revision 2022-12-09 {
+    description
+      "Version 12.1";
+  }
+  revision 2022-05-27 {
+    description
+      "Version 11.1";
+  }
+  revision 2022-03-25 {
+    description
+      "Version 11.0";
+  }
+  revision 2021-12-10 {
+    description
+      "Version 10.1";
+  }
+  revision 2021-09-24 {
+    description
+      "Version 10.0";
+  }
+  revision 2020-12-11 {
+    description
+      "Version 8.1";
+  }
+  revision 2020-03-27 {
+    description
+      "Version 7.0.0";
+  }
+  revision 2019-11-29 {
+    description
+      "Version 6.1.0";
+  }
+  revision 2019-03-29 {
+    description
+      "Version 5.0.0";
+  }
+  revision 2018-11-30 {
+    description
+      "Version 4.1.0";
+  }
+  revision 2017-12-15 {
+    description
+      "Version 2.2";
+  }
+  revision 2017-09-29 {
+    description
+      "Version 2.1";
+  }
+  revision 2017-06-26 {
+    description
+      "Version 2.0";
+  }
+  revision 2016-10-14 {
+    description
+      "Version 1.2";
+  }
+
+  typedef pm-granularity {
+    type enumeration {
+      enum notApplicable {
+        value 1;
+        description
+          "This is for total statistic counters on devices that support
+              them.";
+      }
+      enum 15min {
+        value 2;
+      }
+      enum 24Hour {
+        value 3;
+      }
+    }
+    description
+      "Granularity of PM bin";
+  }
+
+  typedef pm-data-type {
+    type union {
+      type uint64;
+      type int64;
+      type decimal64 {
+        fraction-digits 2;
+      }
+      type decimal64 {
+        fraction-digits 17;
+      }
+    }
+  }
+
+  typedef validity {
+    type enumeration {
+      enum complete {
+        value 1;
+      }
+      enum partial {
+        value 2;
+      }
+      enum suspect {
+        value 3;
+      }
+    }
+    description
+      "Validity of data";
+  }
+
+  typedef pm-names-enum {
+    type enumeration {
+      enum vendorExtension {
+        value 1;
+        description
+          "vendor extension";
+      }
+      enum bitErrorRate {
+        value 2;
+        description
+          "Bit error rate (BER)";
+      }
+      enum opticalPowerOutput {
+        value 3;
+        description
+          "Optical Power Output (OPOUT-OTS, OPOUT-OMS, OPT-OCH, OPT, OPT-OSC(on Port)).
+           Total optical power includes Variable Optical Attenuator (VOA) attenuation.
+           Unbinned/current value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum opticalReturnLoss {
+        value 4;
+        description
+          "Optical Return Loss (ORL-OTS) - at MW port(s) B";
+      }
+      enum opticalPowerInput {
+        value 5;
+        description
+          "Optical Power Input (OPIN-OTS, OPIN-OMS, OPR-OCH, OPR, OPR-OSC(on Port)).
+           Total optical power.
+           Unbinned/current value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum codeViolations {
+        value 8;
+        description
+          "BIP-8 error counter, sum of all lanes. RX/TX.";
+        reference
+          "RX: IEEE 802.3-2018, sections 82.2.8 (BIP calculations), 82.2.15 (Alignment marker removal),
+                                45.2.3.46, 45.2.3.47 (MDIO counters).
+           TX: IEEE 802.3-2018, sections 91.5.2.4 (Alignment marker removal),
+                                91.6.14 (BIP_error_counter_i), 45.2.1.117,.118 (MDIO counters).
+           In case of mapping according to ITU-T G.709-2020 section 17.7.5.1, non-intrusive monitoring
+           follows IEEE 802.3 section 82.2.8 for mapping (RX) and de-mapping (TX).";
+      }
+      enum erroredSeconds {
+        value 9;
+        description
+          "Errored Seconds (ES)";
+        reference
+          "ITU-T G.7710-200707 section 10.2.1.";
+      }
+      enum severelyErroredSeconds {
+        value 10;
+        description
+          "Severely Errored Seconds (SES)";
+        reference
+          "ITU-T G.7710-200707 section 10.2.1.";
+      }
+      enum unavailableSeconds {
+        value 11;
+        description
+          "Unavailable Seconds (UAS)";
+        reference
+          "ITU-T G.7710-200707 section 10.1.5.";
+      }
+      enum inFrames {
+        value 12;
+        description
+          "In frames (INFRAMES-E).
+           Equivalent to RMON MIB etherStatsPkts (RX).";
+        reference
+          "RMON MIB RFC 2819.";
+      }
+      enum inFramesErrored {
+        value 13;
+        description
+          "In frames errored (INFRAMESERR-E).
+           Equivalent to sum of RMON MIB etherStatsCRCAlignErrors + etherStatsFragments + etherStatsJabbers.";
+        reference
+          "RMON MIB RFC 2819.";
+      }
+      enum outFrames {
+        value 14;
+        description
+          "Out frames (OUTRAMES-E).
+           Equivalent to RMON MIB etherStatsPkts (TX).";
+        reference
+          "RMON MIB RFC 2819.";
+      }
+      enum erroredSecondsEthernet {
+        value 15;
+        status obsolete;
+        description
+          "Errored Seconds Ethernet (ES-E).
+           Deprecated, use erroredSeconds.";
+      }
+      enum severelyErroredSecondsEthernet {
+        value 16;
+        status obsolete;
+        description
+          "Severely Errored Seconds, Ethernet (SES-E).
+           Deprecated, use severelyErroredSeconds.";
+      }
+      enum unavailableSecondsEthernet {
+        value 17;
+        status obsolete;
+        description
+          "Unavailable Seconds, Ethernet (UAS-E).
+           Deprecated, use unavailableSeconds.";
+      }
+      enum erroredBlockCount {
+        value 18;
+        description
+          "Errored block count (ETH-IF, OTU-IF, ODU-IF).
+           ETH-IF: PCS layer error as defined in IEEE 802.3-2018.
+           OTU-IF, ODU-IF: BIP-8 errors as defined in ITU-T G.798-202101.";
+        reference
+          "IEEE 802.3-2018, sections 36.2.4.6 (8B10B PCS errors),
+                            49.2.4.6 (64B66B PCS errors), 49.2.14.2 (10G counter),
+                            82.2.3.5 (100G errors), 82.3.1 (100G counter),
+                            119.2.3.4 (400G errors), 119.3.1 (400G counter),
+                            45.2.3.16.4, 45.2.3.22 (MDIO counters).
+           ITU-T G.798-202101, section 6.5.1.1 (Errored block count).";
+      }
+      enum delay {
+        value 19;
+        status obsolete;
+        description
+          "Number of frames between a DMValue toggle event and the received DMp signal value toggle event";
+      }
+      enum defectSeconds {
+        value 20;
+        description
+          "Defect Seconds (DS)";
+      }
+      enum backwardIncomingAlignmentError {
+        value 21;
+        description
+          "Backward Incoming Alignment Error (BIAE)";
+      }
+      enum incomingAlignmentError {
+        value 22;
+        description
+          "Incoming Alignment Error (IAE)";
+      }
+      enum opticalPowerOutputMin {
+        value 23;
+        description
+          "Minimum Optical Power Output (OPOUT-OTS, OPOUT-OMS, OPT-OCH, OPT, OPT-OSC(on Port)).
+           Total optical power includes Variable Optical Attenuator (VOA) attenuation.
+           Binned (15min/1day) value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum opticalPowerOutputMax {
+        value 24;
+        description
+          "Maximum Optical Power Output (OPOUT-OTS, OPOUT-OMS, OPT-OCH, OPT, OPT-OSC(on Port)).
+           Total optical power includes Variable Optical Attenuator (VOA) attenuation.
+           Binned (15min/1day) value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum opticalPowerOutputAvg {
+        value 25;
+        description
+          "Average Optical Power Output (OPOUT-OTS, OPOUT-OMS, OPT-OCH, OPT, OPT-OSC(on Port)).
+           Total optical power includes Variable Optical Attenuator (VOA) attenuation.
+           Binned (15min/1day) value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum opticalPowerInputMin {
+        value 26;
+        description
+          "Minimum Optical Power Input (OPIN-OTS, OPIN-OMS, OPR-OCH, OPR, OPR-OSC(on Port)).
+           Total optical power includes Variable Optical Attenuator (VOA) attenuation.
+           Binned (15min/1day) value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum opticalPowerInputMax {
+        value 27;
+        description
+          "Maximum Optical Power Input (OPIN-OTS, OPIN-OMS, OPR-OCH, OPR, OPR-OSC(on Port)).
+           Total optical power includes Variable Optical Attenuator (VOA) attenuation.
+           Binned (15min/1day) value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum opticalPowerInputAvg {
+        value 28;
+        description
+          "Average Optical Power Input (OPIN-OTS, OPIN-OMS, OPR-OCH, OPR, OPR-OSC(on Port)).
+           Total optical power includes Variable Optical Attenuator (VOA) attenuation.
+           Binned (15min/1day) value reported against OTS-IF, OMS-IF or Port entities.";
+        reference
+          "OTS-IF, OMS-IF: ITU-T G.872-201701 section 8.4.3.";
+      }
+      enum opticalPowerOutputOSC {
+        value 29;
+        description
+          "OSC Optical Transmit Power Output on MW port (OPT-OSC).
+           Unbinned/current value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum opticalPowerOutputOSCMin {
+        value 30;
+        description
+          "Minimum OSC Optical Transmit Power Output on MW port (OPT-OSC).
+           Binned (15min/1day) value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum opticalPowerOutputOSCMax {
+        value 31;
+        description
+          "Maximum OSC Optical Transmit Power Output on MW port (OPT-OSC).
+           Binned (15min/1day) value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum opticalPowerOutputOSCAvg {
+        value 32;
+        description
+          "Average OSC Optical Transmit Power Output on MW port (OPT-OSC).
+           Binned (15min/1day) value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum opticalPowerInputOSC {
+        value 33;
+        description
+          "OSC Optical Receive Power Input on MW port (OPR-OSC).
+           Unbinned/current value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum opticalPowerInputOSCMin {
+        value 34;
+        description
+          "Minimum OSC Optical Receive Power Input on MW port (OPR-OSC).
+           Binned (15min/1day) value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum opticalPowerInputOSCMax {
+        value 35;
+        description
+          "Maximum OSC Optical Receive Power Input on MW port (OPR-OSC).
+           Binned (15min/1day) value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum opticalPowerInputOSCAvg {
+        value 36;
+        description
+          "Average OSC Optical Receive Power Input on MW port (OPR-OSC).
+           Binned (15min/1day) value reported against OTS-IF interfaces.";
+        reference
+          "ITU-T G.872-201701 section 8.4.2.";
+      }
+      enum preFECCorrectedErrors {
+        value 37;
+        description
+          "pFEC corrected Errors";
+      }
+      enum totalOpticalPowerInput {
+        value 38;
+        description
+          "Total Optical Power Input.";
+      }
+      enum totalOpticalPowerInputMin {
+        value 39;
+        description
+          "Minimum Total Optical Power Input.";
+      }
+      enum totalOpticalPowerInputMax {
+        value 40;
+        description
+          "Maximum Total Optical Power Input.";
+      }
+      enum totalOpticalPowerInputAvg {
+        value 41;
+        description
+          "Average Total Optical Power Input.";
+      }
+      enum FECCorrectableBlocks {
+        value 42;
+        description
+          "FEC Correctable Blocks.";
+      }
+      enum FECUncorrectableBlocks {
+        value 43;
+        description
+          "FEC Uncorrectable Blocks.";
+      }
+      enum BIPErrorCounter {
+        value 56;
+        description
+          "BIP Error Counter";
+      }
+      enum protectionSwitchingCount {
+        value 57;
+        description
+          "Protection Switching Count (PSC)";
+      }
+      enum protectionSwitchingDuration {
+        value 58;
+        description
+          "Protection Switching Duration in seconds (PSD)";
+      }
+      enum erroredBlockCountTCM1-up {
+        value 59;
+        description
+          "errored Blocks Count on TCM1 up direction.";
+      }
+      enum erroredBlockCountTCM2-up {
+        value 60;
+        description
+          "errored Blocks Count on TCM2 up direction.";
+      }
+      enum erroredBlockCountTCM3-up {
+        value 61;
+        description
+          "errored Blocks Count on TCM3 up direction.";
+      }
+      enum erroredBlockCountTCM4-up {
+        value 62;
+        description
+          "errored Blocks Count on TCM4 up direction.";
+      }
+      enum erroredBlockCountTCM5-up {
+        value 63;
+        description
+          "errored Blocks Count on TCM5 up direction.";
+      }
+      enum erroredBlockCountTCM6-up {
+        value 64;
+        description
+          "errored Blocks Count on TCM6 up direction.";
+      }
+      enum delayTCM1-up {
+        value 65;
+        status obsolete;
+        description
+          "Delay on TCM1 up direction.";
+      }
+      enum delayTCM2-up {
+        value 66;
+        status obsolete;
+        description
+          "Delay on TCM2 up direction.";
+      }
+      enum delayTCM3-up {
+        value 67;
+        status obsolete;
+        description
+          "Delay on TCM3 up direction.";
+      }
+      enum delayTCM4-up {
+        value 68;
+        status obsolete;
+        description
+          "Delay on TCM4 up direction.";
+      }
+      enum delayTCM5-up {
+        value 69;
+        status obsolete;
+        description
+          "Delay on TCM5 up direction.";
+      }
+      enum delayTCM6-up {
+        value 70;
+        status obsolete;
+        description
+          "Delay on TCM6 up direction.";
+      }
+      enum erroredBlockCountTCM1-down {
+        value 71;
+        description
+          "errored Blocks Count on TCM1 down direction.";
+      }
+      enum erroredBlockCountTCM2-down {
+        value 72;
+        description
+          "errored Blocks Count on TCM2 down direction.";
+      }
+      enum erroredBlockCountTCM3-down {
+        value 73;
+        description
+          "errored Blocks Count on TCM3 down direction.";
+      }
+      enum erroredBlockCountTCM4-down {
+        value 74;
+        description
+          "errored Blocks Count on TCM4 down direction.";
+      }
+      enum erroredBlockCountTCM5-down {
+        value 75;
+        description
+          "errored Blocks Count on TCM5 down direction.";
+      }
+      enum erroredBlockCountTCM6-down {
+        value 76;
+        description
+          "errored Blocks Count on TCM6 down direction.";
+      }
+      enum delayTCM1-down {
+        value 77;
+        status obsolete;
+        description
+          "Delay on TCM1 down direction.";
+      }
+      enum delayTCM2-down {
+        value 78;
+        status obsolete;
+        description
+          "Delay on TCM2 down direction.";
+      }
+      enum delayTCM3-down {
+        value 79;
+        status obsolete;
+        description
+          "Delay on TCM3 down direction.";
+      }
+      enum delayTCM4-down {
+        value 80;
+        status obsolete;
+        description
+          "Delay on TCM4 down direction.";
+      }
+      enum delayTCM5-down {
+        value 81;
+        status obsolete;
+        description
+          "Delay on TCM5 down direction.";
+      }
+      enum delayTCM6-down {
+        value 82;
+        status obsolete;
+        description
+          "Delay on TCM6 down direction.";
+      }
+      enum partialRateDiscard {
+        value 83;
+        description
+          "Discarded packet as a result of policing or rate limiting for subrate ethernet.";
+      }
+      enum erroredSecondsTCM1-up {
+        value 84;
+        description
+          "errored Seconds Count on TCM1 up direction.";
+      }
+      enum erroredSecondsTCM2-up {
+        value 85;
+        description
+          "errored Seconds Count on TCM2 up direction.";
+      }
+      enum erroredSecondsTCM3-up {
+        value 86;
+        description
+          "errored Seconds Count on TCM3 up direction.";
+      }
+      enum erroredSecondsTCM4-up {
+        value 87;
+        description
+          "errored Seconds Count on TCM4 up direction.";
+      }
+      enum erroredSecondsTCM5-up {
+        value 88;
+        description
+          "errored Seconds Count on TCM5 up direction.";
+      }
+      enum erroredSecondsTCM6-up {
+        value 89;
+        description
+          "errored Seconds Count on TCM6 up direction.";
+      }
+      enum severelyErroredSecondsTCM1-up {
+        value 90;
+        description
+          "severely Errored Seconds Count on TCM1 up direction.";
+      }
+      enum severelyErroredSecondsTCM2-up {
+        value 91;
+        description
+          "severely Errored Seconds Count on TCM2 up direction.";
+      }
+      enum severelyErroredSecondsTCM3-up {
+        value 92;
+        description
+          "severely Errored Seconds Count on TCM3 up direction.";
+      }
+      enum severelyErroredSecondsTCM4-up {
+        value 93;
+        description
+          "severely Errored Seconds Count on TCM4 up direction.";
+      }
+      enum severelyErroredSecondsTCM5-up {
+        value 94;
+        description
+          "severely Errored Seconds Count on TCM5 up direction.";
+      }
+      enum severelyErroredSecondsTCM6-up {
+        value 95;
+        description
+          "severely Errored Seconds Count on TCM6 up direction.";
+      }
+      enum unavailableSecondsTCM1-up {
+        value 96;
+        description
+          "unavailable Seconds Count on TCM1 up direction.";
+      }
+      enum unavailableSecondsTCM2-up {
+        value 97;
+        description
+          "unavailable Seconds Count on TCM2 up direction.";
+      }
+      enum unavailableSecondsTCM3-up {
+        value 98;
+        description
+          "unavailable Seconds Count on TCM3 up direction.";
+      }
+      enum unavailableSecondsTCM4-up {
+        value 99;
+        description
+          "unavailable Seconds Count on TCM4 up direction.";
+      }
+      enum unavailableSecondsTCM5-up {
+        value 100;
+        description
+          "unavailable Seconds Count on TCM5 up direction.";
+      }
+      enum unavailableSecondsTCM6-up {
+        value 101;
+        description
+          "unavailable Seconds Count on TCM6 up direction.";
+      }
+      enum erroredSecondsTCM1-down {
+        value 102;
+        description
+          "errored Seconds Count on TCM1 down direction.";
+      }
+      enum erroredSecondsTCM2-down {
+        value 103;
+        description
+          "errored Seconds Count on TCM2 down direction.";
+      }
+      enum erroredSecondsTCM3-down {
+        value 104;
+        description
+          "errored Seconds Count on TCM3 down direction.";
+      }
+      enum erroredSecondsTCM4-down {
+        value 105;
+        description
+          "errored Seconds Count on TCM4 down direction.";
+      }
+      enum erroredSecondsTCM5-down {
+        value 106;
+        description
+          "errored Seconds Count on TCM5 down direction.";
+      }
+      enum erroredSecondsTCM6-down {
+        value 107;
+        description
+          "errored Seconds Count on TCM6 down direction.";
+      }
+      enum severelyErroredSecondsTCM1-down {
+        value 108;
+        description
+          "severely Errored Seconds Count on TCM1 down direction.";
+      }
+      enum severelyErroredSecondsTCM2-down {
+        value 109;
+        description
+          "severely Errored Seconds Count on TCM2 down direction.";
+      }
+      enum severelyErroredSecondsTCM3-down {
+        value 110;
+        description
+          "severely Errored Seconds Count on TCM3 down direction.";
+      }
+      enum severelyErroredSecondsTCM4-down {
+        value 111;
+        description
+          "severely Errored Seconds Count on TCM4 down direction.";
+      }
+      enum severelyErroredSecondsTCM5-down {
+        value 112;
+        description
+          "severely Errored Seconds Count on TCM5 down direction.";
+      }
+      enum severelyErroredSecondsTCM6-down {
+        value 113;
+        description
+          "severely Errored Seconds Count on TCM6 down direction.";
+      }
+      enum unavailableSecondsTCM1-down {
+        value 114;
+        description
+          "unavailable Seconds Count on TCM1 down direction.";
+      }
+      enum unavailableSecondsTCM2-down {
+        value 115;
+        description
+          "unavailable Seconds Count on TCM2 down direction.";
+      }
+      enum unavailableSecondsTCM3-down {
+        value 116;
+        description
+          "unavailable Seconds Count on TCM3 down direction.";
+      }
+      enum unavailableSecondsTCM4-down {
+        value 117;
+        description
+          "unavailable Seconds Count on TCM4 down direction.";
+      }
+      enum unavailableSecondsTCM5-down {
+        value 118;
+        description
+          "unavailable Seconds Count on TCM5 down direction.";
+      }
+      enum unavailableSecondsTCM6-down {
+        value 119;
+        description
+          "unavailable Seconds Count on TCM6 down direction.";
+      }
+      enum fecCorrectedCodewords {
+        value 120;
+        description
+          "FEC Corrected Codewords Counter";
+        reference
+          "100 GE: IEEE802.3-2018 sections 91.6.9 (FEC_corrected_cw_counter), 45.2.1.112 (MDIO).
+           400 GE: IEEE802.3-2018 sections 119.3.1 (FEC_corrected_cw_counter), 45.2.3.61 (MDIO).";
+      }
+      enum fecUncorrectedCodewords {
+        value 121;
+        description
+          "FEC Uncorrected Codewords Counter";
+        reference
+          "100 GE: IEEE802.3-2018 sections 91.6.10 (FEC_uncorrected_cw_counter), 45.2.1.113 (MDIO).
+           400 GE: IEEE802.3-2018 sections 119.3.1 (FEC_uncorrected_cw_counter), 45.2.3.62 (MDIO).";
+      }
+      enum fecSymbolErrors {
+        value 122;
+        description
+          "FEC Symbol Error Counter";
+        reference
+          "100 GE: IEEE802.3-2018 sections 91.6.12 (FEC_symbol_error_counter_i), 45.2.1.115/116 (MDIO).
+           400 GE: IEEE802.3-2018 sections 119.3.1 (FEC_symbol_error_counter_i), 45.2.3.57/58 (MDIO).";
+      }
+      enum localFaultSeconds {
+        value 123;
+        description
+          "Local Fault Seconds";
+      }
+      enum remoteFaultSeconds {
+        value 124;
+        description
+          "Remote Fault Seconds";
+      }
+      enum delayTimeTCM1-up {
+        value 125;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM2-up {
+        value 126;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM3-up {
+        value 127;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM4-up {
+        value 128;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM5-up {
+        value 129;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM6-up {
+        value 130;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM1-down {
+        value 131;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM2-down {
+        value 132;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM3-down {
+        value 133;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM4-down {
+        value 134;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM5-down {
+        value 135;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeTCM6-down {
+        value 136;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum erroredBlockCountRatio {
+        value 137;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM1-up {
+        value 138;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM2-up {
+        value 139;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM3-up {
+        value 140;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM4-up {
+        value 141;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM5-up {
+        value 142;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM6-up {
+        value 143;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM1-down {
+        value 144;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM2-down {
+        value 145;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM3-down {
+        value 146;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM4-down {
+        value 147;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM5-down {
+        value 148;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum erroredBlockCountRatioTCM6-down {
+        value 149;
+        description
+          "Background block error ratio (BBER)";
+        reference
+          "G.8201 3.2.2";
+      }
+      enum severelyErroredSecondRatio {
+        value 150;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM1-up {
+        value 151;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM2-up {
+        value 152;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM3-up {
+        value 153;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM4-up {
+        value 154;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM5-up {
+        value 155;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM6-up {
+        value 156;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM1-down {
+        value 157;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM2-down {
+        value 158;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM3-down {
+        value 159;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM4-down {
+        value 160;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM5-down {
+        value 161;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum severelyErroredSecondRatioTCM6-down {
+        value 162;
+        description
+          "Severely errored second ratio (SESR)";
+        reference
+          "G.8201 3.2.1";
+      }
+      enum delayTime {
+        value 163;
+        description
+          "Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMax {
+        value 164;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMin {
+        value 165;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM1-up {
+        value 166;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM2-up {
+        value 167;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM3-up {
+        value 168;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM4-up {
+        value 169;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM5-up {
+        value 170;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM6-up {
+        value 171;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM1-up {
+        value 172;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM2-up {
+        value 173;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM3-up {
+        value 174;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM4-up {
+        value 175;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM5-up {
+        value 176;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM6-up {
+        value 177;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM1-down {
+        value 178;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM2-down {
+        value 179;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM3-down {
+        value 180;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM4-down {
+        value 181;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM5-down {
+        value 182;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMaxTCM6-down {
+        value 183;
+        description
+          "Maximum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM1-down {
+        value 184;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM2-down {
+        value 185;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM3-down {
+        value 186;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM4-down {
+        value 187;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM5-down {
+        value 188;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum delayTimeMinTCM6-down {
+        value 189;
+        description
+          "Minimum Time taken, in microseconds, for a DMValue toggle event to travel and receive as DMp signal value toggle event";
+        reference
+          "G.709";
+      }
+      enum backwardIncomingAlignmentErrorTCM1-down {
+        value 190;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM2-down {
+        value 191;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM3-down {
+        value 192;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM4-down {
+        value 193;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM5-down {
+        value 194;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM6-down {
+        value 195;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM1-up {
+        value 196;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM2-up {
+        value 197;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM3-up {
+        value 198;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM4-up {
+        value 199;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM5-up {
+        value 200;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum backwardIncomingAlignmentErrorTCM6-up {
+        value 201;
+        description
+          "Backward Incoming Alignment Error (BIAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM1-down {
+        value 202;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM2-down {
+        value 203;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM3-down {
+        value 204;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM4-down {
+        value 205;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM5-down {
+        value 206;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM6-down {
+        value 207;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM1-up {
+        value 208;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM2-up {
+        value 209;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM3-up {
+        value 210;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM4-up {
+        value 211;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM5-up {
+        value 212;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum incomingAlignmentErrorTCM6-up {
+        value 213;
+        description
+          "Incoming Alignment Error (IAE) seconds";
+        reference
+          "G.798 6.2.6.11";
+      }
+      enum preFECbitErrorRate {
+        value 214;
+        description
+          "Pre-FEC Bit Error Rate, decimal64 with 17 fraction digits";
+        reference
+          "G.709";
+      }
+      enum gfpCmfFrames {
+        value 215;
+        description
+          "GFP Client Management frames";
+        reference
+          "G.7041";
+      }
+      enum gfpErroredFrames {
+        value 216;
+        description
+          "GFP Errored Frames";
+        reference
+          "G.7041";
+      }
+      enum gfpErroredSecond {
+        value 217;
+        description
+          "GFP Errored seconds, based on errored frames/defects";
+      }
+      enum gfpSeverelyErroredSecond {
+        value 218;
+        description
+          "GFP severely errored seconds, based on errored frames/defects";
+      }
+      enum gfpUnavailableSecond {
+        value 219;
+        description
+          "GFP unavailable errored seconds, based on errored frames/defects";
+      }
+      enum laserBiasCurrent {
+        value 220;
+        description
+          "Laser Bias Current, units in mA";
+      }
+      enum laserBiasCurrentMax {
+        value 221;
+        description
+          "Maximum Laser Bias Current, units in mA";
+      }
+      enum laserBiasCurrentMin {
+        value 222;
+        description
+          "Minimum Laser Bias Current, units in mA";
+      }
+      enum opticalInterconnectLoss {
+        value 223;
+        description
+          "Loss on internal optical interconnect in ROADM, units in dB";
+      }
+      enum opticalInterconnectLossMax {
+        value 224;
+        description
+          "Maximum loss on internal optical interconnect in ROADM, units in dB";
+      }
+      enum opticalInterconnectLossMin {
+        value 225;
+        description
+          "Minimum loss on internal optical interconnect in ROADM, units in dB";
+      }
+      enum opticalSignalNoiseRatio {
+        value 226;
+        description
+          "Optical Signal To Noise Ratio (OSNR), units in dB";
+      }
+      enum opticalSignalNoiseRatioMax {
+        value 227;
+        description
+          "Maximum Optical Signal To Noise Ratio (OSNR), units in dB";
+      }
+      enum opticalSignalNoiseRatioMin {
+        value 228;
+        description
+          "Minimum Optical Signal To Noise Ratio (OSNR), units in dB";
+      }
+      enum polarizationDependentLoss {
+        value 229;
+        description
+          "Polarization Dependent Loss (PDL), units in dB";
+      }
+      enum polarizationDependentLossMax {
+        value 230;
+        description
+          "Maximum Polarization Dependent Loss (PDL), units in dB";
+      }
+      enum polarizationDependentLossMin {
+        value 231;
+        description
+          "Minimum Polarization Dependent Loss (PDL), units in dB";
+      }
+      enum polarizationModeDispersion {
+        value 232;
+        description
+          "Polarization Mode Dispersion (PMD), units in ps";
+      }
+      enum polizationModeDispersionMax {
+        value 233;
+        description
+          "Maximum Polarization Mode Dispersion (PMD), units in ps";
+      }
+      enum polizationModeDispersionMin {
+        value 234;
+        description
+          "Minimum Polarization Mode Dispersion (PMD), units in ps";
+      }
+      enum chromaticDispersion {
+        value 235;
+        description
+          "Chromatic Dispersion, units in ps/nm";
+      }
+      enum chromaticDispersionMax {
+        value 236;
+        description
+          "Maximum Chromatic Dispersion, units in ps/nm";
+      }
+      enum chromaticDispersionMin {
+        value 237;
+        description
+          "Minimum Chromatic Dispersion, units in ps/nm";
+      }
+      enum temperature {
+        value 238;
+        description
+          "Temperature Measurement, units in deg C";
+      }
+      enum temperatureMax {
+        value 239;
+        description
+          "Maximum Temperature Measurement, units in deg C";
+      }
+      enum temperatureMin {
+        value 240;
+        description
+          "Minimum Temperature Measurement, units in deg C";
+      }
+      enum temperatureAvg {
+        value 241;
+        description
+          "Average Temperature Measurement, units in deg C";
+      }
+      enum opticalPowerOutputDrift {
+        value 242;
+        description
+          "The delta (dB) between the measured optical power output and expected
+           or targeted optical power output. One use case would be the difference between the
+           measured nmc opticalPowerOutput and the target-output-power set by controller.";
+      }
+      enum opticalPowerInputLane1 {
+        value 243;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerInputLane1Max {
+        value 244;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerInputLane1Min {
+        value 245;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerInputLane1Avg {
+        value 246;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerInputLane2 {
+        value 247;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerInputLane2Max {
+        value 248;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerInputLane2Min {
+        value 249;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerInputLane2Avg {
+        value 250;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerInputLane3 {
+        value 251;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerInputLane3Max {
+        value 252;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerInputLane3Min {
+        value 253;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerInputLane3Avg {
+        value 254;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerInputLane4 {
+        value 255;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerInputLane4Max {
+        value 256;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerInputLane4Min {
+        value 257;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerInputLane4Avg {
+        value 258;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerInputLane5 {
+        value 259;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerInputLane5Max {
+        value 260;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerInputLane5Min {
+        value 261;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerInputLane5Avg {
+        value 262;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerInputLane6 {
+        value 263;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerInputLane6Max {
+        value 264;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerInputLane6Min {
+        value 265;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerInputLane6Avg {
+        value 266;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerInputLane7 {
+        value 267;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerInputLane7Max {
+        value 268;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerInputLane7Min {
+        value 269;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerInputLane7Avg {
+        value 270;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerInputLane8 {
+        value 271;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), input power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+      enum opticalPowerInputLane8Max {
+        value 272;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum input power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+      enum opticalPowerInputLane8Min {
+        value 273;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum input power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+      enum opticalPowerInputLane8Avg {
+        value 274;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average input power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+      enum opticalPowerOutputLane1 {
+        value 275;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerOutputLane1Max {
+        value 276;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerOutputLane1Min {
+        value 277;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerOutputLane1Avg {
+        value 278;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 1.";
+      }
+      enum opticalPowerOutputLane2 {
+        value 279;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerOutputLane2Max {
+        value 280;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerOutputLane2Min {
+        value 281;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerOutputLane2Avg {
+        value 282;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 2.";
+      }
+      enum opticalPowerOutputLane3 {
+        value 283;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerOutputLane3Max {
+        value 284;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerOutputLane3Min {
+        value 285;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerOutputLane3Avg {
+        value 286;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 3.";
+      }
+      enum opticalPowerOutputLane4 {
+        value 287;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerOutputLane4Max {
+        value 288;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerOutputLane4Min {
+        value 289;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerOutputLane4Avg {
+        value 290;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 4.";
+      }
+      enum opticalPowerOutputLane5 {
+        value 291;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerOutputLane5Max {
+        value 292;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerOutputLane5Min {
+        value 293;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerOutputLane5Avg {
+        value 294;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 5.";
+      }
+      enum opticalPowerOutputLane6 {
+        value 295;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerOutputLane6Max {
+        value 296;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerOutputLane6Min {
+        value 297;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerOutputLane6Avg {
+        value 298;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 6.";
+      }
+      enum opticalPowerOutputLane7 {
+        value 299;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerOutputLane7Max {
+        value 300;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerOutputLane7Min {
+        value 301;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerOutputLane7Avg {
+        value 302;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 7.";
+      }
+      enum opticalPowerOutputLane8 {
+        value 303;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), output power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+      enum opticalPowerOutputLane8Max {
+        value 304;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), maximum output power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+      enum opticalPowerOutputLane8Min {
+        value 305;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), minimum output power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+      enum opticalPowerOutputLane8Avg {
+        value 306;
+        description
+          "Applicable to multi lane pluggable interfaces (ex: 100G LR-4), average output power
+          (dBm) measured by the pluggable for lane 8.";
+      }
+    }
+  }
+
+  grouping pm-measurement {
+    description
+      "Set of parameters related to a PM Measurement";
+    leaf pmParameterValue {
+      type pm-data-type;
+      config false;
+      mandatory true;
+    }
+    leaf pmParameterUnit {
+      type string;
+      mandatory false;
+      description
+        "Unit PM parameter has been measured - frames, packets, u, etc";
+    }
+    leaf validity {
+      type validity;
+      mandatory true;
+    }
+  }
+
+  grouping pm-names {
+    description
+      "Name of PM parameter. Consists of a set list of parameters,
+       plus an extension field to support addition parameters.";
+    leaf type {
+      type pm-names-enum;
+      mandatory true;
+    }
+    leaf extension {
+      type string;
+      description
+        "name of parameter, when enum value set to vendorExtension because
+         name not found in pm-names-enum";
+    }
+  }
+}

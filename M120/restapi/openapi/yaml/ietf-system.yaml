@@ -1,0 +1,1975 @@
+---
+swagger: "2.0"
+info:
+  description: "This module contains a collection of YANG definitions for the\n  \
+    \   configuration and identification of some common system\n     properties within\
+    \ a device containing a NETCONF server.  This\n     includes data node definitions\
+    \ for system identification,\n     time-of-day management, user management, DNS\
+    \ resolver\n     configuration, and some protocol operations for system\n    \
+    \ management.\n\n     Copyright (c) 2014 IETF Trust and the persons identified\
+    \ as\n     authors of the code.  All rights reserved.\n\n     Redistribution and\
+    \ use in source and binary forms, with or\n     without modification, is permitted\
+    \ pursuant to, and subject\n     to the license terms contained in, the Simplified\
+    \ BSD License\n     set forth in Section 4.c of the IETF Trust's Legal Provisions\n\
+    \     Relating to IETF Documents\n     (http://trustee.ietf.org/license-info).\n\
+    \n     This version of this YANG module is part of RFC 7317; see\n     the RFC\
+    \ itself for full legal notices."
+  version: "1.0"
+  title: "ietf-system API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/system:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.System"
+      description: "System group configuration."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.System"
+          schema:
+            $ref: "#/definitions/ietf.system.SystemWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.System"
+      description: "System group configuration."
+      parameters:
+      - in: "body"
+        name: "ietf.system.System.body-param"
+        description: "ietf.system.System to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.SystemWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.System"
+      description: "System group configuration."
+      parameters:
+      - in: "body"
+        name: "ietf.system.System.body-param"
+        description: "ietf.system.System to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.SystemWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.System"
+      description: "System group configuration."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system-state:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.SystemState"
+      description: "System group operational state."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.SystemState"
+          schema:
+            $ref: "#/definitions/ietf.system.SystemStateWrapper"
+        400:
+          description: "Internal error"
+  /data/system-state/clock:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.systemstate.Clock"
+      description: "Monitoring of the system date and time properties."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.systemstate.Clock"
+          schema:
+            $ref: "#/definitions/ietf.system.systemstate.ClockWrapper"
+        400:
+          description: "Internal error"
+  /data/system-state/platform:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.systemstate.Platform"
+      description: "Contains vendor-specific information for\n         identifying\
+        \ the system platform and operating system."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.systemstate.Platform"
+          schema:
+            $ref: "#/definitions/ietf.system.systemstate.PlatformWrapper"
+        400:
+          description: "Internal error"
+  /data/system/authentication:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.Authentication"
+      description: "The authentication configuration subtree."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.system.Authentication"
+          schema:
+            $ref: "#/definitions/ietf.system.system.AuthenticationWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.Authentication"
+      description: "The authentication configuration subtree."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Authentication.body-param"
+        description: "ietf.system.system.Authentication to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.AuthenticationWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.Authentication"
+      description: "The authentication configuration subtree."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Authentication.body-param"
+        description: "ietf.system.system.Authentication to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.AuthenticationWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.Authentication"
+      description: "The authentication configuration subtree."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/authentication/user/:
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.authentication.User"
+      description: "The list of local users configured on this device."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.authentication.User.body-param"
+        description: "ietf.system.system.authentication.User to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.authentication.UserWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/system/authentication/user={name}:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.authentication.User"
+      description: "The list of local users configured on this device."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.authentication.User"
+          schema:
+            $ref: "#/definitions/ietf.system.system.authentication.UserWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.authentication.User"
+      description: "The list of local users configured on this device."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of user"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.authentication.User.body-param"
+        description: "ietf.system.system.authentication.User to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.authentication.UserWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.authentication.User"
+      description: "The list of local users configured on this device."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of user"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/authentication/user={name}/authorized-key/:
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.authentication.user.AuthorizedKey"
+      description: "A list of public SSH keys for this user.  These keys\n       \
+        \       are allowed for SSH authentication, as described in\n            \
+        \  RFC 4253."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of user"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.authentication.user.AuthorizedKey.body-param"
+        description: "ietf.system.system.authentication.user.AuthorizedKey to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.authentication.user.AuthorizedKeyWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/system/authentication/user={name}/authorized-key={authorized-key-name}:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.authentication.user.AuthorizedKey"
+      description: "A list of public SSH keys for this user.  These keys\n       \
+        \       are allowed for SSH authentication, as described in\n            \
+        \  RFC 4253."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of user"
+        required: true
+        type: "string"
+      - name: "authorized-key-name"
+        in: "path"
+        description: "Id of authorized-key"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.authentication.user.AuthorizedKey"
+          schema:
+            $ref: "#/definitions/ietf.system.system.authentication.user.AuthorizedKeyWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.authentication.user.AuthorizedKey"
+      description: "A list of public SSH keys for this user.  These keys\n       \
+        \       are allowed for SSH authentication, as described in\n            \
+        \  RFC 4253."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of user"
+        required: true
+        type: "string"
+      - name: "authorized-key-name"
+        in: "path"
+        description: "Id of authorized-key"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.authentication.user.AuthorizedKey.body-param"
+        description: "ietf.system.system.authentication.user.AuthorizedKey to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.authentication.user.AuthorizedKeyWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.authentication.user.AuthorizedKey"
+      description: "A list of public SSH keys for this user.  These keys\n       \
+        \       are allowed for SSH authentication, as described in\n            \
+        \  RFC 4253."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of user"
+        required: true
+        type: "string"
+      - name: "authorized-key-name"
+        in: "path"
+        description: "Id of authorized-key"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/clock:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.Clock"
+      description: "Configuration of the system date and time properties."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.system.Clock"
+          schema:
+            $ref: "#/definitions/ietf.system.system.ClockWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.Clock"
+      description: "Configuration of the system date and time properties."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Clock.body-param"
+        description: "ietf.system.system.Clock to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.ClockWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.Clock"
+      description: "Configuration of the system date and time properties."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Clock.body-param"
+        description: "ietf.system.system.Clock to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.ClockWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.Clock"
+      description: "Configuration of the system date and time properties."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/dns-resolver:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.DnsResolver"
+      description: "Configuration of the DNS resolver."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.system.DnsResolver"
+          schema:
+            $ref: "#/definitions/ietf.system.system.DnsResolverWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.DnsResolver"
+      description: "Configuration of the DNS resolver."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.DnsResolver.body-param"
+        description: "ietf.system.system.DnsResolver to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.DnsResolverWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.DnsResolver"
+      description: "Configuration of the DNS resolver."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.DnsResolver.body-param"
+        description: "ietf.system.system.DnsResolver to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.DnsResolverWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.DnsResolver"
+      description: "Configuration of the DNS resolver."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/dns-resolver/options:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.dnsresolver.Options"
+      description: "Resolver options.  The set of available options has been\n   \
+        \        limited to those that are generally available across\n          \
+        \ different resolver implementations and generally useful."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.system.dnsresolver.Options"
+          schema:
+            $ref: "#/definitions/ietf.system.system.dnsresolver.OptionsWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.dnsresolver.Options"
+      description: "Resolver options.  The set of available options has been\n   \
+        \        limited to those that are generally available across\n          \
+        \ different resolver implementations and generally useful."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.dnsresolver.Options.body-param"
+        description: "ietf.system.system.dnsresolver.Options to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.dnsresolver.OptionsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.dnsresolver.Options"
+      description: "Resolver options.  The set of available options has been\n   \
+        \        limited to those that are generally available across\n          \
+        \ different resolver implementations and generally useful."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.dnsresolver.Options.body-param"
+        description: "ietf.system.system.dnsresolver.Options to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.dnsresolver.OptionsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.dnsresolver.Options"
+      description: "Resolver options.  The set of available options has been\n   \
+        \        limited to those that are generally available across\n          \
+        \ different resolver implementations and generally useful."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/dns-resolver/server/:
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.dnsresolver.Server"
+      description: "List of the DNS servers that the resolver should query.\n\n  \
+        \         When the resolver is invoked by a calling application, it\n    \
+        \       sends the query to the first name server in this list.  If\n     \
+        \      no response has been received within 'timeout' seconds,\n         \
+        \  the resolver continues with the next server in the list.\n           If\
+        \ no response is received from any server, the resolver\n           continues\
+        \ with the first server again.  When the resolver\n           has traversed\
+        \ the list 'attempts' times without receiving\n           any response, it\
+        \ gives up and returns an error to the\n           calling application.\n\n\
+        \           Implementations MAY limit the number of entries in this\n    \
+        \       list."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.dnsresolver.Server.body-param"
+        description: "ietf.system.system.dnsresolver.Server to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.dnsresolver.ServerWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/system/dns-resolver/server={name}:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.dnsresolver.Server"
+      description: "List of the DNS servers that the resolver should query.\n\n  \
+        \         When the resolver is invoked by a calling application, it\n    \
+        \       sends the query to the first name server in this list.  If\n     \
+        \      no response has been received within 'timeout' seconds,\n         \
+        \  the resolver continues with the next server in the list.\n           If\
+        \ no response is received from any server, the resolver\n           continues\
+        \ with the first server again.  When the resolver\n           has traversed\
+        \ the list 'attempts' times without receiving\n           any response, it\
+        \ gives up and returns an error to the\n           calling application.\n\n\
+        \           Implementations MAY limit the number of entries in this\n    \
+        \       list."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.dnsresolver.Server"
+          schema:
+            $ref: "#/definitions/ietf.system.system.dnsresolver.ServerWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.dnsresolver.Server"
+      description: "List of the DNS servers that the resolver should query.\n\n  \
+        \         When the resolver is invoked by a calling application, it\n    \
+        \       sends the query to the first name server in this list.  If\n     \
+        \      no response has been received within 'timeout' seconds,\n         \
+        \  the resolver continues with the next server in the list.\n           If\
+        \ no response is received from any server, the resolver\n           continues\
+        \ with the first server again.  When the resolver\n           has traversed\
+        \ the list 'attempts' times without receiving\n           any response, it\
+        \ gives up and returns an error to the\n           calling application.\n\n\
+        \           Implementations MAY limit the number of entries in this\n    \
+        \       list."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.dnsresolver.Server.body-param"
+        description: "ietf.system.system.dnsresolver.Server to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.dnsresolver.ServerWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.dnsresolver.Server"
+      description: "List of the DNS servers that the resolver should query.\n\n  \
+        \         When the resolver is invoked by a calling application, it\n    \
+        \       sends the query to the first name server in this list.  If\n     \
+        \      no response has been received within 'timeout' seconds,\n         \
+        \  the resolver continues with the next server in the list.\n           If\
+        \ no response is received from any server, the resolver\n           continues\
+        \ with the first server again.  When the resolver\n           has traversed\
+        \ the list 'attempts' times without receiving\n           any response, it\
+        \ gives up and returns an error to the\n           calling application.\n\n\
+        \           Implementations MAY limit the number of entries in this\n    \
+        \       list."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/dns-resolver/server={name}/udp-and-tcp:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp"
+      description: "Contains UDP- and TCP-specific configuration\n               \
+        \  parameters for DNS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp"
+          schema:
+            $ref: "#/definitions/ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcpWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp"
+      description: "Contains UDP- and TCP-specific configuration\n               \
+        \  parameters for DNS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp.body-param"
+        description: "ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp"
+      description: "Contains UDP- and TCP-specific configuration\n               \
+        \  parameters for DNS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp.body-param"
+        description: "ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp"
+      description: "Contains UDP- and TCP-specific configuration\n               \
+        \  parameters for DNS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/ntp:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.Ntp"
+      description: "Configuration of the NTP client."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.system.Ntp"
+          schema:
+            $ref: "#/definitions/ietf.system.system.NtpWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.Ntp"
+      description: "Configuration of the NTP client."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Ntp.body-param"
+        description: "ietf.system.system.Ntp to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.NtpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.Ntp"
+      description: "Configuration of the NTP client."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Ntp.body-param"
+        description: "ietf.system.system.Ntp to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.NtpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.Ntp"
+      description: "Configuration of the NTP client."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/ntp/server/:
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.ntp.Server"
+      description: "List of NTP servers to use for system clock\n           synchronization.\
+        \  If '/system/ntp/enabled'\n           is 'true', then the system will attempt\
+        \ to\n           contact and utilize the specified NTP servers."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.ntp.Server.body-param"
+        description: "ietf.system.system.ntp.Server to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.ntp.ServerWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/system/ntp/server={name}:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.ntp.Server"
+      description: "List of NTP servers to use for system clock\n           synchronization.\
+        \  If '/system/ntp/enabled'\n           is 'true', then the system will attempt\
+        \ to\n           contact and utilize the specified NTP servers."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.ntp.Server"
+          schema:
+            $ref: "#/definitions/ietf.system.system.ntp.ServerWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.ntp.Server"
+      description: "List of NTP servers to use for system clock\n           synchronization.\
+        \  If '/system/ntp/enabled'\n           is 'true', then the system will attempt\
+        \ to\n           contact and utilize the specified NTP servers."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.ntp.Server.body-param"
+        description: "ietf.system.system.ntp.Server to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.ntp.ServerWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.ntp.Server"
+      description: "List of NTP servers to use for system clock\n           synchronization.\
+        \  If '/system/ntp/enabled'\n           is 'true', then the system will attempt\
+        \ to\n           contact and utilize the specified NTP servers."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/ntp/server={name}/udp:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.ntp.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for NTP."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.ntp.server.transport.udp.Udp"
+          schema:
+            $ref: "#/definitions/ietf.system.system.ntp.server.transport.udp.UdpWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.ntp.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for NTP."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.ntp.server.transport.udp.Udp.body-param"
+        description: "ietf.system.system.ntp.server.transport.udp.Udp to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.ntp.server.transport.udp.UdpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.ntp.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for NTP."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.ntp.server.transport.udp.Udp.body-param"
+        description: "ietf.system.system.ntp.server.transport.udp.Udp to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.ntp.server.transport.udp.UdpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.ntp.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for NTP."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/radius:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.Radius"
+      description: "Configuration of the RADIUS client."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.system.Radius"
+          schema:
+            $ref: "#/definitions/ietf.system.system.RadiusWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.Radius"
+      description: "Configuration of the RADIUS client."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Radius.body-param"
+        description: "ietf.system.system.Radius to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.RadiusWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.Radius"
+      description: "Configuration of the RADIUS client."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.Radius.body-param"
+        description: "ietf.system.system.Radius to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.RadiusWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.Radius"
+      description: "Configuration of the RADIUS client."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/radius/options:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.radius.Options"
+      description: "RADIUS client options."
+      parameters: []
+      responses:
+        200:
+          description: "ietf.system.system.radius.Options"
+          schema:
+            $ref: "#/definitions/ietf.system.system.radius.OptionsWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.radius.Options"
+      description: "RADIUS client options."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.radius.Options.body-param"
+        description: "ietf.system.system.radius.Options to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.radius.OptionsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.radius.Options"
+      description: "RADIUS client options."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.radius.Options.body-param"
+        description: "ietf.system.system.radius.Options to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.radius.OptionsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.radius.Options"
+      description: "RADIUS client options."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/radius/server/:
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.radius.Server"
+      description: "List of RADIUS servers used by the device.\n\n           When\
+        \ the RADIUS client is invoked by a calling\n           application, it sends\
+        \ the query to the first server in\n           this list.  If no response\
+        \ has been received within\n           'timeout' seconds, the client continues\
+        \ with the next\n           server in the list.  If no response is received\
+        \ from any\n           server, the client continues with the first server\
+        \ again.\n           When the client has traversed the list 'attempts' times\n\
+        \           without receiving any response, it gives up and returns an\n \
+        \          error to the calling application."
+      parameters:
+      - in: "body"
+        name: "ietf.system.system.radius.Server.body-param"
+        description: "ietf.system.system.radius.Server to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.radius.ServerWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/system/radius/server={name}:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.radius.Server"
+      description: "List of RADIUS servers used by the device.\n\n           When\
+        \ the RADIUS client is invoked by a calling\n           application, it sends\
+        \ the query to the first server in\n           this list.  If no response\
+        \ has been received within\n           'timeout' seconds, the client continues\
+        \ with the next\n           server in the list.  If no response is received\
+        \ from any\n           server, the client continues with the first server\
+        \ again.\n           When the client has traversed the list 'attempts' times\n\
+        \           without receiving any response, it gives up and returns an\n \
+        \          error to the calling application."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.radius.Server"
+          schema:
+            $ref: "#/definitions/ietf.system.system.radius.ServerWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.radius.Server"
+      description: "List of RADIUS servers used by the device.\n\n           When\
+        \ the RADIUS client is invoked by a calling\n           application, it sends\
+        \ the query to the first server in\n           this list.  If no response\
+        \ has been received within\n           'timeout' seconds, the client continues\
+        \ with the next\n           server in the list.  If no response is received\
+        \ from any\n           server, the client continues with the first server\
+        \ again.\n           When the client has traversed the list 'attempts' times\n\
+        \           without receiving any response, it gives up and returns an\n \
+        \          error to the calling application."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.radius.Server.body-param"
+        description: "ietf.system.system.radius.Server to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.radius.ServerWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.radius.Server"
+      description: "List of RADIUS servers used by the device.\n\n           When\
+        \ the RADIUS client is invoked by a calling\n           application, it sends\
+        \ the query to the first server in\n           this list.  If no response\
+        \ has been received within\n           'timeout' seconds, the client continues\
+        \ with the next\n           server in the list.  If no response is received\
+        \ from any\n           server, the client continues with the first server\
+        \ again.\n           When the client has traversed the list 'attempts' times\n\
+        \           without receiving any response, it gives up and returns an\n \
+        \          error to the calling application."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/system/radius/server={name}/udp:
+    get:
+      tags:
+      - "ietf-system"
+      summary: "returns ietf.system.system.radius.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for RADIUS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "ietf.system.system.radius.server.transport.udp.Udp"
+          schema:
+            $ref: "#/definitions/ietf.system.system.radius.server.transport.udp.UdpWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "ietf-system"
+      summary: "creates ietf.system.system.radius.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for RADIUS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.radius.server.transport.udp.Udp.body-param"
+        description: "ietf.system.system.radius.server.transport.udp.Udp to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.radius.server.transport.udp.UdpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "ietf-system"
+      summary: "creates or updates ietf.system.system.radius.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for RADIUS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "ietf.system.system.radius.server.transport.udp.Udp.body-param"
+        description: "ietf.system.system.radius.server.transport.udp.Udp to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/ietf.system.system.radius.server.transport.udp.UdpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "ietf-system"
+      summary: "removes ietf.system.system.radius.server.transport.udp.Udp"
+      description: "Contains UDP-specific configuration parameters\n             \
+        \    for RADIUS."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of server"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /operations/set-current-datetime:
+    post:
+      tags:
+      - "ietf-system"
+      summary: "operates on ietf.system.SetCurrentDatetime"
+      description: "operates on ietf.system.SetCurrentDatetime"
+      parameters:
+      - in: "body"
+        name: "ietf.system.setcurrentdatetime.Input.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/ietf.system.setcurrentdatetime.Input"
+      responses:
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+  /operations/system-restart:
+    post:
+      tags:
+      - "ietf-system"
+      parameters: []
+      responses:
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+  /operations/system-shutdown:
+    post:
+      tags:
+      - "ietf-system"
+      parameters: []
+      responses:
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+definitions:
+  com.oplink.auth.UserAugmentation1:
+    type: "object"
+    properties:
+      user-role:
+        type: "integer"
+        format: "int64"
+        description: "Applications that accesses to the device. \n               \
+          \ 1 : query, \n                2 : opeartion,\n                4 : admin"
+    x-augmentation:
+      prefix: "com-oplink-auth"
+      namespace: "http://com/oplink/auth"
+  ietf.aaa.tacacs.ServerTypeEnumeration:
+    type: "string"
+    enum:
+    - "authentication"
+    - "authorization"
+    - "accounting"
+  ietf.aaa.tacacs.Statistics:
+    type: "object"
+    properties:
+      statistics:
+        description: "A collection of server-related statistics objects"
+        $ref: "#/definitions/ietf.aaa.tacacs.statistics.Statistics"
+  ietf.aaa.tacacs.SystemAugmentation1:
+    type: "object"
+    properties:
+      tacacs:
+        description: "Container for TACACS+ configurations and operations."
+        $ref: "#/definitions/ietf.aaa.tacacs.tacacs.Tacacs"
+    x-augmentation:
+      prefix: "ietf-aaa-tacacs"
+      namespace: "urn:ietf:params:xml:ns:yang:ietf-aaa-tacacs"
+  ietf.aaa.tacacs.statistics.Statistics:
+    type: "object"
+    properties:
+      connection-failures:
+        type: "integer"
+        format: "int32"
+        description: "Number of connection failures to the server"
+      messages-sent:
+        type: "integer"
+        format: "int32"
+        description: "Number of messages sent to the server"
+      connection-timeouts:
+        type: "integer"
+        format: "int32"
+        description: "Number of connection timeouts to the server"
+      connection-opens:
+        type: "integer"
+        format: "int32"
+        description: "Number of new connection requests sent to the server, e.g.\n\
+          \           socket open"
+      connection-aborts:
+        type: "integer"
+        format: "int32"
+        description: "Number of aborted connections to the server.  These do\n   \
+          \        not include connections that are close gracefully."
+      errors-received:
+        type: "integer"
+        format: "int32"
+        description: "Number of error messages received from the server"
+      connection-closes:
+        type: "integer"
+        format: "int32"
+        description: "Number of connection close requests sent to the server, e.g.\n\
+          \           socket close"
+      messages-received:
+        type: "integer"
+        format: "int32"
+        description: "Number of messages received by the server"
+  ietf.aaa.tacacs.tacacs.Tacacs:
+    type: "object"
+    properties:
+      options:
+        description: "TACACS+ client options."
+        $ref: "#/definitions/ietf.aaa.tacacs.tacacs.tacacs.Options"
+      server:
+        type: "array"
+        description: "List of TACACS+ servers used by the device\n\n             When\
+          \ the TACACS client is invoked by a calling\n             application, it\
+          \ sends the query to the first server in\n             this list.  If no\
+          \ response has been received within\n             'timeout' seconds, the\
+          \ client continues with the next\n             server in the list.  If no\
+          \ response is received from any\n             server, the client continues\
+          \ with the first server again.\n             When the client has traversed\
+          \ the list 'attempts' times\n             without receiving any response,\
+          \ it gives up and returns an\n             error to the calling application."
+        items:
+          $ref: "#/definitions/ietf.aaa.tacacs.tacacs.tacacs.Server"
+  ietf.aaa.tacacs.tacacs.tacacs.Options:
+    type: "object"
+    properties:
+      timeout:
+        type: "integer"
+        format: "int32"
+        description: "The number of seconds the device will wait for a\n         \
+          \    response from each TACACS+ server before trying with a\n          \
+          \   different server."
+        default: 5
+  ietf.aaa.tacacs.tacacs.tacacs.Server:
+    allOf:
+    - $ref: "#/definitions/ietf.aaa.tacacs.Statistics"
+    - type: "object"
+      properties:
+        address:
+          type: "string"
+          description: "The address of the TACACS+ server."
+        shared-secret:
+          type: "string"
+          description: "The shared secret, which is known to both the\n          \
+            \   TACACS client and server.TACACS+ server administrators\n         \
+            \    SHOULD configure secret keys of minimum\n             16 characters\
+            \ length. REF:tacacs protocol:"
+        port:
+          type: "integer"
+          format: "int32"
+          description: "The port number of TACACSPLUS Server port."
+          default: 49
+        single-connection:
+          type: "boolean"
+          description: "Whether the single connection mode is enabled for the\n  \
+            \           server. By default, the single connection mode is\n      \
+            \      disabled."
+          default: false
+        name:
+          type: "string"
+          description: "An arbitrary name for the TACACS+ server."
+        source-ip:
+          type: "string"
+          description: "Source IP address for a TACACS+ server."
+        server-type:
+          description: "Server type: authentication/authorization/accounting."
+          $ref: "#/definitions/ietf.aaa.tacacs.ServerTypeEnumeration"
+      description: "List of TACACS+ servers used by the device\n\n             When\
+        \ the TACACS client is invoked by a calling\n             application, it\
+        \ sends the query to the first server in\n             this list.  If no response\
+        \ has been received within\n             'timeout' seconds, the client continues\
+        \ with the next\n             server in the list.  If no response is received\
+        \ from any\n             server, the client continues with the first server\
+        \ again.\n             When the client has traversed the list 'attempts' times\n\
+        \             without receiving any response, it gives up and returns an\n\
+        \             error to the calling application."
+  ietf.system.AssociationType:
+    type: "string"
+    enum:
+    - "server"
+    - "peer"
+    - "pool"
+  ietf.system.System:
+    allOf:
+    - $ref: "#/definitions/ietf.aaa.tacacs.SystemAugmentation1"
+    - type: "object"
+      properties:
+        hostname:
+          type: "string"
+          description: "The name of the host.  This name can be a single domain\n\
+            \        label or the fully qualified domain name of the host."
+        contact:
+          type: "string"
+          description: "The administrator contact information for the system.\n\n\
+            \         A server implementation MAY map this leaf to the sysContact\n\
+            \         MIB object.  Such an implementation needs to use some\n    \
+            \     mechanism to handle the differences in size and characters\n   \
+            \      allowed between this leaf and sysContact.  The definition of\n\
+            \         such a mechanism is outside the scope of this document. REF:RFC\
+            \ 3418: Management Information Base (MIB) for the\n                  \
+            \ Simple Network Management Protocol (SNMP)\n                   SNMPv2-MIB.sysContact"
+        location:
+          type: "string"
+          description: "The system location.\n\n         A server implementation MAY\
+            \ map this leaf to the sysLocation\n         MIB object.  Such an implementation\
+            \ needs to use some\n         mechanism to handle the differences in size\
+            \ and characters\n         allowed between this leaf and sysLocation.\
+            \  The definition\n         of such a mechanism is outside the scope of\
+            \ this document. REF:RFC 3418: Management Information Base (MIB) for the\n\
+            \                   Simple Network Management Protocol (SNMP)\n      \
+            \             SNMPv2-MIB.sysLocation"
+        ntp:
+          description: "Configuration of the NTP client."
+          $ref: "#/definitions/ietf.system.system.Ntp"
+        clock:
+          description: "Configuration of the system date and time properties."
+          $ref: "#/definitions/ietf.system.system.Clock"
+        radius:
+          description: "Configuration of the RADIUS client."
+          $ref: "#/definitions/ietf.system.system.Radius"
+        dns-resolver:
+          description: "Configuration of the DNS resolver."
+          $ref: "#/definitions/ietf.system.system.DnsResolver"
+        authentication:
+          description: "The authentication configuration subtree."
+          $ref: "#/definitions/ietf.system.system.Authentication"
+      description: ""
+  ietf.system.SystemState:
+    type: "object"
+    properties:
+      platform:
+        description: "Contains vendor-specific information for\n         identifying\
+          \ the system platform and operating system. REF:IEEE Std 1003.1-2008 - sys/utsname.h"
+        $ref: "#/definitions/ietf.system.systemstate.Platform"
+      clock:
+        description: "Monitoring of the system date and time properties."
+        $ref: "#/definitions/ietf.system.systemstate.Clock"
+  ietf.system.SystemStateWrapper:
+    properties:
+      system-state:
+        $ref: "#/definitions/ietf.system.SystemState"
+  ietf.system.SystemWrapper:
+    properties:
+      system:
+        $ref: "#/definitions/ietf.system.System"
+  ietf.system.setcurrentdatetime.Input:
+    type: "object"
+    properties:
+      current-datetime:
+        type: "string"
+        description: "The current system date and time."
+  ietf.system.system.Authentication:
+    type: "object"
+    properties:
+      user:
+        type: "array"
+        description: "The list of local users configured on this device."
+        items:
+          $ref: "#/definitions/ietf.system.system.authentication.User"
+      user-authentication-order:
+        type: "array"
+        description: "When the device authenticates a user with a password,\n    \
+          \        it tries the authentication methods in this leaf-list in\n    \
+          \        order.  If authentication with one method fails, the next\n   \
+          \         method is used.  If no method succeeds, the user is\n        \
+          \    denied access.\n\n            An empty user-authentication-order leaf-list\
+          \ still allows\n            authentication of users using mechanisms that\
+          \ do not\n            involve a password.\n\n            If the 'radius-authentication'\
+          \ feature is advertised by\n            the NETCONF server, the 'radius'\
+          \ identity can be added to\n            this list.\n\n            If the\
+          \ 'local-users' feature is advertised by the\n            NETCONF server,\
+          \ the 'local-users' identity can be\n            added to this list."
+        items:
+          type: "string"
+  ietf.system.system.AuthenticationWrapper:
+    properties:
+      authentication:
+        $ref: "#/definitions/ietf.system.system.Authentication"
+  ietf.system.system.Clock:
+    type: "object"
+    properties:
+      timezone-utc-offset:
+        type: "integer"
+        format: "int32"
+        description: "The number of minutes to add to UTC time to\n              \
+          \ identify the time zone for this system.  For example,\n              \
+          \ 'UTC - 8:00 hours' would be represented as '-480'.\n               Note\
+          \ that automatic daylight saving time adjustment\n               is not\
+          \ provided if this object is used."
+        x-choice: "timezone:timezone-utc-offset"
+      timezone-name:
+        type: "string"
+        description: "The TZ database name to use for the system, such\n         \
+          \      as 'Europe/Stockholm'."
+        x-choice: "timezone:timezone-name"
+  ietf.system.system.ClockWrapper:
+    properties:
+      clock:
+        $ref: "#/definitions/ietf.system.system.Clock"
+  ietf.system.system.DnsResolver:
+    type: "object"
+    properties:
+      options:
+        description: "Resolver options.  The set of available options has been\n \
+          \          limited to those that are generally available across\n      \
+          \     different resolver implementations and generally useful."
+        $ref: "#/definitions/ietf.system.system.dnsresolver.Options"
+      server:
+        type: "array"
+        description: "List of the DNS servers that the resolver should query.\n\n\
+          \           When the resolver is invoked by a calling application, it\n\
+          \           sends the query to the first name server in this list.  If\n\
+          \           no response has been received within 'timeout' seconds,\n  \
+          \         the resolver continues with the next server in the list.\n   \
+          \        If no response is received from any server, the resolver\n    \
+          \       continues with the first server again.  When the resolver\n    \
+          \       has traversed the list 'attempts' times without receiving\n    \
+          \       any response, it gives up and returns an error to the\n        \
+          \   calling application.\n\n           Implementations MAY limit the number\
+          \ of entries in this\n           list."
+        items:
+          $ref: "#/definitions/ietf.system.system.dnsresolver.Server"
+      search:
+        type: "array"
+        description: "An ordered list of domains to search when resolving\n      \
+          \     a host name."
+        items:
+          type: "string"
+  ietf.system.system.DnsResolverWrapper:
+    properties:
+      dns-resolver:
+        $ref: "#/definitions/ietf.system.system.DnsResolver"
+  ietf.system.system.Ntp:
+    type: "object"
+    properties:
+      server:
+        type: "array"
+        description: "List of NTP servers to use for system clock\n           synchronization.\
+          \  If '/system/ntp/enabled'\n           is 'true', then the system will\
+          \ attempt to\n           contact and utilize the specified NTP servers."
+        items:
+          $ref: "#/definitions/ietf.system.system.ntp.Server"
+      enabled:
+        type: "boolean"
+        description: "Indicates that the system should attempt to\n           synchronize\
+          \ the system clock with an NTP server\n           from the 'ntp/server'\
+          \ list."
+        default: true
+  ietf.system.system.NtpWrapper:
+    properties:
+      ntp:
+        $ref: "#/definitions/ietf.system.system.Ntp"
+  ietf.system.system.Radius:
+    type: "object"
+    properties:
+      options:
+        description: "RADIUS client options."
+        $ref: "#/definitions/ietf.system.system.radius.Options"
+      server:
+        type: "array"
+        description: "List of RADIUS servers used by the device.\n\n           When\
+          \ the RADIUS client is invoked by a calling\n           application, it\
+          \ sends the query to the first server in\n           this list.  If no response\
+          \ has been received within\n           'timeout' seconds, the client continues\
+          \ with the next\n           server in the list.  If no response is received\
+          \ from any\n           server, the client continues with the first server\
+          \ again.\n           When the client has traversed the list 'attempts' times\n\
+          \           without receiving any response, it gives up and returns an\n\
+          \           error to the calling application."
+        items:
+          $ref: "#/definitions/ietf.system.system.radius.Server"
+  ietf.system.system.RadiusWrapper:
+    properties:
+      radius:
+        $ref: "#/definitions/ietf.system.system.Radius"
+  ietf.system.system.authentication.User:
+    allOf:
+    - $ref: "#/definitions/com.oplink.auth.UserAugmentation1"
+    - type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "The user name string identifying this entry."
+        password:
+          type: "string"
+          description: "The password for this entry."
+        authorized-key:
+          type: "array"
+          description: "A list of public SSH keys for this user.  These keys\n   \
+            \           are allowed for SSH authentication, as described in\n    \
+            \          RFC 4253. REF:RFC 4253: The Secure Shell (SSH) Transport Layer\n\
+            \                        Protocol"
+          items:
+            $ref: "#/definitions/ietf.system.system.authentication.user.AuthorizedKey"
+      description: ""
+  ietf.system.system.authentication.UserWrapper:
+    properties:
+      user:
+        $ref: "#/definitions/ietf.system.system.authentication.User"
+  ietf.system.system.authentication.user.AuthorizedKey:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "An arbitrary name for the SSH key."
+      key-data:
+        type: "string"
+        description: "The binary public key data for this SSH key, as\n          \
+          \      specified by RFC 4253, Section 6.6, i.e.:\n\n                  string\
+          \    certificate or public key format\n                            identifier\n\
+          \                  byte[n]   key/certificate data. REF:RFC 4253: The Secure\
+          \ Shell (SSH) Transport Layer\n                          Protocol"
+      algorithm:
+        type: "string"
+        description: "The public key algorithm name for this SSH key.\n\n        \
+          \        Valid values are the values in the IANA 'Secure Shell\n       \
+          \         (SSH) Protocol Parameters' registry, Public Key\n            \
+          \    Algorithm Names. REF:IANA 'Secure Shell (SSH) Protocol Parameters'\n\
+          \                registry, Public Key Algorithm Names"
+  ietf.system.system.authentication.user.AuthorizedKeyWrapper:
+    properties:
+      authorized-key:
+        $ref: "#/definitions/ietf.system.system.authentication.user.AuthorizedKey"
+  ietf.system.system.dnsresolver.Options:
+    type: "object"
+    properties:
+      timeout:
+        type: "integer"
+        format: "int32"
+        description: "The amount of time the resolver will wait for a\n          \
+          \   response from each remote name server before\n             retrying\
+          \ the query via a different name server."
+        default: 5
+      attempts:
+        type: "integer"
+        format: "int32"
+        description: "The number of times the resolver will send a query to\n    \
+          \         all of its name servers before giving up and returning\n     \
+          \        an error to the calling application."
+        default: 2
+  ietf.system.system.dnsresolver.OptionsWrapper:
+    properties:
+      options:
+        $ref: "#/definitions/ietf.system.system.dnsresolver.Options"
+  ietf.system.system.dnsresolver.Server:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "An arbitrary name for the DNS server."
+      udp-and-tcp:
+        description: "Contains UDP- and TCP-specific configuration\n             \
+          \    parameters for DNS. REF:RFC 1035: Domain Names - Implementation and\n\
+          \                           Specification\n                 RFC 5966: DNS\
+          \ Transport over TCP - Implementation\n                           Requirements"
+        $ref: "#/definitions/ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp"
+        x-choice: "transport:udp-and-tcp"
+  ietf.system.system.dnsresolver.ServerWrapper:
+    properties:
+      server:
+        $ref: "#/definitions/ietf.system.system.dnsresolver.Server"
+  ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp:
+    type: "object"
+    properties:
+      port:
+        type: "integer"
+        format: "int32"
+        description: "The UDP and TCP port number of the DNS server."
+        default: 53
+      address:
+        type: "string"
+        description: "The address of the DNS server."
+  ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcpWrapper:
+    properties:
+      udp-and-tcp:
+        $ref: "#/definitions/ietf.system.system.dnsresolver.server.transport.udpandtcp.UdpAndTcp"
+  ietf.system.system.ntp.Server:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "An arbitrary name for the NTP server."
+      udp:
+        description: "Contains UDP-specific configuration parameters\n           \
+          \      for NTP."
+        $ref: "#/definitions/ietf.system.system.ntp.server.transport.udp.Udp"
+        x-choice: "transport:udp"
+      prefer:
+        type: "boolean"
+        description: "Indicates whether this server should be preferred\n        \
+          \     or not."
+        default: false
+      association-type:
+        description: "The desired association type for this NTP server."
+        $ref: "#/definitions/ietf.system.AssociationType"
+      iburst:
+        type: "boolean"
+        description: "Indicates whether this server should enable burst\n        \
+          \     synchronization or not."
+        default: false
+  ietf.system.system.ntp.ServerWrapper:
+    properties:
+      server:
+        $ref: "#/definitions/ietf.system.system.ntp.Server"
+  ietf.system.system.ntp.server.transport.udp.Udp:
+    type: "object"
+    properties:
+      port:
+        type: "integer"
+        format: "int32"
+        description: "The port number of the NTP server."
+        default: 123
+      address:
+        type: "string"
+        description: "The address of the NTP server."
+  ietf.system.system.ntp.server.transport.udp.UdpWrapper:
+    properties:
+      udp:
+        $ref: "#/definitions/ietf.system.system.ntp.server.transport.udp.Udp"
+  ietf.system.system.radius.Options:
+    type: "object"
+    properties:
+      timeout:
+        type: "integer"
+        format: "int32"
+        description: "The number of seconds the device will wait for a\n         \
+          \    response from each RADIUS server before trying with a\n           \
+          \  different server."
+        default: 5
+      attempts:
+        type: "integer"
+        format: "int32"
+        description: "The number of times the device will send a query to\n      \
+          \       all of its RADIUS servers before giving up."
+        default: 2
+  ietf.system.system.radius.OptionsWrapper:
+    properties:
+      options:
+        $ref: "#/definitions/ietf.system.system.radius.Options"
+  ietf.system.system.radius.Server:
+    type: "object"
+    properties:
+      authentication-type:
+        type: "string"
+        description: "The authentication type requested from the RADIUS\n        \
+          \     server."
+        default: "radius-pap"
+      name:
+        type: "string"
+        description: "An arbitrary name for the RADIUS server."
+      udp:
+        description: "Contains UDP-specific configuration parameters\n           \
+          \      for RADIUS."
+        $ref: "#/definitions/ietf.system.system.radius.server.transport.udp.Udp"
+        x-choice: "transport:udp"
+  ietf.system.system.radius.ServerWrapper:
+    properties:
+      server:
+        $ref: "#/definitions/ietf.system.system.radius.Server"
+  ietf.system.system.radius.server.transport.udp.Udp:
+    type: "object"
+    properties:
+      address:
+        type: "string"
+        description: "The address of the RADIUS server."
+      shared-secret:
+        type: "string"
+        description: "The shared secret, which is known to both the\n            \
+          \       RADIUS client and server. REF:RFC 2865: Remote Authentication Dial\
+          \ In User\n                             Service (RADIUS)"
+      authentication-port:
+        type: "integer"
+        format: "int32"
+        description: "The port number of the RADIUS server."
+        default: 1812
+  ietf.system.system.radius.server.transport.udp.UdpWrapper:
+    properties:
+      udp:
+        $ref: "#/definitions/ietf.system.system.radius.server.transport.udp.Udp"
+  ietf.system.systemstate.Clock:
+    type: "object"
+    properties:
+      boot-datetime:
+        type: "string"
+        description: "The system date and time when the system last restarted."
+      current-datetime:
+        type: "string"
+        description: "The current system date and time."
+  ietf.system.systemstate.ClockWrapper:
+    properties:
+      clock:
+        $ref: "#/definitions/ietf.system.systemstate.Clock"
+  ietf.system.systemstate.Platform:
+    type: "object"
+    properties:
+      os-version:
+        type: "string"
+        description: "The current version level of the operating\n           system\
+          \ in use.  This string MAY indicate\n           the specific OS build date\
+          \ and target variant\n           information. REF:IEEE Std 1003.1-2008 -\
+          \ utsname.version"
+      os-name:
+        type: "string"
+        description: "The name of the operating system in use -\n           for example,\
+          \ 'Linux'. REF:IEEE Std 1003.1-2008 - utsname.sysname"
+      os-release:
+        type: "string"
+        description: "The current release level of the operating\n           system\
+          \ in use.  This string MAY indicate\n           the OS source code revision.\
+          \ REF:IEEE Std 1003.1-2008 - utsname.release"
+      machine:
+        type: "string"
+        description: "A vendor-specific identifier string representing\n         \
+          \  the hardware in use. REF:IEEE Std 1003.1-2008 - utsname.machine"
+  ietf.system.systemstate.PlatformWrapper:
+    properties:
+      platform:
+        $ref: "#/definitions/ietf.system.systemstate.Platform"

@@ -1,0 +1,194 @@
+{
+    "BoardRegInfo": {
+        "LogicDrv": [
+            [
+                {
+                    "HwType": 16, 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": 0
+                }
+            ],
+            [
+                {
+                    "HwType": 16, 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": 0
+                }
+            ]
+        ],
+        "I2cSwitch": [
+            [
+                {
+                    "HwType": 23, 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": 0
+                }
+            ],
+        ],
+        "I2c": [
+        		/* Logic I2c */
+            [
+                {
+                    "HwType": 8, 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0x8000, 
+                    "Proto": 0
+                }
+            ],
+            /* Logic Switch I2c */
+            [
+                {
+                    "HwType": 9, 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": 0
+                },
+                {
+                    "HwType": 32, 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": 0
+                }
+            ],
+            /* PCA I2c */
+            [
+                {
+                    "HwType": 11, 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 0xE8, 
+                    "Proto": 0
+                }
+            ],
+            /* SUSI I2c */
+            [
+                {
+                    "HwType": 12, 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": 0
+                }
+            ],
+        ],
+        "FanLogicDrv": [
+            [
+                {
+                    "HwType": 7, 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 0x04, 
+                    "Proto": 0
+                }
+            ],
+        ],
+        "APSD": [
+            [
+                {
+                    "HwType": 23, 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": 0
+                }
+            ],
+        ],
+    }, 
+    "SlotRegInfo": [
+        {
+            "RegInfo": [
+                {
+                    "HwType": 5, 
+                    "HwIdx": 2, 
+                    "HwSubIdx": 3, 
+                    "DevAddr": 0
+                }
+            ], 
+            "SupportedTypes": [
+                1, 
+                2, 
+                3
+            ], 
+            "Interfaces": [
+                {
+                    "Interface": {
+                        "HwType": 5, 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "1": {
+                            "2": 3
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "Interface": {
+                        "HwType": 5, 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "1": {
+                            "2": 3
+                        }
+                    }, 
+                    "Devs": { }
+                }
+            ]
+        }, 
+        {
+            "RegInfo": [
+                    {
+                        "HwType": 1, 
+                        "HwIdx": 2, 
+                        "HwSubIdx": 3, 
+                        "DevAddr": 0
+                    }
+                ],
+            "SupportedTypes": [
+                1, 
+                2, 
+                3
+            ], 
+            "Interfaces": [
+                {
+                    "Interface": {
+                        "HwType": 5, 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "1": {
+                            "2": 3
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "Interface": {
+                        "HwType": 5, 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "1": {
+                            "2": 3
+                        }
+                    }, 
+                    "Devs": { }
+                }
+            ]
+        }
+    ]
+}

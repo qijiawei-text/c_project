@@ -1,0 +1,36 @@
+This README explains how the sol006-metadata.json file is used to populate
+information in yangcatalog.org
+
+This JSON file has been created using the example file described here. Note,
+the first two lines in the example are really for putting on the command
+line, and not be included in the JSON file.
+
+Once the file has been populated, the following command should be used to
+upload the metadata into the YANG Catalog.
+
+curl -X PUT -u <username>:<password> -H "Content-type: application/json" https://yangcatalog.org/api/modules --upload-file sol006-metadata.json
+
+where the 'username' and 'password' can be requested at
+https://yangcatalog.org/create.html.
+
+A successfule submission should result in an output that gives a job-id
+like this:
+
+{"info":"Verification successful","job-id":"75883423-a6b7-4e9e-94ad-0983a0a8cac7"}
+
+Use the following link to verify the status of the job:
+
+https://yangcatalog.org/api/job/<job-id>
+
+If the submission is in progress, expect an output as follows:
+
+{"info":{"job-id":"7b7f3436-34e9-4947-aa60-402102cdff05","reason":null,"result":"In progress\n"}}
+
+and once it is complete, and the submission fails, expect an output as
+follows:
+
+{"info":{"job-id":"7b7f3436-34e9-4947-aa60-402102cdff05","reason":null,"result":"Failed\n"}}
+
+Or if it is successful expect an output like this:
+
+{"info":{"job-id":"75883423-a6b7-4e9e-94ad-0983a0a8cac7","reason":null,"result":"Finished successfully\n"}}

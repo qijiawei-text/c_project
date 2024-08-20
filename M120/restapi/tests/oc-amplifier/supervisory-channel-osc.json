@@ -1,0 +1,6 @@
+{
+  "config": {
+    "interface": "OSC",
+    "com-oplink-amplifier-ext:osc-sfp-enable": true
+  }
+}

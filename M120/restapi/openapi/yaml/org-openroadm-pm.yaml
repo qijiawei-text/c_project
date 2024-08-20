@@ -1,0 +1,1062 @@
+---
+swagger: "2.0"
+info:
+  description: "YANG definitions of performance management.\n       \n      Copyright\
+    \ of the Members of the Open ROADM MSA Agreement dated (c) 2016, \n      AT&T\
+    \ Intellectual Property.  All other rights reserved.\n      \n      Redistribution\
+    \ and use in source and binary forms, with or without modification, \n      are\
+    \ permitted provided that the following conditions are met:\n      \n      * Redistributions\
+    \ of source code must retain the above copyright notice, this \n        list of\
+    \ conditions and the following disclaimer.\n      * Redistributions in binary\
+    \ form must reproduce the above copyright notice, \n        this list of conditions\
+    \ and the following disclaimer in the documentation and/or \n        other materials\
+    \ provided with the distribution.\n      * Neither the Members of the Open ROADM\
+    \ MSA Agreement nor the names of its \n        contributors may be used to endorse\
+    \ or promote products derived from this software \n        without specific prior\
+    \ written permission.\n      \n      THIS SOFTWARE IS PROVIDED BY THE MEMBERS\
+    \ OF THE OPEN ROADM MSA  AGREEMENT ''AS IS'' \n      AND ANY EXPRESS OR IMPLIED\
+    \ WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED \n      WARRANTIES OF\
+    \ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. \n    \
+    \  IN NO EVENT THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT BE LIABLE FOR ANY\
+    \ DIRECT, \n      INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\
+    \ (INCLUDING, BUT \n      NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\
+    \  LOSS OF USE, DATA, \n      OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED\
+    \ AND ON ANY THEORY OF LIABILITY, \n      WHETHER IN CONTRACT, STRICT LIABILITY,\
+    \ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) \n      ARISING IN ANY WAY OUT OF\
+    \ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE \n      POSSIBILITY OF SUCH\
+    \ DAMAGE"
+  version: "1.0"
+  title: "org-openroadm-pm API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/currentPmlist:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.CurrentPmlist"
+      description: "List of current PMs."
+      parameters: []
+      responses:
+        200:
+          description: "org.openroadm.pm.CurrentPmlist"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.CurrentPmlistWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.currentpmlist.CurrentPm"
+      description: "returns org.openroadm.pm.CurrentPm"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.CurrentPm"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.CurrentPmWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/measurements={granularity}:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.currentpmlist.currentpm.Measurements"
+      description: "returns org.openroadm.pm.currentpmlist.currentpm.Measurements"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      - name: "granularity"
+        in: "path"
+        description: "Id of measurements"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.currentpmlist.currentpm.Measurements"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.currentpmlist.currentpm.MeasurementsWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/measurements={granularity}/measurement:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.currentpmlist.currentpm.measurements.Measurement"
+      description: "returns org.openroadm.pm.types.PmMeasurement"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      - name: "granularity"
+        in: "path"
+        description: "Id of measurements"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.types.PmMeasurement"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.types.PmMeasurementWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/measurements={granularity}/measurement/pmParameterValue={type}:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.currentpmlist.currentpm.measurements.measurement.PmParameterValue"
+      description: "returns org.openroadm.pm.currentpmlist.currentpm.measurements.measurement.PmParameterValue"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      - name: "granularity"
+        in: "path"
+        description: "Id of measurements"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "Id of pmParameterValue"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.currentpmlist.currentpm.measurements.measurement.PmParameterValue"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.currentpmlist.currentpm.measurements.measurement.PmParameterValueWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/pmParameterName:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.types.PmNames"
+      description: "returns org.openroadm.pm.types.PmNames"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.types.PmNames"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.types.PmNamesWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/resource:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.Resource"
+      description: "returns org.openroadm.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.Resource"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.ResourceWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/resource/device:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.types.DeviceId"
+      description: "Device of the resource, used only when the system using this\n\
+        \         model report on more than one device. "
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.DeviceId"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.DeviceIdWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/resource/resource:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.resource.Resource"
+      description: "returns org.openroadm.resource.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.resource.Resource"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.resource.ResourceWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/resource/resource/port:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.types.PortName"
+      description: "returns org.openroadm.resource.types.PortName"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.PortName"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.PortNameWrapper"
+        400:
+          description: "Internal error"
+  /data/currentPmlist/currentPm={id}/resource/resourceType:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.types.ResourceType"
+      description: "returns org.openroadm.resource.types.ResourceType"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of currentPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.ResourceType"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.ResourceTypeWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.HistoricalPmlist"
+      description: "List of historical PM"
+      parameters: []
+      responses:
+        200:
+          description: "org.openroadm.pm.HistoricalPmlist"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.HistoricalPmlistWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.historicalpmlist.HistoricalPm"
+      description: "returns org.openroadm.pm.HistoricalPm"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.HistoricalPm"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.HistoricalPmWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/measurements={granularity}:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.historicalpmlist.historicalpm.Measurements"
+      description: "returns org.openroadm.pm.historicalpmlist.historicalpm.Measurements"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      - name: "granularity"
+        in: "path"
+        description: "Id of measurements"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.historicalpmlist.historicalpm.Measurements"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.historicalpmlist.historicalpm.MeasurementsWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/measurements={granularity}/binned-pm={bin-number}:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.historicalpmlist.historicalpm.measurements.BinnedPm"
+      description: "returns org.openroadm.pm.BinPm"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      - name: "granularity"
+        in: "path"
+        description: "Id of measurements"
+        required: true
+        type: "string"
+      - name: "bin-number"
+        in: "path"
+        description: "Id of binned-pm"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "org.openroadm.pm.BinPm"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.BinPmWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/measurements={granularity}/binned-pm={bin-number}/measurement:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.Measurement"
+      description: "returns org.openroadm.pm.types.PmMeasurement"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      - name: "granularity"
+        in: "path"
+        description: "Id of measurements"
+        required: true
+        type: "string"
+      - name: "bin-number"
+        in: "path"
+        description: "Id of binned-pm"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "org.openroadm.pm.types.PmMeasurement"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.types.PmMeasurementWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/measurements={granularity}/binned-pm={bin-number}/measurement/pmParameterValue={type}:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.measurement.PmParameterValue"
+      description: "returns org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.measurement.PmParameterValue"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      - name: "granularity"
+        in: "path"
+        description: "Id of measurements"
+        required: true
+        type: "string"
+      - name: "bin-number"
+        in: "path"
+        description: "Id of binned-pm"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "type"
+        in: "path"
+        description: "Id of pmParameterValue"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.measurement.PmParameterValue"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.measurement.PmParameterValueWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/pmParameterName:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.pm.types.PmNames"
+      description: "returns org.openroadm.pm.types.PmNames"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.pm.types.PmNames"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.types.PmNamesWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/resource:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.Resource"
+      description: "returns org.openroadm.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.Resource"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.ResourceWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/resource/device:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.types.DeviceId"
+      description: "Device of the resource, used only when the system using this\n\
+        \         model report on more than one device. "
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.DeviceId"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.DeviceIdWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/resource/resource:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.resource.Resource"
+      description: "returns org.openroadm.resource.resource.Resource"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.resource.Resource"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.resource.ResourceWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/resource/resource/port:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.types.PortName"
+      description: "returns org.openroadm.resource.types.PortName"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.PortName"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.PortNameWrapper"
+        400:
+          description: "Internal error"
+  /data/historicalPmlist/historicalPm={id}/resource/resourceType:
+    get:
+      tags:
+      - "org-openroadm-pm"
+      summary: "returns org.openroadm.resource.types.ResourceType"
+      description: "returns org.openroadm.resource.types.ResourceType"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of historicalPm"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.resource.types.ResourceType"
+          schema:
+            $ref: "#/definitions/org.openroadm.resource.types.ResourceTypeWrapper"
+        400:
+          description: "Internal error"
+  /operations/clear-pm:
+    post:
+      tags:
+      - "org-openroadm-pm"
+      summary: "operates on org.openroadm.pm.ClearPm"
+      description: "operates on org.openroadm.pm.ClearPm"
+      parameters:
+      - in: "body"
+        name: "org.openroadm.pm.clearpm.Input.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/org.openroadm.pm.clearpm.Input"
+      responses:
+        200:
+          description: "Correct response"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.ClearPm"
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+  /operations/pm-collection:
+    post:
+      tags:
+      - "org-openroadm-pm"
+      summary: "operates on org.openroadm.pm.PmCollection"
+      description: "operates on org.openroadm.pm.PmCollection"
+      parameters:
+      - in: "body"
+        name: "org.openroadm.pm.pmcollection.Input.body-param"
+        required: false
+        schema:
+          properties:
+            input:
+              $ref: "#/definitions/org.openroadm.pm.pmcollection.Input"
+      responses:
+        200:
+          description: "Correct response"
+          schema:
+            $ref: "#/definitions/org.openroadm.pm.PmCollection"
+        201:
+          description: "No response"
+        400:
+          description: "Internal error"
+definitions:
+  com.oplink.pm.ext.PmParameterValueAugmentation1:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+    x-augmentation:
+      prefix: "com-oplink-pm-ext"
+      namespace: "http://com/oplink/pm/ext"
+  org.openroadm.common.alarm.pm.types.Direction:
+    type: "string"
+    enum:
+    - "tx"
+    - "rx"
+    - "bidirectional"
+    - "notApplicable"
+  org.openroadm.common.types.RpcResponseStatus:
+    type: "object"
+    properties:
+      status-message:
+        type: "string"
+        description: "Gives a more detailed status"
+      status:
+        description: "Successful or Failed"
+        $ref: "#/definitions/org.openroadm.common.types.RpcStatus"
+  org.openroadm.common.types.RpcStatus:
+    type: "string"
+    enum:
+    - "Successful"
+    - "Failed"
+  org.openroadm.pm.BinPm:
+    type: "object"
+    properties:
+      completionTime:
+        type: "string"
+      measurement:
+        $ref: "#/definitions/org.openroadm.pm.types.PmMeasurement"
+      bin-number:
+        type: "integer"
+        format: "int32"
+  org.openroadm.pm.BinPmWrapper:
+    properties:
+      binned-pm:
+        $ref: "#/definitions/org.openroadm.pm.BinPm"
+  org.openroadm.pm.ClearPm:
+    type: "object"
+    properties:
+      output:
+        $ref: "#/definitions/org.openroadm.pm.clearpm.Output"
+  org.openroadm.pm.CollectionTypeEnumeration:
+    type: "string"
+    enum:
+    - "current"
+    - "historical"
+  org.openroadm.pm.CurrentPm:
+    type: "object"
+    properties:
+      retrievalTime:
+        type: "string"
+      pmParameterName:
+        $ref: "#/definitions/org.openroadm.pm.types.PmNames"
+      id:
+        type: "string"
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.Resource"
+      measurements:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.currentpm.Measurements"
+  org.openroadm.pm.CurrentPmWrapper:
+    properties:
+      currentPm:
+        $ref: "#/definitions/org.openroadm.pm.CurrentPm"
+  org.openroadm.pm.CurrentPmlist:
+    type: "object"
+    properties:
+      currentPm:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.CurrentPm"
+  org.openroadm.pm.CurrentPmlistWrapper:
+    properties:
+      currentPmlist:
+        $ref: "#/definitions/org.openroadm.pm.CurrentPmlist"
+  org.openroadm.pm.Granularity:
+    type: "string"
+    enum:
+    - "notApplicable"
+    - "1min"
+    - "15min"
+    - "24Hour"
+  org.openroadm.pm.HistoricalPm:
+    type: "object"
+    properties:
+      pmParameterName:
+        $ref: "#/definitions/org.openroadm.pm.types.PmNames"
+      id:
+        type: "string"
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.Resource"
+      measurements:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.historicalpm.Measurements"
+  org.openroadm.pm.HistoricalPmWrapper:
+    properties:
+      historicalPm:
+        $ref: "#/definitions/org.openroadm.pm.HistoricalPm"
+  org.openroadm.pm.HistoricalPmlist:
+    type: "object"
+    properties:
+      historicalPm:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.HistoricalPm"
+  org.openroadm.pm.HistoricalPmlistWrapper:
+    properties:
+      historicalPmlist:
+        $ref: "#/definitions/org.openroadm.pm.HistoricalPmlist"
+  org.openroadm.pm.PmCollection:
+    type: "object"
+    properties:
+      output:
+        $ref: "#/definitions/org.openroadm.pm.pmcollection.Output"
+  org.openroadm.pm.PmType:
+    type: "string"
+    enum:
+    - "current"
+    - "all"
+  org.openroadm.pm.StatusEnumeration:
+    type: "string"
+    enum:
+    - "Successful"
+    - "Failed"
+  org.openroadm.pm.clearpm.Input:
+    allOf:
+    - $ref: "#/definitions/org.openroadm.resource.Resource"
+    - type: "object"
+      properties:
+        pm-type:
+          $ref: "#/definitions/org.openroadm.pm.PmType"
+        granularity:
+          $ref: "#/definitions/org.openroadm.pm.Granularity"
+  org.openroadm.pm.clearpm.Output:
+    type: "object"
+    properties:
+      status-message:
+        type: "string"
+        description: "Gives a more detailed reason for success / failure"
+      status:
+        description: "Successful or Failed"
+        $ref: "#/definitions/org.openroadm.pm.StatusEnumeration"
+  org.openroadm.pm.currentpmlist.currentpm.Measurements:
+    type: "object"
+    properties:
+      granularity:
+        $ref: "#/definitions/org.openroadm.pm.types.PmGranularity"
+      measurement:
+        $ref: "#/definitions/org.openroadm.pm.types.PmMeasurement"
+  org.openroadm.pm.currentpmlist.currentpm.MeasurementsWrapper:
+    properties:
+      measurements:
+        $ref: "#/definitions/org.openroadm.pm.currentpmlist.currentpm.Measurements"
+  org.openroadm.pm.currentpmlist.currentpm.measurements.measurement.PmParameterValue:
+    allOf:
+    - $ref: "#/definitions/com.oplink.pm.ext.PmParameterValueAugmentation1"
+    - type: "object"
+      properties:
+        type:
+          type: "string"
+        value:
+          type: "string"
+      description: ""
+  org.openroadm.pm.currentpmlist.currentpm.measurements.measurement.PmParameterValueWrapper:
+    properties:
+      pmParameterValue:
+        $ref: "#/definitions/org.openroadm.pm.currentpmlist.currentpm.measurements.measurement.PmParameterValue"
+  org.openroadm.pm.historicalpmlist.historicalpm.Measurements:
+    type: "object"
+    properties:
+      binned-pm:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.BinPm"
+      granularity:
+        $ref: "#/definitions/org.openroadm.pm.types.PmGranularity"
+  org.openroadm.pm.historicalpmlist.historicalpm.MeasurementsWrapper:
+    properties:
+      measurements:
+        $ref: "#/definitions/org.openroadm.pm.historicalpmlist.historicalpm.Measurements"
+  org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.measurement.PmParameterValue:
+    allOf:
+    - $ref: "#/definitions/com.oplink.pm.ext.PmParameterValueAugmentation1"
+    - type: "object"
+      properties:
+        type:
+          type: "string"
+        value:
+          type: "string"
+      description: ""
+  org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.measurement.PmParameterValueWrapper:
+    properties:
+      pmParameterValue:
+        $ref: "#/definitions/org.openroadm.pm.historicalpmlist.historicalpm.measurements.binnedpm.measurement.PmParameterValue"
+  org.openroadm.pm.pmcollection.Input:
+    type: "object"
+    properties:
+      collections:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.pmcollection.input.Collections"
+  org.openroadm.pm.pmcollection.Output:
+    allOf:
+    - $ref: "#/definitions/org.openroadm.common.types.RpcResponseStatus"
+    - type: "object"
+      properties:
+        file-location:
+          type: "string"
+          description: "Directory name on device where the files should be SFTPed\
+            \ from"
+  org.openroadm.pm.pmcollection.input.Collections:
+    type: "object"
+    properties:
+      interval:
+        $ref: "#/definitions/org.openroadm.pm.types.PmGranularity"
+      filename:
+        type: "string"
+        description: "file name to be used for the collection in tar.gz\n        \
+          \     format"
+      collection-type:
+        $ref: "#/definitions/org.openroadm.pm.CollectionTypeEnumeration"
+  org.openroadm.pm.types.LocationEnumeration:
+    type: "string"
+    enum:
+    - "notApplicable"
+    - "nearEnd"
+    - "farEnd"
+  org.openroadm.pm.types.PmGranularity:
+    type: "string"
+    enum:
+    - "notApplicable"
+    - "1min"
+    - "15min"
+    - "24Hour"
+  org.openroadm.pm.types.PmMeasurement:
+    type: "object"
+    properties:
+      location:
+        description: "Location PM parameter measurement"
+        $ref: "#/definitions/org.openroadm.pm.types.LocationEnumeration"
+      validity:
+        description: "Validity of data"
+        $ref: "#/definitions/org.openroadm.pm.types.ValidityEnumeration"
+      pmParameterValue:
+        type: "array"
+        items:
+          $ref: "#/definitions/org.openroadm.pm.types.pmmeasurement.PmParameterValue"
+      direction:
+        description: "Direction PM parameter measurement"
+        $ref: "#/definitions/org.openroadm.common.alarm.pm.types.Direction"
+      pmParameterUnit:
+        type: "string"
+        description: "Unit PM parameter has been measured - frames, packets, u, etc"
+  org.openroadm.pm.types.PmMeasurementWrapper:
+    properties:
+      measurement:
+        $ref: "#/definitions/org.openroadm.pm.types.PmMeasurement"
+  org.openroadm.pm.types.PmNames:
+    type: "object"
+    properties:
+      type:
+        $ref: "#/definitions/org.openroadm.pm.types.PmNamesEnum"
+      extension:
+        type: "string"
+        description: "name of parameter"
+  org.openroadm.pm.types.PmNamesEnum:
+    type: "string"
+    enum:
+    - "vendorExtension"
+    - "bitErrorRate"
+    - "opticalPowerOutput"
+    - "opticalReturnLoss"
+    - "opticalPowerInput"
+    - "opticalPower"
+    - "opticalChannelPowerTransmit"
+    - "codeViolations"
+    - "erroredSecondsSection"
+    - "severlyErrorSeconds"
+    - "unavailableSecondsPCS"
+    - "inFrames"
+    - "inFramesErrored"
+    - "outFrames"
+    - "erroredSecondsEthernet"
+    - "severelyErroredSecondsEthernet"
+    - "unavailableSecondsEthernet"
+    - "erroredBlockCount"
+    - "delay"
+    - "defectSeconds"
+    - "backwardIncomingAlignmentError"
+    - "incomingAlignmentError"
+  org.openroadm.pm.types.PmNamesWrapper:
+    properties:
+      pmParameterName:
+        $ref: "#/definitions/org.openroadm.pm.types.PmNames"
+  org.openroadm.pm.types.ValidityEnumeration:
+    type: "string"
+    enum:
+    - "complete"
+    - "partial"
+    - "suspect"
+  org.openroadm.pm.types.pmmeasurement.PmParameterValue:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      value:
+        type: "string"
+  org.openroadm.resource.Resource:
+    type: "object"
+    properties:
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.resource.Resource"
+      device:
+        description: "Device of the resource, used only when the system using this\n\
+          \         model report on more than one device. "
+        $ref: "#/definitions/org.openroadm.resource.types.DeviceId"
+      resourceType:
+        $ref: "#/definitions/org.openroadm.resource.types.ResourceType"
+  org.openroadm.resource.ResourceWrapper:
+    properties:
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.Resource"
+  org.openroadm.resource.resource.Resource:
+    type: "object"
+    properties:
+      node-id:
+        type: "string"
+        description: "Node Id is a globally unique identifier for a device.\n    \
+          \     Same as leafref value in model, if applicable."
+        x-choice: "resource:device"
+      connection-name:
+        type: "string"
+        description: "Connection name. Unique within the context of a device.\n  \
+          \       Same as leafref value in model, if applicable."
+        x-choice: "resource:connection"
+      internal-link-name:
+        type: "string"
+        description: "Internal Link identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:internal-link"
+      interface-name:
+        type: "string"
+        description: "Interface identifier."
+        x-choice: "resource:interface"
+      versioned-service-name:
+        type: "string"
+        description: "Service identifier. Unique within the context of a network.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:versioned-service"
+      odu-sncp-pg-name:
+        type: "string"
+        description: "name of the odu-snc-pg"
+        x-choice: "resource:odu-sncp-pg"
+      circuit-pack-name:
+        type: "string"
+        description: "Circuit-Pack identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:circuit-pack"
+      degree-number:
+        type: "integer"
+        format: "int32"
+        description: "Degree identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:degree"
+      srg-number:
+        type: "integer"
+        format: "int32"
+        description: "Shared Risk Group identifier. Unique within the context of a\
+          \ device.\n         Same as leafref value in model, if applicable."
+        x-choice: "resource:srg"
+      shelf-name:
+        type: "string"
+        description: "Shelf-id identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:shelf"
+      service-name:
+        type: "string"
+        description: "Service identifier. Unique within the context of a network.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:service"
+      common-id:
+        type: "string"
+        description: "Service identifier. Unique within the context of a network.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:temp-service"
+      physical-link-name:
+        type: "string"
+        description: "Physical Link identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+        x-choice: "resource:physical-link"
+      port:
+        $ref: "#/definitions/org.openroadm.resource.types.PortName"
+        x-choice: "resource:port"
+      other-resource-id:
+        type: "string"
+        description: "resource-id for other."
+        x-choice: "resource:other"
+      xpdr-number:
+        type: "integer"
+        format: "int32"
+        description: "number of the xponder"
+        x-choice: "resource:xponder"
+      version-number:
+        type: "integer"
+        format: "int32"
+        description: "version-number of the service"
+        x-choice: "resource:versioned-service"
+      amp-number:
+        type: "integer"
+        format: "int32"
+        description: "number of the line-amplifier"
+        x-choice: "resource:line-amplifier"
+  org.openroadm.resource.resource.ResourceWrapper:
+    properties:
+      resource:
+        $ref: "#/definitions/org.openroadm.resource.resource.Resource"
+  org.openroadm.resource.types.CircuitPackName:
+    type: "object"
+    properties:
+      circuit-pack-name:
+        type: "string"
+        description: "Circuit-Pack identifier. Unique within the context of a device.\n\
+          \         Same as leafref value in model, if applicable."
+  org.openroadm.resource.types.DeviceId:
+    type: "object"
+    properties:
+      node-id:
+        type: "string"
+        description: "Node Id is a globally unique identifier for a device.\n    \
+          \     Same as leafref value in model, if applicable."
+  org.openroadm.resource.types.DeviceIdWrapper:
+    properties:
+      device:
+        $ref: "#/definitions/org.openroadm.resource.types.DeviceId"
+  org.openroadm.resource.types.PortName:
+    allOf:
+    - $ref: "#/definitions/org.openroadm.resource.types.CircuitPackName"
+    - type: "object"
+      properties:
+        port-name:
+          type: "string"
+          description: "Port identifier. Unique within the context of a circuit-pack.\n\
+            \         Same as leafref value in model, if applicable."
+  org.openroadm.resource.types.PortNameWrapper:
+    properties:
+      port:
+        $ref: "#/definitions/org.openroadm.resource.types.PortName"
+  org.openroadm.resource.types.ResourceType:
+    type: "object"
+    properties:
+      type:
+        $ref: "#/definitions/org.openroadm.resource.types.ResourceTypeEnum"
+      extension:
+        type: "string"
+  org.openroadm.resource.types.ResourceTypeEnum:
+    type: "string"
+    enum:
+    - "other"
+    - "device"
+    - "degree"
+    - "shared-risk-group"
+    - "connection"
+    - "connection-map"
+    - "port"
+    - "circuit-pack"
+    - "internal-link"
+    - "physical-link"
+    - "interface"
+    - "shelf"
+    - "service"
+    - "odu-sncp-pg"
+    - "line-amplifier"
+    - "xponder"
+    - "versioned-service"
+    - "temp-service"
+  org.openroadm.resource.types.ResourceTypeWrapper:
+    properties:
+      resourceType:
+        $ref: "#/definitions/org.openroadm.resource.types.ResourceType"

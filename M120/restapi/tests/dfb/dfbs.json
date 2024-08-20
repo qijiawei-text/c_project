@@ -1,0 +1,14 @@
+{
+    "dfbs": {
+      "dfb": [
+        {
+          "name": "dfb-hp",
+          "config": {
+            "name": "dfb-hp",
+            "target-output-power": "7.5",
+            "enabled": false
+          }
+        }
+      ]
+    }
+}

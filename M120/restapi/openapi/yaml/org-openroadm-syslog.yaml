@@ -1,0 +1,882 @@
+---
+swagger: "2.0"
+info:
+  description: "This module contains a collection of YANG definitions \n     for Syslog\
+    \ configuration.                                               \n     \n     Copyright\
+    \ of the Members of the Open ROADM MSA Agreement dated (c) 2016, \n     All other\
+    \ rights reserved.\n     \n     Redistribution and use in source and binary forms,\
+    \ with or without modification, \n     are permitted provided that the following\
+    \ conditions are met:\n     \n     * Redistributions of source code must retain\
+    \ the above copyright notice, this \n       list of conditions and the following\
+    \ disclaimer.\n     * Redistributions in binary form must reproduce the above\
+    \ copyright notice, \n       this list of conditions and the following disclaimer\
+    \ in the documentation and/or \n       other materials provided with the distribution.\n\
+    \     * Neither the Members of the Open ROADM MSA Agreement nor the names of its\
+    \ \n       contributors may be used to endorse or promote products derived from\
+    \ this software \n       without specific prior written permission.\n     \n \
+    \    THIS SOFTWARE IS PROVIDED BY THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT\
+    \ ''AS IS'' \n     AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED\
+    \ TO, THE IMPLIED \n     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR\
+    \ PURPOSE ARE DISCLAIMED. \n     IN NO EVENT THE MEMBERS OF THE OPEN ROADM MSA\
+    \  AGREEMENT BE LIABLE FOR ANY DIRECT, \n     INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,\
+    \ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT \n     NOT LIMITED TO, PROCUREMENT\
+    \ OF SUBSTITUTE GOODS OR SERVICES;  LOSS OF USE, DATA, \n     OR PROFITS; OR BUSINESS\
+    \ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, \n     WHETHER\
+    \ IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) \n\
+    \     ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\
+    \ \n     POSSIBILITY OF SUCH DAMAGE.\n     \n     Also contains code components\
+    \ extracted from IETF Interfaces.  These code components\n     are copyrighted\
+    \ and licensed as follows:\n     \n     Copyright (c) 2016 IETF Trust and the\
+    \ persons identified as the document authors.\n     All rights reserved.\n   \
+    \  \n     This document is subject to BCP 78 and the IETF Trust’s Legal Provisions\
+    \ Relating\n     to IETF Documents (http://trustee.ietf.org/license-info) in effect\
+    \ on the date of\n     publication of this document. Please review these documents\
+    \ carefully, as they\n     describe your rights and restrictions with respect\
+    \ to this document. Code Components\n     extracted from this document must include\
+    \ Simplified BSD License text as described in\n     Section 4.e of the Trust Legal\
+    \ Provisions and are provided without warranty as\n     described in the Simplified\
+    \ BSD License."
+  version: "1.0"
+  title: "org-openroadm-syslog API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/syslog:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.Syslog"
+      description: "This container describes the configuration parameters for \n \
+        \      Syslog."
+      parameters: []
+      responses:
+        200:
+          description: "org.openroadm.syslog.Syslog"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.SyslogWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.Syslog"
+      description: "This container describes the configuration parameters for \n \
+        \      Syslog."
+      parameters:
+      - in: "body"
+        name: "org.openroadm.syslog.Syslog.body-param"
+        description: "org.openroadm.syslog.Syslog to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.SyslogWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.Syslog"
+      description: "This container describes the configuration parameters for \n \
+        \      Syslog."
+      parameters:
+      - in: "body"
+        name: "org.openroadm.syslog.Syslog.body-param"
+        description: "org.openroadm.syslog.Syslog to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.SyslogWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.Syslog"
+      description: "This container describes the configuration parameters for \n \
+        \      Syslog."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/syslog/log-actions:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.syslog.LogActions"
+      description: "This container describes the log-action parameters \n        \
+        \ for Syslog."
+      parameters: []
+      responses:
+        200:
+          description: "org.openroadm.syslog.syslog.LogActions"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.syslog.LogActionsWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.syslog.LogActions"
+      description: "This container describes the log-action parameters \n        \
+        \ for Syslog."
+      parameters:
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.LogActions.body-param"
+        description: "org.openroadm.syslog.syslog.LogActions to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.LogActionsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.syslog.LogActions"
+      description: "This container describes the log-action parameters \n        \
+        \ for Syslog."
+      parameters:
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.LogActions.body-param"
+        description: "org.openroadm.syslog.syslog.LogActions to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.LogActionsWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.syslog.LogActions"
+      description: "This container describes the log-action parameters \n        \
+        \ for Syslog."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/syslog/log-actions/remote:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.syslog.logactions.Remote"
+      description: "This container describes the configuration parameters for \n \
+        \          remote logging."
+      parameters: []
+      responses:
+        200:
+          description: "org.openroadm.syslog.syslog.logactions.Remote"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.RemoteWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.syslog.logactions.Remote"
+      description: "This container describes the configuration parameters for \n \
+        \          remote logging."
+      parameters:
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.Remote.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.Remote to be added to\
+          \ list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.RemoteWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.syslog.logactions.Remote"
+      description: "This container describes the configuration parameters for \n \
+        \          remote logging."
+      parameters:
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.Remote.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.Remote to be added or\
+          \ updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.RemoteWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.syslog.logactions.Remote"
+      description: "This container describes the configuration parameters for \n \
+        \          remote logging."
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/syslog/log-actions/remote/destination/:
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.syslog.logactions.remote.Destination"
+      description: "This list describes a collection of remote logging \n        \
+        \     destinations."
+      parameters:
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.remote.Destination.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.remote.Destination to\
+          \ be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.DestinationWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/syslog/log-actions/remote/destination={name}:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.syslog.logactions.remote.Destination"
+      description: "This list describes a collection of remote logging \n        \
+        \     destinations."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.syslog.syslog.logactions.remote.Destination"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.DestinationWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.syslog.logactions.remote.Destination"
+      description: "This list describes a collection of remote logging \n        \
+        \     destinations."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.remote.Destination.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.remote.Destination to\
+          \ be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.DestinationWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.syslog.logactions.remote.Destination"
+      description: "This list describes a collection of remote logging \n        \
+        \     destinations."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/syslog/log-actions/remote/destination={name}/log-selector:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.syslogselector.LogSelector"
+      description: "This container describes the log selector parameters \n      \
+        \   for Syslog."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.syslog.syslogselector.LogSelector"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.syslogselector.LogSelectorWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.syslogselector.LogSelector"
+      description: "This container describes the log selector parameters \n      \
+        \   for Syslog."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslogselector.LogSelector.body-param"
+        description: "org.openroadm.syslog.syslogselector.LogSelector to be added\
+          \ to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslogselector.LogSelectorWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.syslogselector.LogSelector"
+      description: "This container describes the log selector parameters \n      \
+        \   for Syslog."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslogselector.LogSelector.body-param"
+        description: "org.openroadm.syslog.syslogselector.LogSelector to be added\
+          \ or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslogselector.LogSelectorWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.syslogselector.LogSelector"
+      description: "This container describes the log selector parameters \n      \
+        \   for Syslog."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/syslog/log-actions/remote/destination={name}/log-selector/log-facility/:
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility"
+      description: "This list describes a collection of Syslog \n               facilities\
+        \ and severities."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility.body-param"
+        description: "org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacilityWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/syslog/log-actions/remote/destination={name}/log-selector/log-facility={facility}:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility"
+      description: "This list describes a collection of Syslog \n               facilities\
+        \ and severities."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - name: "facility"
+        in: "path"
+        description: "Id of log-facility"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacilityWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility"
+      description: "This list describes a collection of Syslog \n               facilities\
+        \ and severities."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - name: "facility"
+        in: "path"
+        description: "Id of log-facility"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility.body-param"
+        description: "org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacilityWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility"
+      description: "This list describes a collection of Syslog \n               facilities\
+        \ and severities."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - name: "facility"
+        in: "path"
+        description: "Id of log-facility"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/syslog/log-actions/remote/destination={name}/tcp:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp"
+      description: "This container describes the TCP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.TcpWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp"
+      description: "This container describes the TCP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.TcpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp"
+      description: "This container describes the TCP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.TcpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp"
+      description: "This container describes the TCP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/syslog/log-actions/remote/destination={name}/udp:
+    get:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "returns org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp"
+      description: "This container describes the UDP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp"
+          schema:
+            $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.UdpWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp"
+      description: "This container describes the UDP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp\
+          \ to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.UdpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "creates or updates org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp"
+      description: "This container describes the UDP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp.body-param"
+        description: "org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp\
+          \ to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.UdpWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "org-openroadm-syslog"
+      summary: "removes org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp"
+      description: "This container describes the UDP transport\n                 \
+        \  options."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id of destination"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+definitions:
+  org.openroadm.syslog.Severity:
+    type: "string"
+    enum:
+    - "emergency"
+    - "alert"
+    - "critical"
+    - "error"
+    - "warning"
+    - "notice"
+    - "info"
+    - "debug"
+    - "all"
+    - "none"
+  org.openroadm.syslog.SeverityOperator:
+    type: "string"
+    enum:
+    - "equals-or-higher"
+    - "equals"
+    - "not-equals"
+  org.openroadm.syslog.Syslog:
+    type: "object"
+    properties:
+      log-actions:
+        description: "This container describes the log-action parameters \n      \
+          \   for Syslog."
+        $ref: "#/definitions/org.openroadm.syslog.syslog.LogActions"
+      local-syslog-filename:
+        type: "string"
+        description: "The syslog file name. It should be a fully qualified name \n\
+          \         so that the user can get the file using transfer RPC."
+  org.openroadm.syslog.SyslogSelector:
+    type: "object"
+    properties:
+      log-selector:
+        description: "This container describes the log selector parameters \n    \
+          \     for Syslog."
+        $ref: "#/definitions/org.openroadm.syslog.syslogselector.LogSelector"
+  org.openroadm.syslog.SyslogSeverity:
+    type: "object"
+    properties:
+      severity:
+        description: "This leaf specifies the Syslog message severity. When \n   \
+          \      severity is specified, the default severity comparison \n       \
+          \  is all messages of the specified severity and greater are \n        \
+          \ selected. 'all' is a special case which means all severities\n       \
+          \  are selected. 'none' is a special case which means that\n         no\
+          \ selection should occur or disable this filter."
+        $ref: "#/definitions/org.openroadm.syslog.Severity"
+      severity-operator:
+        description: "This leaf describes the option to specify how the \n       \
+          \  severity comparison is performed."
+        $ref: "#/definitions/org.openroadm.syslog.SeverityOperator"
+  org.openroadm.syslog.SyslogWrapper:
+    properties:
+      syslog:
+        $ref: "#/definitions/org.openroadm.syslog.Syslog"
+  org.openroadm.syslog.syslog.LogActions:
+    type: "object"
+    properties:
+      remote:
+        description: "This container describes the configuration parameters for \n\
+          \           remote logging."
+        $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.Remote"
+  org.openroadm.syslog.syslog.LogActionsWrapper:
+    properties:
+      log-actions:
+        $ref: "#/definitions/org.openroadm.syslog.syslog.LogActions"
+  org.openroadm.syslog.syslog.logactions.Remote:
+    type: "object"
+    properties:
+      destination:
+        type: "array"
+        description: "This list describes a collection of remote logging \n      \
+          \       destinations."
+        items:
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.Destination"
+  org.openroadm.syslog.syslog.logactions.RemoteWrapper:
+    properties:
+      remote:
+        $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.Remote"
+  org.openroadm.syslog.syslog.logactions.remote.Destination:
+    allOf:
+    - $ref: "#/definitions/org.openroadm.syslog.SyslogSelector"
+    - type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "An arbitrary name for the endpoint to connect to."
+        udp:
+          description: "This container describes the UDP transport\n             \
+            \      options. REF:RFC 5426: Transmission of Syslog Messages over UDP"
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp"
+          x-choice: "transport:udp"
+        tcp:
+          description: "This container describes the TCP transport\n             \
+            \      options. REF:RFC 6587: Transmission of Syslog Messages over TCP"
+          $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp"
+          x-choice: "transport:tcp"
+      description: "This list describes a collection of remote logging \n        \
+        \     destinations."
+  org.openroadm.syslog.syslog.logactions.remote.DestinationWrapper:
+    properties:
+      destination:
+        $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.Destination"
+  org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp:
+    type: "object"
+    properties:
+      port:
+        type: "integer"
+        format: "int32"
+        description: "This leaf specifies the port number used to \n             \
+          \        deliver messages to the remote server."
+        default: 514
+      address:
+        type: "string"
+        description: "The leaf uniquely specifies the address of \n              \
+          \       the remote host. One of the following must \n                  \
+          \   be specified: an ipv4 address, an ipv6 \n                     address,\
+          \ or a host name."
+  org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.TcpWrapper:
+    properties:
+      tcp:
+        $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.tcp.Tcp"
+  org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp:
+    type: "object"
+    properties:
+      port:
+        type: "integer"
+        format: "int32"
+        description: "This leaf specifies the port number used to \n             \
+          \        deliver messages to the remote server."
+        default: 514
+      address:
+        type: "string"
+        description: "The leaf uniquely specifies the address of \n              \
+          \       the remote host. One of the following must be \n               \
+          \      specified: an ipv4 address, an ipv6 address, \n                 \
+          \    or a host name."
+  org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.UdpWrapper:
+    properties:
+      udp:
+        $ref: "#/definitions/org.openroadm.syslog.syslog.logactions.remote.destination.transport.udp.Udp"
+  org.openroadm.syslog.syslogselector.LogSelector:
+    type: "object"
+    properties:
+      log-facility:
+        type: "array"
+        description: "This list describes a collection of Syslog \n              \
+          \ facilities and severities."
+        items:
+          $ref: "#/definitions/org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility"
+        x-choice: "selector-facility:log-facility"
+      no-facilities:
+        type: "string"
+        description: "This leaf specifies that no facilities are selected \n     \
+          \          for this log-action."
+        x-choice: "selector-facility:no-log-facility"
+  org.openroadm.syslog.syslogselector.LogSelectorWrapper:
+    properties:
+      log-selector:
+        $ref: "#/definitions/org.openroadm.syslog.syslogselector.LogSelector"
+  org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility:
+    allOf:
+    - $ref: "#/definitions/org.openroadm.syslog.SyslogSeverity"
+    - type: "object"
+      properties:
+        facility:
+          type: "string"
+          description: "The leaf uniquely identifies a Syslog facility."
+      description: "This list describes a collection of Syslog \n               facilities\
+        \ and severities."
+  org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacilityWrapper:
+    properties:
+      log-facility:
+        $ref: "#/definitions/org.openroadm.syslog.syslogselector.logselector.selectorfacility.logfacility.LogFacility"

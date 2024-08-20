@@ -1,0 +1,20 @@
+{
+        "system":       {
+                "nodename":     "Cross-Connect-Switch2",
+                "ip-address":   "172.16.166.235",
+                "netmask":      "255.255.255.0",
+                "gateway":      "172.16.166.8",
+                "ntp-ip-1":     "",
+                "ntp-ip-2":     "",
+                "syslog-ip-1":  "127.0.0.1",
+                "syslog-ip-2":  "172.16.166.20",
+                "tacacs-ip-1":  "",
+                "tacacs-server-secret-1":       "",
+                "tacacs-ip-2":  "",
+                "tacacs-server-secret-2":       "",
+                "timezone":     0,
+                "ipv6-mode":    "link-layer",
+                "ipv6-address": "",
+                "ipv6-gateway": ""
+        }
+}

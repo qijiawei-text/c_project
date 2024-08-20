@@ -1,0 +1,9 @@
+[submodule "OpenROADM_MSA_Public"]
+	path = OpenROADM_MSA_Public
+	url = https://github.com/OpenROADM/OpenROADM_MSA_Public
+[submodule "openconfig"]
+	path = openconfig
+	url = https://github.com/openconfig/public
+[submodule "ietf"]
+	path = ietf
+	url = https://github.com/YangModels/yang

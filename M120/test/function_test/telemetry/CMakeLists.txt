@@ -1,0 +1,25 @@
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11 -O3 -Wall -Werror")
+
+string(TOLOWER "$ENV{ILA_PRODUCT}" PRODUCT_BUILD_TYPE)
+message("PRODUCT_BUILD_TYPE = ${PRODUCT_BUILD_TYPE}")
+
+set(SHASTA_BIGSUR_PROJECT_DIR  ../../../..)
+include_directories("${PROJECT_SOURCE_DIR}/inc")
+#include_directories("${SHASTA_BIGSUR_PROJECT_DIR}/libs/dev-lib/API_lib/api")
+include_directories("${SHASTA_BIGSUR_PROJECT_DIR}/libs/dsc-lib/include")
+include_directories("${SHASTA_BIGSUR_PROJECT_DIR}/libs/util-lib")
+
+LINK_DIRECTORIES("/usr/local/lib")
+add_executable(pm_telemetry_subscription_test pm_telemetry_subscription_test.c)
+add_executable(rpc_gpb_client rpc_gpb_client.c)
+add_executable(telemetry_subscription_enable_test telemetry_subscription_enable_test.c)
+add_executable(telemetry_test_server telemetry_test_server.c)
+add_executable(gpb_time_test_client gpb_time_test_client.c)
+add_executable(gpb_time_test_server gpb_time_test_server.c)
+
+target_link_libraries(pm_telemetry_subscription_test oplkdsc oplkutil sysrepo)
+target_link_libraries(rpc_gpb_client oplkdsc oplkutil sysrepo)
+target_link_libraries(telemetry_subscription_enable_test oplkdsc oplkutil sysrepo)
+target_link_libraries(telemetry_test_server oplkdsc oplkutil sysrepo pbc)
+target_link_libraries(gpb_time_test_client oplkdsc oplkutil sysrepo pbc)
+target_link_libraries(gpb_time_test_server oplkdsc oplkutil sysrepo pbc)

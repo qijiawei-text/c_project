@@ -1,0 +1,134 @@
+{
+    "modules": {
+        "module": [
+            {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-descriptors", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-04-25", 
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-descriptors.yang", 
+                    "repository": "yang"
+                }
+            },
+	    {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-common", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-04-25", 
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-common.yang", 
+                    "repository": "yang"
+		}
+	    },
+	    {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-ns", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-04-25", 
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-ns.yang", 
+                    "repository": "yang"
+                }
+	    },
+	    {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-nsd", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-04-25", 
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-nsd.yang", 
+                    "repository": "yang"
+                }
+	    },
+	    {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-pnf", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-04-25", 
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-pnf.yang", 
+                    "repository": "yang"
+                }
+	    },
+	    {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-pnfd", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-04-25", 
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-pnfd.yang", 
+                    "repository": "yang"
+                }
+	    },
+	    {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-vnf", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-03-18", 
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-vnf.yang", 
+                    "repository": "yang"
+                }
+	    },
+	    {
+                "author-email": "pnns@etsi.org", 
+                "document-name": "NFV descriptors based on YANG specification <https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf>",
+                "generated-from": "not-applicable", 
+                "maturity-level": "ratified", 
+                "name": "etsi-nfv-vnfd", 
+                "organization": "etsi", 
+                "reference": "https://www.etsi.org/deliver/etsi_gs/NFV-SOL/001_099/006/02.06.01_60/gs_nfv-sol006v020601p.pdf",
+                "module-classification": "network-service",
+                "revision": "2019-03-18",
+                "source-file": {
+                    "owner": "YangModels", 
+                    "path": "standard/etsi/SOL006/src/yang/etsi-nfv-vnfd.yang", 
+                    "repository": "yang"
+                }
+	    }
+        ]
+    }
+}

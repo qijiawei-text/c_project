@@ -1,0 +1,199 @@
+---
+swagger: "2.0"
+info:
+  description: "YANG definitions for services supported by device."
+  version: "1.0"
+  title: "com-oplink-service API"
+host: "localhost:1234"
+consumes:
+- "application/yang-data+json"
+produces:
+- "application/yang-data+json"
+paths:
+  /data/support-service:
+    get:
+      tags:
+      - "com-oplink-service"
+      summary: "returns com.oplink.service.SupportService"
+      description: "returns com.oplink.service.SupportService"
+      parameters: []
+      responses:
+        200:
+          description: "com.oplink.service.SupportService"
+          schema:
+            $ref: "#/definitions/com.oplink.service.SupportServiceWrapper"
+        400:
+          description: "Internal error"
+    post:
+      tags:
+      - "com-oplink-service"
+      summary: "creates com.oplink.service.SupportService"
+      description: "creates com.oplink.service.SupportService"
+      parameters:
+      - in: "body"
+        name: "com.oplink.service.SupportService.body-param"
+        description: "com.oplink.service.SupportService to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.service.SupportServiceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+    put:
+      tags:
+      - "com-oplink-service"
+      summary: "creates or updates com.oplink.service.SupportService"
+      description: "creates or updates com.oplink.service.SupportService"
+      parameters:
+      - in: "body"
+        name: "com.oplink.service.SupportService.body-param"
+        description: "com.oplink.service.SupportService to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.service.SupportServiceWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "com-oplink-service"
+      summary: "removes com.oplink.service.SupportService"
+      description: "removes com.oplink.service.SupportService"
+      parameters: []
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+  /data/support-service/services/:
+    post:
+      tags:
+      - "com-oplink-service"
+      summary: "creates com.oplink.service.supportservice.Services"
+      description: "OPLINK-EXTENSION:\n\t            supported features wherein the\
+        \ device is server."
+      parameters:
+      - in: "body"
+        name: "com.oplink.service.supportservice.Services.body-param"
+        description: "com.oplink.service.supportservice.Services to be added to list"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.service.supportservice.ServicesWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        409:
+          description: "Object already exists"
+  /data/support-service/services={service-name}:
+    get:
+      tags:
+      - "com-oplink-service"
+      summary: "returns com.oplink.service.supportservice.Services"
+      description: "OPLINK-EXTENSION:\n\t            supported features wherein the\
+        \ device is server."
+      parameters:
+      - name: "service-name"
+        in: "path"
+        description: "Id of services"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "com.oplink.service.supportservice.Services"
+          schema:
+            $ref: "#/definitions/com.oplink.service.supportservice.ServicesWrapper"
+        400:
+          description: "Internal error"
+    put:
+      tags:
+      - "com-oplink-service"
+      summary: "creates or updates com.oplink.service.supportservice.Services"
+      description: "OPLINK-EXTENSION:\n\t            supported features wherein the\
+        \ device is server."
+      parameters:
+      - name: "service-name"
+        in: "path"
+        description: "Id of services"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "com.oplink.service.supportservice.Services.body-param"
+        description: "com.oplink.service.supportservice.Services to be added or updated"
+        required: false
+        schema:
+          $ref: "#/definitions/com.oplink.service.supportservice.ServicesWrapper"
+      responses:
+        201:
+          description: "Object created"
+        400:
+          description: "Internal error"
+        204:
+          description: "Object modified"
+    delete:
+      tags:
+      - "com-oplink-service"
+      summary: "removes com.oplink.service.supportservice.Services"
+      description: "OPLINK-EXTENSION:\n\t            supported features wherein the\
+        \ device is server."
+      parameters:
+      - name: "service-name"
+        in: "path"
+        description: "Id of services"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Internal error"
+        204:
+          description: "Object deleted"
+definitions:
+  com.oplink.service.ServiceNameEnumeration:
+    type: "string"
+    enum:
+    - "none"
+    - "snmp"
+    - "netconf"
+    - "rest"
+    - "web"
+    - "sftp"
+    - "bgp"
+    - "gnmi-server"
+    - "lldp"
+    - "ospf"
+    - "proxyarp"
+    - "klish-server"
+  com.oplink.service.SupportService:
+    type: "object"
+    properties:
+      services:
+        type: "array"
+        description: "OPLINK-EXTENSION:\n\t            supported features wherein\
+          \ the device is server."
+        items:
+          $ref: "#/definitions/com.oplink.service.supportservice.Services"
+  com.oplink.service.SupportServiceWrapper:
+    properties:
+      support-service:
+        $ref: "#/definitions/com.oplink.service.SupportService"
+  com.oplink.service.supportservice.Services:
+    type: "object"
+    properties:
+      service-enable:
+        type: "boolean"
+        default: false
+      service-name:
+        $ref: "#/definitions/com.oplink.service.ServiceNameEnumeration"
+  com.oplink.service.supportservice.ServicesWrapper:
+    properties:
+      services:
+        $ref: "#/definitions/com.oplink.service.supportservice.Services"

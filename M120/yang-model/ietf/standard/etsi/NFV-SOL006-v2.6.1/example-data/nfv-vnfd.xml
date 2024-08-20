@@ -1,0 +1,90 @@
+<vnfd xmlns="urn:etsi:nfv:yang:etsi-nfv-vnfd">
+  <id>ASA</id>
+  <provider>My Company</provider>
+  <product-name>My Company ASAv</product-name>
+  <software-version>9.8</software-version>
+  <version>9.8</version>
+  <vnfm-info>My Company Vnfm</vnfm-info>
+  <vdu>
+    <id>firewall</id>
+    <name>Firewall VDU</name>
+    <int-cpd>
+      <id>inside</id>
+      <layer-protocol xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:ethernet</layer-protocol>
+    </int-cpd>
+    <int-cpd>
+      <id>management</id>
+      <layer-protocol xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:ethernet</layer-protocol>
+    </int-cpd>
+    <int-cpd>
+      <id>outside</id>
+      <layer-protocol xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:ethernet</layer-protocol>
+    </int-cpd>
+    <virtual-compute-desc>asa-vcd</virtual-compute-desc>
+    <virtual-storage-desc>asa-vsd</virtual-storage-desc>
+    <sw-image-desc>asa-image</sw-image-desc>
+  </vdu>
+  <virtual-compute-desc>
+    <id>asa-vcd</id>
+    <virtual-memory>
+      <size>4.0</size>
+    </virtual-memory>
+    <virtual-cpu>
+      <num-virtual-cpu>2</num-virtual-cpu>
+    </virtual-cpu>
+  </virtual-compute-desc>
+  <virtual-storage-desc>
+    <id>asa-vsd</id>
+    <type-of-storage xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:root-storage</type-of-storage>
+    <size-of-storage>0</size-of-storage>
+  </virtual-storage-desc>
+  <sw-image-desc>
+    <id>asa-image</id>
+    <name>ASA image</name>
+    <version>1.1</version>
+    <checksum>
+      <algorithm xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:sha-224</algorithm>
+      <hash>deadbeef</hash>
+    </checksum>
+    <container-format>bare</container-format>
+    <disk-format>qcow2</disk-format>
+    <min-ram>2.0</min-ram>
+    <size>1</size>
+    <image>http://www.cisco.com/asa.qcow2</image>
+  </sw-image-desc>
+  <ext-cpd>
+    <id>inside</id>
+      <layer-protocol xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:ethernet</layer-protocol>
+  </ext-cpd>
+  <ext-cpd>
+    <id>management</id>
+      <layer-protocol xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:ethernet</layer-protocol>
+  </ext-cpd>
+  <ext-cpd>
+    <id>outside</id>
+      <layer-protocol xmlns:nfv="urn:etsi:nfv:yang:etsi-nfv-descriptors">nfv:ethernet</layer-protocol>
+  </ext-cpd>
+  <df>
+    <id>normal</id>
+    <vdu-profile>
+      <id>firewall</id>
+      <min-number-of-instances>1</min-number-of-instances>
+      <max-number-of-instances>2</max-number-of-instances>
+    </vdu-profile>
+    <instantiation-level>
+      <id>double</id>
+      <vdu-level>
+        <vdu-id>firewall</vdu-id>
+        <number-of-instances>2</number-of-instances>
+      </vdu-level>
+    </instantiation-level>
+    <instantiation-level>
+      <id>single</id>
+      <vdu-level>
+        <vdu-id>firewall</vdu-id>
+        <number-of-instances>1</number-of-instances>
+      </vdu-level>
+    </instantiation-level>
+    <default-instantiation-level>single</default-instantiation-level>
+  </df>
+</vnfd>

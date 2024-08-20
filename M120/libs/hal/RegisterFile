@@ -1,0 +1,1155 @@
+{
+    "BoardRegInfo": {
+        "LogicDrv": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOCAL_BUS", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_LOCAL_BUS", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 65536, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "UartSwitch": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 24, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ],
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 25, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "Uart": [
+        	[
+                {
+                    "HwType": "HW_TYPE_UART_USB", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ],
+            [
+                {
+                    "HwType": "HW_TYPE_UART_USB", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [   
+            	{
+                    "HwType": "HW_TYPE_MULTI_UART", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                },
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [   
+            	{
+                    "HwType": "HW_TYPE_MULTI_UART", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                },
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ],
+        "I2c": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_I2C", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_FT_I2C", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_PCA_I2C", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 226, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_PCA_I2C", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 224, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_PCA_I2C", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 228, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_PCA_I2C", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 236, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_PCA_I2C", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 224, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ],  
+        "APSD": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "WatchDog": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ],
+        "ResetBoard": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "ResetTypeRegister": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ],
+        "FanBoard": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "PsuBoard": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "LedBoard": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "OscBoard": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "SlotBoard": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "Logic": [ 
+        	[
+        		{
+        			"HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+        		},
+        		{
+        			"HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_FPGA"
+        		}
+        	],
+        	[
+        		{
+        			"HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+        		},
+        		{
+        			"HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 7, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_FPGA"
+        		}
+        	]
+        ], 
+        "EEprom": [
+            [
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 172, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 2, 
+                    "HwSubIdx": 5, 
+                    "DevAddr": 164, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "Flash": [ ], 
+        "Fan": [
+            [
+                {
+                    "HwType": "HW_TYPE_FAN_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 4, 
+                    "HwSubIdx": 4, 
+                    "DevAddr": 164, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_FAN_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 4, 
+                    "HwSubIdx": 5, 
+                    "DevAddr": 164, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_FAN_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 2, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 4, 
+                    "HwSubIdx": 6, 
+                    "DevAddr": 164, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_FAN_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 3, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 4, 
+                    "HwSubIdx": 7, 
+                    "DevAddr": 164, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "Psu": [
+            [
+                {
+                    "HwType": "HW_TYPE_PSU_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 3, 
+                    "HwSubIdx": 7, 
+                    "DevAddr": 160, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 3, 
+                    "HwSubIdx": 7, 
+                    "DevAddr": 176, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_PSU_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 3, 
+                    "HwSubIdx": 6, 
+                    "DevAddr": 162, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }, 
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 3, 
+                    "HwSubIdx": 6, 
+                    "DevAddr": 178, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "Led": [
+            [
+                {
+                    "HwType": "HW_TYPE_LED_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_LED_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 1, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_LED_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 2, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_LED_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 3, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_LED_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 4, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            [
+                {
+                    "HwType": "HW_TYPE_LED_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 5, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "Temp": [
+            [
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 146, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ],
+            [
+                {
+                    "HwType": "HW_TYPE_I2C", 
+                    "HwIdx": 2, 
+                    "HwSubIdx": 7, 
+                    "DevAddr": 144, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "Mdio": [
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ],
+            [
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 1, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ], 
+        "NetSwitch": [
+            [
+                {
+                    "HwType": "HW_TYPE_MDIO_FPGA", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                },
+                {
+                    "HwType": "HW_TYPE_LOGIC_DRIVER", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ]
+        ]
+    }, 
+    "SlotRegInfo": [
+        {
+            "RegInfo": [
+                {
+                    "HwType": "HW_TYPE_SLOT_BOARD", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 2, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            "SupportedType": [
+                "CARD_TYPE_400GZR_BETA", "CARD_TYPE_400GZR"
+            ], 
+            "SlotHwInfo": [ 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_MULTI_UART", 
+                        "HwIdx": 2, 
+                        "HwSubIdx": 0
+                    },
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OA_PA": "DEV_FUNC_TYPE_OA"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OA_PA": "DEV_FUNC_TYPE_OA"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_MULTI_UART", 
+                        "HwIdx": 3, 
+                        "HwSubIdx": 1
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OA_BA": "DEV_FUNC_TYPE_OA"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OA_BA": "DEV_FUNC_TYPE_OA"
+                        }
+                    }, 
+                    "Devs": { }
+                },
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_MULTI_UART", 
+                        "HwIdx": 2, 
+                        "HwSubIdx": 4
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_EXTEND": "DEV_FUNC_TYPE_EXTEND"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_EXTEND": "DEV_FUNC_TYPE_EXTEND"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_MULTI_UART", 
+                        "HwIdx": 3, 
+                        "HwSubIdx": 5
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OTDR": "DEV_FUNC_TYPE_OTDR"
+                        }
+                    }, 
+                    "Devs": { }
+                },
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_LOGIC_MASTER_SPI", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OTDR": "DEV_FUNC_TYPE_OTDR"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_LOGIC_SPI", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OCM": "DEV_FUNC_TYPE_OCM"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OCM": "DEV_FUNC_TYPE_OCM"
+                        }
+                    }, 
+                    "Devs": { }
+                },
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_OSC_BOARD", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OSC": "DEV_FUNC_TYPE_OSC"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OSC": "DEV_FUNC_TYPE_OSC"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_RESET_MODULE", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OTDR": "DEV_FUNC_TYPE_RESET_COLD"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OTDR": "DEV_FUNC_TYPE_RESET_COLD"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_RESET_MODULE", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 1
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OCM": "DEV_FUNC_TYPE_RESET_COLD"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OCM": "DEV_FUNC_TYPE_RESET_COLD"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_RESET_MODULE", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 2
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OA_PA": "DEV_FUNC_TYPE_RESET_COLD"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OA_PA": "DEV_FUNC_TYPE_RESET_COLD"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_RESET_MODULE", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 3
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OA_BA": "DEV_FUNC_TYPE_RESET_COLD"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OA_BA": "DEV_FUNC_TYPE_RESET_COLD"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_RESET_MODULE", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 4
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_EXTEND": "DEV_FUNC_TYPE_RESET_COLD"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_EXTEND": "DEV_FUNC_TYPE_RESET_COLD"
+                        }
+                    }, 
+                    "Devs": { }
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_RESET_MODULE", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 5
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_400GZR_BETA": {
+                            "MODULE_FUNC_TYPE_OSC": "DEV_FUNC_TYPE_RESET_COLD"
+                        },
+                        "CARD_TYPE_400GZR": {
+                            "MODULE_FUNC_TYPE_OSC": "DEV_FUNC_TYPE_RESET_COLD"
+                        }
+                    }, 
+                    "Devs": { 
+                    	"CARD_TYPE_400GZR_BETA": "DEV_FUNC_TYPE_PHY",
+                    	"CARD_TYPE_400GZR": "DEV_FUNC_TYPE_PHY"
+                    	}
+                },
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_LED_BOARD", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 10
+                    }, 
+                    "Modules": {
+                        
+                    }, 
+                    "Devs": {
+                    	"CARD_TYPE_400GZR_BETA": "DEV_FUNC_TYPE_LED_SYS",
+                    	"CARD_TYPE_400GZR": "DEV_FUNC_TYPE_LED_SYS"
+                    	}
+                },
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_LED_BOARD", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 11
+                    }, 
+                    "Modules": {
+                    }, 
+                    "Devs": { 
+                    	"CARD_TYPE_400GZR_BETA": "DEV_FUNC_TYPE_LED_ALM",
+                    	"CARD_TYPE_400GZR": "DEV_FUNC_TYPE_LED_ALM"
+                    	}
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_I2C", 
+                        "HwIdx": 6, 
+                        "HwSubIdx": 4
+                    }, 
+                    "Modules": {
+                    }, 
+                    "Devs": { 
+                    "CARD_TYPE_400GZR_BETA": "DEV_FUNC_TYPE_STORE",
+                    "CARD_TYPE_400GZR": "DEV_FUNC_TYPE_STORE"}
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_I2C", 
+                        "HwIdx": 6, 
+                        "HwSubIdx": 4
+                    }, 
+                    "Modules": {
+                    }, 
+                    "Devs": { 
+                    	"CARD_TYPE_400GZR_BETA": "DEV_FUNC_TYPE_TEMP",
+                    	"CARD_TYPE_400GZR": "DEV_FUNC_TYPE_TEMP"
+                    	}
+                }, 
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_MDIO_FPGA", 
+                        "HwIdx": 1, 
+                        "HwSubIdx": 0
+                    }, 
+                    "Modules": {
+                    }, 
+                    "Devs": { 
+                    	"CARD_TYPE_400GZR_BETA": "DEV_FUNC_TYPE_PHY",
+                    	"CARD_TYPE_400GZR": "DEV_FUNC_TYPE_PHY"
+                    	}
+                }       
+            ]
+        },
+        {
+            "RegInfo": [
+                {
+                    "HwType": "HW_TYPE_USB", 
+                    "HwIdx": 0, 
+                    "HwSubIdx": 0, 
+                    "DevAddr": 0, 
+                    "Proto": "PROTO_TYPE_DEF"
+                }
+            ], 
+            "SupportedType": [
+                "CARD_TYPE_MUX"
+            ], 
+            "SlotHwInfo": [
+                {
+                    "HwInfo": {
+                        "HwType": "HW_TYPE_SPI_USB_FT", 
+                        "HwIdx": 0, 
+                        "HwSubIdx": 2
+                    }, 
+                    "Modules": {
+                        "CARD_TYPE_MUX": {
+                            "MODULE_FUNC_TYPE_MUX": "DEV_FUNC_TYPE_STORE"
+                        }
+                    }, 
+                    "Devs": { }
+                }            
+            ]
+        }
+    ], 
+    "CardRegInfo": {
+        "CARD_TYPE_400GZR_BETA": {
+            "ModuleInfo": [ 
+            	{
+                    "ModuleType": "MODULE_TYPE_OA", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OA_BA", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OA", 
+                            "DevFunc": "DEV_FUNC_TYPE_OA", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_OA_CLI_SIG"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                },
+                {
+                    "ModuleType": "MODULE_TYPE_OA", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OA_PA", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OA", 
+                            "DevFunc": "DEV_FUNC_TYPE_OA", 
+                            "DevAddr": "0", 
+                            "DevProto": "PROTO_TYPE_OA_CLI_SIG"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": "0", 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                }, 
+				{
+				    "ModuleType": "MODULE_TYPE_EXTEND", 
+				    "ModuleFunc": "MODULE_FUNC_TYPE_EXTEND", 
+				    "DevInfo": [
+				        {
+				            "DevType": "DEV_TYPE_EXTEND", 
+				            "DevFunc": "DEV_FUNC_TYPE_EXTEND", 
+				            "DevAddr": 0, 
+				            "DevProto": "PROTO_TYPE_DEF"
+				        }, 
+				        {
+				            "DevType": "DEV_TYPE_RESET", 
+				            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+				            "DevAddr": 0, 
+				            "DevProto": "PROTO_TYPE_DEF"
+				        }
+				    ]
+				},
+                {
+                    "ModuleType": "MODULE_TYPE_OTDR", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OTDR", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OTDR", 
+                            "DevFunc": "DEV_FUNC_TYPE_OTDR", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                },
+                {
+                    "ModuleType": "MODULE_TYPE_OSC", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OSC", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OSC", 
+                            "DevFunc": "DEV_FUNC_TYPE_OSC", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                },
+                {
+                    "ModuleType": "MODULE_TYPE_OCM", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OCM", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OCM", 
+                            "DevFunc": "DEV_FUNC_TYPE_OCM", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                }
+            ], 
+            "DevInfo": [ 
+        			{
+			            "DevType": "DEV_TYPE_LED", 
+			            "DevFunc": "DEV_FUNC_TYPE_LED_SYS", 
+			            "DevAddr": 0, 
+			            "DevProto": "PROTO_TYPE_DEF"
+			        }, 
+			        {
+			            "DevType": "DEV_TYPE_LED", 
+			            "DevFunc": "DEV_FUNC_TYPE_LED_ALM", 
+			            "DevAddr": 0, 
+			            "DevProto": "PROTO_TYPE_DEF"
+			        }, 
+		            {
+                        "DevType": "DEV_TYPE_E2PROM", 
+                        "DevFunc": "DEV_FUNC_TYPE_STORE", 
+                        "DevAddr": 172, 
+                        "DevProto": "PROTO_TYPE_DEF"
+                    }, 
+		            {
+                        "DevType": "DEV_TYPE_TEMP", 
+                        "DevFunc": "DEV_FUNC_TYPE_TEMP", 
+                        "DevAddr": 144, 
+                        "DevProto": "PROTO_TYPE_DEF"
+                    }, 
+		            {
+                        "DevType": "DEV_TYPE_PHY", 
+                        "DevFunc": "DEV_FUNC_TYPE_PHY", 
+                        "DevAddr": 0, 
+                        "DevProto": "PROTO_TYPE_DEF"
+                    }
+			]
+        },
+        "CARD_TYPE_400GZR": {
+            "ModuleInfo": [         	
+                {
+                    "ModuleType": "MODULE_TYPE_OA", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OA_BA", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OA", 
+                            "DevFunc": "DEV_FUNC_TYPE_OA", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_OA_CLI_SIG"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                },
+                {
+                    "ModuleType": "MODULE_TYPE_OA", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OA_PA", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OA", 
+                            "DevFunc": "DEV_FUNC_TYPE_OA", 
+                            "DevAddr": "0", 
+                            "DevProto": "PROTO_TYPE_OA_CLI_SIG"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": "0", 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                }, 
+				{
+				    "ModuleType": "MODULE_TYPE_EXTEND", 
+				    "ModuleFunc": "MODULE_FUNC_TYPE_EXTEND", 
+				    "DevInfo": [
+				        {
+				            "DevType": "DEV_TYPE_EXTEND", 
+				            "DevFunc": "DEV_FUNC_TYPE_EXTEND", 
+				            "DevAddr": 0, 
+				            "DevProto": "PROTO_TYPE_DEF"
+				        }, 
+				        {
+				            "DevType": "DEV_TYPE_RESET", 
+				            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+				            "DevAddr": 0, 
+				            "DevProto": "PROTO_TYPE_DEF"
+				        }
+				    ]
+				},
+                {
+                    "ModuleType": "MODULE_TYPE_OTDR", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OTDR", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OTDR", 
+                            "DevFunc": "DEV_FUNC_TYPE_OTDR", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                },
+                {
+                    "ModuleType": "MODULE_TYPE_OSC", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OSC", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OSC", 
+                            "DevFunc": "DEV_FUNC_TYPE_OSC", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                },
+                {
+                    "ModuleType": "MODULE_TYPE_OCM", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_OCM", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_OCM", 
+                            "DevFunc": "DEV_FUNC_TYPE_OCM", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }, 
+                        {
+                            "DevType": "DEV_TYPE_RESET", 
+                            "DevFunc": "DEV_FUNC_TYPE_RESET_COLD", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                }
+            ], 
+            "DevInfo": [ 
+        			{
+			            "DevType": "DEV_TYPE_LED", 
+			            "DevFunc": "DEV_FUNC_TYPE_LED_SYS", 
+			            "DevAddr": 0, 
+			            "DevProto": "PROTO_TYPE_DEF"
+			        }, 
+			        {
+			            "DevType": "DEV_TYPE_LED", 
+			            "DevFunc": "DEV_FUNC_TYPE_LED_ALM", 
+			            "DevAddr": 0, 
+			            "DevProto": "PROTO_TYPE_DEF"
+			        }, 
+		            {
+                        "DevType": "DEV_TYPE_E2PROM", 
+                        "DevFunc": "DEV_FUNC_TYPE_STORE", 
+                        "DevAddr": 172, 
+                        "DevProto": "PROTO_TYPE_DEF"
+                    }, 
+		            {
+                        "DevType": "DEV_TYPE_TEMP", 
+                        "DevFunc": "DEV_FUNC_TYPE_TEMP", 
+                        "DevAddr": 144, 
+                        "DevProto": "PROTO_TYPE_DEF"
+                    }, 
+		            {
+                        "DevType": "DEV_TYPE_PHY", 
+                        "DevFunc": "DEV_FUNC_TYPE_PHY", 
+                        "DevAddr": 0, 
+                        "DevProto": "PROTO_TYPE_DEF"
+                    }
+			]
+        },
+        "CARD_TYPE_MUX": {
+            "ModuleInfo": [
+                {
+                    "ModuleType": "MODULE_TYPE_MUX", 
+                    "ModuleFunc": "MODULE_FUNC_TYPE_MUX", 
+                    "DevInfo": [
+                        {
+                            "DevType": "DEV_TYPE_E2PROM", 
+                            "DevFunc": "DEV_FUNC_TYPE_STORE", 
+                            "DevAddr": 0, 
+                            "DevProto": "PROTO_TYPE_DEF"
+                        }
+                    ]
+                }				
+            ], 
+            "DevInfo": [ ]
+        }
+    }
+}

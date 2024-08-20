@@ -1,0 +1,1281 @@
+module org-openroadm-probable-cause {
+  namespace "http://org/openroadm/probableCause";
+  prefix org-openroadm-probable-cause;
+
+  import org-openroadm-common-alarm-pm-types {
+    prefix org-openroadm-common-alarm-pm-types;
+    revision-date 2019-11-29;
+  }
+
+  organization
+    "Open ROADM MSA";
+  contact
+    "OpenROADM.org";
+  description
+    "YANG definitions of Probable Causes.
+
+      Copyright of the Members of the Open ROADM MSA Agreement dated (c) 2016,
+      All other rights reserved.
+
+      Redistribution and use in source and binary forms, with or without modification,
+      are permitted provided that the following conditions are met:
+
+      * Redistributions of source code must retain the above copyright notice, this
+        list of conditions and the following disclaimer.
+      * Redistributions in binary form must reproduce the above copyright notice,
+        this list of conditions and the following disclaimer in the documentation and/or
+        other materials provided with the distribution.
+      * Neither the Members of the Open ROADM MSA Agreement nor the names of its
+        contributors may be used to endorse or promote products derived from this software
+        without specific prior written permission.
+
+      THIS SOFTWARE IS PROVIDED BY THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT ''AS IS''
+      AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+      WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+      IN NO EVENT THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT BE LIABLE FOR ANY DIRECT,
+      INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+      NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;  LOSS OF USE, DATA,
+      OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+      WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+      ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+      POSSIBILITY OF SUCH DAMAGE";
+
+  revision 2024-03-29 {
+    description
+      "Version 15.0";
+  }
+  revision 2023-03-31 {
+    description
+      "Version 13.0";
+  }
+  revision 2022-12-09 {
+    description
+      "Version 12.1";
+  }
+  revision 2022-05-27 {
+    description
+      "Version 11.1";
+  }
+  revision 2022-03-25 {
+    description
+      "Version 11.0";
+  }
+  revision 2021-09-24 {
+    description
+      "Version 10.0";
+  }
+  revision 2021-05-28 {
+    description
+      "Version 9.1";
+  }
+  revision 2020-12-11 {
+    description
+      "Version 8.1";
+  }
+  revision 2020-05-29 {
+    description
+      "Version 7.1.0";
+  }
+  revision 2020-03-27 {
+    description
+      "Version 7.0.0";
+  }
+  revision 2019-11-29 {
+    description
+      "Version 6.1.0";
+  }
+  revision 2019-09-27 {
+    description
+      "Version 6.0.0";
+  }
+  revision 2019-05-31 {
+    description
+      "Version 5.1.0";
+  }
+  revision 2018-11-30 {
+    description
+      "Version 4.1.0";
+  }
+  revision 2018-09-28 {
+    description
+      "Version 4.0.0";
+  }
+  revision 2018-03-30 {
+    description
+      "Version 3.0.0";
+  }
+  revision 2017-12-15 {
+    description
+      "Version 2.2";
+  }
+  revision 2017-09-29 {
+    description
+      "Version 2.1";
+  }
+  revision 2017-07-28 {
+    description
+      "Version 2.0.1 - added revision-date to imports";
+  }
+  revision 2017-06-26 {
+    description
+      "Version 2.0";
+  }
+  revision 2016-10-14 {
+    description
+      "Version 1.2";
+  }
+
+  typedef probable-cause-enum {
+    type enumeration {
+      enum vendorExtension {
+        value 1;
+        description
+          "vendorExtension";
+      }
+      enum openConnectionIndication {
+        value 2;
+        description
+          "Open connection indication (OCI)";
+        reference
+          "G.798";
+      }
+      enum alarmIndicationSignal {
+        value 3;
+        description
+          "Alarm indication signal";
+        reference
+          "G.798";
+      }
+      enum lossOfSignal {
+        value 4;
+        description
+          "Loss of Signal";
+      }
+      enum opticalLineFail {
+        value 5;
+        status deprecated;
+        description
+          "(Deprecated) Optical Line Fail
+          Note: opticalLineFail should no longer be raised when OMS lossOfSignal
+          and Ethernet linkDown are detected.";
+
+      }
+      enum opticalPowerDegraded {
+        value 6;
+        description
+          "Optical Power Degraded";
+      }
+      enum automaticLaserShutdown {
+        value 7;
+        description
+          "Automatic Laser Shutdown";
+      }
+      enum serverSignalFail {
+        value 8;
+        description
+          "Server Signal Fail (SSF)";
+        reference
+          "G.798";
+      }
+      enum lockedDefect {
+        value 10;
+        description
+          "Locked defect (LCK)";
+        reference
+          "G.798";
+      }
+      enum trailTraceIdentifierMismatch {
+        value 11;
+        description
+          "Trail trace Identifier Mismatch (TIM)";
+        reference
+          "G.798";
+      }
+      enum degradedDefect {
+        value 12;
+        description
+          "Degraded defect (DEG)";
+        reference
+          "G.798";
+      }
+      enum backwardsDefectIndication {
+        value 13;
+        description
+          "Backward Defect Indication (BDI)";
+        reference
+          "G.798";
+      }
+      enum otsSpanlossPowerOutOfSpecificationHigh {
+        value 14;
+      }
+      enum automaticShutoffDisabled {
+        value 15;
+      }
+      enum portLossOfLight {
+        value 17;
+      }
+      enum reflectionTooHigh {
+        value 18;
+      }
+      enum payloadMissingIndication {
+        value 22;
+        description
+          "Will be applicable to ROADM when OSC signaling supported in future (G.709 2016-06 Figure 15-1A, 1B)";
+      }
+      enum forwardDefectIndication {
+        value 23;
+        description
+          "Will be applicable to ROADM when OSC signaling supported in future (G.709 2016-06 Figure 15-1A, 1B)";
+      }
+      enum oscPowerOutOfSpecificationHigh {
+        value 24;
+      }
+      enum oscPowerOutOfSpecificationLow {
+        value 25;
+      }
+      enum powerOutOfSpecificationHigh {
+        value 26;
+      }
+      enum lossOfSynchronization {
+        value 27;
+      }
+      enum linkDown {
+        value 28;
+      }
+      enum equipmentFault {
+        value 29;
+      }
+      enum equipmentRemoved {
+        value 30;
+      }
+      enum equipmentMismatch {
+        value 31;
+      }
+      enum equipmentWarmup {
+        value 32;
+      }
+      enum equipmentLedOn {
+        value 33;
+      }
+      enum equipmentInterConnectFailure {
+        value 34;
+      }
+      enum equipmentMiscabledConnection {
+        value 35;
+      }
+      enum softwareVersionMismatch {
+        value 36;
+      }
+      enum softwareStageInProgress {
+        value 37;
+      }
+      enum databaseCorruption {
+        value 38;
+      }
+      enum databaseVersionMismatch {
+        value 44;
+      }
+      enum firmwareVersionMismatch {
+        value 46;
+        description
+          "The new version of software is no longer compatible with the version
+           of firmware running on the circuit pack";
+      }
+      enum incompatibleFirmware {
+        value 49;
+        description
+          "The device is provisioned with a feature that requires the firmware on
+           circuit pack to be updated";
+      }
+      enum firmwareDownloadOrActivationFailure {
+        value 50;
+      }
+      enum firmwareInitInProgress {
+        value 51;
+      }
+      enum softwareReset {
+        value 52;
+      }
+      enum fanCoolingFail {
+        value 53;
+      }
+      enum administrativeDown {
+        value 54;
+      }
+      enum lampTest {
+        value 55;
+      }
+      enum powerProblemA {
+        value 56;
+      }
+      enum powerProblemB {
+        value 57;
+      }
+      enum shelfProvisioningMode {
+        value 58;
+      }
+      enum sysNameChanged {
+        value 59;
+      }
+      enum sysNtpNotSynchronized {
+        value 60;
+      }
+      enum lossOfFrame {
+        value 63;
+      }
+      enum lossOfMultiframe {
+        value 64;
+      }
+      enum backwardIncomingAlignmentError {
+        value 65;
+        status obsolete;
+      }
+      enum incomingAlignmentError {
+        value 66;
+        status obsolete;
+      }
+      enum payloadMismatch {
+        value 67;
+      }
+      enum clientSignalFailDefect {
+        value 68;
+      }
+      enum highBER {
+        value 123;
+      }
+      enum localFault {
+        value 124;
+      }
+      enum remoteFault {
+        value 125;
+      }
+      enum lossOfAlignment {
+        value 126;
+      }
+      enum lossOfFECAlignment {
+        value 127;
+      }
+      enum facilityLoopbackActive {
+        value 128;
+      }
+      enum facilityLoopback2Active {
+        value 129;
+      }
+      enum terminalLoopbackActive {
+        value 130;
+      }
+      enum facilityTestsignalActive {
+        value 131;
+      }
+      enum terminalTestsignalActive {
+        value 132;
+      }
+      enum certificateNotInstalled {
+        value 134;
+      }
+      enum lockoutOfProtection {
+        value 135;
+        description
+         "Raised on a protection group, state=W,LOP";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum forcedSwitchAwayFromWorking {
+        value 136;
+        description
+         "Raised on a protection group, state=P,FS";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum forcedSwitchAwayFromProtect {
+        value 137;
+        description
+         "Raised on a protection group, state=W,FS";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum automaticSwitchAwayFromWorkingDueToSF {
+        value 138;
+        description
+         "Raised on a protection group, state=P,SF or P,SD";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum automaticSwitchAwayFromProtectDueToSF {
+        value 139;
+        description
+         "Raised on a protection group, state=W,SF or W,SD";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum automaticSwitchDueToWTR {
+        value 140;
+        description
+         "Raised on a protection group, state=P,WTR";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum manualSwitchAwayFromWork {
+        value 141;
+        status obsolete;
+        description
+         "Raised on a protection group, state=P,MS.
+          Deprecated, see manualSwitchAwayFromWorking.";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum manualSwitchAwayFromProtect {
+        value 142;
+        description
+         "Raised on a protection group, state=W,MS";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum automaticPowerReduction {
+        value 143;
+      }
+      enum lossOfSignalOSC {
+        value 144;
+      }
+      enum softwareValidateInProgress {
+        value 145;
+      }
+      enum databaseRollbackTimerInProgress {
+        value 146;
+      }
+      enum otdrScanInProgress {
+        value 147;
+      }
+      enum lldpFail {
+        value 148;
+      }
+      enum omsPowerOutOfSpecificationHigh {
+        value 149;
+        status obsolete;
+        description
+          "Instead of raising the omsPowerOutOfSpecificationHigh, the recommendation is to raise the powerOutOfSpecificationHigh against the if-OMS";
+      }
+      enum omsPowerOutOfSpecificationLow {
+        value 150;
+        status obsolete;
+        description
+          "Instead of raising the omsPowerOutOfSpecificationLow, the recommendation is to raise the powerOutOfSpecificationLow against the if-OMS";
+      }
+      enum automaticSwitchAwayFromWorkingDueToSD {
+        value 151;
+      }
+      enum automaticSwitchAwayFromProtectDueToSD {
+        value 152;
+      }
+      enum backwardIncomingAlignmentErrorTCM1-up {
+        value 153;
+      }
+      enum backwardIncomingAlignmentErrorTCM2-up {
+        value 154;
+      }
+      enum backwardIncomingAlignmentErrorTCM3-up {
+        value 155;
+      }
+      enum backwardIncomingAlignmentErrorTCM4-up {
+        value 156;
+      }
+      enum backwardIncomingAlignmentErrorTCM5-up {
+        value 157;
+      }
+      enum backwardIncomingAlignmentErrorTCM6-up {
+        value 158;
+      }
+      enum incomingAlignmentErrorTCM1-up {
+        value 159;
+      }
+      enum incomingAlignmentErrorTCM2-up {
+        value 160;
+      }
+      enum incomingAlignmentErrorTCM3-up {
+        value 161;
+      }
+      enum incomingAlignmentErrorTCM4-up {
+        value 162;
+      }
+      enum incomingAlignmentErrorTCM5-up {
+        value 163;
+      }
+      enum incomingAlignmentErrorTCM6-up {
+        value 164;
+      }
+      enum backwardsDefectIndicationTCM1-up {
+        value 165;
+      }
+      enum backwardsDefectIndicationTCM2-up {
+        value 166;
+      }
+      enum backwardsDefectIndicationTCM3-up {
+        value 167;
+      }
+      enum backwardsDefectIndicationTCM4-up {
+        value 168;
+      }
+      enum backwardsDefectIndicationTCM5-up {
+        value 169;
+      }
+      enum backwardsDefectIndicationTCM6-up {
+        value 170;
+      }
+      enum degradedDefectTCM1-up {
+        value 171;
+      }
+      enum degradedDefectTCM2-up {
+        value 172;
+      }
+      enum degradedDefectTCM3-up {
+        value 173;
+      }
+      enum degradedDefectTCM4-up {
+        value 174;
+      }
+      enum degradedDefectTCM5-up {
+        value 175;
+      }
+      enum degradedDefectTCM6-up {
+        value 176;
+      }
+      enum trailTraceIdentifierMisMatchTCM1-up {
+        value 177;
+      }
+      enum trailTraceIdentifierMisMatchTCM2-up {
+        value 178;
+      }
+      enum trailTraceIdentifierMisMatchTCM3-up {
+        value 179;
+      }
+      enum trailTraceIdentifierMisMatchTCM4-up {
+        value 180;
+      }
+      enum trailTraceIdentifierMisMatchTCM5-up {
+        value 181;
+      }
+      enum trailTraceIdentifierMisMatchTCM6-up {
+        value 182;
+      }
+      enum alarmIndicationSignalTCM1-up {
+        value 183;
+      }
+      enum alarmIndicationSignalTCM2-up {
+        value 184;
+      }
+      enum alarmIndicationSignalTCM3-up {
+        value 185;
+      }
+      enum alarmIndicationSignalTCM4-up {
+        value 186;
+      }
+      enum alarmIndicationSignalTCM5-up {
+        value 187;
+      }
+      enum alarmIndicationSignalTCM6-up {
+        value 188;
+      }
+      enum openConnectionIndicationTCM1-up {
+        value 189;
+      }
+      enum openConnectionIndicationTCM2-up {
+        value 190;
+      }
+      enum openConnectionIndicationTCM3-up {
+        value 191;
+      }
+      enum openConnectionIndicationTCM4-up {
+        value 192;
+      }
+      enum openConnectionIndicationTCM5-up {
+        value 193;
+      }
+      enum openConnectionIndicationTCM6-up {
+        value 194;
+      }
+      enum lockedDefectTCM1-up {
+        value 195;
+      }
+      enum lockedDefectTCM2-up {
+        value 196;
+      }
+      enum lockedDefectTCM3-up {
+        value 197;
+      }
+      enum lockedDefectTCM4-up {
+        value 198;
+      }
+      enum lockedDefectTCM5-up {
+        value 199;
+      }
+      enum lockedDefectTCM6-up {
+        value 200;
+      }
+      enum lossofTandemConnectionTCM1-up {
+        value 201;
+      }
+      enum lossofTandemConnectionTCM2-up {
+        value 202;
+      }
+      enum lossofTandemConnectionTCM3-up {
+        value 203;
+      }
+      enum lossofTandemConnectionTCM4-up {
+        value 204;
+      }
+      enum lossofTandemConnectionTCM5-up {
+        value 205;
+      }
+      enum lossofTandemConnectionTCM6-up {
+        value 206;
+      }
+      enum backwardIncomingAlignmentErrorTCM1-down {
+        value 207;
+      }
+      enum backwardIncomingAlignmentErrorTCM2-down {
+        value 208;
+      }
+      enum backwardIncomingAlignmentErrorTCM3-down {
+        value 209;
+      }
+      enum backwardIncomingAlignmentErrorTCM4-down {
+        value 210;
+      }
+      enum backwardIncomingAlignmentErrorTCM5-down {
+        value 211;
+      }
+      enum backwardIncomingAlignmentErrorTCM6-down {
+        value 212;
+      }
+      enum incomingAlignmentErrorTCM1-down {
+        value 213;
+      }
+      enum incomingAlignmentErrorTCM2-down {
+        value 214;
+      }
+      enum incomingAlignmentErrorTCM3-down {
+        value 215;
+      }
+      enum incomingAlignmentErrorTCM4-down {
+        value 216;
+      }
+      enum incomingAlignmentErrorTCM5-down {
+        value 217;
+      }
+      enum incomingAlignmentErrorTCM6-down {
+        value 218;
+      }
+      enum backwardsDefectIndicationTCM1-down {
+        value 219;
+      }
+      enum backwardsDefectIndicationTCM2-down {
+        value 220;
+      }
+      enum backwardsDefectIndicationTCM3-down {
+        value 221;
+      }
+      enum backwardsDefectIndicationTCM4-down {
+        value 222;
+      }
+      enum backwardsDefectIndicationTCM5-down {
+        value 223;
+      }
+      enum backwardsDefectIndicationTCM6-down {
+        value 224;
+      }
+      enum degradedDefectTCM1-down {
+        value 225;
+      }
+      enum degradedDefectTCM2-down {
+        value 226;
+      }
+      enum degradedDefectTCM3-down {
+        value 227;
+      }
+      enum degradedDefectTCM4-down {
+        value 228;
+      }
+      enum degradedDefectTCM5-down {
+        value 229;
+      }
+      enum degradedDefectTCM6-down {
+        value 230;
+      }
+      enum trailTraceIdentifierMisMatchTCM1-down {
+        value 231;
+      }
+      enum trailTraceIdentifierMisMatchTCM2-down {
+        value 232;
+      }
+      enum trailTraceIdentifierMisMatchTCM3-down {
+        value 233;
+      }
+      enum trailTraceIdentifierMisMatchTCM4-down {
+        value 234;
+      }
+      enum trailTraceIdentifierMisMatchTCM5-down {
+        value 235;
+      }
+      enum trailTraceIdentifierMisMatchTCM6-down {
+        value 236;
+      }
+      enum alarmIndicationSignalTCM1-down {
+        value 237;
+      }
+      enum alarmIndicationSignalTCM2-down {
+        value 238;
+      }
+      enum alarmIndicationSignalTCM3-down {
+        value 239;
+      }
+      enum alarmIndicationSignalTCM4-down {
+        value 240;
+      }
+      enum alarmIndicationSignalTCM5-down {
+        value 241;
+      }
+      enum alarmIndicationSignalTCM6-down {
+        value 242;
+      }
+      enum openConnectionIndicationTCM1-down {
+        value 243;
+      }
+      enum openConnectionIndicationTCM2-down {
+        value 244;
+      }
+      enum openConnectionIndicationTCM3-down {
+        value 245;
+      }
+      enum openConnectionIndicationTCM4-down {
+        value 246;
+      }
+      enum openConnectionIndicationTCM5-down {
+        value 247;
+      }
+      enum openConnectionIndicationTCM6-down {
+        value 248;
+      }
+      enum lockedDefectTCM1-down {
+        value 249;
+      }
+      enum lockedDefectTCM2-down {
+        value 250;
+      }
+      enum lockedDefectTCM3-down {
+        value 251;
+      }
+      enum lockedDefectTCM4-down {
+        value 252;
+      }
+      enum lockedDefectTCM5-down {
+        value 253;
+      }
+      enum lockedDefectTCM6-down {
+        value 254;
+      }
+      enum lossofTandemConnectionTCM1-down {
+        value 255;
+      }
+      enum lossofTandemConnectionTCM2-down {
+        value 256;
+      }
+      enum lossofTandemConnectionTCM3-down {
+        value 257;
+      }
+      enum lossofTandemConnectionTCM4-down {
+        value 258;
+      }
+      enum lossofTandemConnectionTCM5-down {
+        value 259;
+      }
+      enum lossofTandemConnectionTCM6-down {
+        value 260;
+      }
+      enum multiplexStructureIdentifierMismatch {
+        value 261;
+        description
+          "G798 : 6.2.9 (dMSIM)";
+      }
+      enum lossOfOmfIndication {
+        value 262;
+        description
+          "G798 : 14.3.10.2 Figure 14-73 (dLOOMFI)";
+      }
+      enum lossOfFrameAndLossOfMultiframe {
+        value 263;
+        description
+          "Loss Of Frame and Loss Of Multiframe";
+        reference
+          "G798 : 6.2.5.3 (dLOFLOM) and 15.3.1.2 FlexO-n/OTUCn_A_Sk where the dLOFLOM defect shall be reported against OTUCn interface";
+      }
+      enum lossOfDatabaseRedundancy {
+        value 264;
+        description
+          "loss of database redundancy";
+      }
+      enum databaseLocked {
+        value 265;
+        description
+          "Database locked";
+      }
+      enum createTechInfoInProgress {
+        value 266;
+        description
+          "create-tech-info in progress";
+      }
+      enum circuitPackActivateFailed {
+        value 267;
+        description
+          "circuit-pack activation failed";
+      }
+      enum softwareSubsystemFailed {
+        value 268;
+        description
+          "Software subsystem failed";
+      }
+      enum diskFull {
+        value 269;
+        description
+          "Disk full";
+      }
+      enum lossOfSignalPayload {
+        value 270;
+        description
+          "Loss Of Signal Payload";
+        reference
+          "G.798 6.2.1.2 dLOS-P, 16.8.2 OTSi/FlexO_A_Sk";
+      }
+      enum lossOfLaneAlignment {
+        value 271;
+        description
+          "Loss Of Lane Alignment";
+        reference
+          "G.798 15.3.1.2 FlexO-n/OTUCn_A_Sk that dLOL if the alignment process is in OLA state, where the dLOL defect shall be reported against OTUCn interface;
+           16.7.2 (OTSi/FlexO-1-SC_A_Sk) (G.709.3) & 16.8.2 (OTSiG/FlexO_A_Sk) (G.709.1)
+           that dLOL based on the FEC alignment state diagram, where the dLOL defect shall be reported against OTSi interface";
+      }
+      enum groupIdMismatch {
+        value 272;
+        description
+          "Group Id Mismatch";
+        reference
+          "G.798 dGIDM in Annex B.1.1.2.1; G.798 15.3.1.2 FlexO-n/OTUCn_A_Sk";
+      }
+      enum flexoMapMismatch {
+        value 273;
+        description
+          "FlexO Map Mismatch";
+        reference
+          "G.798 dFMM in Annex B.1.1.2.2; G.798 15.3.1.2 FlexO-n/OTUCn_A_Sk";
+      }
+      enum powerOutOfSpecificationLow {
+        value 274;
+      }
+      enum gfpLossOfFrameDelineation {
+        value 275;
+        description
+          "GFP loss of frame delineation (dLFD G.806:6.2.5.2) is raised when the frame delineation process (clause 6.3.1 of [ITU-T G.7041]) is not in the 'SYNC' state";
+      }
+      enum cmfLossOfSignal {
+        value 276;
+        description
+          "GFP client signal fail (dCSF G.806:6.2.6.4.1) is raised when a GFP frame with correct tHEC, with aPTI = '100' and a valid UPI code 0x01(G.7041: Table 6-4) is received";
+      }
+      enum cmfLossOfSync {
+        value 277;
+        description
+          "GFP client signal fail (dCSF G.806:6.2.6.4.1) is raised when a GFP frame with correct tHEC, with aPTI = '100' and a valid UPI code 0x02(G.7041: Table 6-4) is received";
+      }
+      enum cmfForwardDefectIndication {
+        value 278;
+        description
+          "GFP client signal fail (dCSF G.806:6.2.6.4.1) is raised when a GFP frame with correct tHEC, with aPTI = '100' and a valid UPI code 0x04(G.7041: Table 6-4) is received";
+      }
+      enum cmfReverseDefectIndication {
+        value 279;
+        description
+          "GFP client signal fail (dCSF G.806:6.2.6.4.1) is raised when a GFP frame with correct tHEC, with aPTI = '100' and a valid UPI code 0x05(G.7041: Table 6-4) is received";
+      }
+      enum localDegradedSER {
+        value 280;
+        description
+          "Local Degraded SER";
+        reference
+          "IEEE 802.3-2018  Section 45.2.3.60.1,  IEEE 802.3-2018  Section 119";
+      }
+      enum remoteDegradedSER {
+        value 281;
+        description
+          "Remote Degraded SER";
+        reference
+          "IEEE 802.3-2018  Section 45.2.3.60.2,  IEEE 802.3-2018  Section 119";
+      }
+      enum fecDegradedSER {
+        value 282;
+        description
+          "PCS FEC Degrade SER";
+        reference
+          "IEEE 802.3-2018  Section 119";
+      }
+      enum farEndFaultIndication {
+        value 283;
+        description
+          "Far End Fault Indication";
+        reference
+          "IEEE 802.3-2018 Section 24.3.2.1";
+      }
+      enum administrativeTesting {
+        value 284;
+        description
+          "Alarm showing that a maintenance action (loopback or testsignal) is in progress.  Cleared when admin state changes to Up or Down";
+      }
+      enum highSER {
+        value 285;
+        description
+          "High Symbol Error Rate when FEC bypass indication is enabled";
+        reference
+          "IEEE 802.3 91.6.5, 119.2.5.3";
+      }
+      enum incompatibleHardware {
+        value 286;
+        description
+          "Incompatible Hardware, does not match with the Application (e.g. FEC type)";
+      }
+      enum opticalInterconnectLossHigh {
+        value 287;
+        description
+          "Interconnection loss high alarm for fiber";
+      }
+      enum secondarySoftwareCorruption {
+        value 288;
+        description
+          "Corrupt secondary software";
+      }
+      enum softwareSyncInProgress {
+        value 289;
+        description
+          "Indication of active software synchronization with secondary storage";
+      }
+      enum totalpowerOutOfSpecificationHigh {
+        value 290;
+        description
+          "Total Power Out Of Specification High for multi-channel drop";
+      }
+      enum totalpowerOutOfSpecificationLow {
+        value 291;
+        description
+          "Total Power Out Of Specification Low for multi-channel drop";
+      }
+      enum "powerOutOfRangeLow" {
+        value 292;
+        description
+          "Measured power is outside the supported or advertised power range";
+      }
+      enum "powerOutOfRangeHigh" {
+        value 293;
+        description
+          "Measured power is outside the supported or advertised power range";
+      }
+      enum "remoteDefectIndication" {
+        value 294;
+        description
+          "Remote Defect Indication";
+        reference
+          "G.798 15.2.1.2 dRDI if the extracted Remote PHY Fault is 1 (FlexO-x TT_Sk)";
+      }
+      enum "lossOfRcBlocks" {
+        value 295;
+        description
+          "Loss Of RC Blocks";
+        reference
+          "G.798 14.3.20.2 dLRC (loss of RC blocks) for 200G/400G ETH based
+           on ODUflexP to ETCy adaptation sink function using BMP (ODUflexP/ETCy_A_Sk)";
+      }
+      enum manualSwitchAwayFromWorking {
+        value 296;
+        description
+         "Raised on a protection group, state=P,MS";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum apsProtocolError {
+        value 297;
+        description
+         "Raised on a protection group when the APS protocol receives
+          no or an unexpected response.";
+        reference
+         "ITU-T G.873.1";
+      }
+      enum apsConfigurationMismatch {
+        value 298;
+        description
+         "Raised on a protection group when the APS protocol detects
+          a far end configuration mismatch.";
+        reference
+         "ITU-T G.873.1";
+      }
+    enum recoveryModeActive {
+      value 299;
+      description
+       "Raised by the device when it enters the recovery-mode due to the detection of an invalid configuration database. During recovery-mode, device preserves and freezes traffic configuration until the user explicitly clears the mode via the clear-recovery-mode RPC.";
+    }
+    enum portLossOfLightLane1 {
+      value 300;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 1.";
+    }
+    enum portLossOfLightLane2 {
+      value 301;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 2.";
+    }
+    enum portLossOfLightLane3 {
+      value 302;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 3.";
+    }
+    enum portLossOfLightLane4 {
+      value 303;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 4.";
+    }
+    enum portLossOfLightLane5 {
+      value 304;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 5.";
+    }
+    enum portLossOfLightLane6 {
+      value 305;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 6.";
+    }
+    enum portLossOfLightLane7 {
+      value 306;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 7.";
+    }
+    enum portLossOfLightLane8 {
+      value 307;
+      description
+       "Applicable to multi lane interfaces. Raised when no optical power is detected on lane 8.";
+    }
+    enum powerOutOfRangeLowLane1 {
+      value 308;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 1 is below a preset threshold.";
+    }
+    enum powerOutOfRangeLowLane2 {
+      value 309;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 2 is below a preset threshold.";
+    }
+    enum powerOutOfRangeLowLane3 {
+      value 310;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 3 is below a preset threshold.";
+    }
+    enum powerOutOfRangeLowLane4 {
+      value 311;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 4 is below a preset threshold.";
+    }
+    enum powerOutOfRangeLowLane5 {
+      value 312;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 5 is below a preset threshold.";
+    }
+    enum powerOutOfRangeLowLane6 {
+      value 313;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 6 is below a preset threshold.";
+    }
+    enum powerOutOfRangeLowLane7 {
+      value 314;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 7 is below a preset threshold.";
+    }
+    enum powerOutOfRangeLowLane8 {
+      value 315;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 8 is below a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane1 {
+      value 316;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 1 is above a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane2 {
+      value 317;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 2 is above a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane3 {
+      value 318;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 3 is above a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane4 {
+      value 319;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 4 is above a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane5 {
+      value 320;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 5 is above a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane6 {
+      value 321;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 6 is above a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane7 {
+      value 322;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 7 is above a preset threshold.";
+    }
+    enum powerOutOfRangeHighLane8 {
+      value 323;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 8 is above a preset threshold.";
+    }
+    enum powerOutOfSpecLowLane1 {
+      value 324;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 1 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecLowLane2 {
+      value 325;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 2 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecLowLane3 {
+      value 326;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 3 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecLowLane4 {
+      value 327;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 4 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecLowLane5 {
+      value 328;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 5 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecLowLane6 {
+      value 329;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 6 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecLowLane7 {
+      value 330;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 7 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecLowLane8 {
+      value 331;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 8 is below the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane1 {
+      value 332;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 1 is above the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane2 {
+      value 333;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 2 is above the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane3 {
+      value 334;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 3 is above the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane4 {
+      value 335;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 4 is above the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane5 {
+      value 336;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 5 is above the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane6 {
+      value 337;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 6 is above the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane7 {
+      value 338;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 7 is above the optical specification for that lane.";
+    }
+    enum powerOutOfSpecHighLane8 {
+      value 339;
+      description
+       "Applicable to multi lane interfaces. Raised when optical power on lane 8 is above the optical specification for that lane.";
+    }
+    enum laserDisabled {
+      value 340;
+      description
+        "Laser has been manually disabled";
+    }
+    enum rebalancingInProgress {
+      value 341;
+      description
+        "Optical channel rebalancing in progress";
+    }
+  }
+    description
+      "probable cause group";
+  }
+
+  grouping probable-cause {
+    leaf cause {
+      type probable-cause-enum;
+      mandatory true;
+    }
+    leaf extension {
+      type string;
+      mandatory false;
+    }
+    leaf direction {
+      type org-openroadm-common-alarm-pm-types:direction;
+      mandatory true;
+      description
+        "Direction indication of the alarm.";
+    }
+    leaf location {
+      type org-openroadm-common-alarm-pm-types:location;
+      mandatory true;
+      description
+        "location indication of the alarm.";
+    }
+    leaf type {
+      type enumeration {
+        enum communication {
+          value 1;
+        }
+        enum qualityOfService {
+          value 2;
+        }
+        enum processingError {
+          value 3;
+        }
+        enum equipment {
+          value 4;
+        }
+        enum environmental {
+          value 5;
+        }
+      }
+      mandatory false;
+      description
+        "Type of alarm. Based on X.733 event Type.";
+    }
+  }
+}

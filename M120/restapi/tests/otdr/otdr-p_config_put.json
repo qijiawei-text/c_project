@@ -1,0 +1,9 @@
+{
+    "config":       {
+        "name": "OTDR-P",
+        "user-ior":     "1.4679",
+        "reflectance-thr":      "-41.4",
+        "splice-loss-thr":      "0.6",
+        "fiber-end-thr":        "3.4"
+    }
+}

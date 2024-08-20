@@ -1,0 +1,88 @@
+/*BaseForm*/
+
+.form-box {
+  width: 600px;
+}
+
+.form-box .line {
+  text-align: center;
+}
+
+.index-content {
+  background-color: #d9edf7;
+  text-align: left;
+  margin-top: 0px;
+  padding: 2px;
+  // border:2px solid red
+}
+
+@mixin op-form-item(
+  $margin-top: 0px,
+  $margin-bottom: 0px,
+  $padding: 0,
+  $margin: 0
+) {
+  margin-top: $margin-top;
+  margin-bottom: $margin-bottom;
+  padding: $padding;
+  margin: $margin;
+}
+
+@mixin op-color-mixin {
+  background-color: red;
+}
+
+.el-form-item {
+  margin-top: 28px;
+  margin-bottom: 18px;
+  padding: 0;
+  margin: 10px;
+}
+
+// 指示灯
+@mixin breath_light($width, $height, $background, $duration) {
+  width: $width; /* 宽度 */
+  height: $height; /* 高度 */
+  border: #666 1px solid;
+  border-radius: 50%;
+  opacity: 1; /* 不透明度 */
+  overflow: hidden; /* 溢出隐藏 */
+  background: $background; /* 背景色 */
+  // margin: 25% auto;                               /* 外边距 */
+
+  /* IE10、Firefox and Opera，IE9以及更早的版本不支持 */
+  animation-name: breath; /* 动画名称 */
+  animation-duration: $duration; /* 动画时长3秒 */
+  animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  animation-iteration-count: infinite; /* 播放次数：无限 */
+
+  /* Safari and Chrome */
+  -webkit-animation-name: breath; /* 动画名称 */
+  -webkit-animation-duration: $duration; /* 动画时长3秒 */
+  -webkit-animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  -webkit-animation-iteration-count: infinite; /* 播放次数：无限 */
+}
+
+@keyframes breath {
+  from {
+    opacity: 0.1;
+  } /* 动画开始时的不透明度 */
+  50% {
+    opacity: 1;
+  } /* 动画50% 时的不透明度 */
+  to {
+    opacity: 0.1;
+  } /* 动画结束时的不透明度 */
+}
+
+@-webkit-keyframes breath {
+  from {
+    opacity: 0.1;
+  } /* 动画开始时的不透明度 */
+  50% {
+    opacity: 1;
+  } /* 动画50% 时的不透明度 */
+  to {
+    opacity: 0.1;
+  } /* 动画结束时的不透明度 */
+}

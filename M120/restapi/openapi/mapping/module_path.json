@@ -1,0 +1,267 @@
+{
+  "com-oplink-optical:optical-control/optical-modules/com-oplink-connectivity-validation": [
+  "/data/com-oplink-connectivity-validation"
+  ],
+  "com-oplink-auth": [
+  "/data/auth-mgnt",
+  "/data/auth-mgnt/config",
+  "/data/auth-mgnt/state",
+  "/operations/auth",
+  "/operations/delete-tokens-by-username",
+  "/operations/login",
+  "/operations/logout"
+  ],
+  "com-oplink-connectivity-validation": [
+  "/data/optical-cv",
+  "/data/optical-cv/config",
+  "/data/optical-cv/state",
+  "/data/optical-cv/state/mux-connectivity",
+  "/operations/set-cv-enable"
+  ],
+  "com-oplink-dfb": [
+  "/data/optical-dfb",
+  "/data/optical-dfb/dfbs",
+  "/data/optical-dfb/dfbs/dfb"
+  ],
+  "com-oplink-laser-safty": [
+  "/data/laser-safty",
+  "/data/laser-safty/config",
+  "/data/laser-safty/state"
+  ],
+  "com-oplink-optical": [
+  "/data/optical-control",
+  "/data/optical-control/optical-modules",
+  "/data/optical-control/optical-modules/aps",
+  "/data/optical-control/optical-modules/aps/aps-modules",
+  "/data/optical-control/optical-modules/aps/aps-modules/aps-module",
+  "/data/optical-control/optical-modules/channel-monitors",
+  "/data/optical-control/optical-modules/channel-monitors/ocm-modules",
+  "/data/optical-control/optical-modules/channel-monitors/ocm-modules/ocm-module",
+  "/data/optical-control/optical-modules/optical-amplifier",
+  "/data/optical-control/optical-modules/optical-amplifier/amplifiers",
+  "/data/optical-control/optical-modules/optical-amplifier/amplifiers/amplifier",
+  "/data/optical-control/optical-modules/optical-amplifier/supervisory-channels",
+  "/data/optical-control/optical-modules/optical-amplifier/supervisory-channels/supervisory-channel",
+  "/data/optical-control/optical-modules/optical-attenuator",
+  "/data/optical-control/optical-modules/optical-attenuator/attenuators",
+  "/data/optical-control/optical-modules/optical-attenuator/attenuators/attenuator",
+  "/data/optical-control/optical-modules/optical-connection-switch",
+  "/data/optical-control/optical-modules/optical-connection-switch/ocs-modules",
+  "/data/optical-control/optical-modules/optical-connection-switch/ocs-modules/ocs-module",
+  "/data/optical-control/optical-modules/optical-dfb",
+  "/data/optical-control/optical-modules/optical-dfb/dfb-modules",
+  "/data/optical-control/optical-modules/optical-dfb/dfb-modules/dfb-module",
+  "/data/optical-control/optical-modules/optical-time-domain-reflectometer",
+  "/data/optical-control/optical-modules/optical-time-domain-reflectometer/otdrs",
+  "/data/optical-control/optical-modules/optical-time-domain-reflectometer/otdrs/otdr",
+  "/data/optical-control/optical-modules/wavelength-router",
+  "/data/optical-control/optical-modules/wavelength-router/wss-modules",
+  "/data/optical-control/optical-modules/wavelength-router/wss-modules/wss-module"
+  ],
+  "com-oplink-rpc": [
+  "/operations/get-apsd-state",
+  "/operations/get-ocm-raw",
+  "/operations/log-hash",
+  "/operations/ready-trigger",
+  "/operations/restore-default",
+  "/operations/save-conf",
+  "/operations/set-apsd",
+  "/operations/set-auto-ctrl-ramp"
+  ],
+  "com-oplink-service": [
+  "/data/support-service",
+  "/data/support-service/services"
+  ],
+  "ietf-system": [
+  "/data/system",
+  "/data/system-state",
+  "/data/system-state/clock",
+  "/data/system-state/platform",
+  "/data/system/authentication",
+  "/data/system/authentication/user",
+  "/data/system/clock",
+  "/data/system/dns-resolver",
+  "/data/system/dns-resolver/options",
+  "/data/system/dns-resolver/server",
+  "/data/system/ntp",
+  "/data/system/ntp/server",
+  "/data/system/radius",
+  "/data/system/radius/options",
+  "/data/system/radius/server",
+  "/operations/set-current-datetime",
+  "/operations/system-restart",
+  "/operations/system-shutdown"
+  ],
+  "openconfig-acl": [
+  "/data/acl",
+  "/data/acl/acl-sets",
+  "/data/acl/acl-sets/acl-set",
+  "/data/acl/config",
+  "/data/acl/interfaces",
+  "/data/acl/interfaces/interface",
+  "/data/acl/state"
+  ],
+  "openconfig-channel-monitor": [
+  "/data/channel-monitors",
+  "/data/channel-monitors/channel-monitor"
+  ],
+  "openconfig-gnoi-otdr": [
+  "/data/optical-time-domain-reflectometer",
+  "/data/optical-time-domain-reflectometer/config-common",
+  "/data/optical-time-domain-reflectometer/config-common/fiber-profile",
+  "/data/optical-time-domain-reflectometer/config-common/scan-types",
+  "/data/optical-time-domain-reflectometer/otdrs",
+  "/data/optical-time-domain-reflectometer/otdrs/otdr",
+  "/operations/otdr-scan",
+  "/operations/set-baseline"
+  ],
+  "openconfig-optical-amplifier": [
+  "/data/optical-amplifier",
+  "/data/optical-amplifier/amplifiers",
+  "/data/optical-amplifier/amplifiers/amplifier",
+  "/data/optical-amplifier/supervisory-channels",
+  "/data/optical-amplifier/supervisory-channels/supervisory-channel"
+  ],
+  "openconfig-optical-attenuator": [
+  "/data/optical-attenuator",
+  "/data/optical-attenuator/attenuators",
+  "/data/optical-attenuator/attenuators/attenuator"
+  ],
+  "openconfig-system": [
+  "/data/system",
+  "/data/system/alarms",
+  "/data/system/clock",
+  "/data/system/clock/config",
+  "/data/system/clock/state",
+  "/data/system/config",
+  "/data/system/cpus",
+  "/data/system/dns",
+  "/data/system/dns/config",
+  "/data/system/dns/host-entries",
+  "/data/system/dns/host-entries/host-entry",
+  "/data/system/dns/servers",
+  "/data/system/dns/servers/server",
+  "/data/system/dns/state",
+  "/data/system/grpc-server",
+  "/data/system/grpc-server/config",
+  "/data/system/grpc-server/state",
+  "/data/system/logging",
+  "/data/system/logging/console",
+  "/data/system/logging/console/config",
+  "/data/system/logging/console/selectors",
+  "/data/system/logging/console/selectors/selector",
+  "/data/system/logging/console/state",
+  "/data/system/logging/remote-servers",
+  "/data/system/logging/remote-servers/remote-server",
+  "/data/system/memory",
+  "/data/system/memory/config",
+  "/data/system/memory/state",
+  "/data/system/ntp",
+  "/data/system/ntp/config",
+  "/data/system/ntp/ntp-keys",
+  "/data/system/ntp/ntp-keys/ntp-key",
+  "/data/system/ntp/servers",
+  "/data/system/ntp/servers/server",
+  "/data/system/ntp/state",
+  "/data/system/processes",
+  "/data/system/snmp",
+  "/data/system/snmp/config",
+  "/data/system/snmp/state",
+  "/data/system/snmp/trap-targets",
+  "/data/system/snmp/trap-targets/trap-target",
+  "/data/system/ssh-server",
+  "/data/system/ssh-server/config",
+  "/data/system/ssh-server/state",
+  "/data/system/state",
+  "/data/system/telnet-server",
+  "/data/system/telnet-server/config",
+  "/data/system/telnet-server/state",
+  "/operations/reboot"
+  ],
+  "openconfig-transport-line-connectivity": [
+  "/data/connections",
+  "/data/connections/connection"
+  ],
+  "openconfig-transport-line-protection": [
+  "/data/aps",
+  "/data/aps/aps-modules",
+  "/data/aps/aps-modules/aps-module",
+  "/operations/manual-to-port"
+  ],
+  "openconfig-wavelength-router": [
+  "/data/wavelength-router",
+  "/data/wavelength-router/media-channels",
+  "/data/wavelength-router/media-channels/channel",
+  "/data/wavelength-router/port-spectrum-power-profiles",
+  "/data/wavelength-router/port-spectrum-power-profiles/port"
+  ],
+  "org-openroadm-alarm": [
+  "/data/active-alarm-list"
+  ],
+  "org-openroadm-database": [
+  "/operations/cancel-rollback-timer",
+  "/operations/database-init",
+  "/operations/db-activate",
+  "/operations/db-backup",
+  "/operations/db-restore"
+  ],
+  "org-openroadm-de-operations": [
+  "/operations/restart"
+  ],
+  "org-openroadm-device": [
+  "/data/org-openroadm-device",
+  "/data/org-openroadm-device/circuit-packs",
+  "/data/org-openroadm-device/database-info",
+  "/data/org-openroadm-device/degree",
+  "/data/org-openroadm-device/external-link",
+  "/data/org-openroadm-device/info",
+  "/data/org-openroadm-device/info/geoLocation",
+  "/data/org-openroadm-device/info/ip-interfaces",
+  "/data/org-openroadm-device/info/ip-interfaces/interface",
+  "/data/org-openroadm-device/interface",
+  "/data/org-openroadm-device/line-amplifier",
+  "/data/org-openroadm-device/odu-connection",
+  "/data/org-openroadm-device/pending-sw",
+  "/data/org-openroadm-device/physical-link",
+  "/data/org-openroadm-device/protection-grps",
+  "/data/org-openroadm-device/protocols",
+  "/data/org-openroadm-device/roadm-connections",
+  "/data/org-openroadm-device/shared-risk-group",
+  "/data/org-openroadm-device/shelves",
+  "/data/org-openroadm-device/users",
+  "/data/org-openroadm-device/users/user",
+  "/data/org-openroadm-device/xponder",
+  "/operations/create-tech-info",
+  "/operations/disable-automatic-shutoff",
+  "/operations/get-connection-port-trail",
+  "/operations/led-control",
+  "/operations/set-current-datetime",
+  "/operations/start-scan"
+  ],
+  "org-openroadm-file-transfer": [
+  "/operations/delete-file",
+  "/operations/show-file",
+  "/operations/transfer"
+  ],
+  "org-openroadm-pm": [
+  "/data/currentPmlist",
+  "/data/historicalPmlist",
+  "/operations/clear-pm",
+  "/operations/pm-collection"
+  ],
+  "org-openroadm-swdl": [
+  "/operations/cancel-validation-timer",
+  "/operations/sw-activate",
+  "/operations/sw-stage"
+  ],
+  "org-openroadm-syslog": [
+  "/data/syslog",
+  "/data/syslog/log-actions",
+  "/data/syslog/log-actions/remote",
+  "/data/syslog/log-actions/remote/destination"
+  ],
+  "org-openroadm-tca": [
+  "/data/potential-tca-list",
+  "/data/potential-tca-list/tca"
+  ]
+}

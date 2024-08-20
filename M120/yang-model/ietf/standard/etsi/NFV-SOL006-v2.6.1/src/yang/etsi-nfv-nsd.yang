@@ -1,0 +1,62 @@
+module etsi-nfv-nsd {
+  yang-version 1.1;
+  namespace "urn:etsi:nfv:yang:etsi-nfv-nsd";
+  prefix nsd;
+
+  import etsi-nfv-descriptors {
+    prefix vnf;
+  }
+
+  organization
+    "European Telecommunications Standards Institute (ETSI)";
+
+  description
+    "Network Services Descriptors";
+
+  revision 2019-04-25 {
+    description
+      "Initial revision.
+       NSD according to ETSI GS NFV-IFA 014 Ed261v252.";
+  }
+
+  container nsd {
+    list vnfd {
+      key "id";
+      description
+        "A VNF Descriptor (VNFD) is a deployment template which
+         describes a VNF in terms of deployment and operational
+         behaviour requirements. It also contains connectivity,
+         interface and virtualised resource requirements";
+      reference
+        "GS NFV-IFA011: Section 7.1.2, VNFD information element";
+
+      uses vnf:vnfd;
+    }
+
+    list nsd {
+      key "id";
+      max-elements 1;
+      uses vnf:nsd;
+      description
+	"The NSD information element is a deployment template whose
+         instances are used by the NFVO for the lifecycle management
+         of NSs.";
+      reference
+        "GS NFV-IFA014: Section 6.2.2, Network Service Descriptor
+         information element";
+    }
+
+    list pnfd {
+      key "id";
+
+      description
+	"The Pnfd information element is a deployment template
+         enabling on-boarding PNFs and referencing them from an
+         NSD. It focuses on connectivity aspects only.";
+      reference
+        "GS NFV-IFA014: Section 6.6.2, Pnfd information element.";
+
+      uses vnf:pnfd;
+    }
+  }
+}
