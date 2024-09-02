@@ -1,0 +1,31 @@
+<system xmlns="urn:ietf:params:xml:ns:yang:ietf-system">
+    <contact>software.oms@molex.com</contact>
+    <hostname>RC06</hostname>
+    <location>MOLEX-WH</location>
+    <ntp>
+        <enabled>true</enabled>
+    </ntp>
+    <clock>
+        <timezone-utc-offset>60</timezone-utc-offset>
+    </clock>
+    <authentication>
+        <user-authentication-order>local-users</user-authentication-order>
+        <user-authentication-order xmlns:tc="urn:ietf:params:xml:ns:yang:ietf-aaa-tacacs">tc:tacacs</user-authentication-order>
+        <user>
+            <name>admin</name>
+            <password>$6$qKEUJGo7$GEhkVybheoqQMu.rK.x0p1VKynXGzycoBo6tqRQYK7FdoFtnpYalIEpFfFOfSdp8FWoKpjBDhAkccwTlA01e2.</password>
+            <user-role xmlns="http://com/oplink/auth">4</user-role>
+        </user>
+    </authentication>
+    <radius>
+        <options>
+            <timeout>5</timeout>
+            <attempts>2</attempts>
+        </options>
+    </radius>
+    <tacacs xmlns="urn:ietf:params:xml:ns:yang:ietf-aaa-tacacs">
+        <options>
+            <timeout>10</timeout>
+        </options>
+    </tacacs>
+</system>

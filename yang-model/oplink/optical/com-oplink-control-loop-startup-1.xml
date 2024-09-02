@@ -1,0 +1,13 @@
+<auto-control xmlns="http://com/oplink/control-loop">
+    <controls>
+        <control>
+            <name>W</name>
+            <auto-config>
+                <number-of-carriers>40</number-of-carriers>
+                <launching-power-per-channel>5</launching-power-per-channel>
+                <target-power-per-channel>0</target-power-per-channel>
+                <ocm-based-carriers>false</ocm-based-carriers>
+            </auto-config>
+        </control>
+    </controls>
+</auto-control>

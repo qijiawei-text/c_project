@@ -1,0 +1,98 @@
+//<CODE BEGINS> file "com-oplink-ocm-ext.yang"
+module com-oplink-ocm-ext{
+  namespace "http://com/oplink/ocm/ext";
+  prefix "com-oplink-ocm-ext";
+  
+  import openconfig-channel-monitor { prefix oc-channel-monitor; }
+
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions for OCM extension to 
+     openconfig-channel.yang.";
+
+  revision 2021-07-01 {
+    description
+      "Oplink Version 1.0";
+  }
+
+  typedef waveplan-mode {
+      type enumeration {
+        enum "auto" {
+          value 0;
+          description
+            "OCM waveplan is detected by Mux/Demux model";
+        }
+        enum "75G" {
+          value 1;
+          description
+            "OCM waveplan is 65 75G channels";
+        }
+        enum "150G" {
+          value 2;
+          description
+            "OCM waveplan is 33 150G channels";
+        }
+        enum "175G" {
+          value 3;
+          description
+            "OCM waveplan is 27 175G channels";
+        }
+        enum "300G" {
+          value 4;
+          description
+            "OCM waveplan is 17 300G channels";
+        } 
+        enum "50G" {
+          value 5;
+          description
+            "OCM waveplan is 80 50G channels";
+        }
+        enum "100G" {
+          value 6;
+          description
+            "OCM waveplan is 49 100G channels";
+        }                         
+      }
+      description
+        "The channel plan for Mux/Demux.";
+  }
+
+  grouping ocm-config {
+      leaf waveplan-mode {
+        type waveplan-mode;
+        default auto;
+        description
+          "User configurable AWG waveplan.";
+      }
+  }
+
+  grouping ocm-state {
+      leaf current-waveplan {
+        type waveplan-mode;
+        description
+          "Current waveplan used.";
+      }
+  }
+
+  grouping ocm-module-top {
+    container config {
+      uses ocm-config;
+    }
+    container state{
+      config false;
+      uses ocm-config;
+      uses ocm-state;
+    }
+  } 
+   
+  augment "/oc-channel-monitor:channel-monitors" {
+      uses ocm-module-top;
+  }
+}
+//<CODE ENDS>
+

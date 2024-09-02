@@ -1,0 +1,217 @@
+module com-oplink-amplifier-ext {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://com/oplink/amplifier-ext";
+
+  prefix "com-oplink-amplifier-ext";
+
+  import openconfig-optical-amplifier { prefix oc-amp; }
+
+  contact
+    "www.oplink.com";
+
+  description
+    "This model extend openconfig-optical-amplifier";
+
+  revision "2023-12-01" {
+    description
+      "Oplink Version 2.0";
+  }
+
+  revision "2020-04-01" {
+    description
+      "Oplink Version 1.0";
+  }
+
+  identity CONSTANT_CURRENT {
+      base oc-amp:OPTICAL_AMPLIFIER_MODE;
+      description
+        "Constant current mode, add by molex";
+  }
+
+  grouping amplifier-config-ext {
+    description
+      "Configuration data for optical amplifiers";
+
+    leaf autolos {
+      type boolean;
+      description
+        "Determines the behavior of the amplifier on input LOS.";
+    }
+
+    leaf apr-enabled {
+      type boolean;
+      description
+        "Turns apr on / off to the amplifiers.";
+    }
+        
+    leaf reflected-power {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      description
+        "reflected power";
+    }
+    
+    list laser-bias-currents {
+      max-elements 8;
+      key id;
+      leaf id {
+        type int32 {
+          range "1..8";
+        }
+      }
+      
+      leaf current {
+        type decimal64 {
+          fraction-digits 2;
+        }
+        description
+          "current. unit mA";
+      }
+    }
+    
+    leaf number-of-pumps {
+        type uint8 {
+          range "1..8";
+        }
+        description
+          "The number of pumps";
+      }
+
+    leaf operational-state {
+      description
+         "OPLINK-EXTENSION:
+          Current operational state of the amplifier.";
+
+      type enumeration {
+        enum in-service {
+          description
+            "Normal in service.";
+        }
+        enum degraded {
+          description
+            "Operational with non-critical fault.";
+        }
+        enum manual-off {
+          description
+            "Out of service due to maintenance:
+             enbale == flase in optical-amplifier-config";
+        }
+        enum out-of-service {
+          description
+            "Not operational due to a critical fault.";
+        }
+        enum auto-power-shutdown {
+          description
+            "Automatic shutdown for safty.";
+        }
+      }
+    }    
+
+    leaf fsm-mode {
+      type enumeration {
+        enum auto {
+          value 0;
+          description
+            "Fsm auto mode";
+        }
+        enum manual {
+          value 1;
+          description
+            "Fsm manual mode";
+        }
+      }
+    }
+
+    leaf ready-power {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      description
+        "ready power";
+    }
+
+  }
+
+  grouping amplifier-state-ext {
+    description
+      "State data extension for optical amplifiers";
+
+      leaf fsm-current  {
+        description
+          "OPLINK-EXTENSION:
+            Current value of the amplifier fsm state. ";
+
+        type enumeration {
+          enum disable {
+            description
+              "Disable.";
+          }
+          enum normal {
+            description
+              "Normal.";
+          }
+          enum safety {
+            description
+              "Safety.";
+          }
+          enum ready {
+            description
+              "Ready.";
+          }
+        }
+      } 
+
+  }  
+  grouping osc-config-ext {
+    description
+      "Configuration data extension for OSC.";
+    leaf osc-sfp-enable {
+      type boolean;
+      description
+        "turn on/off sfp";
+    }
+  }
+
+  grouping osc-state-ext {
+    description
+      "State data extension for OSC.";
+    leaf drop-power {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dBm;
+      description
+        "drop power";
+    }
+    leaf add-power {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dBm;
+      description
+        "add power";
+    }
+
+  }
+
+  augment "/oc-amp:optical-amplifier/oc-amp:amplifiers/oc-amp:amplifier/oc-amp:config" {
+    uses amplifier-config-ext;
+  }
+  
+  augment "/oc-amp:optical-amplifier/oc-amp:amplifiers/oc-amp:amplifier/oc-amp:state" {
+    uses amplifier-config-ext;
+    uses amplifier-state-ext;
+  }
+
+  augment "/oc-amp:optical-amplifier/oc-amp:supervisory-channels/oc-amp:supervisory-channel/oc-amp:config" {
+    uses osc-config-ext;
+  }
+
+  augment "/oc-amp:optical-amplifier/oc-amp:supervisory-channels/oc-amp:supervisory-channel/oc-amp:state" {
+    uses osc-state-ext;
+  }
+}

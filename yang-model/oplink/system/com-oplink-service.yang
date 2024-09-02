@@ -1,0 +1,80 @@
+module com-oplink-service {
+    namespace "http://com/oplink/service";
+    prefix "com-oplink-service";
+
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink.com";
+
+    description
+        "YANG definitions for services supported by device.";
+
+    revision 2019-04-01 {
+      description
+        "Oplink Version 2.0";
+    }
+
+    revision 2016-08-01 {
+        description
+            "Version 1.0 - initial version";
+    }
+
+    container support-service {
+	    list services {
+	        description
+	            "OPLINK-EXTENSION:
+	            supported features wherein the device is server.";
+	        key "service-name";
+	        max-elements 15; // add by fandy
+	        leaf service-name { 
+	            type enumeration {
+	                enum none {
+	                    value 0;
+	                }
+	                enum snmp {
+	                    value 1;
+	                }
+	                enum netconf {
+	                    value 2;
+	                }
+	                enum rest {
+	                    value 3;
+	                }
+	                enum web {
+	                    value 4;
+	                }
+	                enum sftp {
+	                    value 5;
+	                }
+              		enum bgp {
+                  		value 6;
+              		}
+              		enum gnmi-server {
+                  		value 7;
+              		}
+              		enum lldp {
+                  		value 8;
+              		}
+              		enum ospf {
+              		    value 9;
+              		}
+                  enum proxyarp {
+                      value 10;
+                  }
+                  enum klish-server {
+                      value 11;
+                  }
+                }
+            }
+	
+	      leaf service-enable {
+	          type boolean;
+	          default false;
+	      }
+	      
+	    }
+    }
+}		
+//<CODE ENDS>

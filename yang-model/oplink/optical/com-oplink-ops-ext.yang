@@ -1,0 +1,189 @@
+//<CODE BEGINS> file "com-oplink-ops-ext.yang"
+module com-oplink-ops-ext{
+  namespace "http://com/oplink/ops/ext";
+  prefix "com-oplink-ops-ext";
+  
+  import openconfig-types { prefix oc-types; }
+  import openconfig-transport-line-protection { prefix oc-line-protection; }
+
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions for OPS extension to 
+     openconfig-transport-line-protection.yang.";
+
+  revision 2019-04-01 {
+    description
+      "Oplink Version 2.0";
+  }
+
+  grouping switch-state {
+    leaf switch-state {
+      type enumeration {
+        enum LoP {
+          value "1";
+          description
+           "Lockout for Protection - APS is disabled, i.e. traffic is selected
+            from primary path.";
+        }
+        enum FS {
+          value "2";
+          description
+           "Forced Switch - traffic is selected from the current active path,
+            regardless the fault condition on the active path.";
+        }
+        enum SF {
+          value "3";
+          description
+           "Signal Failure - traffic is selected from the current active path
+            by automatical switchover, due to the faults on the other path.";
+        }
+        enum MS {
+          value "4";
+          description
+           "Manual Switch - traffic is selected from the current active path,
+            path, provided no faluts on current active path.";
+        }
+        enum WTR {
+          value "5";
+          description
+           "Wait-To-Restore - Both paths are fault free and traffic will be
+            switch back to primary path when WTR timer expires. WTR state
+            is only applicable if APS is configured as revertive.";
+        }
+        enum NR {
+          value "6";
+          description
+           "No Request - Both paths are fault free and there is no user
+            command is in effect.";
+        }
+        enum RS {
+          value "7";
+          description
+           "Relative Switch - traffic is selected from the current active path
+            by relative switch, due to the faults on the other path.";
+        }
+        enum FS-P {
+          value "8";
+          description
+           "Forced Switch - traffic is selected from the current active path,
+            regardless the fault condition on the active path.";
+        }
+        enum SF-P {
+          value "9";
+          description
+           "Signal Failure - traffic is selected from the current active path
+            by automatical switchover, due to the faults on the other path.";
+        }
+        enum MS-P {
+          value "10";
+          description
+           "Manual Switch - traffic is selected from the current active path,
+            path, provided no faluts on current active path.";
+        }
+        enum NR-P {
+          value "11";
+          description
+           "No Request - Both paths are fault free and there is no user
+            command is in effect.";
+        }
+        enum RS-P {
+          value "12";
+          description
+           "Relative Switch - traffic is selected from the current active path
+            by relative switch, due to the faults on the other path.";
+        }
+        enum DNR {
+          value "13";
+          description
+           "Do Not Revert - traffic is selected from the current active path.";
+        }
+      }
+      description
+        "OPLINK extension - current APS state";
+    }
+  }
+
+  rpc collect-ops-waveform {
+    description
+      "Get OPS waveform data.
+       For each swicthover event, OPS stores a set of sampling input power
+       values before and after the switchover.";
+    output {
+      list waveform {
+        key index;
+        leaf index {
+          type uint32;
+          description
+            "Swicthover event index.";
+        }
+        leaf length {
+          type uint32;
+        }
+        leaf data {
+          type binary;
+          description
+            "primary and secondary input power sampling values";
+        }
+        leaf time-stamp {
+           type oc-types:timeticks64;
+           description
+             "The time at which the the swicthover is occured";
+        }
+      }
+      leaf status {
+        type enumeration {
+          enum "Successful" {
+            value 1;
+          }
+          enum "Failed" {
+            value 2;
+          }
+        }
+        mandatory true;
+        description
+          "Successful or Failed";
+      }
+      leaf status-message {
+         type string;
+         description
+           "Gives a more detailed status";
+      }
+    }
+  }
+
+  augment "/oc-line-protection:aps/oc-line-protection:aps-modules/oc-line-protection:aps-module/oc-line-protection:state" {
+      uses switch-state;
+  }
+  
+  grouping switching-type {
+    leaf switching-type {
+      type enumeration {
+        enum unidirectional {
+          value "1";
+          description
+           "Unidirectional Protection";
+        }
+        enum bidirectional {
+          value "2";
+          description
+           "Bidirectional Protection";
+        }
+      }
+      description
+        "OPLINK extension - current APS protection switch configuration";
+    }
+  }
+  augment "/oc-line-protection:aps/oc-line-protection:aps-modules/oc-line-protection:aps-module/oc-line-protection:state" {
+      uses switching-type;
+  }
+  augment "/oc-line-protection:aps/oc-line-protection:aps-modules/oc-line-protection:aps-module/oc-line-protection:config" {
+      uses switching-type;
+  }
+}
+//<CODE ENDS>
+

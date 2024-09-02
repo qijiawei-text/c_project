@@ -1,0 +1,33 @@
+//<CODE BEGINS> file "com-oplink-gnoi-otdr.yang"
+module com-oplink-gnoi-otdr{
+    namespace "http://com/oplink/gnoi/otdr";
+    prefix "com-oplink-gnoi-otdr";
+
+    import openconfig-gnoi-otdr {
+        prefix openconfig-gnoi-otdr;
+    }
+    
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink Communications, LLC";
+
+    description
+        "YANG definitions for storing otdr scan results";
+
+    revision 2023-12-01 {
+      description
+        "Oplink Version 1.0";
+    }
+
+    uses openconfig-gnoi-otdr:otdr-top {
+      refine optical-time-domain-reflectometer/otdrs/otdr/state {
+         config true;
+      }
+      refine optical-time-domain-reflectometer/otdrs/otdr/scan-results {
+         config true;
+      }
+    } 
+}		
+//<CODE ENDS>

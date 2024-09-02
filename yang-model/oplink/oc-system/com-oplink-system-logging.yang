@@ -1,0 +1,187 @@
+module com-oplink-system-logging {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://oplink.com/optical/yang/system/logging";
+
+  prefix "ba-log";
+
+  // import some basic types
+  import openconfig-system { prefix oc-sys; }
+  import openconfig-inet-types { prefix oc-inet; }
+  import openconfig-yang-types { prefix oc-yang; }
+  import openconfig-system-logging { prefix oc-log; }
+
+  // meta
+  organization "Oplink Communication, A Molex Company";
+
+  contact
+    "Molex Inc
+    www.molex.com";
+
+  description
+    "This module defines configuration and operational state data
+    to augment the common logging facilities on network systems.";
+
+
+  revision "2021-01-04" {
+    description
+      "Add TCP/UDP configuration, and add counters, connection status " + 
+      "as syslog's state.";
+  }
+
+  identity TRANSPORT_PROTOCOL {
+    description
+      "Transport protocol used in syslog.";
+  }
+
+  identity TCP {
+    base TRANSPORT_PROTOCOL;
+    description
+      "TCP used in syslog.";
+  }
+
+  identity UDP {
+    base TRANSPORT_PROTOCOL;
+    description
+      "UDP used in syslog.";
+  }
+
+  grouping counters {
+    description
+        "the counters of sent messages.";
+
+    leaf out-messages {
+        type uint64;
+        description
+            "The number of sent messages.";
+    }
+
+    leaf out-octets {
+        type uint64;
+        description
+            "The total number of octets sent";
+    }
+
+    leaf out-messages-last-minute {
+        type uint64;
+        description
+            "The number of sent messages in the last minute.";
+    }
+
+    leaf out-octets-last-minute {
+        type uint64;
+        description
+            "The total number of octets sent in the last minute";
+    }
+
+    leaf out-error-messages {
+        type uint64;
+        description
+            "The number of messages fail to send.";
+    }
+  }
+
+
+  augment "/oc-sys:system/oc-sys:logging/oc-sys:remote-servers/" + 
+    "oc-sys:remote-server/oc-sys:config" {
+      description 
+        "Add transport protocol used in this remote server.";
+
+      leaf transport-protocol {
+        type identityref {
+          base TRANSPORT_PROTOCOL;
+        }
+      }
+  }
+
+  augment "/oc-sys:system/oc-sys:logging/oc-sys:remote-servers/" + 
+    "oc-sys:remote-server/oc-sys:state" {
+      description 
+        "Add transport protocol used in this remote server, and connection state";
+
+      leaf transport-protocol {
+        type identityref {
+          base TRANSPORT_PROTOCOL;
+        }
+      }
+
+      leaf connection-alive {
+        type boolean;
+        description
+          "Connection status for long-running TCP/TLS. It's meaningless for UDP.";
+      }
+
+      leaf connection-creation-time {
+        type oc-yang:date-and-time;
+        description
+          "connection creation time of current TCP/TLS connection. If there " + 
+          "is no alive connection exists, this leaf means the previous time.";
+      }
+
+      uses counters;
+  }
+
+  rpc upload-syslog {
+    description
+      "Upload the local syste log file to remote SFTP server.";
+
+    input {
+
+      container sftp-server {
+
+        leaf hostname {
+          type oc-inet:host;
+          description
+            "The host of the SFTP server.";
+        }
+
+        leaf port {
+          type oc-inet:port-number;
+          description
+            "The connection port of the SFTP server.";
+        }
+
+        leaf username {
+          type string;
+          description
+            "User name for logging in the SFTP server.";
+        }
+
+        leaf password {
+          type string;
+          description
+            "Password for logging in the SFTP server.";
+        }
+
+      }
+    }
+
+    output {
+      leaf message {
+        type string;
+        description
+          "Vendor-defined response to show the result or details about uploading operation.";
+      }
+    }
+  }
+
+  notification log-level-notifi {
+    description
+      "set the process log level, add by oplink";
+      
+    leaf name {
+        type string;
+        description
+          "The process name";
+      }
+      
+    leaf severity {
+        type oc-log:syslog-severity;
+        description
+         "The log severity";
+    }
+  }
+
+}

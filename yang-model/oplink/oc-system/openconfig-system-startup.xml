@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system xmlns="http://openconfig.net/yang/system"
+        xmlns:oc-log="http://openconfig.net/yang/system/logging">
+    <config>
+        <hostname>OLS01</hostname>
+        <domain-name>www.molex.com</domain-name>
+    </config>
+    <clock>
+        <config>
+            <timezone-name>0</timezone-name>
+        </config>
+    </clock>
+    <logging>
+        <remote-servers>
+            <remote-server>
+                <host>127.0.0.1</host>
+                <config>
+                    <host>127.0.0.1</host>
+                    <source-address>127.0.0.1</source-address>
+                    <remote-port>514</remote-port>
+                    <transport-protocol xmlns="http://oplink.com/optical/yang/system/logging">UDP</transport-protocol>
+                </config>
+                <selectors>
+                    <selector>
+                        <facility>oc-log:LOCAL6</facility>
+                        <severity>DEBUG</severity>
+                        <config>
+                            <facility>oc-log:LOCAL6</facility>
+                            <severity>DEBUG</severity>
+                        </config>
+                    </selector>
+                </selectors>
+            </remote-server>
+        </remote-servers>
+    </logging>
+</system>

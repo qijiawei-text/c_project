@@ -1,0 +1,55 @@
+//<CODE BEGINS> file "com-oplink-control-loop-i.yang"
+module com-oplink-control-loop-i {
+    namespace "http://com/oplink/control-loop-i";
+    prefix "com-oplink-control-loop-i";
+    
+    import com-oplink-control-loop {
+        prefix com-oplink-control-loop;
+        revision-date 2019-08-12;
+    }
+    
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink.com";
+
+    description
+        "YANG definitions for internal peer to peer control loop Module";
+	
+    revision 2024-04-01 {
+        description
+            "Version 1.0 - initial version";
+    }
+
+    uses com-oplink-control-loop:auto-top {
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-osc-tx-power {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-osc-rx-power {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-number-of-carriers {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-booster-amp-input-power {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-booster-amp-gain {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-booster-amp-voa {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-pre-amp-input-power {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-pre-amp-gain {
+         config true;
+      }
+      refine auto-control/controls/control/last-auto-control/last-calibration-data/last-pre-amp-voa {
+         config true;
+      }
+    }
+}		
+//<CODE ENDS>

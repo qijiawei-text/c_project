@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bgp xmlns="http://openconfig.net/yang/bgp">
+  <global>
+    <config>
+    </config>
+  </global>
+  <neighbors>
+  </neighbors>
+  <peer-groups>
+  </peer-groups>
+</bgp>

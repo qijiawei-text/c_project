@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel-monitors xmlns="http://openconfig.net/yang/channel-monitor">
+    <channel-monitor>
+        <name>LineIn</name>
+        <config>
+            <name>LineIn</name>
+            <monitor-port>LineIn</monitor-port>
+        </config>
+    </channel-monitor>
+    <channel-monitor>
+        <name>LineOut</name>
+        <config>
+            <name>LineOut</name>
+            <monitor-port>LineOut</monitor-port>
+        </config>
+    </channel-monitor>
+    <channel-monitor>
+        <name>ClientIn</name>
+        <config>
+            <name>ClientIn</name>
+            <monitor-port>ClientIn</monitor-port>
+        </config>
+    </channel-monitor>
+    <channel-monitor>
+        <name>ClientOut</name>
+        <config>
+            <name>ClientOut</name>
+            <monitor-port>ClientOut</monitor-port>
+        </config>
+    </channel-monitor>
+</channel-monitors>

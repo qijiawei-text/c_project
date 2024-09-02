@@ -1,0 +1,321 @@
+//<CODE BEGINS> file "com-oplink-optical.yang"
+module com-oplink-optical{
+    namespace "http://com/oplink/optical";
+    prefix "com-oplink-optical";
+    
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink Communications, LLC";
+
+    description
+        "YANG definitions for optical control and modules";
+
+    revision 2023-02-01 {
+      description
+        "Oplink Version 1.1";
+    }
+
+    revision 2019-04-01 {
+      description
+        "Oplink Version 1.0";
+    }
+
+    revision 2016-06-08 {
+        description
+            "Version 0.1";
+    }
+
+    feature laser-safty {
+      description 
+        "High power laser safty related features.";
+    }
+
+    grouping parent-circuit-pack {
+      leaf circuit-pack-name {
+        config false;
+        type string;
+        description
+          "The circuit-pack that contains this optical module/component.";
+      }
+      leaf component-name {
+        config false;
+        type string;
+        description
+          "component identifier. Unique within the context of a circuit-pack.";
+      }
+      leaf component-type {
+        config false;
+        type string;
+        description
+          "The HAL device type.";
+      }
+      leaf component-index {
+        config false;
+        type uint32;
+        description
+          "The HAL device index";
+      }
+    }
+
+    grouping optical-top {
+      container optical-control {
+        leaf work-mode {
+          type enumeration {
+            enum "auto" {
+              value 0;
+              description
+                "automatica power adjustment from power mode to gain mode";
+            }
+            enum "manual" {
+              value 1;
+              description
+                "manual power adjustment from power mode to gain mode";
+            }
+            enum "debug" {
+              value 2;
+              description
+                "debug power adjustment from power mode to gain mode";
+            }
+          }
+          default debug;
+        }
+        container laser-safty {
+          if-feature "laser-safty";
+          container config {
+            leaf shutter-on {
+              type boolean;
+              description 
+                "Mechanical shutter is closed(true) or open(false).";
+            }
+            leaf remote-interlock-enable {
+              type boolean;
+              description
+                "Turns Remote Interlock enable / disable to the amplifiers.";
+            }
+
+            leaf dummy-admin-key-enable {
+              type boolean;
+              description
+                "Turns dummy-admin-key enable / disable to the amplifiers.";
+            }
+
+             leaf panel-safe-cmpt-enable {
+              type boolean;
+              description
+                "Turns panel-safe-cmpt enable / disable to the amplifiers.";
+            }
+
+          }
+          container state {
+            leaf inter-lock-on {
+              type boolean;
+              description 
+                "internal lock is on(true) or off(false).";
+            }
+            leaf admin-key-on {
+              type int32;
+              description
+                "admin key is -1, 1, 0.";
+            }
+            leaf lc-present {
+              type boolean;
+              description
+                "lc is present(true) or absent(false).";
+            }
+            leaf lc-door-lock {
+              type boolean;
+              description
+                "lc door lock is on(true) or off(false).";
+            }
+            leaf shutter-on {
+              type boolean;
+              description
+                "Mechanical shutter is closed(true) or open(false).";
+            }
+         }
+      }
+
+      container optical-modules {
+        container optical-amplifier {
+          container amplifiers {
+            list amplifier {
+              key "name";
+              leaf name {
+                type leafref {
+                  path "../config/name";
+                } 
+              } 
+              container config {
+                leaf name {
+                  type string;
+                } 
+              } 
+              uses parent-circuit-pack;   
+            }
+          }          
+        
+          container supervisory-channels {
+            list supervisory-channel {
+              key "interface";
+              leaf interface {
+                type leafref {
+                  path "../config/interface";
+                }
+              }
+              container config {
+                leaf interface {
+                  type string;
+                }
+              }
+              uses parent-circuit-pack;   
+            }
+          }
+        }
+
+        container optical-attenuator{
+          container attenuators {
+           list attenuator {
+            key "name";
+            leaf name {
+              type leafref {
+                path "../config/name";
+              }
+            }
+            container config {
+              leaf name {
+                type string;
+              }
+            }
+
+            uses parent-circuit-pack;
+           }
+         }
+        }
+
+       container aps {
+         container aps-modules {
+          list aps-module {
+            key "name";
+            leaf name {
+              type leafref {
+                path "../config/name";
+              } 
+            } 
+            container config {
+              leaf name {
+                type string;
+              } 
+            } 
+              
+            uses parent-circuit-pack;
+          }
+        }
+       }
+	   
+       container channel-monitors {
+         container ocm-modules {
+          list ocm-module {
+            key "name";
+            leaf name {
+              type leafref {
+                path "../config/name";
+              } 
+            } 
+            container config {
+              leaf name {
+                type string;
+              } 
+            } 
+              
+            uses parent-circuit-pack;
+          }
+        }
+       }
+		
+       container optical-time-domain-reflectometer {
+         container otdrs {
+          list otdr {
+            key "name";
+            leaf name {
+              type leafref {
+                path "../config/name";
+              } 
+            } 
+            container config {
+              leaf name {
+                type string;
+              } 
+            } 
+
+            uses parent-circuit-pack;
+          }
+         }
+       }
+
+       container wavelength-router {
+         container wss-modules {
+          list wss-module {
+            key "name";
+            leaf name {
+              type leafref {
+                path "../config/name";
+              } 
+            } 
+            container config {
+              leaf name {
+                type string;
+              } 
+            } 
+            uses parent-circuit-pack;
+          }
+         }
+       }
+
+       container optical-connection-switch {
+         container ocs-modules {
+          list ocs-module {
+            key "name";
+            leaf name {
+              type leafref {
+                path "../config/name";
+              } 
+            } 
+            container config {
+              leaf name {
+                type string;
+              } 
+            } 
+
+            uses parent-circuit-pack;
+          }
+         }
+       }
+
+       container optical-dfb {
+         container dfb-modules {
+          list dfb-module {
+            key "name";
+            leaf name {
+              type leafref {
+                path "../config/name";
+              }
+            }
+            container config {
+              leaf name {
+                type string;
+              }
+            }
+
+            uses parent-circuit-pack;
+          }
+         }
+        }
+       }
+      }
+    }
+
+    uses optical-top;
+}		
+//<CODE ENDS>

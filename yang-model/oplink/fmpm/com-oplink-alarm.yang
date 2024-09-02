@@ -1,0 +1,122 @@
+module com-oplink-alarm {
+  namespace "http://com/oplink/alarm";
+  prefix com-oplink-alarm;
+
+  import org-openroadm-alarm {
+    prefix org-openroadm-alarm;
+    revision-date 2021-03-26;
+  }
+
+  organization "Oplink Communication Inc.";
+
+  contact
+    "Oplink.com";
+
+  description
+    "YANG definitions of storing active alarm list.";
+     
+  revision 2021-06-01 {
+    description
+      "Version 2.0";
+  }
+
+  revision 2016-12-14 {
+    description
+      "Version 1.0";
+  }
+
+  grouping alarm-ext {
+    description
+      "If user want to customize the name of alarm, use this value.";
+
+    leaf external-id {
+      type string;
+    }
+
+    leaf entity {
+      type string;
+    }
+  }
+
+  container active-alarm-list {
+    description
+      "List of currently active alarms. An alarm is removed from this table when the state transitions to clear.";
+    list activeAlarms {
+      key "id";
+      uses org-openroadm-alarm:alarm;
+      uses alarm-ext;
+    }
+  }
+
+  container all-alarm-list {
+    description
+      "List of currently all alarms.";
+    list allAlarms {
+      key "id";
+      uses org-openroadm-alarm:alarm;
+      uses alarm-ext;
+    }
+  }
+
+  container supported-alarm-list {
+    description
+      "List of alarms supported by device. This list is initialized during start up";
+    list alarm-definition {
+      key "id";
+      uses org-openroadm-alarm:alarm;
+      list parents-id {
+        key "parent-id";
+        leaf parent-id {
+          type string;
+          description
+             "If parent alarm is present, this alarm should be masked";
+        }
+      }
+      list children-id {
+        key "child-id";
+        leaf child-id {
+           type string;
+           description
+              "If this alarm is raised, all existing children alarm should be cleared";
+        }
+      }
+      
+      leaf mask {
+        type boolean;
+        default "false";
+        description
+          "mask on/off alarm ";
+      }
+
+      uses alarm-ext;
+    }
+  }
+  
+  container global-config {
+    description
+      "Control alarm correlation configurations";
+      
+    leaf correlation {
+      type boolean;
+      default "true";
+      description
+        "Turns on/off alarm correlation";
+    }
+  }
+
+  augment "/org-openroadm-alarm:active-alarm-list/org-openroadm-alarm:activeAlarms" {
+    uses alarm-ext {
+      refine external-id {
+        config false;
+      }
+
+      refine entity {
+        config false;
+      }
+    }
+  }
+
+  augment "/org-openroadm-alarm:alarm-notification" {
+    uses alarm-ext;
+  }
+}

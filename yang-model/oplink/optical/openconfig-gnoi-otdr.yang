@@ -1,0 +1,525 @@
+module openconfig-gnoi-otdr {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/gnoi-otdr";
+
+  prefix "oc-gnoi-otdr";
+
+  import openconfig-yang-types { prefix oc-yang; }
+  import openconfig-platform { prefix oc-platform; }
+  import openconfig-extensions { prefix oc-ext; }
+  import openconfig-optical-amplifier { prefix oc-amp; }
+
+  // meta
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+    www.openconfig.net";
+
+  description
+    "This model describes configuration and operational state data
+    for OTDR, deployed as part of a transport line system. It is based on
+    https://github.com/openconfig/gnoi/otdr/otdr.proto";
+
+  oc-ext:openconfig-version "0.1.0";
+
+  revision "2023-11-10" {
+    description
+      "Initial release";
+    reference "0.1.0";
+  }
+
+  // OpenConfig specific extensions for module metadata.
+  oc-ext:regexp-posix;
+  oc-ext:catalog-organization "openconfig";
+  oc-ext:origin "openconfig";
+
+  // extension statements
+
+  // feature statements
+
+  // identity statements
+
+  // grouping statements
+
+  typedef otdr-event-type {
+    type enumeration {
+      enum "unknown" {
+        description
+          "The event type is unknown.";
+      }
+      enum non-reflective {
+        description
+          "The reflection suddenly decreased, displayed as a trace drop.";
+      }
+      enum reflective {
+        description
+          "The pulse reflect back to OTDR, displayed as a trace peak.";
+      }
+      enum fiber-end {
+        description
+          "Fiber end event.";
+      }
+    }
+  }
+
+  grouping event {
+    leaf event-type {
+      type otdr-event-type;
+      description
+        "OTDR event type";
+    }
+    leaf distance-m {
+      type uint32;
+      units "m";
+      description
+          "Distance at which the event occurred in meters.";
+    }
+    leaf loss-db {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units "dB";
+      description
+        "The fiber loss that occurred at the event in dB.";
+    }
+    leaf reflection-db {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units "dB";
+      description
+        "The reflection that occurred at the event in dB.";
+    }
+  }
+
+  grouping otdr-trace {
+    leaf total-length-m {
+      type uint32;
+      units "m";
+      description
+        "Total measured length of the fiber in meters.";
+    }
+    leaf total-loss-db {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units "dB";
+      description
+        "Total measured loss of the fiber.";
+    }
+    leaf optical-return-loss-db {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units "dB";
+      description
+        "Optical return loss of the fiber in dB.";
+    }
+    leaf average-loss-db-km {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units "dB";
+      description
+        "Optical return loss of the fiber in dB.";
+    }
+    leaf discovered-fiber-type {
+      type identityref {
+        base oc-amp:FIBER_TYPE_PROFILE;
+      }
+      description
+        "Discovered fiber type, if the OTDR can infer this information.";
+    }
+    leaf event-count {
+      type uint32;
+      description
+       "Count of the event.";
+    }
+    list events {
+      key "event-id";
+      leaf event-id {
+        type uint8;
+        description
+          "Event index";
+      }
+      uses event;
+    }
+  } 
+
+  grouping otdr-configuration {
+    description
+      "OTDR configuration options which can be set on the device. 
+       It is not required that every field be set as some fields may
+       not apply for a given implementation";
+    leaf acquisition-time-s {
+      type uint32 {
+	 range "10..180";
+      }
+      units "second";
+      default "60";
+      description
+	"The time in seconds in which the OTDR trace will run continuously to
+	 collect data.";
+    }
+    leaf range-m {
+      type uint32 {
+	range "0..128000";
+      }
+      units "m";
+      default "50";
+      description
+	"The maximum fiber distance range in meters that the OTDR trace will
+	 support.";
+    }
+    leaf pulse-width-ns {
+      type uint32 {
+        range "10..20000";
+      }
+      units "ns";
+      default "3000";
+      description
+        "The pulse width in nanoseconds which defines how long pulses sent by the
+         OTDR will be during the test.";
+    }
+    leaf wavelength-mhz {
+      type uint64; 
+      units "MHz";
+      default "200000000";
+      description
+        "The wavelength in MHz that will be sent by the OTDR. 
+         This may be left blank if the OTDR only supports one wavelength.";
+    }
+    leaf sampling-resolution-m {
+      type decimal64 {
+        fraction-digits 2;
+          range "0.00..160.00";
+      }
+      units "m";
+      default "10";
+      description
+        "Sampling resolution in meters.";
+    }
+    leaf fiber-type {
+      type identityref {
+        base oc-amp:FIBER_TYPE_PROFILE;
+      }
+      default oc-amp:SSMF;
+      description
+        "The type of fiber that is being measured.";
+    }
+    leaf negotiation {
+      type boolean;
+      default true;
+      description
+        "Enable auto negotiation to prevent peer otdr scan conflict.";
+    }
+  }
+
+ //Molex extension below
+  typedef rpc-status {
+    type enumeration {
+      enum Successful {
+        value 1;
+      }
+      enum Failed {
+        value 2;
+      }
+    }
+    description
+      "status of RPC ";
+  }
+
+  grouping rpc-response-status {
+    leaf status {
+      type rpc-status;
+      mandatory true;
+      description
+        "Successful or Failed";
+    }
+    leaf status-message {
+      type string;
+      description
+        "Gives a more detailed status";
+    }
+  }
+
+  grouping otdr-state {
+    leaf status {
+      type enumeration {
+        enum unknown {
+          description
+            "OTDR is unknow, i.e., Port uses external OTDR module.";
+        }
+        enum pending {
+          description
+            "OTDR is pending, waiting for peer scan finish.";
+        }
+        enum measuring {
+          description
+            "OTDR is measuring.";
+        }
+        enum idle {
+          description
+            "OTDR is idle.";
+        }
+      }
+    }
+  }
+
+  typedef otdr-trigger-type {
+      type enumeration {
+        enum lof-clear {
+          description
+            "Triggered by LOS clear.";
+        }
+        enum lof-set {
+          description
+            "Triggered by LOS raise.";
+        }
+        enum manual {
+          description
+            "triggered by manual command.";
+        }
+        enum external {
+          description
+            "triggered by external protocol.";
+        }
+      }
+  }
+
+  typedef otdr-scan-type {
+    description
+      "A set of otdr scan configuration.";
+    type enumeration {
+      enum customized {
+        description
+          "use customized config per port.";
+      }
+      enum short {
+        description
+          "Short(2-5Km): use short common config.";
+      }
+      enum medium {
+        description
+          "Medium(5-60Km): use mediam common config.";
+      }
+      enum long {
+        description
+          "Long(60-128Km): use long common config.";
+      }
+      enum auto {
+        description
+          "No config/range needed, otdr moudle scan in auto mode.";
+      }
+    }
+  }
+
+  grouping otdr-scan-result {
+    list traces {
+      max-elements 10;
+      key "completion-time";
+      leaf completion-time {
+        type oc-yang:date-and-time;
+        description
+          "Time scan was completed.";
+      }
+      uses otdr-trace;
+      leaf trigger {
+        type otdr-trigger-type;
+        description
+          "how was this trace triggered.";
+      }    
+      leaf scan-type {
+        type otdr-scan-type;
+        description
+          "Type of the scan performed.";
+      } 
+      leaf sor-file {
+        type string;
+        description
+          "file path and name of the sor file.";
+      }
+      leaf baseline {
+        type boolean;
+        default false;
+        description 
+          "if this trace is the baseline.";
+      }
+    }
+  }
+
+  grouping otdr-fiber-profile {
+    description
+      "Enclosing container for otdr fiber-profile configuration";
+    leaf refractive-index {
+      type decimal64 {
+        fraction-digits 6;
+        range "1.400000..1.700000";
+      }
+      default "1.467900";
+      description
+        "refractive ratio";
+    }
+    leaf backscatter-index {
+     type decimal64 {
+       fraction-digits 2;
+     }
+     description
+       "backscatter ratio";
+    }
+    leaf reflectance-threshold {
+       type decimal64 {
+         fraction-digits 2;
+         range "-65.0..-14.0";
+       }
+       default "-40";
+       description
+         "reflection threshold";
+    }
+    leaf splice-loss-threshold {
+      type decimal64 {
+        fraction-digits 2;
+        range "0.00..10.00";
+      }
+      default "2.16";
+      description
+        "splice loss threshold";
+    }
+    leaf fiber-end-threshold {
+      type decimal64 {
+        fraction-digits 2;
+        range "1..65";
+      }
+      default "3";
+      description
+        "fiber end event threshold";
+    }
+  }
+
+  grouping otdr-top {
+    description
+      "Top-level grouping for OTDRs";
+    container optical-time-domain-reflectometer {
+      description
+        "Enclosing container for otdrs";
+      container config-common {
+        description
+          "List of common configuration for short, mediam and long scan,
+           as all ports should have the same fiber profiles.";
+        list scan-types {
+          key "scan-type";
+          leaf scan-type {
+            type otdr-scan-type;
+          }
+          uses otdr-configuration;
+        }
+        container fiber-profile {
+          uses otdr-fiber-profile;
+        }
+      }
+      container otdrs {
+        description
+          "Enclosing container for list of attenuators";
+        list otdr {
+          key "name";
+          description
+            "List of variable optical attenuators present in the device";
+          leaf name {
+	    type string;
+	    description
+              "name of the otdr, i.e., the otdr port name";
+	  }
+          leaf parent-port {
+            type leafref {
+              path "/oc-platform:components/oc-platform:component/" +
+                "oc-platform:name";
+            }
+            description
+              "Reference to system-supplied name of the port to be scaned.";
+          }
+          container config {
+            description
+              "Customized configuration data for otdr.";
+              uses otdr-configuration;
+              uses otdr-fiber-profile;
+          }
+          container state {
+            config false;
+            description
+              "Operational state data for the otdr";
+
+            uses otdr-configuration;
+            uses otdr-fiber-profile;
+            uses otdr-state;
+          }
+          container scan-results {
+            config false;
+            uses otdr-scan-result;
+          }
+        }
+      }
+    }
+  }
+
+  // data definition statements
+  uses otdr-top;
+
+  //rpc
+  rpc otdr-scan {
+    input {
+      leaf name {
+        type string;
+        description
+          "otdr name (scan port)";
+      }
+      leaf operation {
+        type enumeration {
+          enum start {
+            description
+              "Start scan.";
+          }
+          enum stop {
+            description
+              "Stop scan.";
+          }
+        }
+        default start;
+      }
+      leaf otdr-scan-type {
+         type otdr-scan-type;
+      }
+    }
+    output {
+     uses rpc-response-status;
+    }
+  }
+
+  rpc set-baseline {
+    input {
+      leaf name {
+        type string;
+        description
+          "otdr name (a scaned port)";
+      }
+      leaf scan-time {
+        type oc-yang:date-and-time;
+        description
+          "Update baseline-result, according to scan time";
+      }
+    }
+    output {
+      leaf result-file {
+        type string;
+        description
+          "The SOR files path and filename on the device to be downloaded";
+      }
+      uses rpc-response-status;
+    }
+  }
+}
+
+

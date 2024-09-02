@@ -1,0 +1,37 @@
+module com-oplink-pm {
+  namespace "http://com/oplink/pm";
+  prefix com-oplink-pm;
+
+  import org-openroadm-pm {
+    prefix org-openroadm-pm;
+  }
+
+  organization "Oplink Communication";
+  contact
+    "oplink.com";
+  description
+    "Oplink internal YANG definitions of performance management.";
+       
+  revision 2017-03-14 {
+    description
+      "Version 1.0";
+  }
+
+  container currentPmlist {
+    description
+      "List of current PMs.";
+    list currentPm {
+      key "id";
+      uses org-openroadm-pm:current-pm;
+    }
+  }
+
+  container historicalPmlist {
+    description
+      "List of historical PM";
+    list historicalPm {
+      key "id";
+      uses org-openroadm-pm:historical-pm;
+    }
+  }
+}

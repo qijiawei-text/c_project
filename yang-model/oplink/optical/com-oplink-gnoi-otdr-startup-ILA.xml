@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<optical-time-domain-reflectometer xmlns="http://com/oplink/gnoi/otdr">
+  <otdrs>
+    <otdr>
+      <name>line-in-e</name>
+      <parent-port>line-in-e</parent-port>
+      <state>
+        <status>idle</status>
+      </state>
+    </otdr>
+    <otdr>
+      <name>line-out-e</name>
+      <parent-port>line-out-e</parent-port>
+      <state>
+        <status>idle</status>
+      </state>
+    </otdr>
+    <otdr>
+      <name>line-in-w</name>
+      <parent-port>line-in-w</parent-port>
+      <state>
+        <status>idle</status>
+      </state>
+    </otdr>
+    <otdr>
+      <name>line-out-w</name>
+      <parent-port>line-out-w</parent-port>
+      <state>
+        <status>idle</status>
+      </state>
+    </otdr>
+  </otdrs>
+</optical-time-domain-reflectometer>

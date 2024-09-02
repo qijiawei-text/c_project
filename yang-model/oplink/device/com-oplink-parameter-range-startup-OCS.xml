@@ -1,0 +1,31 @@
+<parameter-range
+    xmlns="http://com/oplink/parameter-range">
+    <parameters>
+        <name>port_num</name>
+        <range>
+            <high-thr>32</high-thr>
+            <low-thr>1</low-thr>
+        </range>
+    </parameters>
+    <parameters>
+        <name>temperature-up</name>
+        <range>
+            <high-thr>70</high-thr>
+            <low-thr>30</low-thr>
+        </range>
+    </parameters>
+    <parameters>
+        <name>temperature-low</name>
+        <range>
+            <high-thr>20</high-thr>
+            <low-thr>-20</low-thr>
+        </range>
+    </parameters>
+    <parameters>
+        <name>edfa1_gain</name>
+        <range>
+            <high-thr>25</high-thr>
+            <low-thr>15</low-thr>
+        </range>
+    </parameters>
+</parameter-range>

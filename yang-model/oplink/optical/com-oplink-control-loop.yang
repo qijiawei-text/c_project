@@ -1,0 +1,630 @@
+//<CODE BEGINS> file "com-oplink-control-loop.yang"
+module com-oplink-control-loop {
+    namespace "http://com/oplink/control-loop";
+    prefix "com-oplink-control-loop";
+
+    import org-openroadm-common-types {
+        prefix org-openroadm-common-types;
+        revision-date 2022-05-27;
+    }
+
+    import org-openroadm-common-link-types {
+        prefix org-openroadm-common-link-types;
+        revision-date 2019-11-29;
+    }
+
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink.com";
+
+    description
+        "YANG definitions for peer to peer control loop  Module";
+	
+    revision 2019-08-12 {
+        description
+            "Version 1.1 - Optimize content based on rainier project";
+    }
+
+    revision 2016-08-01 {
+        description
+            "Version 1.0 - initial version";
+    }
+
+    typedef fiber-types {
+      type enumeration {
+        enum "ssmf" {
+          value 0;
+          description
+            "Vendor: Corning, fiber name: SMF-28e, standard: G652.";
+        }
+        enum "allwave" {
+          value 1;
+          description
+            "Vendor: OFS, fiber name: AllWave® Optical Fiber - Zero Water Peak, standard: G652.";
+        }
+        enum "teralight" {
+          value 2;
+          description
+            "Vendor: Alcatel, fiber name: TeraLight™ Fiber, standard: G655.";
+        }
+        enum "truewave-reach" {
+          value 3;
+          description
+            "Vendor: OFS, fiber name: SMTrueWave REACH, standard: G655.";
+        }
+        enum "leaf" {
+          value 4;
+          description
+            "Vendor: Corning, fiber name: Corning Leaf fiber, standard: G655.";
+        }
+        enum "metrocore" {
+          value 5;
+          description
+            "Vendor: Corning, fiber name: Corning, standard: G655.";
+        }
+        enum "truewave-rs" { 
+          value 6;
+          description
+            "Vendor: OFS or Lucent, fiber name: OFS, standard: G655.";
+        }
+        enum "truewave-cplus" { 
+          value 7;
+          description
+            "Vendor: Lucent, fiber name: Truewave Plus–TW+, standard: G655.";
+        }
+        enum "ls" { 
+          value 8;
+          description
+            "Vendor: Corning, fiber name: SMF-LS CPC6, standard: G653.";
+        }
+        enum "dsf" { 
+          value 9;
+          description
+            "Vendor: Corning, fiber name: SMF/LS CPC3, standard: G653.";
+        }
+        enum "hcf" { 
+          value 10;
+          description
+            "Vendor: , fiber name: HCF, standard: ";
+        }        
+      }
+      description
+        "Identifier for fiber type.";
+    }
+    
+    typedef auto-control-state {
+      type enumeration {
+        enum "success" {
+          value 0;
+        }
+        enum "processing" {
+          value 1;
+        }
+        enum "failed-in-spanloss" {
+          value 2;
+        }
+        enum "failed-in-ba-input-power" {
+          value 3;
+        }
+        enum "failed-in-gain" {
+          value 4;
+        }
+        enum "failed-in-cd" {
+          value 5;
+        }
+        enum "failed-in-osc" {
+          value 6;
+        }
+        enum "failed-in-ba-pump" {
+          value 7;
+        }
+        enum "failed-in-ba-reflection" {
+          value 8;
+        }
+        enum "failed-in-ba-apr" {
+          value 9;
+        }
+        enum "failed-in-ba-laser-safety" {
+          value 10;
+        }
+        enum "failed-in-upgrade-activate" {
+          value 11;
+        }
+        enum "failed-in-scc-software-mismatch" {
+          value 12;
+        }
+        enum "failed-in-amp-software-mismatch" {
+          value 13;
+        }
+        enum "failed-in-apply-to-module" {
+          value 14;
+        }
+      }
+      description
+        "Identifier for automatic control state.";
+    }
+
+    grouping auto-config {      
+      leaf number-of-carriers {
+        type uint8 {
+          range "1..80";
+        }
+        default "40";
+        description
+          "The number of carriers";
+      }
+      
+      leaf fiber-type {
+        type fiber-types;
+        default "ssmf";
+        description
+          "The fiber type";
+      }     
+      
+      leaf launching-power-per-channel {
+        type org-openroadm-common-link-types:power-dBm {
+          range "-15 .. 25.00";
+        }
+        default "4.5";
+        description
+          "The launching power per channel on BA tx port";
+      }
+
+      leaf target-power-per-channel {
+        type org-openroadm-common-link-types:power-dBm;
+        default "6";
+        description
+          "The target power per channel on PA tx port";
+      }
+
+      leaf ocm-based-carriers {
+        type boolean;
+        default false;
+        description
+          "Casrries used ocm based or user set based.";
+      }
+
+      leaf long-span {
+        type boolean;
+        default false;
+        description
+          "Span over then 26dB less then 29dB.";
+      }
+      
+      leaf saturation-drop {
+        type org-openroadm-common-link-types:ratio-dB;
+        default "6";
+        description
+          "The saturation power decrease when fiber loss is very small.";
+      }
+      
+      leaf pre-amp-input-target-power-per-channel {
+        type org-openroadm-common-link-types:power-dBm;
+        default "-8";
+        description
+          "The target power per channel on PA rx port";
+      }
+    }
+    
+    grouping remote-info {
+      leaf remote-node-name {
+        type string {
+          length "1..64";
+        }
+        description
+          "Remote device node name.";
+      }
+      
+      leaf remote-ip {
+        type string {
+          length "1..64";
+        }
+        description
+          "Remote device ip address.";
+      }
+      
+      leaf remote-osc-ip {
+        type string {
+          length "1..64";
+        }
+        description
+          "Remote osc ip address.";
+      }
+      
+      leaf local-osc-ip {
+        type string {
+          length "1..64";
+        }
+        description
+          "Local osc ip address.";
+      }
+    }
+    
+    grouping auto-gain-state {
+      leaf span-loss {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+          "The span loss";
+      }
+      
+      leaf receive-span-loss {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+          "The receive span loss";
+      }
+      
+      leaf osc-input-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+          "The osc input power value";
+      }
+      
+      leaf pre-amp-input-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+          "The pre amp input power value";
+      }
+      
+      leaf pre-amp-gain {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+          "The pre amp gain value";
+      }
+
+      leaf pre-amp-voa {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+          "The pre amp voa attenuation value";
+      }
+      
+      leaf booster-amp-gain {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+          "The booster amp gain value";
+      }
+
+      leaf booster-amp-voa {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+          "The booster amp voa attenuation value";
+      }
+
+      leaf progress {
+        type uint8 {
+          range "0..100";
+        }
+        description
+          "The auto gain progress. Unit: Percentage.";
+      }
+      
+      leaf state {
+      type auto-control-state;
+        description
+          "The auto gain state";      
+      }
+    }
+	
+    grouping auto-cd-state {
+      leaf cd-value {
+        type org-openroadm-common-link-types:fiber-pmd;
+        description
+          "The cd value";
+      }
+
+      leaf progress {
+        type uint8 {
+          range "0..100";
+        }
+        description
+          "The auto cd progress. Unit: Percentage.";
+      }
+      
+      leaf state {
+        type auto-control-state;
+        description
+          "The auto cd state";           
+      }
+    }
+	    
+    grouping last-calibration-data {
+      leaf last-osc-tx-power {
+      	config false;
+        type org-openroadm-common-link-types:power-dBm;
+        default "-60";
+      }
+      
+      leaf last-osc-rx-power {
+      	config false;
+        type org-openroadm-common-link-types:power-dBm;
+        default "-60";
+      }
+      
+      leaf last-spanloss {
+        type org-openroadm-common-link-types:ratio-dB;
+        default "-60";
+      }
+      
+      leaf last-number-of-carriers {
+      	config false;
+        type uint8;
+        default "0";
+      }
+      
+      leaf last-booster-amp-input-power {
+      	config false;
+        type org-openroadm-common-link-types:power-dBm;
+        default "-60";
+      }
+  
+      leaf last-booster-amp-gain {
+      	config false;
+        type org-openroadm-common-link-types:ratio-dB;
+        default "-60";
+      }
+      
+      leaf last-booster-amp-voa {
+      	config false;
+        type org-openroadm-common-link-types:ratio-dB;
+        default "-60";
+      }
+      
+      leaf last-pre-amp-input-power {
+      	config false;
+        type org-openroadm-common-link-types:power-dBm;
+        default "-60";
+      }
+      
+      leaf last-pre-amp-gain {
+      	config false;
+        type org-openroadm-common-link-types:ratio-dB;
+        default "-60";
+      }
+      
+      leaf last-pre-amp-voa {
+      	config false;
+        type org-openroadm-common-link-types:ratio-dB;
+        default "-60";
+      }
+    }
+
+    grouping control-threshold {
+      leaf span-loss-threshold {
+        type org-openroadm-common-link-types:ratio-dB;
+        default "5.0";
+      }
+    }
+
+    grouping manual-config {
+      leaf remote-ip {
+        type string {
+          length "1..64";
+        }
+        description
+          "Manual config remote device ip address.";
+      }
+      
+      leaf local-osc-ip {
+        type string {
+          length "1..64";
+        }
+        description
+          "Manual config local osc ip address.";
+      }
+    }
+
+    typedef auto-control-path {
+      type enumeration {
+        enum "W";
+        enum "P";
+      }
+      description
+        "Specify the path of auto control function, working/protection";
+    } 
+    
+    typedef auto-control-direction {
+      type enumeration {
+        enum "ba" {
+          value 0;
+        }
+        enum "pa" {
+          value 1;
+        }
+      }
+      description
+        "Specify the direction of auto control function, egress/ingress.";
+    }
+   
+    grouping auto-control {
+      list control {
+        key name;
+        leaf name {
+          type auto-control-path;
+        }
+        container auto-config {
+          uses auto-config;
+        }
+                
+        container manual-config {
+          uses manual-config;
+        }
+            
+        container remote-info {
+          uses remote-info;
+          config false;
+        }
+            
+        container auto-gain-state {
+          uses auto-gain-state;
+          config false;
+        }
+		
+        container auto-cd-state {
+          uses auto-cd-state;
+          config false;
+        }
+			
+        container last-auto-control {
+          container last-calibration-data {
+            uses last-calibration-data;
+          }
+        }
+
+        container control-threshold {
+          uses control-threshold;
+        }
+      }
+    }
+ 
+    grouping fiber-config {
+        description
+           "The fiber configuration information list";
+        list fiber-config {
+            key fiber-type;
+            leaf fiber-type {
+              type fiber-types;
+            }
+
+            leaf dispersion {
+              type decimal64 { 
+                fraction-digits 2;
+              }
+              description "Unit: ps/nm/km";
+            }
+
+            leaf fiber_loss {
+              type decimal64 { 
+                fraction-digits 2;
+              }
+              description "Unit: dB/km";
+            }
+            
+            leaf launching_power {
+              type decimal64 { 
+                fraction-digits 2;
+              }
+              description "Unit: dBm/carrier";
+            }
+            
+            leaf supported_span_loss {
+              type decimal64 { 
+                fraction-digits 2;
+              }
+              description "Unit: dB";
+            }
+            
+            leaf signal_loss_tilt {
+              type decimal64 { 
+                fraction-digits 4;
+              }
+              description "Unit: dB/km";
+            }
+            
+            leaf osc_loss_tilt {
+              type decimal64 { 
+                fraction-digits 4;
+              }
+              description "Unit: dB/km";
+            }
+            
+            leaf srs_k {
+              type decimal64 { 
+                fraction-digits 4;
+              }
+              description "Unit: TODO";
+            }
+        }
+    }    
+
+    rpc auto_gain_start {
+       input {
+          leaf path {
+            type auto-control-path;
+            default "W";
+          }
+        }
+        description
+            "Use this rpc to start auto gain control.";
+        output {
+            uses org-openroadm-common-types:rpc-response-status;
+        }
+    }
+	
+    rpc auto_cd_start {
+        input {
+          leaf path {
+            type auto-control-path;
+            default "W";
+          }
+        }
+        description
+            "Use this rpc to start auto cd control.";
+        output {
+            uses org-openroadm-common-types:rpc-response-status;
+        }
+    }
+    
+    rpc auto_clear_alarm {
+       input {
+          leaf path {
+            type auto-control-path;
+            default "W";
+          }
+        }
+        description
+            "Use this rpc to clear auto-gain/cd failed alarm.";
+        output {
+            uses org-openroadm-common-types:rpc-response-status;
+        }
+    }
+
+    rpc collect-fiber-config {
+        description
+            "Use this rpc to get fiber config information.";
+        input {
+          leaf fiber-type-name {
+            type string;
+            default "all";
+            description
+            "Specify the fiber type name to collect the config information. all means all fiber type, other refer to fiber-types define";
+          }
+          leaf path {
+            type auto-control-path;
+            default "W";
+          }
+        }
+        output {
+          uses fiber-config;
+        }
+    }
+    
+    rpc auto_power {
+       input {
+          leaf path {
+            type auto-control-path;
+            default "W";
+          }
+          leaf direction {
+            type auto-control-direction;
+            default "ba";
+          }
+        }
+        description
+            "Use this rpc to auto control power.";
+        output {
+            uses org-openroadm-common-types:rpc-response-status;
+        }
+    }
+    
+    grouping auto-top {
+        container auto-control {
+            container controls {
+                uses auto-control;
+            }
+        }
+    }
+    
+    uses auto-top;
+}		
+//<CODE ENDS>

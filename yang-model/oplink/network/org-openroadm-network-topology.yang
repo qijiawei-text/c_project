@@ -1,0 +1,96 @@
+module org-openroadm-network-topology {
+  yang-version 1.1;
+  namespace "http://org/openroadm/network/topology";
+  prefix topo;
+
+  import ietf-network {
+    prefix nd;
+    revision-date 2018-02-26;
+  }
+  import ietf-network-topology {
+    prefix nwt;
+    revision-date 2018-02-26;
+  }
+  import org-openroadm-link {
+    prefix link;
+    revision-date 2022-05-27;
+  }
+  import org-openroadm-common-network {
+    prefix cnet;
+    revision-date 2022-05-27;
+  }
+
+  organization
+    "OPEN ROADM MSA";
+  contact
+    "OpenROADM.org.";
+  description
+    "YANG definitions for network view of a ROADM
+
+     Copyright of the Members of the Open ROADM MSA Agreement dated (c) 2016,
+     All other rights reserved.
+
+     Redistribution and use in source and binary forms, with or without modification,
+     are permitted provided that the following conditions are met:
+
+     * Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+     * Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation and/or
+       other materials provided with the distribution.
+     * Neither the Members of the Open ROADM MSA Agreement nor the names of its
+       contributors may be used to endorse or promote products derived from this software
+       without specific prior written permission.
+
+     THIS SOFTWARE IS PROVIDED BY THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT ''AS IS''
+     AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+     IN NO EVENT THE MEMBERS OF THE OPEN ROADM MSA  AGREEMENT BE LIABLE FOR ANY DIRECT,
+     INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+     NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;  LOSS OF USE, DATA,
+     OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+     WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+     ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+     POSSIBILITY OF SUCH DAMAGE.";
+
+  revision 2022-05-27 {
+    description
+      "Version 11.1";
+  }
+
+  augment "/nd:networks/nd:network/nd:network-types/cnet:openroadm-common-network" {
+    description
+      "Introduce new network type for the Open ROADM optical
+       `     network topology";
+    container openroadm-topology {
+      presence "indicates optical network topology for Open ROADMs";
+    }
+  }
+
+  augment "/nd:networks/nd:network/nwt:link" {
+    description
+      "This augmentation defines ROADM link types in the ROADM topology";
+    leaf amplified {
+      type boolean;
+      description
+        "defines whether an ROADM-TO-ROADM Link includes line amplifiers or not";
+    }
+    container OMS-attributes {
+      description
+        "";
+      container span {
+        when "../../amplified = 'false'";
+        description
+          "";
+        uses link:span-attributes;
+      }
+      container amplified-link {
+        when "../../amplified = 'true'";
+        description
+          "when amplified is set to true, rather than a simple OMS section
+           we have an amplified link";
+        uses link:amplified-link-attributes;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<optical-dfb xmlns="http://com/oplink/dfb">
+    <dfbs>
+      <dfb>
+        <name>dfb-hp</name>
+    	<config>
+           <name>dfb-hp</name>
+           <enabled>true</enabled>
+           <target-output-power>7.0</target-output-power>
+       </config>
+	<!--
+    	<state>
+           <name>dbf-hp</name>
+              <dfb-port>
+                 <port-name>line-in</name>
+                 <input-power>3.0</input-power>
+              </dfb-port>
+              <dfb-port>
+                 <port-name>line-out</name>
+                 <output-power>3.0</output-power>
+              </dfb-port>
+              <dfb-port>
+                 <port-name>mux-in</name>
+                 <input-power>3.0</input-power>
+                 <output-power>3.0</output-power>
+              </dfb-port>
+              <dfb-port>
+                 <port-name>mux-out</name>
+                 <input-power>3.0</input-power>
+                 <output-power>3.0</output-power>
+              </dfb-port>
+        </state>
+	-->
+    </dfb>
+  </dfbs>
+</optical-dfb>

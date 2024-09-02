@@ -1,0 +1,80 @@
+//<CODE BEGINS> file "com-oplink-ipc.yang"
+module com-oplink-ipc {
+  namespace "http://com/oplink/ipc";
+  prefix "com-oplink-ipc";
+
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions of Oplink ipc between processes, it is used internal only";
+
+  revision 2019-04-01 {
+    description
+      "Oplink Version 2.0";
+  }
+
+  typedef gpb-message {
+    type binary {
+      length "0..1024";
+    }
+    description
+      "GPB message encoded in base64 binary.";
+  } 
+   
+  // for reset from operationd to persistd
+  rpc gpb-rpc {
+    description
+      "This rpc is gpb rpc for common";
+    input {
+      leaf request {
+        type gpb-message;
+        description
+          "detail info about request, defined in proto file";
+      }
+    }
+
+    output {
+      leaf response {
+        type gpb-message;
+        description
+          "detail info about response defined in proto file";
+      }
+    }
+  }
+
+  // for otdr rpc from csm to autoctrld
+  rpc otdr-sync-rpc {
+    description
+      "This rpc is gpb rpc for common";
+    input {
+      leaf request {
+        type gpb-message;
+        description
+          "detail info about request, defined in proto file";
+      }
+    }
+
+    output {
+      leaf response {
+        type gpb-message;
+        description
+          "detail info about response defined in proto file";
+      }
+    }
+  }
+  notification gpb-notifi {
+    description
+      "notification for common by gpb.";
+    leaf event {
+      type gpb-message;
+      description
+        "detail info about plug event defined in proto file";
+    }
+  }
+
+}
+//<CODE ENDS>

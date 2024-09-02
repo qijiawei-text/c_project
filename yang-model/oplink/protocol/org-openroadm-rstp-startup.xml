@@ -1,0 +1,29 @@
+<rstp xmlns="http://org/openroadm/rstp">
+  <rstp-bridge-instance>
+    <bridge-name>oplk-ila</bridge-name>
+    <rstp-config>
+      <bridge-priority>49152</bridge-priority>
+      
+      <hold-time>2</hold-time>
+      <hello-time>2</hello-time>
+      <max-age>20</max-age>
+      <forward-delay>15</forward-delay>
+      <transmit-hold-count>2</transmit-hold-count>
+      <rstp-bridge-port-table>
+        <ifname>OSCA</ifname>
+        <cost>200000</cost>
+        <priority>176</priority>
+      </rstp-bridge-port-table>
+      <rstp-bridge-port-table>
+        <ifname>OSCB</ifname>
+        <cost>200000</cost>
+        <priority>176</priority>
+      </rstp-bridge-port-table>
+      <rstp-bridge-port-table>
+        <ifname>MGMT</ifname>
+        <cost>20000</cost>
+        <priority>32</priority>
+      </rstp-bridge-port-table>            
+    </rstp-config>
+  </rstp-bridge-instance>
+</rstp>

@@ -1,0 +1,62 @@
+//<CODE BEGINS> file "com-oplink-parameter-range.yang"
+module com-oplink-parameter-range {
+  namespace "http://com/oplink/parameter-range";
+  prefix "com-oplink-parameter-range";
+
+  organization
+      "Oplink Communications, LLC";
+
+  contact
+      "Oplink.com";
+
+  description
+      "YANG definitions for parameter range";
+
+  revision 2019-04-01 {
+    description
+      "Oplink Version 2.0";
+  }
+
+  revision 2018-10-04 {
+      description
+          "Version 1.0 - initial version";
+  }
+
+  grouping range {
+    leaf high-thr {
+      type decimal64 {
+        fraction-digits 2;
+        range "-10000.00..7200000.00";
+      }
+      default "10.00";
+      description
+        "High threshold";
+    }
+    leaf low-thr {
+      type decimal64 {
+        fraction-digits 2;
+        range "-10000.00..1000000.00";
+      }
+      default "10.00";
+      description
+        "Low threshold";
+    }
+  }
+    
+  container parameter-range {
+    list parameters {
+      key name;
+      leaf name {
+        type string {
+            length "1..128";
+        }
+        description
+          "An parameter name.";
+      }
+      container range {
+      	uses range;
+      }
+    }//end list
+  }
+}		
+//<CODE ENDS>

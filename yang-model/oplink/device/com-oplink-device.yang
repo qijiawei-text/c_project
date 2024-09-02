@@ -1,0 +1,165 @@
+//<CODE BEGINS> file "roadm/com-oplink-device.yang"
+module com-oplink-device {
+  namespace "http://com/oplink/device";
+  prefix "com-oplink-device";
+
+  import org-openroadm-device {
+    prefix org-openroadm-device;
+    revision-date 2021-03-26;
+  }
+  
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions of device used internally and should not be exposed
+     externally. It has the same model of org-openroadm-device, but refine
+     static non-configable data to config true, so they can be saved in the 
+     startup file.";
+
+  revision 2021-06-01 {
+    description
+      "Oplink Version 3.0";
+  }
+
+  revision 2019-04-01 {
+    description
+      "Oplink Version 2.0";
+  }
+    
+  revision 2016-06-10 {
+    description
+      "Oplink Version 0.1";
+  }
+
+  uses org-openroadm-device:org-openroadm-device-container {
+    refine org-openroadm-device/info/vendor {
+      mandatory false;
+      config true;
+    }
+    refine org-openroadm-device/info/model {
+      mandatory false;
+      config true;
+    }
+    refine org-openroadm-device/info/serial-id {
+      mandatory false;
+      config true;
+    }
+    refine org-openroadm-device/info/softwareVersion {
+      config true;
+    }
+    refine org-openroadm-device/info/software-build {
+      config true;
+    }
+    refine org-openroadm-device/info/ip-interfaces/interface/macAddress {
+      config true;
+    }
+    refine org-openroadm-device/info/ip-interfaces/interface/type {
+      mandatory false;
+    }
+    refine org-openroadm-device/shelves/administrative-state {
+      mandatory false;
+    }
+    refine org-openroadm-device/shelves/shelf-type {
+      mandatory false;
+    }
+    refine org-openroadm-device/shelves/vendor {
+      config true;
+    }
+    refine org-openroadm-device/shelves/model {
+      config true;
+    }
+    refine org-openroadm-device/shelves/serial-id {
+      config true;
+    }
+    refine org-openroadm-device/shelves/product-code {
+      config true;
+    }
+    refine org-openroadm-device/shelves/manufacture-date {
+      config true;
+    }
+    refine org-openroadm-device/shelves/clei {
+      config true;
+    }
+    refine org-openroadm-device/shelves/hardware-version {
+      config true;
+    }
+    refine org-openroadm-device/shelves/operational-state {
+      config true;
+    }
+    refine org-openroadm-device/shelves/is-physical {
+      config true;
+    }
+    refine org-openroadm-device/shelves/is-passive {
+      config true;
+    }
+    refine org-openroadm-device/shelves/faceplate-label {
+      config true;
+    }
+    refine org-openroadm-device/shelves/slots {
+      config true;
+    }
+
+    refine org-openroadm-device/circuit-packs/administrative-state {
+        mandatory false; 
+    }
+    refine org-openroadm-device/circuit-packs/circuit-pack-type {
+        mandatory false;
+    }
+    refine org-openroadm-device/circuit-packs/vendor {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/model {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/serial-id {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/type {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/product-code {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/manufacture-date {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/clei {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/hardware-version {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/operational-state {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/shelf {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/slot {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/circuit-pack-components {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/ports/port-type {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/ports/port-wavelength-type {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/ports/port-qual {
+      config true;
+    }
+    refine org-openroadm-device/circuit-packs/ports/port-direction {
+      config true;
+    }
+    refine org-openroadm-device/pending-sw {
+      config true;
+    }
+  }
+}
+//<CODE ENDS>

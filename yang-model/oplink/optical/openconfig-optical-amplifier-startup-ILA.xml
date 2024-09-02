@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<optical-amplifier xmlns="http://openconfig.net/yang/optical-amplfier">
+      <amplifiers>
+        <amplifier>
+          <name>BA-E</name>
+          <config>
+            <name>BA-E</name>
+            <type>EDFA</type>
+            <gain-range>LOW_GAIN_RANGE</gain-range>
+            <target-gain>8.5</target-gain>
+            <target-gain-tilt>0</target-gain-tilt>
+            <amp-mode>CONSTANT_GAIN</amp-mode>
+            <enabled>true</enabled>
+            <autolos xmlns="http://com/oplink/amplifier-ext">false</autolos>
+          </config>
+        </amplifier>
+        <amplifier>
+          <name>BA-W</name>
+          <config>
+            <name>BA-W</name>
+            <type>EDFA</type>
+            <gain-range>LOW_GAIN_RANGE</gain-range>
+            <target-gain>8.5</target-gain>
+            <target-gain-tilt>0</target-gain-tilt>
+            <amp-mode>CONSTANT_GAIN</amp-mode>
+            <enabled>true</enabled>
+	    <apr-enabled xmlns="http://com/oplink/amplifier-ext">true</apr-enabled>
+            <autolos xmlns="http://com/oplink/amplifier-ext">false</autolos>
+          </config>
+        </amplifier>
+      </amplifiers>
+        <supervisory-channels>
+        <supervisory-channel>
+          <interface>OSC-E</interface>
+          <config>
+            <interface>OSC-E</interface>
+            <osc-sfp-enable xmlns="http://com/oplink/amplifier-ext">true</osc-sfp-enable>
+          </config>
+        </supervisory-channel>
+        <supervisory-channel>
+          <interface>OSC-W</interface>
+          <config>
+            <interface>OSC-W</interface>
+            <osc-sfp-enable xmlns="http://com/oplink/amplifier-ext">true</osc-sfp-enable>
+          </config>
+        </supervisory-channel>
+      </supervisory-channels>
+</optical-amplifier>

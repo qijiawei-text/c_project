@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<optical-attenuator xmlns="http://openconfig.net/yang/optical-attenuator">
+    <attenuators>
+        <attenuator>
+            <name>PADDING-VOA</name>
+            <config>
+                <name>PADDING-VOA</name>
+                <attenuation-mode>CONSTANT_ATTENUATION</attenuation-mode>
+                <attenuation>5.0</attenuation>
+                <enabled>true</enabled>
+            </config>
+        </attenuator>
+        <attenuator>
+            <name>PA-VOA</name>
+            <config>
+                <name>PA-VOA</name>
+                <attenuation-mode>CONSTANT_ATTENUATION</attenuation-mode>
+                <attenuation>15.0</attenuation>
+                <enabled>true</enabled>
+            </config>
+        </attenuator>
+        <attenuator>
+            <name>OSC-VOA</name>
+            <config>
+                <name>OSC-VOA</name>
+                <attenuation-mode>CONSTANT_ATTENUATION</attenuation-mode>
+                <attenuation>10.0</attenuation>
+                <enabled>true</enabled>
+            </config>
+        </attenuator>
+    </attenuators>
+</optical-attenuator>

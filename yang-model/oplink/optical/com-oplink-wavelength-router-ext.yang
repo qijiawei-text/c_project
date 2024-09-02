@@ -1,0 +1,272 @@
+module com-oplink-wavelength-router-ext { 
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://com/oplink/wavelength-router-ext";
+
+  prefix "com-oplink-wave-router-ext";
+
+  import openconfig-wavelength-router {prefix oc-wave-router;} 
+
+  description
+    "YANG definitions of wss extension";
+
+  revision 2021-07-11{
+    description
+      "Add RPC collect-port-waveform;
+      Update RPC specify-connection-validation-ports";
+    reference "0.3.0";
+  }
+
+  revision 2021-05-28{
+      description
+        "Update RPC";
+      reference "0.2.0";
+    }
+
+  revision 2020-10-28{
+    description
+      "Initial version";
+    reference "0.1.0";
+  }
+
+  identity SET_ATTENUATION {
+    base oc-wave-router:ATTENUATION_CONTROL_MODE;
+    description
+      "Control the media channel power by setting the absolute
+       attenuation value";
+  }
+
+  grouping spectrum-target-power-config-ext {
+    description
+      "Extension for configuration data for the media channel target power";
+    leaf attenuation-value {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dB;
+      description
+        "The attenuation value set on this frequency slot, and
+         it is only valid when control-mode is SET_ATTENUATION";
+    }
+  }
+
+  grouping media-channel-state-ext {
+    description
+      "Extension for state data for media channel";
+    leaf input-power {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dBm;
+      description
+        "The input power of the media channel";
+    }
+    leaf output-power {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dBm;
+      description
+        "The output power of the media channel";
+    }
+    leaf actual-attenuation {
+      type decimal64 {
+          fraction-digits 2;
+      }
+      units dB;
+      description
+        "The actual attenuation of the media channel";
+    }
+
+  }
+
+  rpc collect-port-waveform {
+    input {
+      leaf port-name {
+        type string;
+        description
+          "Specify the port name of WSS to collect the waveform.";
+      }
+      leaf collection-time-period {
+        type uint16;
+        units second;
+        description
+          "Corresponds to the requested waveform length in time domain.
+          For example, if collection-time-period equals to 60, that
+          means the waveform in output should record power variation
+          in the past 60 seconds.";
+      }
+    }
+    output {
+      leaf sampling-interval {
+        type int16;
+        units millisecond;
+        description
+          "Describe the sampling interval in unit of milisecond.";
+      }
+      leaf status {
+        type enumeration {
+          enum "Success" {
+            value 1;
+          }
+          enum "Fail" {
+            value 2;
+          }
+        }
+        mandatory true;
+        description
+          "Success: Device succesfully send out the waveform.
+           Fail: Device fail to send out the waveform and the reason
+           can be described in the status-message.";
+      }
+      leaf status-message {
+        type string;
+        description
+          "Gives a more detailed status";
+      }
+      leaf waveform {
+        type string;
+        description
+          "Each data point is represented by two characters(16bits).
+           Therefore, the char array is represented as ISO-8859-1 string.
+           1. The 8 bits of the first char shows the integer part.
+              The highest bit is sign bit, 0 for positive and 1 for
+              negative. Therefore, the numerical range of 8 bits
+              is [-127, 127], i.e., from 0b11111111 to 0b01111111.
+           2. The 8 bits of the second char shows the fractional
+              part. Therefore, the numerical range is [00, 99], i.e.,
+              from 0b00000000 to 0b01100011. All other bits representation
+              larger than 0b01100011 is illegal.
+           In conclusion, the range of the data point should be within
+           [-127.99dBm, 127.99dBm].
+           For example, the conversion for -10.50dBm can be divided into
+           two parts.
+           The integer part should be:
+           to_binary(-10) = 0x10001010 = (char)138
+           The fractional part should be:
+           to_binary(50)  = 0x00110010 = (char)50
+           In the output waveform, only power values are included
+           and the converted 2-character-strings are cascaded
+           in time sequence.
+           To avoid transmission error and decoding error on different
+           netconf tools, the char array MUST be encoded by base64 based
+           on ISO-8859-1 while transmission over netconf/restconf.";
+      }
+    }
+  }
+
+  rpc switch-automatic-connection-validation {
+      description
+        "Enable the connection validation function of the device.";
+
+      input {
+        leaf method {
+          type enumeration {
+            enum ENABLE {
+              description
+                "Turn on automatic connection validation.";
+            }
+
+            enum DISABLE {
+              description
+                "Turn off automatic connection validation.";
+            }
+          }
+        }
+      }
+
+      output {
+        leaf message {
+          type string;
+          description
+            "Informational response for the switch operation.";
+        }
+      }
+  }
+
+  rpc specify-connection-validation-ports {
+      description
+        "Specify the connection validation ports, and this RPC is usually
+         realized by fix the auxiliary transceiver to the specified ports.";
+      input {
+        list port-pairs {
+          key index;
+          leaf index {
+            type int32;
+          }
+          leaf tx-port {
+            type string;
+            description "Auxiliary transceiver uses this WSS sub-port to send detecting signal out.";
+          }
+          leaf rx-port {
+            type string;
+            description "Auxiliary transceiver uses this WSS sub-port to receive detecting signal.";
+          }
+        }
+        leaf hold-on-time {
+          type int32;
+          units ms;
+        }
+      }
+      output {
+        list far-end-infos {
+          key index;
+          leaf index {
+            type int32;
+          }
+          leaf rx-status {
+            type enumeration {
+              enum Success;
+              enum Timeout;
+              enum Error;
+            }
+          }
+          leaf message {
+            type string;
+            description "Detailed information is written here as an explanation to the rx-status.";
+          }
+          container far-end-info {
+            description
+              "It describes the far end port information connected with
+               this port. ";
+            leaf chassis-name {
+              type string;
+              description
+                "It describes which chassis the far-end card locates";
+            }
+            leaf card-name {
+              type string;
+              description
+                "It describes the name of the far-end card";
+            }
+            leaf port-name {
+              type string;
+              description
+                "It describes the far-end port name";
+            }
+            leaf connection-loss {
+              type string;
+              description "Device calculate the connection loss based on the tx-power sent by transmitter, and receiving power measured at the receiver.
+                 Noted that both two power values are calibrated on the device penal, so the connection loss focuses on the the one outside the two devices.
+                 This loss value is in unit of dB. ";
+            }
+          }
+        }
+      }
+  }
+
+  augment "/oc-wave-router:wavelength-router/oc-wave-router:media-channels/oc-wave-router:channel/oc-wave-router:spectrum-power-profile/oc-wave-router:distribution/oc-wave-router:config" {
+    uses spectrum-target-power-config-ext;
+  }
+
+  augment "/oc-wave-router:wavelength-router/oc-wave-router:media-channels/oc-wave-router:channel/oc-wave-router:spectrum-power-profile/oc-wave-router:distribution/oc-wave-router:state" {
+    uses spectrum-target-power-config-ext;
+  }
+
+  augment "/oc-wave-router:wavelength-router/oc-wave-router:media-channels/oc-wave-router:channel/oc-wave-router:state" {
+    uses media-channel-state-ext;
+  }
+
+}
