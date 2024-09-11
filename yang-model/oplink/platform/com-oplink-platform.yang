@@ -1,0 +1,45 @@
+//<CODE BEGINS> file "com-oplink-platform.yang"
+module com-oplink-platform {
+  namespace "http://com/oplink/platform";
+  prefix "com-oplink-platform";
+
+  import openconfig-platform {
+    prefix openconfig-platform;
+  }
+  
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions of platform used internally and should not be exposed
+     externally. It has the same model of openconfig-platform, but refine
+     static non-configable data to config true, so they can be saved in the 
+     startup file.";
+
+  revision 2020-10-07 {
+    description
+      "Oplink Version 0.1";
+  }
+
+  uses openconfig-platform:platform-component-top {
+    refine components/component/state {
+      config true;
+    }
+    refine components/component/power-supply/state {
+      config true;
+    }
+    refine components/component/fan/state {
+      config true;
+    }
+    refine components/component/cpu/state {
+      config true;
+    }
+    refine components/component/subcomponents/subcomponent/state {
+      config true;
+    }  	
+  }
+}
+//<CODE ENDS>

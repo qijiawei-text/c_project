@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aps xmlns="http://openconfig.net/yang/optical-transport-line-protection">
+    <aps-modules>
+        <aps-module>
+            <name>OLP</name>
+            <config>
+                <name>OLP</name>
+                <revertive>false</revertive>
+                <hold-off-time>50</hold-off-time>
+                <primary-switch-threshold>-3</primary-switch-threshold>
+                <primary-switch-hysteresis>1.5</primary-switch-hysteresis>
+                <secondary-switch-threshold>-3</secondary-switch-threshold>
+                <secondary-switch-hysteresis>1.5</secondary-switch-hysteresis>
+                <wait-to-restore-time>300000</wait-to-restore-time>
+                <relative-switch-threshold>4</relative-switch-threshold>
+                <relative-switch-threshold-offset>0</relative-switch-threshold-offset>
+                <force-to-port>NONE</force-to-port>
+                <switching-type xmlns="http://com/oplink/ops/ext">bidirectional</switching-type>
+            </config>
+        </aps-module>
+    </aps-modules>
+</aps>

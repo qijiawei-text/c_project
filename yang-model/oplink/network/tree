@@ -1,0 +1,129 @@
+module: ietf-network-state
+  +--ro networks
+     +--ro network* [network-id]
+        +--ro network-types
+        +--ro network-id            nw:network-id
+        +--ro supporting-network* [network-ref]
+        |  +--ro network-ref    -> /networks/network/network-id
+        +--ro node* [node-id]
+        |  +--ro node-id                   nw:node-id
+        |  +--ro supporting-node* [network-ref node-ref]
+        |  |  +--ro network-ref    -> ../../../supporting-network/network-ref
+        |  |  +--ro node-ref       -> /networks/network/node/node-id
+        |  +--ro nt-s:termination-point* [tp-id]
+        |     +--ro nt-s:tp-id                           nt:tp-id
+        |     +--ro nt-s:supporting-termination-point* [network-ref node-ref tp-ref]
+        |        +--ro nt-s:network-ref    -> ../../../nw-s:supporting-node/network-ref
+        |        +--ro nt-s:node-ref       -> ../../../nw-s:supporting-node/node-ref
+        |        +--ro nt-s:tp-ref         -> /nw-s:networks/network[nw-s:network-id=current()/../network-ref]/node[nw-s:node-id=current()/../node-ref]/termination-point/tp-id
+        +--ro nt-s:link* [link-id]
+           +--ro nt-s:source
+           |  +--ro nt-s:source-node?   -> ../../../nw-s:node/node-id
+           |  +--ro nt-s:source-tp?     -> ../../../nw-s:node[nw-s:node-id=current()/../source-node]/termination-point/tp-id
+           +--ro nt-s:destination
+           |  +--ro nt-s:dest-node?   -> ../../../nw-s:node/node-id
+           |  +--ro nt-s:dest-tp?     -> ../../../nw-s:node[nw-s:node-id=current()/../dest-node]/termination-point/tp-id
+           +--ro nt-s:link-id            nt:link-id
+           +--ro nt-s:supporting-link* [network-ref link-ref]
+              +--ro nt-s:network-ref    -> ../../../nw-s:supporting-network/network-ref
+              +--ro nt-s:link-ref       -> /nw-s:networks/network[nw-s:network-id=current()/../network-ref]/link/link-id
+
+
+
+  +--rw networks
+     +--rw network* [network-id]
+        +--rw network-id            network-id
+        +--rw network-types
+        |  +--rw cnet:openroadm-common-network!
+        |     +--rw topo:openroadm-topology!
+        +--rw supporting-network* [network-ref]
+        |  +--rw network-ref    -> /networks/network/network-id
+        +--rw node* [node-id]
+        |  +--rw node-id                      node-id
+        |  +--rw supporting-node* [network-ref node-ref]
+        |  |  +--rw network-ref    -> ../../../supporting-network/network-ref
+        |  |  +--rw node-ref       -> /networks/network/node/node-id
+        |  +--rw nt:termination-point* [tp-id]
+        |  |  +--rw nt:tp-id                           tp-id
+        |  |  +--rw nt:supporting-termination-point* [network-ref node-ref tp-ref]
+        |  |     +--rw nt:network-ref    -> ../../../nw:supporting-node/network-ref
+        |  |     +--rw nt:node-ref       -> ../../../nw:supporting-node/node-ref
+        |  |     +--rw nt:tp-ref         -> /nw:networks/network[nw:network-id=current()/../network-ref]/node[nw:node-id=current()/../node-ref]/termination-point/tp-id
+        |  +--rw cnet:node-type?              org-openroadm-network-types:openroadm-node-type
+        |  +--rw cnet:lifecycle-state?        org-openroadm-common-state-types:lifecycle-state
+        |  +--ro cnet:operational-state?      org-openroadm-common-state-types:state
+        |  +--rw cnet:administrative-state?   org-openroadm-equipment-states-types:admin-states
+        +--rw nt:link* [link-id]
+           +--rw nt:link-id                   link-id
+           +--rw nt:source
+           |  +--rw nt:source-node?   -> ../../../nw:node/node-id
+           |  +--rw nt:source-tp?     -> ../../../nw:node[nw:node-id=current()/../source-node]/termination-point/tp-id
+           +--rw nt:destination
+           |  +--rw nt:dest-node?   -> ../../../nw:node/node-id
+           |  +--rw nt:dest-tp?     -> ../../../nw:node[nw:node-id=current()/../dest-node]/termination-point/tp-id
+           +--rw nt:supporting-link* [network-ref link-ref]
+           |  +--rw nt:network-ref    -> ../../../nw:supporting-network/network-ref
+           |  +--rw nt:link-ref       -> /nw:networks/network[nw:network-id=current()/../network-ref]/link/link-id
+           +--rw cnet:link-type?              org-openroadm-network-types:openroadm-link-type
+           +--rw cnet:opposite-link?          -> ../../nwt:link/link-id
+           +--rw cnet:link-length?            decimal64
+           +--rw cnet:link-latency?           uint32
+           +--rw cnet:administrative-group?   uint32
+           +--ro cnet:operational-state?      org-openroadm-common-state-types:state
+           +--rw cnet:administrative-state?   org-openroadm-equipment-states-types:admin-states
+           +--rw cnet:lifecycle-state?        org-openroadm-common-state-types:lifecycle-state
+           +--rw topo:amplified?              boolean
+           +--rw topo:OMS-attributes
+              +--rw topo:span
+              |  +--rw topo:auto-spanloss?            boolean
+              |  +--rw topo:spanloss-base?            org-openroadm-common-link-types:ratio-dB
+              |  +--ro topo:spanloss-current?         org-openroadm-common-link-types:ratio-dB
+              |  +--ro topo:spanloss-last-measured?   org-openroadm-common-link-types:ratio-dB
+              |  +--rw topo:engineered-spanloss?      org-openroadm-common-link-types:ratio-dB
+              |  +--rw topo:link-concatenation* [SRLG-Id]
+              |     +--rw topo:SRLG-Id                        uint32
+              |     +--rw topo:SRLG-length?                   decimal64
+              |     +--rw topo:fiber-type?                    enumeration
+              |     +--rw topo:pmd?                           org-openroadm-common-link-types:fiber-pmd
+              |     +--rw topo:subject-to-high-SOP-changes?   boolean
+              +--rw topo:amplified-link
+                 +--rw topo:amplified-link* [section-elt-number]
+                    +--rw topo:section-elt-number    uint16
+                    +--rw topo:section-element
+                       +--rw (topo:section-element)?
+                          +--:(topo:ila)
+                          |  +--rw topo:ila
+                          |     +--rw topo:amp-type                          org-openroadm-common-amplifier-types:amplifier-types
+                          |     +--rw topo:amp-gain-range?                   org-openroadm-common-amplifier-types:amplifier-gain-range
+                          |     +--rw topo:ingress-span-loss-aging-margin?   org-openroadm-common-link-types:ratio-dB
+                          |     +--rw topo:gain                              org-openroadm-common-link-types:ratio-dB
+                          |     +--rw topo:initially-planned-gain?           org-openroadm-common-link-types:ratio-dB
+                          |     +--rw topo:tilt?                             org-openroadm-common-link-types:ratio-dB
+                          |     +--rw topo:initially-planned-tilt?           org-openroadm-common-link-types:ratio-dB
+                          |     +--rw topo:out-voa-att?                      org-openroadm-common-link-types:ratio-dB
+                          |     +--rw topo:initially-planned-out-voa-att?    org-openroadm-common-link-types:ratio-dB
+                          |     +--rw topo:eol-max-load-pIn?                 org-openroadm-common-link-types:power-dBm
+                          |     +--rw topo:egress-average-channel-power?     org-openroadm-common-link-types:power-dBm
+                          |     +--rw topo:supported-operational-modes*      string
+                          |     +--rw topo:type-variety?                     string
+                          |     +--rw topo:node-id                           org-openroadm-common-node-types:node-id-type
+                          |     +--rw topo:administrative-state?             org-openroadm-equipment-states-types:admin-states
+                          +--:(topo:span)
+                             +--rw topo:span
+                                +--rw topo:auto-spanloss?            boolean
+                                +--rw topo:spanloss-base?            org-openroadm-common-link-types:ratio-dB
+                                +--ro topo:spanloss-current?         org-openroadm-common-link-types:ratio-dB
+                                +--ro topo:spanloss-last-measured?   org-openroadm-common-link-types:ratio-dB
+                                +--rw topo:engineered-spanloss?      org-openroadm-common-link-types:ratio-dB
+                                +--rw topo:link-concatenation* [SRLG-Id]
+                                |  +--rw topo:SRLG-Id                        uint32
+                                |  +--rw topo:SRLG-length?                   decimal64
+                                |  +--rw topo:fiber-type?                    enumeration
+                                |  +--rw topo:pmd?                           org-openroadm-common-link-types:fiber-pmd
+                                |  +--rw topo:subject-to-high-SOP-changes?   boolean
+                                +--rw topo:administrative-state?     org-openroadm-equipment-states-types:admin-states
+
+
+
+
+

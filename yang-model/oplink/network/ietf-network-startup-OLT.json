@@ -1,0 +1,516 @@
+{
+  "ietf-network:networks": {
+    "network": [
+      {
+        "network-id": "SFC01-NET002-DFW02",
+        "node": [
+          {
+            "node-id": "SFC01-NET002-01OMT",
+            "ietf-network-topology:termination-point": [
+              {
+                "tp-id": "tp-add-c"
+              },
+              {
+                "tp-id": "tp-drop-c"
+              },
+              {
+                "tp-id": "tp-add-l"
+              },
+              {
+                "tp-id": "tp-drop-l"
+              }
+            ]
+          },
+          {
+            "node-id": "JFK02-NET002-02OIL",
+            "ietf-network-topology:termination-point": [
+              {
+                "tp-id": "tp-we-c"
+              },
+              {
+                "tp-id": "tp-ew-c"
+              },
+              {
+                "tp-id": "tp-we-l"
+              },
+              {
+                "tp-id": "tp-ew-l"
+              }
+            ]
+          },
+          {
+            "node-id": "DFW02-NET002-01OMT",
+            "ietf-network-topology:termination-point": [
+              {
+                "tp-id": "tp-add-c"
+              },
+              {
+                "tp-id": "tp-drop-c"
+              },
+              {
+                "tp-id": "tp-add-l"
+              },
+              {
+                "tp-id": "tp-drop-l"
+              }
+            ]
+          }
+        ],
+        "ietf-network-topology:link": [
+          {
+            "link-id": "NET002-AZ-C",
+            "source": {
+              "source-node": "SFC01-NET002-01OMT",
+              "source-tp": "tp-add-c"
+            },
+            "destination": {
+              "dest-node": "DFW02-NET002-01OMT",
+              "dest-tp": "tp-drop-c"
+            },
+            "org-openroadm-common-network:opposite-link": "NET002-ZA-C",
+            "org-openroadm-common-network:link-length": "1200.0",
+            "org-openroadm-common-network:link-latency": 20,
+            "org-openroadm-network-topology:amplified": true,
+            "org-openroadm-network-topology:OMS-attributes": {
+              "amplified-link": {
+                "amplified-link": [
+                  {
+                    "section-elt-number": 1,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "SFC01-NET002-01OMT"
+                      }
+		    }
+		  },
+		  {
+		    "section-elt-number": 2,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 3,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "JFK02-NET002-02OIL"
+                      }
+		    }
+		  },
+		  {
+		    "section-elt-number": 4,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 5,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "DFW02-NET002-01OMT"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "link-id": "NET002-ZA-C",
+            "source": {
+              "source-node": "DFW02-NET002-01OMT",
+              "source-tp": "tp-add-c"
+            },
+            "destination": {
+              "dest-node": "SFC01-NET002-01OMT",
+              "dest-tp": "tp-drop-c"
+            },
+            "org-openroadm-common-network:opposite-link": "NET002-AZ-C",
+            "org-openroadm-common-network:link-length": "1200.0",
+            "org-openroadm-common-network:link-latency": 20,
+            "org-openroadm-network-topology:amplified": true,
+            "org-openroadm-network-topology:OMS-attributes": {
+              "amplified-link": {
+                "amplified-link": [
+                  {
+                    "section-elt-number": 1,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "SFC01-NET002-01OMT"
+                      }
+		    }
+		  },
+		  {
+		    "section-elt-number": 2,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 3,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "JFK02-NET002-02OIL"
+                      }
+		    }
+		  },
+		  {
+                    "section-elt-number": 4,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 5,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "DFW02-NET002-01OMT"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "link-id": "NET002-AZ-L",
+            "source": {
+              "source-node": "SFC01-NET002-01OMT",
+              "source-tp": "tp-add-c"
+            },
+            "destination": {
+              "dest-node": "DFW02-NET002-01OMT",
+              "dest-tp": "tp-drop-c"
+            },
+            "org-openroadm-common-network:opposite-link": "NET002-ZA-L",
+            "org-openroadm-common-network:link-length": "1200.0",
+            "org-openroadm-common-network:link-latency": 20,
+            "org-openroadm-network-topology:amplified": true,
+            "org-openroadm-network-topology:OMS-attributes": {
+              "amplified-link": {
+                "amplified-link": [
+                  {
+                    "section-elt-number": 1,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "SFC01-NET002-01OMT"
+                      }
+		    }
+		  },
+		  {
+		    "section-elt-number": 2,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 3,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "JFK02-NET002-02OIL"
+                      }
+		    }
+		  },
+		  {
+		    "section-elt-number": 4,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 5,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "DFW02-NET002-01OMT"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "link-id": "NET002-ZA-L",
+            "source": {
+              "source-node": "DFW02-NET002-01OMT",
+              "source-tp": "tp-add-c"
+            },
+            "destination": {
+              "dest-node": "SFC01-NET002-01OMT",
+              "dest-tp": "tp-drop-c"
+            },
+            "org-openroadm-common-network:opposite-link": "NET002-AZ-L",
+            "org-openroadm-common-network:link-length": "1200.0",
+            "org-openroadm-common-network:link-latency": 20,
+            "org-openroadm-network-topology:amplified": true,
+            "org-openroadm-network-topology:OMS-attributes": {
+              "amplified-link": {
+                "amplified-link": [
+                  {
+                    "section-elt-number": 1,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "SFC01-NET002-01OMT"
+                      }
+		    }
+		  },
+		  {
+		    "section-elt-number": 2,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 3,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "JFK02-NET002-02OIL"
+                      }
+		    }
+		  },
+		  {
+		    "section-elt-number": 4,
+                    "section-element": {
+                      "span": {
+                        "auto-spanloss": true,
+                        "spanloss-base": "15.0",
+                        "engineered-spanloss": "15.0",
+                        "link-concatenation": [
+                          {
+                            "SRLG-Id": 1,
+                            "SRLG-length": "120.0",
+                            "fiber-type": "smf",
+                            "pmd": "1.0"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "section-elt-number": 5,
+                    "section-element": {
+                      "ila": {
+                        "amp-type": "standard",
+                        "amp-gain-range": "gain-range-2",
+                        "ingress-span-loss-aging-margin": "2.0",
+                        "gain": "15.0",
+                        "initially-planned-gain": "14.0",
+                        "tilt": "0.1",
+                        "initially-planned-tilt": "0.2",
+                        "out-voa-att": "5.0",
+                        "initially-planned-out-voa-att": "5.0",
+                        "eol-max-load-pIn": "30.0",
+                        "egress-average-channel-power": "5.0",
+                        "node-id": "DFW02-NET002-01OMT"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

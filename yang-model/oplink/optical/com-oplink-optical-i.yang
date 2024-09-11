@@ -1,0 +1,76 @@
+//<CODE BEGINS> file "com-oplink-optical-i.yang"
+module com-oplink-optical-i{
+    namespace "http://com/oplink/optical-i";
+    prefix "com-oplink-optical-i";
+
+    import com-oplink-optical {
+        prefix com-oplink-optical;
+    }
+    
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink Communications, LLC";
+
+    description
+        "YANG definitions for internal optical control and modules";
+
+    revision 2019-04-01 {
+      description
+        "Oplink Version 2.0";
+    }
+
+    uses com-oplink-optical:optical-top {
+      refine optical-control/optical-modules/optical-amplifier/amplifiers/amplifier/circuit-pack-name {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-amplifier/amplifiers/amplifier/component-name {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-amplifier/supervisory-channels/supervisory-channel/circuit-pack-name {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-amplifier/supervisory-channels/supervisory-channel/component-name {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-attenuator/attenuators/attenuator/circuit-pack-name {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-attenuator/attenuators/attenuator/component-name {
+         config true;
+      }
+      refine optical-control/optical-modules/aps/aps-modules/aps-module/circuit-pack-name {
+         config true;
+      }
+      refine optical-control/optical-modules/aps/aps-modules/aps-module/component-name {
+         config true;
+      }
+
+      refine optical-control/optical-modules/channel-monitors/ocm-modules/ocm-module/circuit-pack-name {
+         config true;
+      }
+      refine optical-control/optical-modules/channel-monitors/ocm-modules/ocm-module/component-name {
+         config true;
+      }
+      refine optical-control/optical-modules/channel-monitors/ocm-modules/ocm-module/component-type {
+         config true;
+      }
+      refine optical-control/optical-modules/channel-monitors/ocm-modules/ocm-module/component-index {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-time-domain-reflectometer/otdrs/otdr/circuit-pack-name {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-time-domain-reflectometer/otdrs/otdr/component-name {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-time-domain-reflectometer/otdrs/otdr/component-type {
+         config true;
+      }
+      refine optical-control/optical-modules/optical-time-domain-reflectometer/otdrs/otdr/component-index {
+         config true;
+      }
+    }
+}		
+//<CODE ENDS>

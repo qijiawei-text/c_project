@@ -1,0 +1,2434 @@
+module openconfig-transport-pms {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://openconfig.net/yang/transport-pms";
+
+  prefix "oc-opt-pms";
+
+  import openconfig-extensions { prefix oc-ext; }
+  import openconfig-yang-types {prefix oc-yang; }
+
+
+  // meta
+  organization "OpenConfig working group";
+
+  contact
+    "OpenConfig working group
+    www.openconfig.net";
+
+  description
+    "This model describes configuration, operational state data and RPC 
+    for performance management of optical transport system.";
+
+  oc-ext:openconfig-version "0.5.0";
+
+  revision "2021-07-11" {
+    description
+      "Add parameter tx-laser-age;
+      Add coherent transceiver modulator bias parameters:
+      tx-mod-bias-x-i, tx-mod-bias-x-q,
+      tx-mod-bias-y-i, tx-mod-bias-y-q,
+      tx-mod-bias-x-ph, tx-mod-bias-x-ph.
+      add coherent signal input power: OPR-signal-avg/max/min/inst.";
+    reference "0.11.0";
+  }
+
+  revision "2021-07-08" {
+    description
+      "Add two type of counters: power-low-second and power-los-second";
+    reference "0.10.0";
+  }
+
+  revision "2020-11-26" {
+    description
+      "Add pm-parameter attenuation";
+    reference "0.9.0";
+  }
+  
+  revision "2020-07-20" {
+    description
+      "Correct a typo error: iput --> input; 
+      Add pm-parameter SOP change rate";
+    reference "0.8.0";
+  }
+
+  revision "2020-06-19" {
+    description
+      "Add pm-parameter OSNR";
+    reference "0.7.0";
+  }
+
+  revision "2019-10-20" {
+    description
+      "Add pm-parameters gain, gain-tilt and return-loss;
+      Add otdr pm-parameters";
+    reference "0.6.0";
+  }
+
+  revision "2018-07-11" {
+    description
+      "Change the unit of voltage from mV to V;
+      Change the unit of fan-speed from rpm to percentage;
+      Delete Voltage-lane-1/2/3/4 from pm-parameter;
+      Add InUndersizePkts, OutOversizePkts, OutUndersizePkts, 
+      OutJabbers, OutFragments, OutCRCAlignErrors and OutFcsErrors
+      to pm-parameter;
+      Change the order of key in list pm-item to 
+      (pm-time-period pmp-type pm-parameter);
+      Delete the recursive-flag in RPC get-pm input;
+      Change component-name to entity-name in pmp-entity;
+      Add config ans state container to pm-point;
+      Change the order of key in list pm-set to 
+      (pm-time-period pmp-type);
+      Change pm-thresholds-value to pm-threshold in container
+      pm-thresholds";
+    reference "0.5.0";
+  }
+
+  revision "2018-03-20" {
+    description
+      "change pmp-type, pm-parameter and pmp-entity;
+      change the position of validity.";
+    reference "0.4.0";
+  }
+
+  revision "2018-02-11" {
+    description
+      "change validity-type definition to keep up with TMF standard;
+      fix some bugs;
+      add container for each list;
+      add -instant and -avg to differentiate instant value 
+      and average value";
+    reference "0.3.0";
+  }
+
+  revision "2018-01-29" {
+    description
+      "Added RPC: get-pm, clear-pm-data;
+      Add current-bin-24h; fix some bug";
+    reference "0.2.0";
+  }
+
+  revision "2018-01-26" {
+    description
+      "Initial public release";
+    reference "0.1.0";
+  }
+
+  //typedef
+
+  typedef validity-type {
+    type enumeration {
+      enum complete {
+        value 1;
+        description
+          "PM Data collection are completed in the bin.";
+      }
+
+      enum incomplete {
+        value 2;
+        description
+          "PM Data collection are only available for a part 
+          of the measurement interval.";
+      }
+
+      enum unavailable {
+        value 3;
+        description
+          "PM parameter not supported or PM data not available.";
+      }
+
+      enum invalid {
+        value 4;
+        description
+        "data available but marked as invalid for the interval. ";
+      }
+
+      enum all {
+        value 5;
+        description
+          "All PM Data collection.";
+      }
+    }
+  }
+
+  typedef pmp-type {
+    type enumeration {
+      enum not-applicable {
+        value 0;
+        description
+          "not applicable";
+      }
+
+      enum odu {
+        value 1;
+        description
+          "PM point of ODU. this pm-point at line-side port corresponds to high-order ODU,
+           while this at client-side port corresponds to low-order ODU.
+           the intermediate ODUs in the multiplex stage are internal from 
+           device perspective, so the related PMs are not defined in this model";
+      }
+
+      enum otu {
+        value 2;
+        description
+          "PM point of OTU";
+      }
+
+      enum delay-measurement-odu {
+        value 3;
+        description
+          "delay measurement PM point of ODU";
+      }
+
+      enum coherent-optical-interface {
+        value 4;
+        description
+          "PM point of coherent optical interface";
+      }
+
+      enum optical-power {
+        value 5;
+        description
+          "PM point of optical module";
+      }
+
+      enum ethernet {
+        value 6;
+        description
+          "PM point of Ethernet ingress and egress";
+      }
+
+      enum fec {
+        value 7;
+        description
+          "PM point of FEC";
+      }
+
+      enum chassis-temperature {
+        value 8;
+        description
+          "PM point of shelf temperature";
+      }
+
+      enum equipment-temperature {
+        value 9;
+        description
+          "PM point of equipment temperature";
+      }
+
+      enum optical-power-lane {
+        value 10;
+        description
+          "PM point of optical power with multiple lanes";
+      }
+
+      enum power-supply {
+        value 11;
+        description
+          "PM point of power supply";
+      }
+
+      enum fan-speed {
+        value 12;
+        description
+          "PM point of FAN speed";
+      }
+
+
+      enum all {
+        value 100;
+        description
+          "ALL";
+      }
+    }
+  }
+
+  typedef pm-parameter {
+    type enumeration {
+      enum all {
+        value 0;
+        description
+          "all pm-parameters";
+      }
+
+      enum EB {
+        description
+          "Errored Blocks. belong to pm-type: odu, otu, ethernet";
+      }
+
+      enum ES {
+        description
+          "Errored Seconds. belong to pm-type: odu, otu, ethernet";
+      }
+
+      enum SES {
+        description
+          "Severely Errored Seconds. belong to pm-type: odu, otu, ethernet";
+      }
+
+      enum UAS {
+        description
+          "Unavailable Seconds. belong to pm-type: odu, otu, ethernet";
+      }
+
+      enum CV {
+        description
+          "Coding Violation. belong to pm-type: odu, otu, ethernet";
+      }
+
+      enum BBE {
+        description
+          "Background block errors. belong to pm-type: odu, otu";
+      }
+
+      enum DELAY-avg {
+        description
+          "Average Value of Delay Measurement on ODU. unit: ps. belong to pm-type: odu";
+      }
+
+      enum DELAY-inst {
+        description
+          "Instant Value of Delay Measurement on ODU. unit: ps. belong to pm-type: odu";
+      }
+
+      enum DELAY-max {
+        description
+          "Max value of Delay Measurement on ODU. unit: ps. belong to pm-type: odu";
+      }
+
+      enum DELAY-min {
+        description
+          "Min value of Delay Measurement on ODU. unit: ps. belong to pm-type: odu";
+      }
+
+      enum DGD-avg {
+        description
+          "Average Value of Differential Group Delay. unit: ps. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum DGD-inst {
+        description
+          "Instant Value of Differential Group Delay. unit: ps. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum DGD-max {
+        description
+          "Maximum of Differential Group Delay. unit: ps. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum DGD-min {
+        description
+          "Minimum of Differential Group Delay. unit: ps. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum CD-avg {
+        description
+          "Average Value of Chromatic Dispersion. unit: ps/nm. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum CD-inst {
+        description
+          "Instant Value of Chromatic Dispersion. unit: ps/nm. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum CD-max {
+        description
+          "Maximum of Chromatic Dispersion. unit: ps/nm. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum CD-min {
+        description
+          "Minimum of Chromatic Dispersion. unit: ps/nm. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum ESNR-avg {
+        description
+          "Average value of ESNR, The result could be ESNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum ESNR-inst {
+        description
+          "Instant value of ESNR, The result could be ESNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum ESNR-max {
+        description
+          "Maximum of ESNR. The result could be ESNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum ESNR-min {
+        description
+          "Minimum of ESNR. The result could be ESNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+      
+      enum OSNR-avg {
+        description
+          "Average value of OSNR, The result could be OSNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum OSNR-inst {
+        description
+          "Instant value of OSNR, The result could be OSNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum OSNR-max {
+        description
+          "Maximum of OSNR. The result could be OSNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum OSNR-min {
+        description
+          "Minimum of OSNR. The result could be OSNR value in dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum Q-factor-avg {
+        description
+          "Average value of Q-factor in dB. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum Q-factor-inst {
+        description
+          "Instant value of Q-factor in dB. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum Q-factor-max {
+        description
+          "Maximum of Q-factor. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum Q-factor-min {
+        description
+          "Minimum of Q-factor. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum PDL-avg {
+        description
+          "Average value of polarization dependent loss. unit: dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum PDL-inst {
+        description
+          "Instant value of polarization dependent loss. unit: dB.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum PDL-max {
+        description
+          "Maximum of PDL. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum PDL-min {
+        description
+          "Minimum of PDL. belong to pm-type: coherent-optical-interface";
+      }
+
+      enum BE-FEC {
+        description
+          "corrected Bit Error Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum UBE-FEC {
+        description
+          "Uncorrectable Block Error Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum PRE-FEC-BER-avg {
+        description
+          "Average Bit Error Rate before Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum PRE-FEC-BER-inst {
+        description
+          "instant Bit Error Rate before Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+
+      enum PRE-FEC-BER-max {
+        description
+          "Maximum of Bit Error Rate before Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum PRE-FEC-BER-min {
+        description
+          "Minimum of Bit Error Rate before Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum POST-FEC-BER-avg {
+        description
+          "Average Bit Error Rate After Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum POST-FEC-BER-inst {
+        description
+          "Instant Bit Error Rate After Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum POST-FEC-BER-max {
+        description
+          "Maximum of Bit Error Rate After Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum POST-FEC-BER-min {
+        description
+          "Minimum of Bit Error Rate After Forward Error Correction.
+          belong to pm-type: coherent-optical-interface, fec";
+      }
+
+      enum OPR-avg {
+        description
+          "Average Value of OPR Optical Power Received. unit: dbm. belong to pm-type: optical-power";
+      }
+
+      enum OPR-inst {
+        description
+          "Instant Value of OPR Optical Power Received. unit: dbm. belong to pm-type: optical-power";
+      }
+
+      enum OPR-max {
+        description
+          "Maximum of OPR Optical Power Received. belong to pm-type: optical-power";
+      }
+
+      enum OPR-min {
+        description
+          "Minimum of OPR Optical Power Receive. belong to pm-type: optical-power";
+      }
+
+      enum OPT-avg {
+        description
+          "Average Value of OPT Optical Power Transmitted. unit: dbm. belong to pm-type: optical-power";
+      }
+
+      enum OPT-inst {
+        description
+          "Instant Value of OPT Optical Power Transmitted. unit: dbm. belong to pm-type: optical-power";
+      }
+
+      enum OPT-max {
+        description
+          "Maximum of OPT Optical Power Transmitted. belong to pm-type: optical-power";
+      }
+
+      enum OPT-min {
+        description
+          "Minimum of OPT Optical Power Transmitted. belong to pm-type: optical-power";
+      }
+
+      enum OFT-avg {
+        description
+          "Value of OFT Optical Frequency Transmitted. unit: MHz
+          belong to pm-type: optical-power";
+      }
+
+      enum OFT-inst {
+        description
+          "Value of OFT Optical Frequency Transmitted. unit: MHz
+          belong to pm-type: optical-power";
+      }
+
+      enum OFT-max {
+        description
+          "Maximum of OFT Optical Frequency Transmitted. 
+          belong to pm-type: optical-power";
+      }
+
+      enum OFT-min {
+        description
+          "Minimum of OFT Optical Frequency Transmitted. 
+          belong to pm-type: optical-power";
+      }
+
+      enum OFR-avg {
+        description
+          "Value of OFR Optical Frequency Received. unit:MHz
+          belong to pm-type: optical-power";
+      }
+
+      enum OFR-inst {
+        description
+          "Value of OFR Optical Frequency Received. unit:MHz
+          belong to pm-type: optical-power";
+      }
+
+      enum OFR-max {
+        description
+          "Maximum of OFR Optical Frequency Received. unit:MHz
+          belong to pm-type: optical-power";
+      }
+
+      enum OFR-min {
+        description
+          "Minimum of OFR Optical Frequency Received. unit:MHz
+          belong to pm-type: optical-power";
+      }
+
+      enum BIAS-avg {
+        description
+          "Average Value of bias current of transmit laser. unit: mA
+          belong to pm-type: optical-power";
+      }
+
+      enum BIAS-inst {
+        description
+          "Instant Value of bias current of transmit laser. unit: mA
+          belong to pm-type: optical-power";
+      }
+
+      enum BIAS-max {
+        description
+          "Maximum of bias current of transmit laser. unit: mA
+          belong to pm-type: optical-power";
+      }
+
+      enum BIAS-min {
+        description
+          "Minimum of bias current of transmit laser. unit: mA
+          belong to pm-type: optical-power";
+      }
+
+      enum voltage-avg {
+        description
+          "Average Value of driven voltage of transmit laser. unit: mV
+          belong to pm-type: optical-power or optical-power-lane";
+      }
+
+      enum voltage-inst {
+        description
+          "Instant Value of driven voltage of transmit laser. unit: mV
+          belong to pm-type: optical-power or optical-power-lane";
+      }
+
+      enum voltage-max {
+        description
+          "Maximum of driven voltage of transmit laser. unit: mV
+          belong to pm-type: optical-power or optical-power-lane";
+      }
+
+      enum voltage-min {
+        description
+          "Minimum of driven voltage of transmit laser. unit: mV
+          belong to pm-type: optical-power or optical-power-lane";
+      }
+
+      enum InOctets {
+        description
+          "In Octets. belong to pm-type: ethernet";
+      }
+
+      enum InPkts {
+        description
+          "In Pkts. belong to pm-type: ethernet";
+      }
+
+      enum InUtilization-avg {
+        description
+          "Average Utilization. belong to pm-type: ethernet";
+      }
+
+      enum InUtilization-inst {
+        description
+          "Instant Utilization. belong to pm-type: ethernet";
+      }
+
+      enum InUtilization-max {
+        description
+          "Maximum of Utilization. belong to pm-type: ethernet";
+      }
+
+      enum InUtilization-min {
+        description
+          "Minimum of Utilization. belong to pm-type: ethernet";
+      }
+
+      enum InUnicastPkts {
+        description
+          "In UnicastPkts. belong to pm-type: ethernet";
+      }
+
+      enum InBroadcastPkts {
+        description
+          "In BroadcastPkts. belong to pm-type: ethernet";
+      }
+
+      enum InMulticastPkts {
+        description
+          "In MulticastPkts. belong to pm-type: ethernet";
+      }
+
+      enum InDiscards {
+        description
+          "In discards. belong to pm-type: ethernet";
+      }
+
+      enum InErrors {
+        description
+          "Number of inbound packets contains Errors. belong to pm-type: ethernet";
+      }
+
+      enum InUnknowns {
+        description
+          "Number of inbound packets with unknown or unsupported protocol.
+          belong to pm-type: ethernet";
+      }
+
+      enum InPkts64Octets {
+        description
+          "In Pkts64Octets. belong to pm-type: ethernet";
+      }
+
+      enum InPkts65to127Octets {
+        description
+          "In Pkts65to127Octets. belong to pm-type: ethernet";
+      }
+
+      enum InPkts128to255Octets {
+        description
+          "In Pkts128to255Octets. belong to pm-type: ethernet";
+      }
+
+      enum InPkts256to511Octets {
+        description
+          "In Pkts256to511Octets. belong to pm-type: ethernet";
+      }
+
+      enum InPkts512to1023Octets {
+        description
+          "In Pkts512to1023Octets. belong to pm-type: ethernet";
+      }
+
+      enum InPkts1024to1518Octets {
+        description
+          "In Pkts1024to1518Octets. belong to pm-type: ethernet";
+      }
+
+      enum InControls {
+        description
+        "In mac-layer control frames. belong to pm-type: ethernet";
+      }
+
+      enum InPauses {
+        description
+        "In mac-layer pause frames. belong to pm-type: ethernet";
+      }
+
+      enum In802q {
+        description
+          "In 802.1q frames. belong to pm-type: ethernet";
+      }
+
+      enum InOversizePkts {
+        description
+          "In OversizePkts. belong to pm-type: ethernet";
+      }
+
+      enum InUndersizePkts {
+        description
+          "In UndersizePkts. belong to pm-type: ethernet";
+      }
+
+      enum InJabbers {
+        description
+          "In Jabbers. belong to pm-type: ethernet";
+      }
+
+      enum InFragments {
+        description
+          "In Fragmentsments. belong to pm-type: ethernet";
+      }
+
+      enum InCRCAlignErrors {
+        description
+          "In CRCAlignErrors. belong to pm-type: ethernet";
+      }
+
+      enum InFcsErrors {
+        description "In fcs errors. belong to pm-type: ethernet";
+      }
+
+      enum OutOctets {
+        description
+          "Out Octets. belong to pm-type: ethernet";
+      }
+
+      enum OutPkts {
+        description
+          "Out Pkts. belong to pm-type: ethernet";
+      }
+
+      enum OutUtilization-avg {
+        description
+          "Average Utilization. belong to pm-type: ethernet";
+      }
+
+      enum OutUtilization-inst {
+        description
+          "Instant Utilization. belong to pm-type: ethernet";
+      }
+
+      enum OutUtilization-max {
+        description
+          "Maximum of Utilization. belong to pm-type: ethernet";
+      }
+
+      enum OutUtilization-min {
+        description
+          "Minimum of Utilization. belong to pm-type: ethernet";
+      }
+
+      enum OutUnicastPkts {
+        description
+          "Out UnicastPkts. belong to pm-type: ethernet";
+      }
+
+      enum OutBroadcastPkts {
+        description
+          "Out BroadcastPkts. belong to pm-type: ethernet";
+      }
+
+      enum OutMulticastPkts {
+        description
+          "Out MulticastPkts. belong to pm-type: ethernet";
+      }
+
+      enum OutDiscards {
+        description
+          "Out discards. belong to pm-type: ethernet";
+      }
+
+      enum OutErrors {
+        description
+          "Number of outbound packets contains Errors. belong to pm-type: ethernet";
+      }
+
+       enum OutUnknowns {
+        description
+          "Number of outbound packets with unknown or unsupported protocol.
+          belong to pm-type: ethernet";
+      }
+
+      enum OutPkts64Octets {
+        description
+          "Out Pkts64Octets. belong to pm-type: ethernet";
+      }
+
+      enum OutPkts65to127Octets {
+        description
+          "Out Pkts65to127Octets. belong to pm-type: ethernet";
+      }
+
+      enum OutPkts128to255Octets {
+        description
+          "Out Pkts128to255Octets. belong to pm-type: ethernet";
+      }
+
+      enum OutPkts256to511Octets {
+        description
+          "Out Pkts256to511Octets. belong to pm-type: ethernet";
+      }
+
+      enum OutPkts512to1023Octets {
+        description
+          "Out Pkts512to1023Octets. belong to pm-type: ethernet";
+      }
+
+      enum OutPkts1024to1518Octets {
+        description
+          "Out Pkts1024to1518Octets. belong to pm-type: ethernet";
+      }
+
+      enum OutControls {
+        description
+        "Out mac-layer control frames. belong to pm-type: ethernet";
+      }
+
+      enum OutPauses {
+        description
+        "Out mac-layer pause frames. belong to pm-type: ethernet";
+      }
+
+      enum Out802q {
+        description
+          "Out 802.1q frames. belong to pm-type: ethernet";
+      }
+
+      enum OutOversizePkts {
+        description
+          "Out OversizePkts. belong to pm-type: ethernet";
+      }
+
+      enum OutUndersizePkts {
+        description
+          "Out UndersizePkts. belong to pm-type: ethernet";
+      }
+
+      enum OutJabbers {
+        description
+          "Out Jabbers. belong to pm-type: ethernet";
+      }
+
+      enum OutFragments {
+        description
+          "Out Fragmentsments. belong to pm-type: ethernet";
+      }
+
+      enum OutCRCAlignErrors {
+        description
+          "Out CRCAlignErrors. belong to pm-type: ethernet";
+      }
+
+      enum OutFcsErrors {
+        description "Out fcs errors. belong to pm-type: ethernet";
+      }
+
+      enum OPR-total-avg {
+        description
+          "Average Value of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-total-inst {
+        description
+          "Instant Value of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-total-max {
+        description
+          "Maximum of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-total-min {
+        description
+          "Minimum of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-total-avg {
+        description
+          "Average Value of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-total-inst {
+        description
+          "Instant Value of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-total-max {
+        description
+          "Maximum of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-total-min {
+        description
+          "Minimum of total Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-1-avg {
+        description
+          "Average Value of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-1-inst {
+        description
+          "Instant Value of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-1-max {
+        description
+          "Maximum of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-1-min {
+        description
+          "Minimum of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-1-avg {
+        description
+          "Average Value of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-1-inst {
+        description
+          "Instant Value of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-1-max {
+        description
+          "Maximum of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-1-min {
+        description
+          "Minimum of lane-1 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-1-avg {
+        description
+          "Average Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-1-inst {
+        description
+          "Instant Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-1-max {
+        description
+          "Maximum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-1-min {
+        description
+          "Minimum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-2-avg {
+        description
+          "Average Value of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-2-inst {
+        description
+          "Instant Value of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-2-max {
+        description
+          "Maximum of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-2-min {
+        description
+          "Minimum of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-2-avg {
+        description
+          "Average Value of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-2-inst {
+        description
+          "Instant Value of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-2-max {
+        description
+          "Maximum of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-2-min {
+        description
+          "Minimum of lane-2 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-2-avg {
+        description
+          "Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-2-inst {
+        description
+          "Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-2-max {
+        description
+          "Maximum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-2-min {
+        description
+          "Minimum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-3-avg {
+        description
+          "Average Value of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-3-inst {
+        description
+          "Instant Value of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-3-max {
+        description
+          "Maximum of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-3-min {
+        description
+          "Minimum of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-3-avg {
+        description
+          "Average Value of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-3-inst {
+        description
+          "Instant Value of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-3-max {
+        description
+          "Maximum of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-3-min {
+        description
+          "Minimum of lane-3 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-3-avg {
+        description
+          "Average Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-3-inst {
+        description
+          "Instant Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-3-max {
+        description
+          "Maximum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-3-min {
+        description
+          "Minimum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-4-avg {
+        description
+          "Average Value of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-4-inst {
+        description
+          "Instant Value of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-4-max {
+        description
+          "Maximum of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPR-lane-4-min {
+        description
+          "Minimum of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-4-avg {
+        description
+          "Average Value of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-4-inst {
+        description
+          "Instant Value of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-4-max {
+        description
+          "Maximum of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum OPT-lane-4-min {
+        description
+          "Minimum of lane-4 Optical Power.
+           belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-4-avg {
+        description
+          "Average Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-4-inst {
+        description
+          "Instant Value of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-4-max {
+        description
+          "Maximum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum BIAS-lane-4-min {
+        description
+          "Minimum of bias current of transmit laser. 
+          belong to pm-type: optical-power-lane";
+      }
+
+      enum Tmodule-avg {
+        description
+          "The average module temperatur. 
+          belong to pm-type: equipment-temperature";
+      }
+
+      enum Tmodule-inst {
+        description
+          "The instant module temperatur. 
+          belong to pm-type: equipment-temperature";
+      }
+
+      enum Tmodule-max {
+        description
+          "Maximum of the module temperature. 
+          belong to pm-type: equipment-temperature";
+      }
+
+      enum Tmodule-min {
+        description
+          "Minimum of the module temperature. 
+          belong to pm-type: equipment-temperature";
+      }
+
+      enum Tinlet-avg {
+        description
+          "The average inlet temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum Tinlet-inst {
+        description
+          "The instant inlet temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum Tinlet-max {
+        description
+          "Maximum of the inlet temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum Tinlet-min {
+        description
+          "Minimum of the inlet temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum Toutlet-avg {
+        description
+          "The average outlet temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum Toutlet-inst {
+        description
+          "The instant temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum Toutlet-max {
+        description
+          "Maximum of the outlet temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum Toutlet-min {
+        description
+          "Minimum of the outlet temperature.
+          belong to pm-type: chassis-temperature";
+      }
+
+      enum input-current-avg {
+        description
+          "Average Value of input current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum input-current-inst {
+        description
+          "Instant Value of input current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum input-current-max {
+        description
+          "Maximum of input current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum input-current-min {
+        description
+          "Minimum of input current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum output-current-avg {
+        description
+          "Average Value of output current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum output-current-inst {
+        description
+          "Instant Value of output current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum output-current-max {
+        description
+          "Maximum of output current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum output-current-min {
+        description
+          "Minimum of output current of PSU. unit: mA
+          belong to pm-type: power-supply";
+      }
+
+      enum input-voltage-avg {
+        description
+          "Average Value of input voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum input-voltage-inst {
+        description
+          "Instant Value of input voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum input-voltage-max {
+        description
+          "Maximum of input voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum input-voltage-min {
+        description
+          "Minimum of input voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum output-voltage-avg {
+        description
+          "Average Value of output voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum output-voltage-inst {
+        description
+          "Instant Value of output voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum output-voltage-max {
+        description
+          "Maximum of output voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum output-voltage-min {
+        description
+          "Minimum of output voltage of PSU. unit: mV
+          belong to pm-type: power-supply";
+      }
+
+      enum output-power-avg {
+        description
+          "Average Value of output power of PSU. unit: watts
+          belong to pm-type: power-supply";
+      }
+
+      enum output-power-inst {
+        description
+          "Instant Value of output power of PSU. unit: watts
+          belong to pm-type: power-supply";
+      }
+
+      enum output-power-max {
+        description
+          "Maximum of output power of PSU. unit: watts
+          belong to pm-type: power-supply";
+      }
+
+      enum output-power-min {
+        description
+          "Minimum of output power of PSU. unit: watts
+          belong to pm-type: power-supply";
+      }
+
+      enum fan-speed-avg {
+        description
+          "Average value of FAN speed. unit: percentage
+          belong to pm-type: fan-speed";
+      }
+
+      enum fan-speed-inst {
+        description
+          "Instant value of FAN speed. unit: percentage
+          belong to pm-type: fan-speed";
+      }
+
+      enum fan-speed-max {
+        description
+          "Maximum value of FAN speed. unit: percentage
+          belong to pm-type: fan-speed";
+      }
+
+      enum fan-speed-min {
+        description
+          "Minimum value of FAN speed. unit: percentage
+          belong to pm-type: fan-speed";
+      }
+      
+      enum span-loss-avg {
+        description
+          "Average Value of span loss from otdr results. unit: db. belong to pm-type: optical-power";
+      }
+
+      enum span-loss-inst {
+        description
+          "Instant Value of span loss from otdr results. unit: db. belong to pm-type: optical-power";
+      }
+
+      enum span-loss-max {
+        description
+          "Maximum of span loss from otdr results. unit: db. belong to pm-type: optical-power";
+      }
+
+      enum span-loss-min {
+        description
+          "Minimum of span loss from otdr results. unit: db. belong to pm-type: optical-power";
+      }
+      
+      enum gain-avg {
+        description
+          "The average gain. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum gain-inst {
+        description
+          "The instant gain. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum gain-max {
+        description
+          "Maximum of the gain. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum gain-min {
+        description
+          "Minimum of the gain. unit: dB
+          belong to pm-type: optical-power";
+      }
+      
+      enum gain-tilt-avg {
+        description
+          "The average gain tilt. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum gain-tilt-inst {
+        description
+          "The instant gain tilt. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum gain-tilt-max {
+        description
+          "Maximum of the gain tilt. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum gain-tilt-min {
+        description
+          "Minimum of the gain tilt. unit: dB
+          belong to pm-type: optical-power";
+      }
+      
+      enum return-loss-avg {
+        description
+          "The average optical return loss. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum return-loss-inst {
+        description
+          "The instant optical return loss. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum return-loss-max {
+        description
+          "Maximum of the optical return loss. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum return-loss-min {
+        description
+          "Minimum of the optical return loss. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum sop-change-rate-avg {
+        description
+          "The average sop change rate. unit: rads/s
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum sop-change-rate-inst {
+        description
+          "The instant sop change rate. unit: rads/s
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum sop-change-rate-max {
+        description
+          "Maximum of sop change rate. unit: rads/s
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum sop-change-rate-min {
+        description
+          "Minimum of sop change rate. unit: rads/s
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum attenuation-avg {
+        description
+          "The average attenuation. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum attenuation-inst {
+        description
+          "The instant attenuation. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum attenuation-max {
+        description
+          "Maximum of the attenuation. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum attenuation-min {
+        description
+          "Minimum of the attenuation. unit: dB
+          belong to pm-type: optical-power";
+      }
+
+      enum OPT-low-second {
+        description
+          "Number of seconds that power low is detected.
+          unit: s, belong to pm-type: optical power";
+      }
+
+      enum OPT-los-second {
+        description
+          "Number of seconds that power los is detected.
+          unit: s, belong to pm-type: optical power";
+      }
+
+      enum OPR-low-second {
+        description
+          "Number of seconds that power low is detected.
+          unit: s, belong to pm-type: optical power";
+      }
+
+      enum OPR-los-second {
+        description
+          "Number of seconds that power los is detected.
+          unit: s, belong to pm-type: optical power";
+      }
+
+      enum tx-laser-age {
+        description
+          "the laser age value to be the percentage of End Of Life.
+          this value will be 0% at Beginning Of Life and will be
+          100% at End Of Life.
+          the value at the end of the time period should be provided.
+          unit: Percent.
+          belong to pm-type: coherent-optical-interface. ";
+      }
+
+      enum tx-mod-bias-x-i-avg {
+        description
+          "The average TX modulator Bias X/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-i-max {
+        description
+          "The maximum TX modulator Bias X/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-i-min {
+        description
+          "The minimum TX modulator Bias X/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-i-inst {
+        description
+          "The instant TX modulator Bias X/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-q-avg {
+        description
+          "The average TX modulator Bias X/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-q-max {
+        description
+          "The maximum TX modulator Bias X/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-q-min {
+        description
+          "The minimum TX modulator Bias X/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-q-inst {
+        description
+          "The instant TX modulator Bias X/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-i-avg {
+        description
+          "The average TX modulator Bias Y/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-i-max {
+        description
+          "The maximum TX modulator Bias Y/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-i-min {
+        description
+          "The minimum TX modulator Bias Y/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-i-inst {
+        description
+          "The instant TX modulator Bias Y/I.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-q-avg {
+        description
+          "The average TX modulator Bias Y/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-q-max {
+        description
+          "The maximum TX modulator Bias Y/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-q-min {
+        description
+          "The minimum TX modulator Bias Y/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-q-inst {
+        description
+          "The instant TX modulator Bias Y/Q.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-ph-avg {
+        description
+          "The average TX modulator Bias X phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-ph-max {
+        description
+          "The maximum TX modulator Bias X phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-ph-min {
+        description
+          "The minimum TX modulator Bias X phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-x-ph-inst {
+        description
+          "The instant TX modulator Bias X phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-ph-avg {
+        description
+          "The average TX modulator Bias Y phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-ph-max {
+        description
+          "The maximum TX modulator Bias Y phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-ph-min {
+        description
+          "The minimum TX modulator Bias Y phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum tx-mod-bias-y-ph-inst {
+        description
+          "The instant TX modulator Bias Y phase.
+          A bias of 0.00% indicates the bias control is at or below its
+          minimum operating value; A bias of 100.00% indicates the bias
+          control is at or above the maximum operating value.
+          unit: Percent with 0.01 step.
+          belong to pm-type: coherent-optical-interface";
+      }
+
+      enum OPR-signal-avg {
+        description
+          "Average Value of OPR coherent signal Optical Power Received.
+          unit: dbm. belong to pm-type: optical-power";
+      }
+
+      enum OPR-signal-inst {
+        description
+          "Instant Value of OPR coherent signal Optical Power Received.
+          unit: dbm. belong to pm-type: optical-power";
+      }
+
+      enum OPR-signal-max {
+        description
+          "Maximum of OPR coherent signal Optical Power Received.
+          unit: dbm. belong to pm-type: optical-power";
+      }
+
+      enum OPR-signal-min {
+        description
+          "Minimum of OPR coherent signal Optical Power Receive.
+          unit: dbm. belong to pm-type: optical-power";
+      }
+    }
+  }
+
+  typedef threshold-value {
+    type string {
+      length "1..32";
+    }
+  }
+
+  typedef unit-of-value {
+    type enumeration {
+      enum not-applicable {
+        value 0;
+      }
+
+      enum dBm {
+        value 1;
+      }
+
+      enum ms {
+        value 2;
+      }
+
+      enum ps {
+        value 3;
+      }
+
+      enum pspnm {
+        value 4;
+      }
+
+      enum dB {
+        value 5;
+      }
+
+      enum Seconds {
+        value 6;
+      }
+
+      enum Packets {
+        value 7;
+      }
+
+      enum Events {
+        value 8;
+      }
+
+      enum Octets {
+        value 9;
+      }
+
+      enum Bits {
+        value 10;
+      }
+
+      enum Bitsps {
+        value 11;
+      }
+
+      enum Blocks {
+        value 12;
+      }
+
+      enum Times {
+        value 13;
+      }
+
+      enum Percentage {
+        value 14;
+      }
+
+      enum Bit-ratio {
+        value 15;
+      }
+
+      enum MHz {
+        value 16;
+      }
+
+      enum DegreeC {
+        value 17;
+      }
+
+      enum mV {
+        value 18;
+      }
+
+      enum mA {
+        value 19;
+      }
+
+      enum Watts {
+        value 20;
+      }
+
+      enum rpm {
+        value 21;
+      }
+    }
+  }
+
+  typedef management-time-period {
+    type enumeration {
+      enum not-applicable {
+        value 0;
+      }
+
+      enum 15min {
+        value 1;
+      }
+
+      enum 24h {
+        value 2;
+      }
+    }
+  }
+
+  typedef enable-switch {
+    type enumeration {
+      enum enabled {
+        value 1;
+      }
+      enum disabled {
+        value 2;
+      }
+    }
+  }
+
+  //Pm-point configuration
+
+  grouping pm-thresholds {
+    container pm-thresholds {
+      description
+        "Containing the pm thresholds corresponding to each performance monitoring parameter.";
+      list pm-threshold {
+        key "pm-parameter";
+        description
+          "The list of entries of performance mornitoring threshold value.";
+
+        leaf pm-parameter {
+          type oc-opt-pms:pm-parameter;
+          description
+            "Performance Monitoring parameter, which could be a counter or gauge parameter, the later support current/avg, max and min values.";
+        }
+
+        leaf pm-high-threshold {
+          type oc-opt-pms:threshold-value;
+          description
+            "Specifies the desired high threshold value of the selected performance monitoring parameter.";
+        }
+
+        leaf pm-low-threshold {
+          type oc-opt-pms:threshold-value;
+          description
+            "Specifies the desired low threshold value of the selected performance monitoring parameter.";
+        }
+
+        leaf pm-unit {
+          type oc-opt-pms:unit-of-value;
+          config false;
+          description
+            "The unit of the performance monitoring value.";
+        }
+      }
+    }
+  }
+
+  grouping pm-set {
+    description
+      "pm set group";
+    container pm-sets
+    {  
+      list pm-set {
+        key "pm-time-period pmp-type";
+        description
+          "The list of performance monitoring parameters";
+
+        leaf pm-time-period {
+          type oc-opt-pms:management-time-period;
+          description
+            "Specifies the time-period increments during which PM data are collected.";
+        }
+
+        leaf pmp-type {
+          type oc-opt-pms:pmp-type;
+          description
+            "Specifies the type of performance monitoring point.";
+        }
+
+        leaf supervision-switch {
+          type oc-opt-pms:enable-switch;
+          default "disabled";
+          description
+            "Enable/disable counting for all performance monitoring parameters of the given PMP.";
+        }
+
+        leaf thresholding-switch {
+          type oc-opt-pms:enable-switch;
+          default "enabled";
+          description
+            "Enable/disable the TCA processing and reporting for all performance monitoring parameters of the given PMP.";
+        }
+
+        leaf history-recording {
+          type oc-opt-pms:enable-switch;
+          default "enabled";
+          description
+            "Enable/disable the history data storage for all performance monitoring parameters of the given PM point.";
+        }
+
+        uses oc-opt-pms:pm-thresholds;
+      }
+    }
+  }
+  // pmp-entity still need to discuss
+  grouping pmp-entity {
+    description 
+      "Specifies the management object instance the performance monitoring data are collected for.";
+
+    leaf entity-name {
+      type string;
+      description
+        "Name of the monitored entity. special value 'all' means all.
+        It may be a component name, an amplifier name, or something else
+        to be extended. 
+        the PMs of logical-channel and interface are classified into related 
+        port (component).";
+    }
+  }
+
+  grouping pm-point {
+    description
+      "pm point group";
+    container pm-points
+    {
+      list pm-point {
+        key "entity-name";
+        description
+          "The list of performance monitoring point";
+
+        leaf entity-name {
+          type leafref {
+            path "../config/entity-name";
+          }
+          description
+            "Reference to the entity-name list key";
+        }
+
+        container config {
+          description
+            "Configuration data for the pm-point";
+
+          uses pmp-entity;
+          uses pm-set;
+        }
+
+        container state {
+
+          config false;
+
+          description
+            "Operational state data for the pm-point";
+
+          uses pmp-entity;
+          uses pm-set;
+        } 
+      }
+    }
+  }
+
+  //pm data
+
+  grouping get-pm-parameter {
+    leaf pm-time-period {
+        type oc-opt-pms:management-time-period;
+        description
+        " Specifies the time-period increments during which PM data are collected.
+        All means all available pm-time-period'";
+    }
+
+    leaf pmp-type {
+      type oc-opt-pms:pmp-type;
+      description
+        "Specifies the type of performance monitoring point.
+        if not input it means 'all pm types'";
+    }
+
+    leaf pm-parameter {
+      type oc-opt-pms:pm-parameter;
+      description
+        "Performance Monitoring parameter, which could be a counter or gauge parameter, the later support current, max and min values.";
+    }
+  }
+
+  grouping pm-item {
+    description
+      "pm item group";
+
+    uses get-pm-parameter;
+
+    leaf monitoring-date-time {
+      type oc-yang:date-and-time;
+      description
+        "Monitoring data and time. this field is not applicable for counters and average value";
+    }
+
+    leaf pm-value {
+      type string {
+        length "1..32";
+      }
+      description
+        "PM counter or gauge value of the PM parameter.";
+    }
+
+    leaf validity{
+      type oc-opt-pms:validity-type;
+    }
+  }
+
+  grouping pm-entity-data {
+    description
+      "PM entity data group";
+
+    uses pmp-entity;
+ 
+    container pm-items
+    {
+      list pm-item
+      {
+        description
+          "the PM data list of the specified pm-entity";
+        key "pm-time-period pmp-type pm-parameter";
+        uses pm-item;
+      }
+    }
+  }
+
+  grouping pm-bin-data{
+    description
+      "Pm bin data group";
+
+    container pm-instances
+    {  
+      list pm-instance
+      {
+        description
+          "the list of PM entity data";
+        key "entity-name";
+
+        uses pm-entity-data;
+      }
+    }
+  }
+
+  grouping pm-bin {
+    description
+      "Pm bin group";
+    
+    leaf pm-bin-no
+    {
+      type uint16;      
+      description
+        "bin number. ";
+    }
+
+    container pm-bin-state
+    {
+      leaf collect-start-time
+      {
+        type oc-yang:date-and-time;
+      }
+
+      leaf collect-end-time
+      {
+        type oc-yang:date-and-time;
+      }      
+
+      leaf bin-time-period {
+        type oc-opt-pms:management-time-period;
+      }
+    }
+
+    uses pm-bin-data;
+  }
+
+  grouping pm-bins {
+    description
+      "Pm bins group";
+    
+    leaf pm-bins-size
+    {
+      description
+        "the size of PM bins";
+      type uint16;
+    }
+
+    list pm-bin
+    {
+      key "pm-bin-no";
+      uses pm-bin;
+    }
+  }
+
+  grouping history-bins-15min
+  {
+    container history-bins-15min {
+      uses pm-bins;
+    }
+  }
+
+  grouping history-bins-24h
+  {
+    container history-bins-24h {
+      uses pm-bins;
+    }
+  }
+
+  grouping current-bin-15min
+  {
+    container current-bin-15min {
+      uses pm-bin;
+    }
+  }
+
+  grouping current-bin-24h
+  {
+    container current-bin-24h {
+      uses pm-bin;
+    }
+  }
+
+  grouping pm-top {
+    uses pm-point;
+
+    container pm-data {
+      config false;
+
+      uses current-bin-15min;
+      uses current-bin-24h;
+      uses history-bins-15min;
+      uses history-bins-24h;
+    }
+  }
+
+  uses pm-top;
+
+  //RPC
+  grouping pm-rpc-parameter {
+    leaf pm-bin-type {
+      type enumeration {
+        enum current {
+          value 1;
+        }
+
+        enum history {
+          value 2;
+        }
+      }
+
+      default current;
+      description
+        "Indicates the type of the performance monitoring data bin.";
+    }
+
+    uses pmp-entity {
+      refine entity-name {
+        default all;
+      }
+    }
+
+    uses get-pm-parameter {
+      refine pmp-type {
+        default all;
+      }
+
+      refine pm-time-period {
+        default 15min;
+      }
+
+      refine pm-parameter {
+        default all;
+      }
+    }
+
+    leaf validity{
+      type oc-opt-pms:validity-type;
+      default all;
+    }
+  }
+
+  rpc get-pm {
+    description
+      "rpc for pm data get";
+    input {
+      uses pm-rpc-parameter;
+
+      leaf start-number-of-bin {
+        when "../pm-bin-type = 'history'";
+        type uint16;
+        description
+          "Restrict the start logical number of pm data bin that will be
+          retrieved. Only applicable for 'history' retrieval.
+          it is recommended that: the latest history record always has
+          logical bin-number 1, and all history-bins are listed by 
+          collect-start-time in descending order as logical bin-number 
+          increases. ";
+      }
+
+      leaf end-number-of-bin {
+        when "../pm-bin-type = 'history'";
+        type uint16;
+        description
+          "Restrict the end number of pm data bin that will be
+          retrieved. Only applicable for 'history' retrieval.";
+      }
+    }
+
+    output {
+      container pm-results {
+        list pm-result {
+          key "pm-bin-no";
+          description
+            "Defines the get-pm output of record performance data";
+          
+          uses pm-bin;
+        }
+      }
+    }
+  }
+
+  rpc clear-pm-data {
+    description
+      "Allows to clear PM data";
+    input {
+      uses pm-rpc-parameter {
+        refine pm-bin-type {
+          must "current() = 'current'";
+        }
+      }
+    }
+  }
+}

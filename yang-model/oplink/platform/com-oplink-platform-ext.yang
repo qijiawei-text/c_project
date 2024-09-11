@@ -1,0 +1,442 @@
+module com-oplink-platform-ext { 
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://com/oplink/platform-ext";
+
+  prefix "com-oplink-platform-ext";
+
+  import openconfig-platform {prefix oc-platform;} 
+  import openconfig-transport-line-common {prefix oc-line-com;}
+  import openconfig-types { prefix oc-types; }
+  import openconfig-yang-types { prefix oc-yang; }
+
+  description
+    "YANG definitions of openconfig-platform extension.";
+
+  revision 2021-07-08{
+    description
+      "add two counters to optical port (both input and output):
+      power low second and power los second";
+    reference "0.2.0";
+  }
+
+  revision 2021-06-06{
+    description
+      "Initial version.
+      add LED operation.
+      add c band and l band power monitoring to optical port";
+    reference "0.1.0";
+  }
+
+  grouping component-state-led-ext {
+    description 
+      "led extension data for the component state.";
+    container leds {
+      description 
+        "Enclosing container";
+
+      list led {
+        key "name";
+        description
+          "list of led state for the component";
+
+        leaf name {
+          type string;
+          description 
+            "System-supplied name of the LED";
+        }
+
+        leaf led-function {
+          type string;
+          description 
+            "Function of the LED";
+        }
+
+        leaf led-status {
+          description 
+            "LED working status";
+          type enumeration {
+            enum RED {
+              description 
+                "red";
+            }
+            enum GREEN {
+              description
+                "green";
+            }
+            enum RED_FLASH {
+              description
+                "red flash";
+            }
+            enum GREEN_FLASH {
+              description
+                "green flash";
+            }
+            enum RED_GREEN_FLASH {
+              description
+                "red green flash";
+            }
+            enum LAMPTEST {
+              description
+                "lamptest flash";
+            }
+            enum OFF {
+              description
+                "LED off";
+            }
+            enum ABNORMAL {
+              description
+                "abnormal";
+            }
+            enum AMBER {
+              description
+                "amber";
+            }
+            enum AMBER_FLASH {
+              description
+                "amber flash";
+            }
+          }
+        }
+      }
+    }
+  }
+
+  grouping optical-port-state-ext {
+
+    leaf input-power-low-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power low is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null (for example, power low threshold is not defined)";
+    }
+
+    leaf input-power-los-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power los is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null";
+    }
+
+    leaf output-power-low-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power low is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null (for example, power low threshold is not defined)";
+    }
+
+    leaf output-power-los-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power los is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null";
+    }
+
+    container input-power-c-band {
+      description
+        "The C band input optical power of this port in units
+        of 0.01dBm. If avg/min/max statistics are not supported,
+        just supply the instant value. this filed is available
+        only when the port supports both C band and L band";
+
+      uses oc-types:avg-min-max-instant-stats-precision2-dBm;
+    }
+
+    container input-power-l-band {
+      description
+        "The L band input optical power of this port in units
+        of 0.01dBm. If avg/min/max statistics are not supported,
+        just supply the instant value. this filed is available
+        only when the port supports both C band and L band";
+
+      uses oc-types:avg-min-max-instant-stats-precision2-dBm;
+    }
+
+    leaf input-power-c-band-low-second {
+       type oc-yang:counter64;
+       description
+         "The Number of seconds that power low is detected exceeds
+         a predefined threshold. if it is not available, the default
+         value is null (for example, power low threshold is not defined).
+         this field is available only when the port supports both C band
+         and L band";
+     }
+
+     leaf input-power-c-band-los-second {
+       type oc-yang:counter64;
+       description
+         "The Number of seconds that power los is detected exceeds
+         a predefined threshold. if it is not available, the default
+         value is null. this field is available only when the port
+         supports both C band and L band";
+     }
+
+    leaf input-power-l-band-low-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power low is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null (for example, power low threshold is not defined).
+        this field is available only when the port supports both C band
+        and L band";
+    }
+
+    leaf input-power-l-band-los-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power los is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null. this field is available only when the port
+        supports both C band and L band";
+    }
+
+    container output-power-c-band {
+      description
+        "The C band output optical power of this port in units
+        of 0.01dBm. If avg/min/max statistics are not supported,
+        just supply the instant value. this filed is available
+        only when the port supports both C band and L band";
+
+      uses oc-types:avg-min-max-instant-stats-precision2-dBm;
+    }
+
+    container output-power-l-band {
+      description
+        "The L band output optical power of this port in units
+        of 0.01dBm. If avg/min/max statistics are not supported,
+        just supply the instant value. this filed is available
+        only when the port supports both C band and L band";
+
+      uses oc-types:avg-min-max-instant-stats-precision2-dBm;
+    }
+
+    leaf output-power-c-band-low-second {
+       type oc-yang:counter64;
+       description
+         "The Number of seconds that power low is detected exceeds
+         a predefined threshold. if it is not available, the default
+         value is null (for example, power low threshold is not defined).
+         this field is available only when the port supports both C band
+         and L band";
+     }
+
+     leaf output-power-c-band-los-second {
+       type oc-yang:counter64;
+       description
+         "The Number of seconds that power los is detected exceeds
+         a predefined threshold. if it is not available, the default
+         value is null. this field is available only when the port
+         supports both C band and L band";
+     }
+
+    leaf output-power-l-band-low-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power low is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null (for example, power low threshold is not defined).
+        this field is available only when the port supports both C band
+        and L band";
+    }
+
+    leaf output-power-l-band-los-second {
+      type oc-yang:counter64;
+      description
+        "The Number of seconds that power los is detected exceeds
+        a predefined threshold. if it is not available, the default
+        value is null. this field is available only when the port
+        supports both C band and L band";
+    }
+  }
+
+  grouping led-operation-input {
+    description 
+      "Input of the RPC led operation";
+
+    leaf operation {
+      mandatory true;
+      description 
+        "LED operations";
+      type enumeration {
+        enum ENABLED {
+          description "LED enabled";
+        }
+        enum DISABLED {
+          description "LED disabled";
+        }
+      }
+    }
+
+    leaf interval {
+      description 
+        "Effective time of the RPC operation. unit: second";
+      type uint16;
+
+      default 300;
+    }
+
+    leaf source-component {
+      mandatory true;
+      description 
+        "The source component name";
+      type string;
+    }
+
+    leaf source-led {
+      description 
+        "The source LED name";
+      type string;
+    }
+  }
+
+  grouping led-operation-output {
+    description 
+      "Input of the RPC led operation";
+
+    leaf message {
+      description 
+        "RPC output message";
+      type string;
+    }
+  }
+
+  grouping platform-component-state-ext {
+    description 
+      "According to the requirements of Fujitsu, extend Operational state data for device components";
+
+    leaf unit-name {
+      description 
+        "Product name or Unit code";
+      type string;
+    }
+    leaf fc-number {
+      description 
+        "FC number";
+      type string;
+    }
+    leaf piu-issue-number {
+      description 
+        "FC issue number";
+      type string;
+    }
+    leaf fujitsu-part-number {
+      description 
+        "Fujitsu part number";
+      type string;
+    }
+
+    leaf fujitsu-vendor-name {
+      description
+        "Fujitsu vendor name";
+      type string;
+    }
+
+    leaf fujitsu-serial-number {
+      description
+        "Fujitsu serial number";
+      type string;
+    }
+
+    leaf clei {
+      description
+        "clei";
+      type string;
+    }
+
+    leaf fpga-version {
+      description
+        "fpga version. If the component has FPGA, will report this version";
+      type string;
+    }
+
+    leaf cpld-version {
+      description
+        "cpld version. If the component has CPLD, will report this version";
+      type string;
+    }
+
+    leaf model {
+      type string;
+      description
+        "Physical resource model information. This is from org-openroadm-physical-types.yang";
+    }
+    
+    leaf chassis-type {
+      type string;
+      description
+        "This is used to seperate the chassis AMP or OPS";
+    }
+  }
+
+  augment "/oc-platform:components/oc-platform:component/oc-platform:state" {
+    uses component-state-led-ext;
+    uses platform-component-state-ext;
+  }
+
+  augment "/oc-platform:components/oc-platform:component/oc-platform:port" + 
+    "/oc-line-com:optical-port/oc-line-com:state" {
+    uses optical-port-state-ext;
+  }
+
+  rpc led-operation {
+    description 
+      "RPC for LED operation";
+    input {
+      uses led-operation-input;
+    }
+
+    output {
+      uses led-operation-output;
+    }
+  }
+
+  rpc set-chassis-type {
+    description
+      "RPC for set chassis type operation";
+
+    input {
+      leaf chassis-type {
+        mandatory true;
+        description
+          "LED working status";
+        type enumeration {
+          enum AMP {
+            description
+              "amp blade";
+          }
+          enum OPS {
+            description
+              "ops blade";
+          }
+        }
+      }
+    }
+
+    output {
+      leaf status {
+        type enumeration {
+          enum "Successful" {
+            value 1;
+          }
+          enum "Failed" {
+            value 2;
+          }
+        }
+        mandatory true;
+        description
+          "Successful or Failed";
+      }
+      leaf status-message {
+        type string;
+        description
+          "Gives a more detailed reason for success / failure";
+      }
+    }
+  }
+}

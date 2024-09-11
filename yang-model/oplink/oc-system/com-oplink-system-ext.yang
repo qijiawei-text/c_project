@@ -1,0 +1,62 @@
+module com-oplink-system-ext { 
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://com/oplink/system-ext";
+
+  prefix "com-oplink-system-ext";
+
+  import openconfig-system {prefix oc-sys;} 
+
+  description
+    "YANG definitions of openconfig-system extension.";
+
+  revision 2021-07-08{
+    description
+      "Update ntp status: UNREACHABLE, UNSYNCHRONIZED, SYNCHRONIZED";
+    reference "0.2.0";
+  }
+
+  revision 2021-06-06{
+    description
+      "Initial version. add ntp status and selected server";
+    reference "0.1.0";
+  }
+
+  grouping ntp-state-ext {
+    description 
+      "extension data for the system ntp status.";
+    leaf ntp-server-selected {
+      type leafref {
+        path "/oc-sys:system/oc-sys:ntp/oc-sys:servers" +
+        "/oc-sys:server/oc-sys:state/oc-sys:address";
+      }
+      description "the system selected ntp server";
+    }
+
+    leaf ntp-status {
+      description
+        "NTP working status";
+      type enumeration {
+        enum UNREACHABLE {
+          description
+            "The NTP server is not reachable";
+        }
+        enum UNSYNCHRONIZED {
+          description
+            "The time is not synchronized";
+        }
+        enum SYNCHRONIZED {
+          description
+            "The time is synchronized";
+        }
+      }
+    }
+  }
+
+  augment "/oc-sys:system/oc-sys:ntp/oc-sys:state" {
+    uses ntp-state-ext;
+  }
+
+}

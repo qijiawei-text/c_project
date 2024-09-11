@@ -1,0 +1,108 @@
+//<CODE BEGINS> file "com-oplink-waveplan.yang"
+module com-oplink-waveplan {
+    namespace "http://com/oplink/waveplan";
+    prefix "com-oplink-waveplan";
+
+    import com-oplink-optical {
+        prefix com-oplink-optical;
+    }
+
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink Communications, LLC";
+
+    description
+        "YANG definitions for ROADM WSS module";
+
+    revision 2019-04-01 {
+      description
+        "Oplink Version 2.0";
+    }
+
+    revision 2016-06-26 {
+        description
+            "Version 0.1";
+    }
+
+    typedef wavelength-number-type {
+        type uint32 {
+            range "1..96";
+        }
+
+        description
+            "the center frequency specified as n (Nominal Central Frequency):
+             f = 193.1 THz + n x 6.25 GHz";
+    }
+
+    typedef wavelength-bandwidth-type {
+        type uint32;
+        default "4";
+
+        description
+            "the bandwidth of the channel specified as m: 
+             b = m x 6.25 GHz. the default is 50GHz";
+    }
+
+    grouping wavelength-map-g {
+        list wavelengths {
+            key "wavelength-number";
+            leaf wavelength-number {
+                type wavelength-number-type;
+            }
+
+            leaf wavelength-name {
+                type string {
+                    length "1..64";
+                }
+            }
+
+            leaf bandwidth {
+                type wavelength-bandwidth-type;
+            }
+
+            leaf center-frequency {
+                type decimal64 {
+                    fraction-digits 4;
+                    range "191.000..196.500";
+                }
+            units "THz";
+            description
+                "Frequency of the transmit optical channel
+                 Domain range:  191.000..196.500THz ";
+           }
+           leaf wavelength {
+               type decimal64 {
+                   fraction-digits 2;
+                   range "1525.66..1565.80";
+               }
+               units "nm";
+               description
+                   "Lambda corresponding to transmit frequency
+                    Domain range:  1525.66nm .. 1565.80nm";
+          }
+      }
+  }
+
+  grouping waveplan-top {
+      container default-waveplan {
+          config false;
+          uses wavelength-map-g;
+      }
+  }
+
+  container com-oplink-waveplan {
+      uses waveplan-top {
+          refine default-waveplan {
+              config true;
+          }
+      }
+  }
+
+  augment "/com-oplink-optical:optical-control/com-oplink-optical:optical-modules" {
+      uses waveplan-top;
+  }
+
+}
+//<CODE ENDS>

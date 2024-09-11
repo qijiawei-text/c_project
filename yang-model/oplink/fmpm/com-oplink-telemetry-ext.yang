@@ -1,0 +1,154 @@
+module com-oplink-telemetry-ext {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://com/oplink/telemetry-ext";
+
+  prefix "com-oplink-telemetry-ext";
+
+  import openconfig-telemetry {prefix oc-telemetry; }
+
+  description
+    "YANG definitions of openconfig-telemetry extension.";
+
+  revision 2021-07-12{
+    description
+      "Initial version";
+    reference "0.1.0";
+  }
+
+  grouping telemetry-stream-subscription-config-ext {
+    description 
+      "extension data for the telemetry subscription config.";
+    leaf telemetry-mode {
+      description 
+        "telemetry data push mode when multiple destinations exist";
+
+      type enumeration {
+        enum ALL {
+          description "to all destinations";
+        }
+        enum STRICT_PRIORITY {
+          description
+            "to one destination which has both the highest priority
+            and active gRPC channel. if there is no priority assigned,
+            the destination is selected by the target device";
+        }
+        enum TARGET_DEFINED {
+          description "Determined by the target device.";
+        }
+      }
+
+      default TARGET_DEFINED;
+    }
+  }
+
+  grouping telemetry-stream-destination-config-ext {
+    description
+      "Extension data for the destination config.";
+
+    leaf priority {
+      type uint16;
+      description
+        "The priority of the destination.";
+    }
+  }
+
+  grouping telemetry-stream-destination-state-ext {
+    description
+      "Extension data for the destination state.";
+
+    leaf conn-state {
+      description
+        "The state of the gRPC connectivity.";
+      type enumeration {
+        enum CONNECTING {
+          description
+            "The channel is trying to establish a connection
+            and is waiting to make progress on one of the steps
+            involved in name resolution, TCP connection establishment
+            or TLS handshake. This may be used as the initial
+            state for channels upon creation.";
+        }
+        enum READY {
+          description
+            "The channel has successfully established a connection
+            all the way through TLS handshake (or equivalent) and
+            protocol-level (HTTP/2, etc) handshaking, and all
+            subsequent attempt to communicate have succeeded
+            (or are pending without any known failure).";
+        }
+        enum TRANSIENT_FAILURE {
+          description
+            "There has been some transient failure (such as a TCP
+            3-way handshake timing out or a socket error). Channels
+            in this state will eventually switch to the CONNECTING
+            state and try to establish a connection again. Since
+            retries are done with exponential backoff, channels that
+            fail to connect will start out spending very little time
+            in this state but as the attempts fail repeatedly, the
+            channel will spend increasingly large amounts of time
+            in this state. For many non-fatal failures (e.g., TCP
+            connection attempts timing out because the server is not
+            yet available), the channel may spend increasingly large
+            amounts of time in this state.";
+        }
+        enum IDLE {
+          description
+            "This is the state where the channel is not even trying to
+            create a connection because of a lack of new or pending RPCs.
+            New RPCs MAY be created in this state. Any attempt to start
+            an RPC on the channel will push the channel out of this state
+            to connecting. When there has been no RPC activity on a channel
+            for a specified IDLE_TIMEOUT, i.e., no new or pending (active)
+            RPCs for this period, channels that are READY or CONNECTING
+            switch to IDLE. Additionally, channels that receive a GOAWAY
+            when there are no active or pending RPCs should also switch to
+            IDLE to avoid connection overload at servers that are attempting
+            to shed connections.";
+        }
+        enum SHUTDOWN {
+          description
+            "This channel has started shutting down. Any new RPCs should fail
+            immediately. Pending RPCs may continue running till the application
+            cancels them. Channels may enter this state either because the
+            application explicitly requested a shutdown or if a non-recoverable
+            error has happened during attempts to connect communicate .
+            Channels that enter this state never leave this state.";
+        }
+      }
+    }
+
+    leaf is-selected {
+      description
+        "If True, this destination is selected to receive data.";
+      type boolean;
+    }
+  }
+
+  augment "/oc-telemetry:telemetry-system/oc-telemetry:subscriptions"
+    + "/oc-telemetry:persistent-subscriptions"
+    + "/oc-telemetry:persistent-subscription/oc-telemetry:config" {
+    uses telemetry-stream-subscription-config-ext;
+  }
+
+  augment "/oc-telemetry:telemetry-system/oc-telemetry:subscriptions"
+    + "/oc-telemetry:persistent-subscriptions"
+    + "/oc-telemetry:persistent-subscription/oc-telemetry:state" {
+    uses telemetry-stream-subscription-config-ext;
+  }
+
+  augment "/oc-telemetry:telemetry-system/oc-telemetry:destination-groups"
+    + "/oc-telemetry:destination-group/oc-telemetry:destinations"
+    + "/oc-telemetry:destination/oc-telemetry:config" {
+    uses telemetry-stream-destination-config-ext;
+  }
+
+  augment "/oc-telemetry:telemetry-system/oc-telemetry:destination-groups"
+    + "/oc-telemetry:destination-group/oc-telemetry:destinations"
+    + "/oc-telemetry:destination/oc-telemetry:state" {
+    uses telemetry-stream-destination-config-ext;
+    uses telemetry-stream-destination-state-ext;
+  }
+}

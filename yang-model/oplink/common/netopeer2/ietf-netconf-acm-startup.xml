@@ -1,0 +1,126 @@
+<nacm xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-acm">
+ <enable-nacm>true</enable-nacm>
+ <read-default>permit</read-default>
+ <write-default>deny</write-default>
+ <exec-default>permit</exec-default>
+ <groups>
+   <group>
+     <name>read-user</name>
+   </group>
+   <group>
+     <name>write-user</name>
+     <user-name>admin</user-name>
+   </group>
+ </groups>
+ <rule-list>
+   <name>block-security-modules</name>
+   <group>*</group>
+   <rule>
+     <name>block-keystore</name>
+     <module-name>ietf-keystore</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of ietf-keystore module</comment>
+   </rule>
+   <rule>
+     <name>block-netconf-server</name>
+     <module-name>ietf-netconf-server</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of ietf-netconf-server module</comment>
+   </rule>
+  </rule-list>
+  <rule-list>
+   <name>block-internal-modules</name>
+   <group>*</group>
+   <rule>
+     <name>block-ipc</name>
+     <module-name>com-oplink-ipc</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of internal module</comment>
+   </rule>
+   <rule>
+     <name>block-device</name>
+     <module-name>com-oplink-device</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of internal module</comment>
+   </rule>
+   <rule>
+     <name>block-platform</name>
+     <module-name>com-oplink-platform</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of internal module</comment>
+   </rule>
+   <rule>
+     <name>block-alarm</name>
+     <module-name>com-oplink-alarm</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of internal module</comment>
+   </rule>
+   <rule>
+     <name>block-pm</name>
+     <module-name>com-oplink-pm</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of internal module</comment>
+   </rule>
+   <rule>
+     <name>block-para-range</name>
+     <module-name>com-oplink-parameter-range</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of internal module</comment>
+   </rule>
+   <rule>
+     <name>block-waveplan</name>
+     <module-name>com-oplink-waveplan</module-name>
+     <access-operations>*</access-operations>
+     <action>deny</action>
+     <comment>This rule blocks access of internal module</comment>
+   </rule>
+ </rule-list>
+ <rule-list>
+   <name>read-rules</name>
+   <group>read-user</group>
+   <rule>
+     <name>read-rule</name>
+     <module-name>*</module-name>
+     <access-operations>read</access-operations>
+     <action>permit</action>
+     <comment>This rule only allows read access</comment>
+   </rule>
+ </rule-list>
+ <rule-list>
+   <name>read-write-exec</name>
+   <group>write-user</group>
+   <rule>
+      <name>deny-modify-enable-nacm</name>
+      <path xmlns:nacm="urn:ietf:params:xml:ns:yang:ietf-netconf-acm">
+           /nacm:nacm/nacm:enable-nacm
+      </path>
+      <access-operations>create update delete</access-operations>
+      <action>deny</action>
+      <comment>deny modify enable-nacm in ietf-netconf-acm</comment>
+   </rule>
+   <rule>
+      <name>deny-modify-rule-list</name>
+      <path xmlns:nacm="urn:ietf:params:xml:ns:yang:ietf-netconf-acm">
+           /nacm:nacm/nacm:rule-list
+      </path>
+      <access-operations>create update delete</access-operations>
+      <action>deny</action>
+      <comment>deny modify rule-list in ietf-netconf-acm</comment>
+   </rule>
+   <rule>
+     <name>read-write-exec</name>
+     <module-name>*</module-name>
+     <access-operations>*</access-operations>
+     <action>permit</action>
+     <comment>This rule allows access to everything</comment>
+   </rule>
+ </rule-list>
+</nacm>

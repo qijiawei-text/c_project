@@ -1,0 +1,164 @@
+//<CODE BEGINS> file "com-oplink-swdl-ext.yang"
+module com-oplink-swdl-ext{
+  namespace "http://com/oplink/swdl/ext";
+  prefix "com-oplink-swdl-ext";
+
+  import org-openroadm-device {
+    prefix org-openroadm-device;
+    revision-date 2021-03-26;
+  }
+
+  import com-oplink-device {
+    prefix com-oplink-device;
+    revision-date 2021-06-01;
+  }
+
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions of extension to org-openroadm-swdl.yang";
+
+  revision 2019-04-01{
+    description
+      "Oplink Version 2.0";
+  }
+
+  grouping sw-upgrade-state {
+    leaf upgrade-state {
+      type enumeration {
+        enum "committed" {
+          value 0;
+          description
+            "Software is in normal operation state.";
+        }
+        enum "staged" {
+          value 1;
+          description
+            "New software is installed in the standby bank.";
+        }
+        enum "pilot" {
+          value 2;
+          description
+            "New software is running in active bank.";
+        }
+      }
+      description
+        "Definition for software upgrade state.";
+      default "committed";
+    }
+/*
+    leaf status {
+      type boolean;
+      default "true";
+      description "TRUE means upgrade success";
+    }
+
+	leaf status {
+      type enumeration {
+        enum success {
+          value 0;
+        }
+        enum in-progress {
+          value 1;
+        }
+        enum failure {
+          value 2;
+        }
+        enum check-error {
+          value 3;
+        }
+      }
+    }
+*/
+
+    leaf sys-status {
+      type enumeration {
+        enum normal {
+          value 0;
+        }
+        enum upgrading {
+          value 1;
+        }
+        enum transferring {
+          value 2;
+        }
+        enum transfer-failed {
+          value 3;
+        }
+      }
+    }
+    leaf upgrade-step {
+      type enumeration {
+        enum none {
+          value 0;
+        }
+		enum commit {
+          value 1;
+        }
+		enum commit-fail {
+          value 2;
+        }
+        enum commit-succ {
+          value 3;
+        }
+		enum check-bundle {
+          value 4;
+        }
+        enum check-bundle-fail {
+          value 5;
+        }
+        enum check-bundle-succ {
+          value 6;
+        }
+		enum download {
+          value 7;
+        }
+        enum download-fail {
+          value 8;
+        }
+        enum download-succ {
+          value 9;
+        }
+		enum switch {
+          value 10;
+        }
+        enum switch-fail {
+          value 11;
+        }
+        enum switch-succ {
+          value 12;
+        }
+      }
+    }
+    leaf hitless {
+      type boolean;
+      default "true";
+      description "TRUE means upgrade not affect traffic";
+    }
+    leaf percent {
+      type uint8 {
+        range "0..100";
+      }
+    }
+  }
+
+  grouping sw-upgrade-state-top {
+    container sw-upgrade-state {
+      uses sw-upgrade-state;
+    }
+  }
+
+  augment "/org-openroadm-device:org-openroadm-device/org-openroadm-device:pending-sw"
+  {
+     uses sw-upgrade-state-top;
+  }
+
+  augment "/com-oplink-device:org-openroadm-device/com-oplink-device:pending-sw"  {
+     uses sw-upgrade-state-top;
+  }
+}
+//<CODE ENDS>

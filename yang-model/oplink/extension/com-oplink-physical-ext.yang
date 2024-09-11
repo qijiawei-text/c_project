@@ -1,0 +1,177 @@
+//<CODE BEGINS> file "com-oplink-physical-ext.yang"
+module com-oplink-physical-ext{
+  namespace "http://com/oplink/physical/ext";
+  prefix "com-oplink-physical-ext";
+
+  import org-openroadm-device {
+    prefix org-openroadm-device;
+    revision-date 2021-03-26;
+  }
+
+  import com-oplink-device {
+    prefix com-oplink-device;
+    revision-date 2021-06-01;
+  }
+
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions of extension to shelf and circuit-pack";
+
+  revision 2019-04-01{
+    description
+      "Oplink Version 2.0";
+  }
+
+  grouping physical-ext {
+    leaf temperature-up-thr {
+        type decimal64 {
+            fraction-digits 2;
+            range "55.00..75.00";
+        }
+        description
+           "temperature up threshold of device";
+    }
+    leaf temperature-low-thr {
+        type decimal64 {
+            fraction-digits 2;
+            range "-25.00..0.00";
+        }
+        description
+            "temperature low threshold of device";
+    }
+
+    leaf temperature {
+        type decimal64 {
+            fraction-digits 2;
+        }
+        units celsius;
+        config false;
+    }
+
+    leaf reset-cause {
+      type enumeration {
+        enum power {
+          value 0;
+        }
+        enum cold {
+          value 1;
+        }
+        enum warm {
+          value 2;
+        }
+        enum button {
+          value 3;
+        }
+        enum watchdog {
+          value 4;
+        }
+      }
+      config false;
+      description
+        "OPLINK extension - indicating reset type";
+    }
+  }
+
+  grouping service-affect{
+    leaf service-affect {
+        type boolean;
+        default false;
+        description
+          "indicate if this circuit-pack is service impact";
+    }
+  }
+  
+  grouping fujitsu-physical-ext {
+    description 
+      "According to the requirements of Fujitsu, extend Operational state data for circuit-packs";
+
+    leaf unit-name {
+      description 
+        "Product name or Unit code";
+      type string;
+      config false;
+    }
+    leaf fc-number {
+      description 
+        "FC number";
+      type string;
+      config false;
+    }
+    leaf piu-issue-number {
+      description 
+        "FC issue number";
+      type string;
+      config false;
+    }
+    leaf fujitsu-part-number {
+      description 
+        "Fujitsu part number";
+      type string;
+      config false;
+    }
+  }
+
+  augment "/org-openroadm-device:org-openroadm-device/org-openroadm-device:shelves" {
+    uses fujitsu-physical-ext;
+    uses physical-ext;
+    uses service-affect;
+  }
+
+  augment "/org-openroadm-device:org-openroadm-device/org-openroadm-device:circuit-packs" {
+    uses fujitsu-physical-ext;
+    uses physical-ext;
+    uses service-affect;
+  }
+
+  augment "/com-oplink-device:org-openroadm-device/com-oplink-device:shelves" {
+    uses fujitsu-physical-ext {
+      refine unit-name {
+         config true;
+      }
+      refine fc-number {
+         config true;
+      }
+      refine piu-issue-number {
+         config true;
+      }
+      refine fujitsu-part-number {
+         config true;
+      }   
+    }
+    uses physical-ext {
+      refine reset-cause {
+        config true;
+      }
+    }
+    uses service-affect;
+  }
+
+  augment "/com-oplink-device:org-openroadm-device/com-oplink-device:circuit-packs" {
+    uses fujitsu-physical-ext {
+      refine unit-name {
+         config true;
+      }
+      refine fc-number {
+         config true;
+      }
+      refine piu-issue-number {
+         config true;
+      }
+      refine fujitsu-part-number {
+         config true;
+      }
+    }
+    uses physical-ext {
+      refine reset-cause {
+        config true;
+      }
+    }
+    uses service-affect;
+  }
+}
+//<CODE ENDS>

@@ -1,0 +1,237 @@
+//<CODE BEGINS> file "com-oplink-rpc.yang"
+module com-oplink-rpc {
+  namespace "http://com/oplink/rpc";
+  prefix "com-oplink-rpc";
+
+  import org-openroadm-common-types {
+    prefix org-openroadm-common-types;
+    revision-date 2022-05-27;
+  }
+
+  organization
+    "Oplink Communications, LLC";
+
+  contact
+    "Oplink Communications, LLC";
+
+  description
+    "YANG definitions of Oplink rpc";
+
+  revision 2021-06-01 {
+    description
+      "Oplink Version 2.0";
+  }
+
+  revision 2019-04-01 {
+    description
+      "Oplink Version 2.0";
+  }
+
+  revision 2018-09-26{
+    description
+      "Oplink Version 1.0";
+  }
+
+  rpc restore-default {
+    description
+      "OPLINK-EXTENSION: 
+       Restore configuration to manufacture default value.";
+    input {
+     leaf restore-type {
+        type enumeration {
+           enum "all" {
+               value 1;
+           }   
+           enum "optical" {
+               value 2;
+           }   
+        }
+        mandatory true;
+        description
+           "all-whole device; optical-optical module only";
+      }   
+    }
+
+    output {
+      uses org-openroadm-common-types:rpc-response-status;
+    } 
+  } 
+
+  rpc save-conf {
+    description
+      "Restore default value.";
+    input {
+     leaf save-type {
+        type enumeration {
+           enum "all" {
+               value 1;
+           }
+           enum "optical" {
+               value 2;
+           }
+        }
+        mandatory true;
+        description
+          "all:whole device; optical:optical module only";
+      }
+    }
+
+    output {
+      uses org-openroadm-common-types:rpc-response-status;
+    }
+  }
+      
+  rpc get-ocm-raw{
+    description
+      "Get OCM raw data";
+    input {
+      leaf port {
+        type string;
+      }
+    }
+
+    output {
+      leaf length {
+         type uint32;
+      }
+      leaf data {
+        type binary {
+           //length 2048;
+        }
+      }
+      
+      uses org-openroadm-common-types:rpc-response-status;
+    }
+  }
+
+  rpc set-apsd {
+    description
+      "Set apsd.";
+    input {
+      leaf enabled {
+        type boolean;
+        mandatory true;
+        description
+          "Enable/disable apsd";
+      }
+      
+      leaf path {
+        type enumeration {
+          enum "W";
+          enum "P";
+        }
+        default "W";
+      }
+    }
+
+    output {
+      uses org-openroadm-common-types:rpc-response-status;
+    }
+  }
+
+  rpc get-apsd-state {
+    description
+      "Get apsd state.";
+    input {
+      leaf path {
+        type enumeration {
+          enum "W";
+          enum "P";
+        }
+        default "W";
+      }
+    }
+      
+    output {
+      leaf enabled {
+        type boolean;
+        description
+          "The config state of apsd-enabled. True means that apsd is enabled, otherwise means disabled.";
+      }
+
+      leaf apsd-status {
+        type boolean;
+          description
+           "The actual state of apsd-status. True means that apsd is enabled, otherwise means disabled.";
+      }
+      uses org-openroadm-common-types:rpc-response-status;
+    }
+  }
+
+  rpc log-hash {
+	  description
+	    "OPLINK-EXTENSION: Alarm simulator.";
+     
+	  input {
+	   leaf enable {
+	      type boolean;
+	      default true;
+	    }
+	   leaf process-name {
+	      type string;
+	   } 
+	  }
+	    
+	  output {
+	      uses org-openroadm-common-types:rpc-response-status;
+	  } 
+  }
+
+  rpc ready-trigger {
+    description
+      "OPLINK-EXTENSION: trigger module state leave ready to normal.";
+      
+    input {
+     leaf module {
+        type enumeration {
+           enum "PA" {
+               value 0;
+           }   
+           enum "BA" {
+               value 1;
+           }   
+        }
+        mandatory true;
+        description
+           "module; optical-amplfier module only";
+      }
+      leaf value {
+         type uint32;
+      } 
+    }
+
+    output {
+        uses org-openroadm-common-types:rpc-response-status;
+    } 
+  }  
+  
+  rpc set-auto-ctrl-ramp {
+      input {
+          leaf path {
+              type enumeration {
+                  enum "W";
+                  enum "P";
+              }
+              default "W";
+          }
+          leaf step {
+              type decimal64 {
+                  fraction-digits 2;
+              }
+              description
+                  "step of ramp proc.";
+          }       
+          leaf interval { 
+              type uint32;
+              description
+                  "interval of ramp proc.";
+          }
+      }
+      description
+          "Use this rpc to set ba gain ramp parameter.";
+      output {
+          uses org-openroadm-common-types:rpc-response-status;
+      }
+  }      
+}
+//<CODE ENDS>

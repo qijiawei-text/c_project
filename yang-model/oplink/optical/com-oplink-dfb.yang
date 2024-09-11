@@ -1,0 +1,163 @@
+module com-oplink-dfb {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://com/oplink/dfb";
+
+  prefix "com-oplink-dfb";
+
+  import openconfig-platform { prefix oc-platform; }
+  import openconfig-types { prefix oc-types; }
+
+  // meta
+  organization "Molex Oplink OMS";
+
+  contact
+    "www.oplink.com";
+
+  description
+    "This model describes configuration and operational state data
+    for  distributed feedback (DFB) laser, deployed as part of a transport
+    line system.";
+
+  revision "2024-02-19" {
+    description
+      "Initial release";
+    reference "0.1.0";
+  }
+
+  // extension statements
+
+  // feature statements
+
+  // identity statements
+
+  // grouping statements
+
+  grouping optical-dfb-config {
+    description
+      "Configuration data for optical dfbs";
+
+    leaf name {
+      type string;
+      description
+        "User-defined name assigned to identify a specific dfb
+        in the device";
+    }
+
+    leaf target-output-power {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units dB;
+      description
+        "Power level set on the output of dfb";
+    }
+
+    leaf enabled {
+      type boolean;
+      description
+        "When true, dfb is set to maintain constant output power.";
+    }
+  }
+
+  grouping optical-dfb-state {
+    description
+      "Operational state data for optical dfbs";
+
+    leaf component {
+      type leafref {
+        path "/oc-platform:components/oc-platform:component/" +
+          "oc-platform:name";
+      }
+      description
+        "Reference to the system-supplied physical component that
+        the dfb block is contained within. Multiple
+        dfb blocks may be contained within the same
+        physical component.";
+    }
+
+    list dfb-port {
+      description
+        "list of ports with input or output power.";
+      key "port-name";
+      leaf port-name {
+        type leafref {
+          path "/oc-platform:components/oc-platform:component/" +
+            "oc-platform:name";
+        }
+        description
+          "Reference to system-supplied name of port."; 
+      }
+
+      container input-power {
+        description
+          "The optical in power of this port in units
+          of 0.01dBm. If avg/min/max statistics are not supported,
+          just supply the instant value";
+      
+        uses oc-types:avg-min-max-instant-stats-precision2-dBm;
+      }
+
+      container output-power {
+        description
+          "The optical out power of this port in units
+          of 0.01dBm. If avg/min/max statistics are not supported,
+          just supply the instant value";
+
+        uses oc-types:avg-min-max-instant-stats-precision2-dBm;
+      }
+    }
+  }
+
+  grouping optical-dfb-top {
+    description
+      "Top-level grouping for optical dfb data";
+
+    container optical-dfb {
+      description
+        "Enclosing container for dfbs";
+
+      container dfbs {
+        description
+          "Enclosing container for list of dfbs";
+
+        list dfb {
+          key "name";
+          description
+            "List of variable optical dfbs present in the device";
+
+          leaf name {
+            type leafref {
+              path "../config/name";
+            }
+            description
+              "Reference to the name of the dfb";
+          }
+
+          container config {
+            description
+              "Configuration data for the dfb";
+
+            uses optical-dfb-config;
+          }
+
+          container state {
+
+            config false;
+
+            description
+              "Operational state data for the dfb";
+
+            uses optical-dfb-config;
+            uses optical-dfb-state;
+          }
+        }
+      }
+    }
+  }
+
+  // data definition statements
+  uses optical-dfb-top;
+}

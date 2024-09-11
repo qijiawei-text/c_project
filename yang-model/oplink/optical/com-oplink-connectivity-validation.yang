@@ -1,0 +1,252 @@
+//<CODE BEGINS> file "com-oplink-connectivity-validation.yang"
+module com-oplink-connectivity-validation {
+    namespace "http://com/oplink/connectivity-validation";
+    prefix "com-oplink-cv";
+    
+    import org-openroadm-common-link-types {
+      prefix org-openroadm-common-link-types;
+      revision-date 2019-11-29;
+    }
+
+    import org-openroadm-common-types {
+      prefix org-openroadm-common-types;
+      revision-date 2022-05-27;
+    }
+
+    import com-oplink-optical {
+      prefix com-oplink-optical;
+    }
+
+    import com-oplink-optical-i {
+      prefix com-oplink-optical-i;
+      revision-date 2019-04-01;
+    }
+
+    organization
+      "Oplink Communications, LLC";
+
+    contact
+      "Oplink.com";
+
+    description
+      "YANG definitions for connection validation Module";
+
+    revision 2020-09-29 {
+      description
+        "Oplink Version 1.0";
+    }
+    
+    grouping reflection-state { 
+      leaf name {
+        type enumeration {
+          enum mux-t {
+            description
+              "MUX T";
+          }
+          enum client-w-line-t {
+            description
+              "Client-W LineT";
+          }
+          enum client-w-t {
+            description
+              "Client-W T";
+          }
+          enum client-p-line-t {
+            description
+              "Client-P LineT";
+          }
+          enum client-p-t {
+            description
+              "Client-P T";
+          }
+        }
+      }
+
+      leaf differ-power {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+         "Reflect power.";
+      }
+      leaf output-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "PDb power.";
+      }
+      leaf reflect-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "PDa power.";
+      }
+    }
+    
+    grouping mux-connecvity-state {
+      leaf mux-r-out-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "MUX R CV OUT, pd6, calibrated to port MuxR";
+      }
+      
+      leaf mux-r-in-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "MUX R CV in, pd7, calibrated to port MuxR";
+      }
+      
+      leaf mux-r-differ-power {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+         "MUX R differ power, 'mux-r-out-power' - 'mux-r-in-power'";
+      }
+      
+      leaf mux-t-out-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "MUX T CV OUT, pd3/pd4, calibrated to port MuxT";
+      }
+      
+      leaf mux-t-in-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "MUX T CV in, pd5, calibrated to port MuxT";
+      }
+      
+      leaf mux-t-differ-power {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+         "MUX R differ power, 'mux-t-out-power' - 'mux-t-in-power'";
+      }
+    }
+
+    grouping client-state {
+      leaf name {
+        type enumeration {
+          enum client-w {
+            description
+              "working";
+          }
+          enum client-p {
+            description
+              "protection";
+          }
+        }
+      }
+      
+      leaf dfb-output-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "AMP card DFB output power. This value is caculated by PD10 or PD12";
+      }
+      
+      leaf client-r-out-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "AMP card CLIENT R CV OUT, pd10, calibrated to port ClientR";
+      }
+
+      leaf client-r-in-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "CLIENT[-W/-P] T CV IN, pd6, calibrated to port Client[-W/-P]T";
+      }
+
+      leaf client-r-differ-power {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+         "ClientR differ power, 'client-r-out-power' - 'client-r-in-power'";
+      }
+
+      leaf client-t-out-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "AMP card CLIENT T CV OUT, pd12, calibrated to port ClientT";
+      }
+      
+      leaf client-t-in-power {
+        type org-openroadm-common-link-types:power-dBm;
+        description
+         "CLIENT[-W/-P] R CV IN, pd3/pd4, calibrated to port Client[-W/-P]R";
+      }
+      
+      leaf client-t-differ-power {
+        type org-openroadm-common-link-types:ratio-dB;
+        description
+         "ClientT differ power, 'client-t-out-power' - 'client-t-in-power'";
+      }
+    }
+
+    grouping cv-state {
+      list reflection {
+        key name;
+        uses reflection-state;
+      }
+      
+      container mux-connectivity {
+        uses mux-connecvity-state;
+      }
+      
+      list client-connectivity {
+        key name;
+        uses client-state;
+      }
+    }
+    
+    grouping cv-config {
+      leaf enable-cv-protection { 
+      	type boolean;
+       	default false;
+       	description
+        	"enable/disable connectivity validation protection.";
+     	}
+    }
+
+    grouping cv-top {
+      container optical-cv {
+        container state {
+          uses cv-state;
+          config false;
+        }
+        container config {
+        	uses cv-config;
+        }
+        uses com-oplink-optical:parent-circuit-pack;
+      }
+    }
+
+    rpc set-cv-enable {
+      input {
+        leaf name {
+          type enumeration {
+            enum all;
+            enum reflection;
+            enum mux;
+            enum client-w;
+            enum client-p;
+          }
+          default all;
+        }
+        
+        leaf enable { 
+          type boolean;
+        }
+      }
+      output {
+        uses org-openroadm-common-types:rpc-response-status;
+      }
+    }
+
+    augment "/com-oplink-optical:optical-control/com-oplink-optical:optical-modules" {
+      uses cv-top;
+    }
+
+    augment "/com-oplink-optical-i:optical-control/com-oplink-optical-i:optical-modules" {
+      uses cv-top {
+        refine optical-cv/circuit-pack-name {
+          config true;
+        }
+        refine optical-cv/component-name {
+          config true;
+        }
+      }
+    }
+}		
+//<CODE ENDS>

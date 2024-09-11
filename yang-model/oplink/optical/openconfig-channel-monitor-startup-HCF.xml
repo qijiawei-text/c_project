@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel-monitors xmlns="http://openconfig.net/yang/channel-monitor">
+    <channel-monitor>
+        <name>pre-amp-input</name>
+        <config>
+            <name>pre-amp-input</name>
+            <monitor-port>pre-amp-input</monitor-port>
+        </config>
+    </channel-monitor>
+    <channel-monitor>
+        <name>booster-amp-output</name>
+        <config>
+            <name>booster-amp-output</name>
+            <monitor-port>booster-amp-output</monitor-port>
+        </config>
+    </channel-monitor>
+    <channel-monitor>
+        <name>booster-amp-input</name>
+        <config>
+            <name>booster-amp-input</name>
+            <monitor-port>booster-amp-input</monitor-port>
+        </config>
+    </channel-monitor>
+    <channel-monitor>
+        <name>pre-amp-output</name>
+        <config>
+            <name>pre-amp-output</name>
+            <monitor-port>pre-amp-output</monitor-port>
+        </config>
+    </channel-monitor>
+</channel-monitors>

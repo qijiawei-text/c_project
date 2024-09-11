@@ -1,0 +1,163 @@
+module com-oplink-lldp-ext {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://com/oplink/lldp-ext";
+
+  prefix "com-oplink-lldp-ext";
+
+  import openconfig-lldp-types { prefix oc-lldp-types; }
+  import openconfig-lldp { prefix oc-lldp; }
+
+  description
+    "This module extend configuration and operational state data
+    for the LLDP protocol.";
+
+  revision "2020-06-30" {
+    description 
+      "Oplink - Add port and custom TLV config";
+    reference "1.0.1";
+  }
+
+  grouping system-info-config-ext {
+    description
+      "Extended Configuration data for local LLDP agent/daemon";
+
+    leaf management-address {
+      type string;
+      description
+        "The Management Address is a mandatory TLV which identifies a
+        network address associated with the local LLDP agent, which
+        can be used to reach the agent on the port identified in the
+        Port ID TLV.";
+    }
+  }
+
+  grouping lldp-config-ext {
+    leaf hold-timer {
+      type uint64;
+      description 
+         "Change transmit hold value to the specified value. This value
+          is used to compute the TTL of transmitted packets which is the
+          product of this value and of the transmit delay. The default
+          value is 4 and therefore the default TTL is 120 seconds.";
+    }
+    leaf lldp-agent-type {
+      type enumeration {
+        enum NEAREST-BRIDGE {
+          description 
+            "The destination MAC address used to send LLDPDU allows an agent
+             to control the propagation of LLDPDUs. By default, the
+             01:80:c2:00:00:0e MAC address is used and limit the propagation
+             of the LLDPDU to the nearest bridge (nearest-bridge).  To in-
+             struct lldpd to use the 01:80:c2:00:00:03 MAC address instead,
+             use nearest-nontpmr-bridge instead.  To use the
+             01:80:c2:00:00:00 MAC address instead, use
+             nearest-customer-bridge instead.";
+        }
+        enum NEAREST-NONPMR-BRIDGE {
+          description
+             "Use the 01:80:c2:00:00:03 MAC address instead,
+             use nearest-nontpmr-bridge instead";
+        }
+        enum NEAREST-CUSTOMER-BRIDGE {
+          description
+             "Use 01:80:c2:00:00:00 MAC address instead, use
+             nearest-customer-bridge instead.";
+        }
+      }
+      default "NEAREST-BRIDGE";
+    }
+  }
+
+  grouping interface-config-ext {
+    leaf port-id-type {
+      type oc-lldp-types:port-id-type;
+      description
+        "This field identifies the format and source of the port
+        identifier string. It is an enumerator defined by the
+        PtopoPortIdType object from RFC2922. Default MacAddress";
+    }
+
+    leaf local-value {
+        type string;
+        description
+          "Force port ID subtype. By default, lldpd will use the MAC ad-
+           dress as port identifier and the interface name as port de-
+           scription, unless the interface has an alias. In this case, the
+           interface name will be used as port identifier and the descrip-
+           tion will be the interface alias. With this command, you can
+           force the port identifier to be a local value.";
+    }
+    leaf port-description {
+	type string;
+	description
+ 	"The binary string containing the actual port identifier for
+	the port which this LLDP PDU was transmitted. The source and
+	format of this field is defined by PtopoPortId from
+	RFC2922.";
+    }
+    container custom-tlvs {
+      description
+        "Enclosing container for list of custom TLVs send to 
+        neighbor";
+      list tlv {
+        key "type";
+        description
+          "List of custom LLDP TLVs from a neighbor";
+
+	    leaf type {
+	      type int32;
+	      description
+		"The integer value identifying the type of information
+		contained in the value field.";
+	    }
+
+	    leaf oui {
+	      type string;
+	      description
+		"The organizationally unique identifier field shall contain
+		the organization's OUI as defined in Clause 9 of IEEE Std
+		802. The high-order octet is 0 and the low-order 3 octets
+		are the SMI Network Management Private Enterprise Code of
+		the Vendor in network byte order, as defined in the
+		'Assigned Numbers' RFC [RFC3232].";
+	    }
+
+	    leaf oui-subtype {
+	      type string;
+	      description
+		"The organizationally defined subtype field shall contain a
+		unique subtype value assigned by the defining organization.";
+	    }
+
+	    // TODO: consider making this string type
+	    leaf value {
+	      type binary;
+	      description
+		"A variable-length octet-string containing the
+		instance-specific information for this TLV.";
+	    }
+       }
+    }
+  }
+
+  augment "/oc-lldp:lldp/oc-lldp:config" {
+    uses lldp-config-ext;
+    uses system-info-config-ext;
+  }
+
+  augment "/oc-lldp:lldp/oc-lldp:state" {
+    uses lldp-config-ext;
+    uses system-info-config-ext;
+  }
+
+  augment "/oc-lldp:lldp/oc-lldp:interfaces/oc-lldp:interface/oc-lldp:config" {
+    uses interface-config-ext;
+  } 
+
+  augment "/oc-lldp:lldp/oc-lldp:interfaces/oc-lldp:interface/oc-lldp:state" {
+    uses interface-config-ext;
+  }
+}

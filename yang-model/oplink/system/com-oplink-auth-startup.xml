@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<auth-mgnt xmlns="http://com/oplink/auth">
+    <config>
+        <session-maxcount>20</session-maxcount>
+        <session-timeout>15</session-timeout>
+    </config>
+</auth-mgnt>

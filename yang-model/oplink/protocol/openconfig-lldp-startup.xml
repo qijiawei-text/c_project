@@ -1,0 +1,68 @@
+<lldp xmlns="http://openconfig.net/yang/lldp">
+    <config>
+        <enabled>true</enabled>
+        <hello-timer>30</hello-timer>
+        <hold-timer xmlns="http://com/oplink/lldp-ext">4</hold-timer>
+        <system-name>OLSP-0001</system-name>
+        <system-description>Flex Mux-Demux</system-description>
+        <chassis-id>OLSP-0001</chassis-id>
+        <chassis-id-type>CHASSIS_COMPONENT</chassis-id-type>
+    </config>
+    <interfaces>
+        <!---
+        <interface>
+            <name>eth2.1</name>
+            <config>
+                <name>eth2.1</name>
+                <enabled>true</enabled>
+                <port-id-type xmlns="http://com/oplink/lldp-ext">INTERFACE_NAME</port-id-type>
+                <port-description xmlns="http://com/oplink/lldp-ext">OSC1</port-description>
+            </config>
+        </interface>
+        <interface>
+            <name>eth2.2</name>
+            <config>
+                <name>eth2.2</name>
+                <enabled>true</enabled>
+                <port-id-type xmlns="http://com/oplink/lldp-ext">LOCAL</port-id-type>
+                <local-value xmlns="http://com/oplink/lldp-ext">100</local-value>
+                <port-description xmlns="http://com/oplink/lldp-ext">OSC2</port-description>
+            </config>
+        </interface>
+        --->
+        <interface>
+            <name>eth1</name>
+            <config>
+                <name>eth1</name>
+                <enabled>true</enabled>
+                <port-id-type xmlns="http://com/oplink/lldp-ext">INTERFACE_NAME</port-id-type>
+                <custom-tlvs xmlns="http://com/oplink/lldp-ext">
+                    <tlv>
+                        <type>1</type>
+                        <oui>0x02DF3B</oui>
+                        <oui-subtype>1</oui-subtype>
+                        <value>0920</value>
+                    </tlv>
+                </custom-tlvs>
+                <port-description xmlns="http://com/oplink/lldp-ext">LinkDiscovery</port-description>
+            </config>
+        </interface>
+        <interface>
+            <name>eth2</name>
+            <config>
+                <name>eth2</name>
+                <enabled>true</enabled>
+                <port-id-type xmlns="http://com/oplink/lldp-ext">INTERFACE_NAME</port-id-type>
+                <custom-tlvs xmlns="http://com/oplink/lldp-ext">
+                    <tlv>
+                        <type>1</type>
+                        <oui>0x02DF3B</oui>
+                        <oui-subtype>1</oui-subtype>
+                        <value>0920</value>
+                    </tlv>
+                </custom-tlvs>
+                <port-description xmlns="http://com/oplink/lldp-ext">LinkDiscovery</port-description>
+            </config>
+        </interface>
+    </interfaces>
+</lldp>

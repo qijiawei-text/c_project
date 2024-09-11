@@ -1,0 +1,284 @@
+module com-oplink-auth {
+    namespace "http://com/oplink/auth";
+    prefix    "com-oplink-auth";
+
+    import ietf-system {
+      prefix ietf-system;
+      revision-date 2014-08-06;
+    }
+
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink Communications, LLC";
+
+    description
+        "YANG definitions of auth managements, including authentication, user management, session management.";
+
+    revision 2019-04-01 {
+        description
+        "Version 2.0";
+    }
+
+    revision 2018-07-18 {
+        description 
+        "Version 0.2";
+    }
+
+    grouping user-name {
+        leaf name {
+            type string {
+                length "1..63";
+            }
+            description
+                "The user name string identifying this entry.";
+            }
+    }
+
+    grouping user-pasword {
+        leaf password {
+            type string {
+                length "1..128";
+        }
+        description
+             "The password for this entry. This shouldn't be in clear text when output operaton.";
+        }
+    }
+    grouping app-mode {
+        leaf application {
+            type uint32;
+            
+			description
+                "Applications that accesses to the device. 
+                1 : WEB, 
+                2 : COMAND,
+                4 : tl1,
+                8 : snmp,
+                16: shell,
+                32: rest,
+                64: netconf,
+                0xFFFFFFFF: all";
+        }
+    }
+
+    grouping last-login-time {
+        leaf last-login-time {
+            type uint32;
+        }
+    }
+
+    grouping last-operation-time {
+        leaf last-operation-time {
+            type uint32;
+        }
+    }	
+    
+    grouping user-role {
+        leaf user-role {
+            type uint32;
+
+            description
+                "Applications that accesses to the device. 
+                1 : query, 
+                2 : opeartion,
+                4 : admin";			
+        }
+    }
+
+    grouping token {
+        leaf token {
+            type string;
+            description
+                "The token for authentication.";
+        }
+    }
+    
+
+    grouping expire-time {
+        leaf expire-time {
+            type uint32;
+        }
+    }
+
+    grouping login-type {
+        leaf login-type {
+            type uint32;
+            description
+                "login type that is used for checking accouts. 
+                0 : Normal Authentication, 
+                1 : HTTP Basic Authentication,
+                2 : Token Authentication,
+                3 : Token Authentication without password";			
+        }
+    }
+
+    grouping priv-lv {
+        leaf priv-lv {
+            type uint32;
+
+            description
+                "Remote return user priv level.";
+        }
+    }
+    
+    grouping remote-address {
+        leaf remote-address {
+            type string;
+        }
+    }
+    
+    grouping auth-channel {
+        leaf auth-channel {
+            type uint32;
+            description
+                "The auth channel which is used to check username and password. 
+                0 : radius, 
+                1 : tacacs,
+                2 : local";			
+        }
+    }
+    
+    typedef result-status {
+        description
+            "error code";
+        type int32;
+    }
+
+    grouping rpc-response-status {
+        leaf status {
+            type result-status;
+            mandatory true;
+            description
+                "Successful or Failed";
+        }
+        leaf status-message {
+            type string;
+            description
+                "Gives a more detailed reason for failure";
+        }
+    }
+	
+	grouping oper-cmd {
+        leaf oper-cmd {
+            type string {
+                length "0..255";
+        }
+        description
+             "The operating command from client";
+        }
+    }
+    
+    grouping token-info {
+        uses token;
+        uses user-name;	
+        uses expire-time;
+        uses last-login-time;
+        uses last-operation-time;
+        uses app-mode;	
+        uses login-type;
+        uses user-role;
+        uses priv-lv;
+        uses auth-channel;
+        uses remote-address;	
+    }
+
+    rpc login {
+        description
+            "User login.";
+        input {
+            uses user-name;
+            uses user-pasword;
+            uses app-mode;
+            uses login-type;
+            uses remote-address;
+            uses token;
+        }
+        output {
+            uses user-role;
+            uses auth-channel;
+            uses token;
+            uses rpc-response-status;
+        }
+    }
+
+    rpc logout {
+        description
+            "User logout.";
+        input {
+            uses user-name;
+            uses token;
+            uses app-mode;
+            uses login-type;
+        }
+        output {
+            uses rpc-response-status;
+        }
+    }
+
+    rpc auth {
+        description
+            "User authenticate.";
+        input {
+            uses token;
+            uses app-mode;
+            uses oper-cmd;
+        }
+        output {
+            uses rpc-response-status;
+        }
+    }
+
+    rpc delete-tokens-by-username {
+        description
+            "Delete all token records by the username.";
+        input {
+            uses user-name;
+        }
+        output {
+            uses rpc-response-status;
+        }
+    }
+    
+    container auth-mgnt {
+        container config {
+            leaf session-maxcount {
+                type uint32 {
+                    range "10..30";
+                }
+                description
+                    "The maximum number of sessions";
+            }
+            
+            leaf session-timeout {
+                type uint32 {
+                    range "0..120";
+                }
+                units "minutes";
+                description
+                    "Session timeout. 0 means never timeout until logout";
+            }
+
+            leaf per-command-authorizaiton {
+                type boolean;
+                default "false";
+                description
+                    "Turns per-command-authorizaiton on / off to aaa server(tacacs+ or radius).";
+            }
+        }
+       
+        container state {
+             list tokens {
+                 key "token";         
+                 uses token-info;
+             }
+
+             config false;
+        }
+    }
+    
+
+    augment "/ietf-system:system/ietf-system:authentication/ietf-system:user" {
+      uses user-role;
+    }
+}

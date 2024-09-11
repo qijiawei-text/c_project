@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<optical-control xmlns="http://com/oplink/optical">
+    <work-mode>manual</work-mode>
+    <laser-safty>
+      <config>
+	      <shutter-on>true</shutter-on>
+        <remote-interlock-enable>true</remote-interlock-enable>
+        <dummy-admin-key-enable>true</dummy-admin-key-enable>
+        <panel-safe-cmpt-enable>true</panel-safe-cmpt-enable>
+      </config>
+    </laser-safty>
+    <optical-modules>
+    <optical-cv xmlns="http://com/oplink/connectivity-validation">
+    	<config>
+    		<enable-cv-protection>false</enable-cv-protection>
+    	</config>
+    </optical-cv>
+  </optical-modules>
+</optical-control>

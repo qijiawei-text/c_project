@@ -1,0 +1,298 @@
+//<CODE BEGINS> file "com-oplink-ip.yang"
+module com-oplink-ip{
+    namespace "http://com/oplink/ip";
+    prefix "com-oplink-ip";
+
+    import ietf-inet-types {
+        prefix ietf-inet-types;
+        revision-date 2013-07-15;
+    }
+    import ietf-yang-types {
+        prefix ietf-yang-types;
+        revision-date 2013-07-15;
+    }
+    import org-openroadm-interfaces {
+      prefix org-openroadm-interfaces;
+      revision-date 2019-11-29;
+    }
+
+    organization
+        "Oplink Communications, LLC";
+
+    contact
+        "Oplink.com";
+
+    description
+        "YANG definitions for ip network based on OpenROADM.";
+
+    revision 2019-04-01 {
+      description
+        "Oplink Version 2.0";
+    }
+
+    revision 2019-03-29 {
+      description
+        "OpenROADM Version 5.0.0";
+    }
+
+    typedef ip-address-origin {
+      type enumeration {
+        enum "other" {
+          value 0;
+          description
+            "None of the following.";
+        }
+        enum "static" {
+          value 1;
+          description
+            "Indicates that the address has been statically
+          configured - for example, using NETCONF or a Command Line
+          Interface.";
+        }
+        enum "dhcp" {
+          value 2;
+          description
+            "Indicates an address that has been assigned to this
+          system by a DHCP server.";
+        }
+        enum "link-layer" {
+          value 3;
+          description
+            "Indicates an address created by IPv6 stateless
+          autoconfiguration that embeds a link-layer address in its
+          interface identifier.";
+        }
+        enum "random" {
+          value 4;
+          description
+            "Indicates an address chosen by the system at
+
+          random, e.g., an IPv4 address within 169.254/16, an
+          RFC 4941 temporary address, or an RFC 7217 semantically
+          opaque address.";
+          reference
+            "RFC 4941: Privacy Extensions for Stateless Address
+                  Autoconfiguration in IPv6
+             RFC 7217: A Method for Generating Semantically Opaque
+                  Interface Identifiers with IPv6 Stateless
+                  Address Autoconfiguration (SLAAC)";
+
+        }
+      }
+      description
+        "The origin of an address.";
+    }
+
+    grouping dhcp-client {
+      leaf client-id {
+        type string;
+        description
+          "DHCP client identifier";
+      }
+      leaf timeout {
+        type uint32;
+        default 300;
+      } 
+      leaf lease {
+        type uint32 {
+          range "1..4294967295";
+        }
+        default 600;
+        description
+          "Default network address lease time assigned to DHCP clients";
+      }
+    }
+
+    grouping dhcp-server {
+      leaf lease-time {
+        type uint32 {
+          range "1..4294967295";
+        }
+        default 600;
+        description
+          "Default network address lease time assigned to DHCP clients";
+       }
+       leaf pool-start-ip {
+         type ietf-inet-types:ip-address;
+         mandatory true;
+         description
+           "Starting IPv4/IPv6 Address of a section";
+       }
+
+       leaf pool-end-ip {
+         type ietf-inet-types:ip-address;
+         description
+           "Last IPv4/IPv6 Address of a section";
+       }
+    }
+
+    grouping interfaces {
+      description
+        "Interface configuration parameters.";
+
+      list interface {
+        key "name";
+        description
+          "The list of configured interfaces on the device.";
+
+        leaf name {
+          type string{ // add length range by fandy
+            length "1..128";
+          }
+          description
+            "The name of the interface.";
+        }
+
+        leaf type {
+          type identityref {
+            base org-openroadm-interfaces:interface-type;
+          }
+          mandatory true;
+          description
+            "The type of the interface.";
+        }
+
+        leaf enabled {
+          type boolean;
+          default "false";
+          description
+            "This leaf contains the configured, desired state of the
+           interface.";
+        }
+        
+        leaf macAddress {
+          type ietf-yang-types:mac-address;
+          config false;
+          description
+            "Physical address of the interface";
+        }
+
+        container ipv4 {
+          leaf origin {
+            type ip-address-origin;
+            description
+              "The origin of this address.";
+          }
+          
+          when "../type = 'org-openroadm-interfaces:ip'";
+          leaf ipAddress {
+            when "../origin='static'";
+            type ietf-inet-types:ipv4-address;
+            description
+              "IPv4 address of interface.";
+          }
+          leaf netmask {
+            when "../origin='static'";
+            type ietf-inet-types:ipv4-address;
+            description
+              "Subnet mask of ipAddress";
+          }
+          leaf defaultGateway {
+            when "../origin='static'";
+            type ietf-inet-types:ipv4-address;
+            description
+              "Default Gateway";
+          }
+          leaf current-ipAddress {
+            type ietf-inet-types:ipv4-address;
+            config false;
+            description
+              "IPv4 address of interface.";
+          }
+          leaf current-netmask {
+            type ietf-inet-types:ipv4-address;
+            config false;
+            description
+              "Subnet mask of ipAddress";
+          }
+          leaf current-defaultGateway {
+            type ietf-inet-types:ipv4-address;
+            config false;
+            description
+              "Default Gateway";
+          }
+
+          choice dhcp {
+            case dhcp-client {
+              container dhcp-client {
+                when "../origin='dhcp'";
+                uses dhcp-client;
+              }
+            }
+            case dhcp-server {
+              container dhcp-server {
+                when "../origin='static'";
+                uses dhcp-server;
+              }
+            }  
+          }
+        }
+
+        container ipv6 {
+          leaf originV6 {
+            type ip-address-origin;
+            description
+              "The origin of this address.";
+          }
+          
+          when "../type = 'org-openroadm-interfaces:ip'";
+          leaf ipAddressV6 {
+            when "../originV6='static'";
+            type ietf-inet-types:ipv6-address;
+            description
+              "IPv6 Address of interface.";
+          }
+          leaf prefix-length {
+            when "../originV6='static'";
+            type uint8 {
+              range "0..128";
+            }
+            description
+              "The length of the subnet prefix.";
+          }
+          leaf defaultGatewayV6 {
+            when "../originV6='static'";
+            type ietf-inet-types:ipv6-address;
+            description 
+              "Default Gateway";
+          }
+          leaf current-ipAddressV6 {
+            type ietf-inet-types:ipv6-address;
+            config false;
+            description
+              "IPv6 Address of interface.";
+          }
+          leaf current-prefix-length {
+            type uint8 {
+              range "0..128";
+            }
+            config false;
+            description
+              "The length of the subnet prefix.";
+          }
+          leaf current-defaultGatewayV6 {
+            type ietf-inet-types:ipv6-address;
+            config false;
+            description  
+              "Default Gateway";
+          }
+
+          choice dhcpV6 {
+            case dhcp-clientV6 {
+              container dhcp-clientV6 {
+                when "../originV6='dhcp'";
+                uses dhcp-client;
+              }
+            }
+            case dhcp-serverV6 {
+              container dhcp-serverV6 {
+                when "../originV6='static'";
+                uses dhcp-server;
+              }
+            }
+          }
+        }
+      }
+    }
+}		
+//<CODE ENDS>

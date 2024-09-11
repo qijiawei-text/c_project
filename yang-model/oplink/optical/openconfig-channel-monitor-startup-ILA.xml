@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel-monitors xmlns="http://openconfig.net/yang/channel-monitor">
+          <channel-monitor>
+            <name>line-in-e</name>
+            <config>
+              <name>line-in-e</name>
+              <monitor-port>line-in-e</monitor-port>
+            </config>
+          </channel-monitor>
+	      <channel-monitor>
+            <name>line-out-e</name>
+            <config>
+              <name>line-out-e</name>
+              <monitor-port>line-out-e</monitor-port>
+            </config>
+          </channel-monitor>
+          <channel-monitor>
+            <name>line-in-w</name>
+            <config>
+              <name>line-in-w</name>
+              <monitor-port>line-in-w</monitor-port>
+            </config>
+          </channel-monitor>
+	      <channel-monitor>
+            <name>line-out-w</name>
+            <config>
+              <name>line-out-w</name>
+              <monitor-port>line-out-w</monitor-port>
+            </config>
+          </channel-monitor>
+</channel-monitors>

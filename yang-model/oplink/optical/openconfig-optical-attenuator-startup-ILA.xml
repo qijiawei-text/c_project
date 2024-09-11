@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<optical-attenuator xmlns="http://openconfig.net/yang/optical-attenuator">
+     <attenuators>
+      <attenuator>
+        <name>VOA-E</name>
+        <config>
+          <name>VOA-E</name>
+          <attenuation-mode>CONSTANT_ATTENUATION</attenuation-mode>
+          <attenuation>0</attenuation>
+          <enabled>true</enabled>
+        </config>
+       </attenuator>
+       <attenuator>
+        <name>VOA-W</name>
+        <config>
+          <name>VOA-W</name>
+          <attenuation-mode>CONSTANT_ATTENUATION</attenuation-mode>
+          <attenuation>0</attenuation>
+          <enabled>true</enabled>
+        </config>
+       </attenuator>
+     </attenuators>
+</optical-attenuator>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<optical-control xmlns="http://com/oplink/optical">
+    <work-mode>manual</work-mode>
+</optical-control>

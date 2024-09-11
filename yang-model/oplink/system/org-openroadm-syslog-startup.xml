@@ -1,0 +1,7 @@
+<syslog xmlns="http://org/openroadm/syslog">
+    <log-actions>
+        <remote></remote>
+    </log-actions>
+</syslog>
+
+
